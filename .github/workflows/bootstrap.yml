@@ -1,15 +1,13 @@
 name: Bootstrap GamesCalculators
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
   bootstrap:
-    if: ${{ github.actor != 'github-actions[bot]' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,7 +15,7 @@ jobs:
         shell: bash
         run: |
           if [ ! -f GamesCalculators-phase3.tar.gz ]; then
-            echo "Archive not present yet; waiting for upload."
+            echo "Archive not present."
             exit 0
           fi
           tar -xzf GamesCalculators-phase3.tar.gz
