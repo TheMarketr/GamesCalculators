@@ -111,5 +111,10 @@ export const secondaryTools = {
     tool('map-locations', 'GTA VI Map Locations', 'Search and filter clearly labeled sample locations used by the map architecture.', 'Map'),
     tool('characters', 'GTA VI Characters', 'Browse a concise character reference and filter by role.', 'Reference'),
     tool('edition-comparison', 'GTA VI Edition Comparison', 'Compare the announced Standard and Ultimate editions using regional prices and the value you assign to included extras.', 'Planning'),
+    tool('mission-earnings-calculator', 'GTA VI Mission Earnings Calculator', 'Estimate net payout, profit per hour and runs needed using the mission values you observe after launch.', 'Money', ['gta 6 mission payout', 'gta vi money per hour'], true),
+    tool('payout-split-calculator', 'GTA VI Payout Split Calculator', 'Split a user-entered take after setup costs and compare leader and crew shares.', 'Money', ['gta 6 payout split', 'heist split calculator']),
+    tool('wanted-escape-planner', 'GTA VI Wanted Escape Planner', 'Score visible escape risks from witnesses, vehicle, outfit and search pressure without claiming an official police formula.', 'Gameplay', ['gta 6 wanted system', 'gta vi escape planner'], true),
+    tool('garage-value-calculator', 'GTA VI Garage Value Calculator', 'Total vehicle purchases, upgrades and fees using your own observed prices.', 'Collection', ['gta 6 car value', 'garage calculator']),
+    tool('activity-session-planner', 'GTA VI Activity Session Planner', 'Fit story missions, travel and open-world activities into a realistic play session.', 'Planning', ['gta 6 activities', 'session planner']),
   ],
 } as const;

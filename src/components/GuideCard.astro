@@ -1,12 +1,13 @@
 ---
-import type { Accent } from '../data/games';
+import { getGame, type Accent } from '../data/games';
 import type { GuideConfig } from '../data/guides';
 interface Props { guide: GuideConfig; accent?: Accent }
 const { guide, accent = 'cyan' } = Astro.props;
+const game = getGame(guide.gameSlug);
 const formattedDate = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(`${guide.updated}T12:00:00Z`));
 ---
 <a href={`/${guide.slug}/`} class={`guide-card accent-${accent}`}>
-  <div class="guide-card__top"><span class="eyebrow">{guide.game} · {guide.category}</span><span class="card-arrow" aria-hidden="true">↗</span></div>
+  <div class="guide-card__top"><span class="guide-card-game">{game?.icon && <img src={game.icon.src} alt="" width="42" height="42" loading="lazy" decoding="async" />}<span class="eyebrow">{guide.game} · {guide.category}</span></span><span class="card-arrow" aria-hidden="true">↗</span></div>
   <div><h3>{guide.title}</h3><p>{guide.description}</p></div>
   <div class="guide-card__meta"><span>{guide.readingTime}</span><time datetime={guide.updated}>Updated {formattedDate}</time></div>
 </a>

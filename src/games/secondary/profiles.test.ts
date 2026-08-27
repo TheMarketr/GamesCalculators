@@ -6,9 +6,9 @@ import { getCalculatorProfile, getSecondaryMode } from './profiles';
 describe('secondary tool registry', () => {
   const entries = Object.entries(secondaryTools).flatMap(([gameSlug, tools]) => tools.map((tool) => ({ gameSlug, tool })));
 
-  it('contains every one of the 82 phase 4 and phase 5 routes', () => {
-    expect(entries).toHaveLength(82);
-    expect(new Set(entries.map(({ gameSlug, tool }) => `${gameSlug}/${tool.slug}`)).size).toBe(82);
+  it('contains every secondary tool route', () => {
+    expect(entries).toHaveLength(87);
+    expect(new Set(entries.map(({ gameSlug, tool }) => `${gameSlug}/${tool.slug}`)).size).toBe(87);
   });
 
   it.each(entries)('$gameSlug/$tool.slug has a working profile or local catalog', ({ gameSlug, tool }) => {

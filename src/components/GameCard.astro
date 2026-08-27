@@ -4,7 +4,7 @@ interface Props { game: GameConfig; featured?: boolean }
 const { game, featured = false } = Astro.props;
 ---
 <a href={`/${game.slug}/`} class:list={['game-card', `accent-${game.accent}`, { 'game-card--featured': featured }] }>
-  <div class="game-card__top"><span class="game-glyph">{game.glyph}</span><span class="card-arrow" aria-hidden="true">↗</span></div>
+  <div class="game-card__top">{game.icon ? <img class="game-icon" src={game.icon.src} alt="" width="56" height="56" loading="lazy" decoding="async" /> : <span class="game-glyph">{game.glyph}</span>}<span class="card-arrow" aria-hidden="true">↗</span></div>
   <div><span class="eyebrow">{game.eyebrow}</span><h3>{game.shortName ?? game.name}</h3><p>{game.description}</p></div>
   <span class="card-meta">{`${game.tools.length} working ${game.tools.length === 1 ? 'tool' : 'tools'}`}</span>
 </a>

@@ -68,4 +68,19 @@ describe('secondary calculator formulas', () => {
   it('calculates a map scenario area', () => {
     expect(metric('map-size', { width: 12, height: 10, speed: 60 }, 'Scenario area')).toBe(120);
   });
+
+  it('calculates GTA VI mission profit per run', () => {
+    expect(metric('gta-mission', { payout: 100000, cost: 10000, bonus: 10, minutes: 20, runs: 3 }, 'Net payout per run')).toBeCloseTo(100000);
+  });
+
+  it('splits a GTA VI crew payout after costs', () => {
+    expect(metric('gta-split', { take: 500000, cost: 50000, players: 4, leader: 40 }, 'Leader payout')).toBe(180000);
+    expect(metric('gta-split', { take: 500000, cost: 50000, players: 4, leader: 40 }, 'Each other crew member')).toBe(90000);
+  });
+
+  it('reduces wanted planning risk after vehicle and outfit changes', () => {
+    const before = Number(metric('gta-wanted', { witnesses: 3, heat: 3, knownVehicle: 1, knownOutfit: 1, changedVehicle: 0, changedOutfit: 0 }, 'Planning risk score'));
+    const after = Number(metric('gta-wanted', { witnesses: 3, heat: 3, knownVehicle: 1, knownOutfit: 1, changedVehicle: 1, changedOutfit: 1 }, 'Planning risk score'));
+    expect(after).toBeLessThan(before);
+  });
 });

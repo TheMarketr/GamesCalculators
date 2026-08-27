@@ -403,5 +403,67 @@ export function calculateSecondary(formula: FormulaKey, values: Record<string, n
         { label: 'Better fit', value: net >= 0 ? 'Ultimate Edition' : 'Standard Edition', format: 'text', tone: 'good' },
       ];
     }
+    case 'gta-mission': {
+      const gross = positive(n(values, 'payout')) * (1 + positive(n(values, 'bonus')) / 100);
+      const net = Math.max(0, gross - positive(n(values, 'cost')));
+      const minutes = Math.max(.1, positive(n(values, 'minutes'), .1));
+      const runs = positive(n(values, 'runs'));
+      return [
+        { label: 'Net payout per run', value: net, format: 'currency', tone: 'good' },
+        { label: 'Estimated profit per hour', value: net * 60 / minutes, format: 'currency' },
+        { label: 'Planned session earnings', value: net * runs, format: 'currency' },
+        { label: 'Planned session time', value: minutes * runs * 60, format: 'duration' },
+      ];
+    }
+    case 'gta-split': {
+      const pool = Math.max(0, positive(n(values, 'take')) - positive(n(values, 'cost')));
+      const players = Math.max(1, Math.floor(positive(n(values, 'players'), 1)));
+      const leaderShare = players === 1 ? pool : pool * percent(n(values, 'leader')) / 100;
+      const crewShare = players > 1 ? Math.max(0, pool - leaderShare) / (players - 1) : 0;
+      return [
+        { label: 'Net pool after costs', value: pool, format: 'currency' },
+        { label: 'Leader payout', value: leaderShare, format: 'currency', tone: 'good' },
+        { label: 'Each other crew member', value: crewShare, format: 'currency' },
+        { label: 'Crew members paid', value: players },
+      ];
+    }
+    case 'gta-wanted': {
+      const baseRisk = positive(n(values, 'witnesses')) * 8 + positive(n(values, 'heat')) * 10 + positive(n(values, 'knownVehicle')) * 18 + positive(n(values, 'knownOutfit')) * 12;
+      const reduction = positive(n(values, 'changedVehicle')) * 24 + positive(n(values, 'changedOutfit')) * 16;
+      const risk = percent(baseRisk - reduction);
+      const label = risk >= 70 ? 'High exposure' : risk >= 35 ? 'Moderate exposure' : 'Lower exposure';
+      return [
+        { label: 'Planning risk score', value: risk, format: 'percent', tone: risk >= 70 ? 'bad' : risk >= 35 ? 'warn' : 'good' },
+        { label: 'Escape status', value: label, format: 'text' },
+        { label: 'Risk reduced by changes', value: Math.min(baseRisk, reduction), suffix: ' points', tone: reduction ? 'good' : 'warn' },
+        { label: 'Next priority', value: n(values, 'knownVehicle') && !n(values, 'changedVehicle') ? 'Change known vehicle' : n(values, 'knownOutfit') && !n(values, 'changedOutfit') ? 'Change visible outfit' : 'Break sight and leave search area', format: 'text' },
+      ];
+    }
+    case 'gta-garage': {
+      const vehicles = positive(n(values, 'vehicles'));
+      const purchase = vehicles * positive(n(values, 'averagePrice'));
+      const upgrades = vehicles * positive(n(values, 'upgrades'));
+      const invested = purchase + upgrades + positive(n(values, 'fees'));
+      return [
+        { label: 'Vehicle purchase total', value: purchase, format: 'currency' },
+        { label: 'Upgrade total', value: upgrades, format: 'currency' },
+        { label: 'Total garage investment', value: invested, format: 'currency', tone: 'good' },
+        { label: 'Scenario resale value', value: invested * percent(n(values, 'resaleRate')) / 100, format: 'currency' },
+      ];
+    }
+    case 'gta-session': {
+      const session = positive(n(values, 'session'));
+      const reserved = Math.min(session, positive(n(values, 'freeRoam')));
+      const missionBlock = Math.max(1, positive(n(values, 'mission')) + positive(n(values, 'travel')));
+      const missionMinutes = Math.max(0, session - reserved);
+      const missions = Math.floor(missionMinutes / missionBlock);
+      const unused = Math.max(0, missionMinutes - missions * missionBlock);
+      return [
+        { label: 'Missions that fit', value: missions, tone: 'good' },
+        { label: 'Reserved free-roam time', value: reserved * 60, format: 'duration' },
+        { label: 'Unallocated buffer', value: unused * 60, format: 'duration' },
+        { label: 'Planned session length', value: session * 60, format: 'duration' },
+      ];
+    }
   }
 }

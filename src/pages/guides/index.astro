@@ -3,10 +3,46 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import GuideCard from '../../components/GuideCard.astro';
 import { guides } from '../../data/guides';
 import { games } from '../../data/games';
+import FAQSection from '../../components/FAQSection.astro';
+const featured = guides.find((guide) => guide.slug === 'gta-6/guides/extended-look-breakdown')!;
+const gta = games.find((game) => game.slug === 'gta-6')!;
+const guideFaqs = [
+  { question: 'Are GamesCalculators guides written for search engines or players?', answer: 'They are structured around real player tasks: choosing inputs, understanding mechanics, checking uncertainty and using a related tool. Search-friendly headings help discovery, but the article must still answer the gameplay question.' },
+  { question: 'How are guide facts verified?', answer: 'Official publisher pages take priority for release, platform and mechanic claims. Repeatable game behavior and reputable reporting may provide additional context, with estimates and unknowns labeled clearly.' },
+  { question: 'Why do guides link to calculators?', answer: 'A guide explains the mechanic and decision process; the calculator lets you apply it to your own values. The two formats answer different parts of the same intent.' },
+  { question: 'How often are guides updated?', answer: 'Each guide shows a review date. High-change topics are revisited after significant patches, new seasons, publisher announcements or verified data changes.' },
+  { question: 'Can I request a new game guide?', answer: 'Yes. Use the contact page with the game, player question and reliable source or reproducible situation you want covered.' },
+];
 const schema = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Game Guides', description: 'Practical gameplay guides that explain calculator inputs, strategies and limitations.', url: 'https://gamescalculators.com/guides/', hasPart: guides.map((guide) => ({ '@type': 'Article', name: guide.title, url: `https://gamescalculators.com/${guide.slug}/` })) };
 ---
 <BaseLayout title="Game Guides & Calculator Help" description="Read practical game guides for values, trading, progression, survival, enchanting and release planning." canonical="/guides/" schema={schema}>
   <header class="directory-hero"><div class="container"><nav class="breadcrumbs"><a href="/">Home</a><span>›</span><span aria-current="page">Guides</span></nav><span class="eyebrow">Guides directory</span><h1>Gameplay context beyond the calculator result</h1><p>Use these guides to understand the mechanics, assumptions and player decisions behind our calculators and reference tools.</p><div class="directory-stats"><span><strong>{guides.length}</strong> detailed guides</span><span><strong>{games.length}</strong> supported games</span><span><strong>100%</strong> free to read</span></div></div></header>
-  <section class="section container-wide"><div class="section-heading"><div><span class="eyebrow">Learn before you decide</span><h2>All game guides</h2><p>Each article connects a gameplay goal to relevant calculations, cautions and next steps.</p></div></div><div class="guide-grid">{guides.map((guide) => { const game = games.find((entry) => entry.slug === guide.gameSlug); return <GuideCard guide={guide} accent={game?.accent} />; })}</div></section>
+  <section class="section container-wide"><a class="guide-feature accent-sunset" href={`/${featured.slug}/`}><div><span class="eyebrow">New today · GTA VI research</span><h2>{featured.title}</h2><p>{featured.description}</p><ul><li>Confirmed launch and platform information</li><li>Witness, wanted, disguise and character-switching details</li><li>Clear list of map, PC and online unknowns</li></ul><strong>Read the full breakdown →</strong></div>{gta.image && <img src={gta.image.src} alt={gta.image.alt} width="1200" height="675" loading="eager" decoding="async" />}</a></section>
+  <section class="section container-wide"><div class="section-heading"><div><span class="eyebrow">Learn before you decide</span><h2>All game guides</h2><p>Search {guides.length} articles connecting a gameplay goal to calculations, cautions and next steps.</p></div></div><div class="guide-directory-controls"><label><span>Search guides</span><input type="search" placeholder="Try trading, GTA VI map, Minecraft coordinates…" data-guide-search /></label><div>{games.map((game) => <button type="button" data-guide-filter={game.slug} aria-pressed="false">{game.icon && <img src={game.icon.src} alt="" width="28" height="28" loading="lazy" decoding="async" />}{game.shortName ?? game.name}</button>)}<button type="button" class="active" data-guide-filter="all" aria-pressed="true">All games</button></div></div><div class="guide-grid" data-guide-grid>{guides.map((guide) => { const game = games.find((entry) => entry.slug === guide.gameSlug); return <div data-guide-entry data-game={guide.gameSlug} data-search={`${guide.title} ${guide.description} ${guide.keywords.join(' ')}`.toLowerCase()}><GuideCard guide={guide} accent={game?.accent} /></div>; })}</div><div class="hub-no-results" data-guide-empty hidden><strong>No guides matched</strong><p>Try a game name, mechanic or broader keyword.</p></div></section>
   <section class="section section--surface"><div class="container directory-explainer"><div><span class="eyebrow">Editorial approach</span><h2>Useful, independent and clear about uncertainty</h2><p>Guides distinguish deterministic formulas from community values, probability, performance ranges and unconfirmed information.</p></div><ul><li><strong>Visible dates</strong><span>Articles and data references show when they were reviewed.</span></li><li><strong>Source awareness</strong><span>Confirmed publisher information takes priority over rumors.</span></li><li><strong>Corrections</strong><span>Players can report outdated data through the contact page.</span></li></ul></div></section>
+  <section class="section container"><FAQSection faqs={guideFaqs} /></section>
 </BaseLayout>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>('[data-guide-search]');
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-guide-filter]')];
+  const entries = [...document.querySelectorAll<HTMLElement>('[data-guide-entry]')];
+  const empty = document.querySelector<HTMLElement>('[data-guide-empty]');
+  let active = 'all';
+  const render = () => {
+    const query = input?.value.trim().toLowerCase() ?? '';
+    let visible = 0;
+    entries.forEach((entry) => {
+      const show = (active === 'all' || entry.dataset.game === active) && (!query || entry.dataset.search?.includes(query));
+      entry.toggleAttribute('hidden', !show);
+      if (show) visible += 1;
+    });
+    empty?.toggleAttribute('hidden', visible > 0);
+  };
+  input?.addEventListener('input', render);
+  buttons.forEach((button) => button.addEventListener('click', () => {
+    active = button.dataset.guideFilter ?? 'all';
+    buttons.forEach((candidate) => { const selected = candidate === button; candidate.classList.toggle('active', selected); candidate.setAttribute('aria-pressed', String(selected)); });
+    render();
+  }));
+</script>

@@ -48,6 +48,8 @@ const collectionSchema = { '@context': 'https://schema.org', '@type': 'Collectio
       </div>
     </section>
 
+    {game.gallery && game.gallery.length > 1 && <section class="section container-wide" aria-labelledby="game-gallery-heading"><div class="section-heading section-heading--small"><div><span class="eyebrow">Official game media</span><h2 id="game-gallery-heading">See {game.name} before opening a tool</h2><p>Publisher-provided or licensed imagery helps confirm that you are using the right game collection.</p></div><a href="/media-credits/">Media credits →</a></div><div class="hub-media-gallery">{game.gallery.map((media) => <figure><img src={media.src} alt={media.alt} width="768" height="432" loading="lazy" decoding="async" /><figcaption><a href={media.creditUrl} target="_blank" rel="license noopener">{media.credit}</a> · <a href={media.licenseUrl} target="_blank" rel="license noopener">{media.license}</a></figcaption></figure>)}</div></section>}
+
     <section class="section container-wide" aria-labelledby="featured-tools">
       <div class="section-heading"><div><span class="eyebrow">Start here</span><h2 id="featured-tools">Featured tools</h2><p>The most useful starting points for this game cluster.</p></div><span class="hub-section-count">{featuredTools.length} featured</span></div>
       <div class="tool-grid">{featuredTools.map((tool) => <ToolCard name={tool.shortName} description={tool.description} href={`/${game.slug}/${tool.slug}/`} game={game.shortName ?? game.name} category={tool.category} accent={game.accent} />)}</div>

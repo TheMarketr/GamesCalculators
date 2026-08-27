@@ -10,7 +10,7 @@ export interface GuideConfig {
   keywords: string[];
 }
 
-export const guides: GuideConfig[] = [
+const originalGuides: GuideConfig[] = [
   { slug: 'grow-a-garden/value-planning-guide', gameSlug: 'grow-a-garden', game: 'Grow a Garden', title: 'Grow a Garden Value Planning Guide', description: 'Learn how weight, growth variants and mutations combine before comparing crops or trades.', category: 'Values', readingTime: '4 min read', updated: '2026-08-27', keywords: ['crop values', 'mutations', 'trade planning'] },
   { slug: 'blox-fruits/trading-guide', gameSlug: 'blox-fruits', game: 'Blox Fruits', title: 'Blox Fruits Trading Guide', description: 'Use value and demand together to build clearer, more balanced fruit offers.', category: 'Trading', readingTime: '4 min read', updated: '2026-08-26', keywords: ['fruit trading', 'trade values', 'demand'] },
   { slug: 'steal-a-brainrot/collection-planning-guide', gameSlug: 'steal-a-brainrot', game: 'Steal a Brainrot', title: 'Steal a Brainrot Collection Planning Guide', description: 'Compare collection value and income without letting one large number hide the items doing the work.', category: 'Collections', readingTime: '4 min read', updated: '2026-08-27', keywords: ['collection value', 'income', 'mutations'] },
@@ -22,3 +22,9 @@ export const guides: GuideConfig[] = [
   { slug: 'fortnite/xp-planning-guide', gameSlug: 'fortnite', game: 'Fortnite', title: 'Fortnite XP Planning Guide', description: 'Set a realistic level target, estimate the remaining XP and turn it into a flexible match plan.', category: 'Progress', readingTime: '4 min read', updated: '2026-08-27', keywords: ['fortnite xp', 'battle pass levels', 'level planning'] },
   { slug: 'gta-6/release-planning-guide', gameSlug: 'gta-6', game: 'GTA VI', title: 'GTA VI Release Planning Guide', description: 'Check the countdown, announced platforms and download-time scenarios from one practical checklist.', category: 'Release', readingTime: '4 min read', updated: '2026-08-27', keywords: ['gta 6 release date', 'platforms', 'download planning'] },
 ];
+
+export const guides: GuideConfig[] = [
+  ...originalGuides,
+  ...richGuideArticles.map(({ slug, gameSlug, game, title, description, category, readingTime, updated, keywords }) => ({ slug, gameSlug, game, title, description, category, readingTime, updated, keywords })),
+];
+import { richGuideArticles } from './rich-guides';

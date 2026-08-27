@@ -13,10 +13,14 @@ const updated = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric'
 <div class={`tool-page accent-${game.accent}`}>
   <div class="tool-hero"><div class="container">
     <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href={`/${game.slug}/`}>{game.shortName ?? game.name}</a><span>›</span><span aria-current="page">{tool.shortName}</span></nav>
-    <div class="tool-heading"><div><span class="eyebrow">{game.name} · {tool.category}</span><h1>{tool.name}</h1><p>{tool.description}</p></div><div class="update-badge"><span></span><small>Last updated</small><strong>{updated}</strong></div></div>
+    <div class="tool-heading"><div class="tool-title-lockup">{game.icon ? <img class="tool-game-icon" src={game.icon.src} alt={`${game.name} game artwork`} width="80" height="80" loading="eager" decoding="async" /> : <span class="game-glyph">{game.glyph}</span>}<div><span class="eyebrow">{game.name} · {tool.category}</span><h1>{tool.name}</h1><p>{tool.description}</p></div></div><div class="update-badge"><span></span><small>Last updated</small><strong>{updated}</strong></div></div>
   </div></div>
   <div class="container tool-layout"><section class="calculator-shell" aria-label={`${tool.name} interactive tool`}><slot name="calculator" /></section><aside class="tool-side"><div class="side-card"><span class="eyebrow">How it works</span><h2>Transparent by design</h2><p>Change any input and the result updates instantly. The formula is tested separately from the interface, and data-driven values show an update date.</p><a href="/data-methodology/">Read the methodology →</a></div><div class="local-notice"><span>▣</span><p><strong>Your data stays local</strong>Inputs and saved progress remain in this browser. No account required.</p></div></aside></div>
   <div class="container tool-content">
+    {game.gallery?.length && <section class="tool-media-strip" aria-label={`${game.name} official game imagery`}>
+      <div class="tool-media-copy"><span class="eyebrow">Recognize the game</span><strong>{game.name}</strong><p>Official or licensed game imagery is shown for identification. GamesCalculators remains an independent fan utility.</p></div>
+      {game.gallery.slice(0, 2).map((media) => <figure><img src={media.src} alt={media.alt} width="768" height="432" loading="lazy" decoding="async" /><figcaption><a href={media.creditUrl} target="_blank" rel="license noopener">{media.credit}</a></figcaption></figure>)}
+    </section>}
     <nav class="content-jump-nav" aria-label="Calculator page sections"><a href="#calculator-guide">How to use it</a><a href="#result-reading">Read the result</a><a href="#gameplay-context">Gameplay context</a><a href="#faq">FAQs</a></nav>
     <section class="calculator-guide" id="calculator-guide" aria-labelledby="calculator-guide-title">
       <div class="guide-copy"><span class="eyebrow">Calculator guide</span><h2 id="calculator-guide-title">What the {tool.name} solves</h2>{content.overview.map((paragraph) => <p>{paragraph}</p>)}<p>{content.problem}</p></div>
