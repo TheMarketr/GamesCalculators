@@ -41,7 +41,7 @@ const collectionSchema = { '@context': 'https://schema.org', '@type': 'Collectio
             <h1>{title}</h1>
             <p>{game.description}</p>
             <div class="hub-search"><span aria-hidden="true">⌕</span><label class="sr-only" for="hub-tool-search">Search {game.name} tools and guides</label><input id="hub-tool-search" type="search" placeholder={`Search ${game.shortName ?? game.name} tools and guides`} data-hub-search /></div>
-            <div class="hub-stats" aria-label={`${game.name} hub summary`}><span><strong>{game.tools.length}</strong> live {game.tools.length === 1 ? 'tool' : 'tools'}</span><span><strong>{gameGuides.length}</strong> player {gameGuides.length === 1 ? 'guide' : 'guides'}</span><span><strong>{game.planned.length}</strong> tools planned</span></div>
+            <div class="hub-stats" aria-label={`${game.name} hub summary`}><span><strong>{game.tools.length}</strong> working {game.tools.length === 1 ? 'tool' : 'tools'}</span><span><strong>{gameGuides.length}</strong> player {gameGuides.length === 1 ? 'guide' : 'guides'}</span><span><strong>100%</strong> browser based</span></div>
           </div>
           <div class="hub-art" aria-hidden="true"><span class="game-glyph">{game.glyph}</span><i></i><i></i><i></i><b>{game.tools.length + gameGuides.length}</b><small>resources live</small></div>
         </div>
@@ -49,12 +49,8 @@ const collectionSchema = { '@context': 'https://schema.org', '@type': 'Collectio
     </section>
 
     <section class="section container-wide" aria-labelledby="featured-tools">
-      <div class="section-heading"><div><span class="eyebrow">Start here</span><h2 id="featured-tools">Featured tools</h2><p>The most useful starting points for this game cluster.</p></div><span class="hub-section-count">{featuredTools.length || Math.min(game.planned.length, 3)} featured</span></div>
-      {featuredTools.length ? (
-        <div class="tool-grid">{featuredTools.map((tool) => <ToolCard name={tool.shortName} description={tool.description} href={`/${game.slug}/${tool.slug}/`} game={game.shortName ?? game.name} category={tool.category} accent={game.accent} />)}</div>
-      ) : (
-        <div class="featured-roadmap-grid">{game.planned.slice(0, 3).map((name, index) => <article class="roadmap-card"><span class="game-glyph">{String(index + 1).padStart(2, '0')}</span><div><span class="eyebrow">In development</span><h3>{name}</h3><p>This utility is prioritized for the {game.shortName ?? game.name} collection and will be linked only after its interaction and logic are complete.</p></div><b>Planned</b></article>)}</div>
-      )}
+      <div class="section-heading"><div><span class="eyebrow">Start here</span><h2 id="featured-tools">Featured tools</h2><p>The most useful starting points for this game cluster.</p></div><span class="hub-section-count">{featuredTools.length} featured</span></div>
+      <div class="tool-grid">{featuredTools.map((tool) => <ToolCard name={tool.shortName} description={tool.description} href={`/${game.slug}/${tool.slug}/`} game={game.shortName ?? game.name} category={tool.category} accent={game.accent} />)}</div>
     </section>
 
     <section class="section section--surface" aria-labelledby="available-tools">
@@ -64,13 +60,8 @@ const collectionSchema = { '@context': 'https://schema.org', '@type': 'Collectio
           <button type="button" class="active" data-hub-filter="all" aria-pressed="true">All</button>
           {toolCategories.map((category) => <button type="button" data-hub-filter={category.toLowerCase()} aria-pressed="false">{category}</button>)}
           <button type="button" data-hub-filter="guide" aria-pressed="false">Guides</button>
-          <button type="button" data-hub-filter="roadmap" aria-pressed="false">Roadmap</button>
         </div>
-        {game.tools.length ? (
-          <div class="tool-grid hub-tool-grid" data-resource-grid>{game.tools.map((tool) => <div data-hub-entry data-entry-type={tool.category.toLowerCase()} data-search-text={`${tool.name} ${tool.description} ${tool.category}`}><ToolCard name={tool.shortName} description={tool.description} href={`/${game.slug}/${tool.slug}/`} game={game.shortName ?? game.name} category={tool.category} accent={game.accent} /></div>)}</div>
-        ) : (
-          <div class="hub-empty" data-hub-entry data-entry-type="all" data-search-text="tools in development roadmap"><span class="game-glyph">{game.glyph}</span><div><h3>The hub is live; interactive tools are in development.</h3><p>We publish utilities only when the interaction and underlying logic are ready. Use the guide below now, or filter the roadmap to see what is planned.</p></div></div>
-        )}
+        <div class="tool-grid hub-tool-grid" data-resource-grid>{game.tools.map((tool) => <div data-hub-entry data-entry-type={tool.category.toLowerCase()} data-search-text={`${tool.name} ${tool.description} ${tool.category}`}><ToolCard name={tool.shortName} description={tool.description} href={`/${game.slug}/${tool.slug}/`} game={game.shortName ?? game.name} category={tool.category} accent={game.accent} /></div>)}</div>
         <div class="hub-no-results" data-hub-empty hidden><strong>No matching resources</strong><p>Try a broader term or choose All.</p></div>
       </div>
     </section>
@@ -80,15 +71,7 @@ const collectionSchema = { '@context': 'https://schema.org', '@type': 'Collectio
       <div class="guide-grid" data-resource-grid>{gameGuides.map((guide) => <div data-hub-entry data-entry-type="guide" data-search-text={`${guide.title} ${guide.description} ${guide.category} ${guide.keywords.join(' ')}`}><GuideCard guide={guide} accent={game.accent} /></div>)}</div>
     </section>
 
-    <section class="section section--surface">
-      <div class="container-wide hub-columns">
-        <div>
-          <div class="section-heading section-heading--small"><div><span class="eyebrow">Product roadmap</span><h2>Tools being prepared</h2><p>Planned pages stay out of navigation and the sitemap until they work.</p></div></div>
-          <div class="planned-grid" data-resource-grid>{game.planned.map((name, index) => <article data-hub-entry data-entry-type="roadmap" data-search-text={`${name} planned roadmap`}><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{name}</h3><p>Planned for this game cluster. It will become a link only when the tool is complete.</p></div><b>Planned</b></article>)}</div>
-        </div>
-        <aside class="hub-guide-card"><span class="eyebrow">Built to stay useful</span><h2>A stronger {game.shortName ?? game.name} toolkit</h2><p>Calculations live apart from the interface. Game-specific values stay in editable local data files, with visible update dates and a documented methodology.</p><ul><li><span>✓</span> Instant browser calculations</li><li><span>✓</span> Mobile-first controls</li><li><span>✓</span> No account or personal data</li><li><span>✓</span> Shareable results where useful</li></ul><a class="button button--secondary" href="/data-methodology/">View data methodology</a></aside>
-      </div>
-    </section>
+    <section class="section section--surface"><div class="container-wide"><aside class="hub-guide-card hub-guide-card--wide"><span class="eyebrow">Complete browser toolkit</span><h2>Every listed {game.shortName ?? game.name} utility is now available</h2><p>Calculations live apart from the interface. Game-specific values stay in editable local data files, with visible update dates and a documented methodology.</p><ul><li><span>✓</span> Instant browser calculations</li><li><span>✓</span> Searchable references and comparisons</li><li><span>✓</span> Local-only inventory and collection saves</li><li><span>✓</span> Mobile-first controls and shareable results</li></ul><a class="button button--secondary" href="/data-methodology/">View data methodology</a></aside></div></section>
 
     <section class="section container-wide" aria-labelledby="recently-updated">
       <div class="section-heading section-heading--small"><div><span class="eyebrow">Maintenance log</span><h2 id="recently-updated">Recently updated</h2><p>Latest reviewed calculators and guides in this collection.</p></div><span class="hub-section-count">Hub reviewed {dateFormatter.format(new Date(`${latestUpdate}T12:00:00Z`))}</span></div>

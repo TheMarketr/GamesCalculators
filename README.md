@@ -4,7 +4,7 @@ A production-oriented static gaming utility platform built with Astro, TypeScrip
 
 ## Running locally
 
-Requires Node.js 22.12 or newer.
+Requires Node.js 22.13 or newer.
 
 ```bash
 npm install
@@ -23,6 +23,8 @@ npm run build
 ```
 
 Run all checks in order with `npm run check`. Preview static production output with `npm run preview`.
+
+The managed Sites deployment uses `npm run build:sites` to wrap the same static output in a Cloudflare Worker-compatible artifact. Normal Cloudflare Pages and Netlify builds continue to use `npm run build` and the root `dist` directory.
 
 ## Project structure
 
@@ -48,7 +50,7 @@ public/             Static files, robots.txt, and hosting headers
 4. Add relevant search keywords to the tool configuration.
 5. Add the calculator implementation under `src/games/<game>/<tool>/`.
 
-The global search, homepage update feed, sitemap routes and game hub read from the central configuration. Planned tools may be listed without a link; only completed tools belong in `tools`.
+The global search, homepage update feed, sitemap routes and game hub read from the central configuration. Only completed, linked tools belong in `tools`.
 
 ## Adding a calculator
 
@@ -96,7 +98,7 @@ The build output is the static `dist` directory.
 - Framework preset: Astro
 - Build command: `npm run build`
 - Build output directory: `dist`
-- Node.js version: 22.12 or newer
+- Node.js version: 22.13 or newer
 
 No Worker is required. `public/_headers` supplies baseline security and immutable asset caching headers.
 
