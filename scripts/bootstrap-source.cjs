@@ -11,7 +11,7 @@ if (!existsSync(archive)) {
   throw new Error(`Missing validated source archive: ${archive}`);
 }
 
-const result = spawnSync('tar', ['-xzf', archive], {
+const result = spawnSync('tar', ['--exclude=package.json', '-xzf', archive], {
   cwd: process.cwd(),
   stdio: 'inherit',
 });
