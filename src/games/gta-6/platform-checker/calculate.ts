@@ -1,0 +1,2 @@
+export type Platform='ps5'|'xbox-series'|'pc'|'ps4'|'xbox-one'|'switch-2';
+export function checkPlatform(platform:Platform){if(platform==='ps5'||platform==='xbox-series')return{status:'Confirmed' as const,message:'Announced for launch on November 19, 2026.'};if(platform==='pc')return{status:'Not announced' as const,message:'Rockstar has not announced a PC release date.'};return{status:'Not announced' as const,message:'This platform is not in the currently announced launch lineup.'}}

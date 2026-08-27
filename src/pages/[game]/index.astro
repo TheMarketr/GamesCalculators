@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import { games, type GameConfig } from '../../data/games';
+import { guides } from '../../data/guides';
+
+export function getStaticPaths() {
+  return games.map((game) => ({ params: { game: game.slug }, props: { game } }));
+}
+
+interface Props { game: GameConfig }
+const { game } = Astro.props;
+const gameGuides = guides.filter((guide) => guide.gameSlug === game.slug);
+const featuredTools = (game.tools.some((tool) => tool.featured) ? game.tools.filter((tool) => tool.featured) : game.tools).slice(0, 3);
+const toolCategories = [...new Set(game.tools.map((tool) => tool.category))];
+const updates = [
+  ...game.tools.map((tool) => ({ name: tool.shortName, type: 'Tool', category: tool.category, updated: tool.updated, href: `/${game.slug}/${tool.slug}/` })),
+  ...gameGuides.map((guide) => ({ name: guide.title, type: 'Guide', category: guide.category, updated: guide.updated, href: `/${guide.slug}/` })),
+].sort((a, b) => b.updated.localeCompare(a.updated));
+const latestUpdate = updates[0]?.updated ?? '2026-08-27';
+const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+const title = `${game.name} Calculators & Tools`;
+const breadcrumbSchema = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+  { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gamescalculators.com/' },
+  { '@type': 'ListItem', position: 2, name: title, item: `https://gamescalculators.com/${game.slug}/` },
+] };
+const collectionSchema = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, description: game.description, url: `https://gamescalculators.com/${game.slug}/`, hasPart: [
+  ...game.tools.map((tool) => ({ '@type': 'WebApplication', name: tool.name, url: `https://gamescalculators.com/${game.slug}/${tool.slug}/` })),
+  ...gameGuides.map((guide) => ({ '@type': 'Article', name: guide.title, url: `https://gamescalculators.com/${guide.slug}/` })),
+] };
+---
+<BaseLayout title={title} description={`${game.description} Browse free ${game.name} calculators, tools and player guides.`} schema={[breadcrumbSchema, collectionSchema]}>
+  <div class={`game-hub accent-${game.accent}`}>
+    <section class="game-hub-hero">
+      <div class="container-wide">
+        <nav class="breadcrumbs"><a href="/">Home</a><span>›</span><span aria-current="page">{game.shortName ?? game.name}</span></nav>
+        <div class="hub-hero-grid">
+          <div>
+            <span class="eyebrow">{game.eyebrow}</span>
+            <h1>{title}</h1>
+            <p>{game.description}</p>
+            <div class="hub-search"><span aria-hidden="true">⌕</span><label class="sr-only" for="hub-tool-search">Search {game.name} tools and guides</label><input id="hub-tool-search" type="search" placeholder={`Search ${game.shortName ?? game.name} tools and guides`} data-hub-search /></div>
+            <div class="hub-stats" aria-label={`${game.name} hub summary`}><span><strong>{game.tools.length}</strong> live {game.tools.length === 1 ? 'tool' : 'tools'}</span><span><strong>{gameGuides.length}</strong> player {gameGuides.length === 1 ? 'guide' : 'guides'}</span><span><strong>{game.planned.length}</strong> tools planned</span></div>
+          </div>
+          <div class="hub-art" aria-hidden="true"><span class="game-glyph">{game.glyph}</span><i></i><i></i><i></i><b>{game.tools.length + gameGuides.length}</b><small>resources live</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container-wide" aria-labelledby="featured-tools">
+      <div class="section-heading"><div><span class="eyebrow">Start here</span><h2 id="featured-tools">Featured tools</h2><p>The most useful starting points for this game cluster.</p></div><span class="hub-section-count">{featuredTools.length || Math.min(game.planned.length, 3)} featured</span></div>
+      {featuredTools.length ? (
+        <div class="tool-grid">{featuredTools.map((tool) => <ToolCard name={tool.shortName} description={tool.description} href={`/${game.slug}/${tool.slug}/`} game={game.shortName ?? game.name} category={tool.category} accent={game.accent} />)}</div>
+      ) : (
+        <div class="featured-roadmap-grid">{game.planned.slice(0, 3).map((name, index) => <article class="roadmap-card"><span class="game-glyph">{String(index + 1).padStart(2, '0')}</span><div><span class="eyebrow">In development</span><h3>{name}</h3><p>This utility is prioritized for the {game.shortName ?? game.name} collection and will be linked only after its interaction and logic are complete.</p></div><b>Planned</b></article>)}</div>
+      )}
+    </section>
+
+    <section class="section section--surface" aria-labelledby="available-tools">
+      <div class="container-wide">
+        <div class="section-heading"><div><span class="eyebrow">Explore the collection</span><h2 id="available-tools">Available tools</h2><p>Every linked calculator below is functional and tested.</p></div></div>
+        <div class="hub-filter-bar" aria-label="Filter hub resources">
+          <button type="button" class="active" data-hub-filter="all" aria-pressed="true">All</button>
+          {toolCategories.map((category) => <button type="button" data-hub-filter={category.toLowerCase()} aria-pressed="false">{category}</button>)}
+          <button type="button" data-hub-filter="guide" aria-pressed="false">Guides</button>
+          <button type="button" data-hub-filter="roadmap" aria-pressed="false">Roadmap</button>
+        </div>
+        {game.tools.length ? (
+          <div class="tool-grid hub-tool-grid" data-resource-grid>{game.tools.map((tool) => <div data-hub-entry data-entry-type={tool.category.toLowerCase()} data-search-text={`${tool.name} ${tool.description} ${tool.category}`}><ToolCard name={tool.shortName} description={tool.description} href={`/${game.slug}/${tool.slug}/`} game={game.shortName ?? game.name} category={tool.category} accent={game.accent} /></div>)}</div>
+        ) : (
+          <div class="hub-empty" data-hub-entry data-entry-type="all" data-search-text="tools in development roadmap"><span class="game-glyph">{game.glyph}</span><div><h3>The hub is live; interactive tools are in development.</h3><p>We publish utilities only when the interaction and underlying logic are ready. Use the guide below now, or filter the roadmap to see what is planned.</p></div></div>
+        )}
+        <div class="hub-no-results" data-hub-empty hidden><strong>No matching resources</strong><p>Try a broader term or choose All.</p></div>
+      </div>
+    </section>
+
+    <section class="section container-wide" aria-labelledby="related-guides">
+      <div class="section-heading"><div><span class="eyebrow">Learn the system</span><h2 id="related-guides">Related guides</h2><p>Practical context for getting more from the calculators and game data.</p></div><span class="hub-section-count">{gameGuides.length} {gameGuides.length === 1 ? 'guide' : 'guides'}</span></div>
+      <div class="guide-grid" data-resource-grid>{gameGuides.map((guide) => <div data-hub-entry data-entry-type="guide" data-search-text={`${guide.title} ${guide.description} ${guide.category} ${guide.keywords.join(' ')}`}><GuideCard guide={guide} accent={game.accent} /></div>)}</div>
+    </section>
+
+    <section class="section section--surface">
+      <div class="container-wide hub-columns">
+        <div>
+          <div class="section-heading section-heading--small"><div><span class="eyebrow">Product roadmap</span><h2>Tools being prepared</h2><p>Planned pages stay out of navigation and the sitemap until they work.</p></div></div>
+          <div class="planned-grid" data-resource-grid>{game.planned.map((name, index) => <article data-hub-entry data-entry-type="roadmap" data-search-text={`${name} planned roadmap`}><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{name}</h3><p>Planned for this game cluster. It will become a link only when the tool is complete.</p></div><b>Planned</b></article>)}</div>
+        </div>
+        <aside class="hub-guide-card"><span class="eyebrow">Built to stay useful</span><h2>A stronger {game.shortName ?? game.name} toolkit</h2><p>Calculations live apart from the interface. Game-specific values stay in editable local data files, with visible update dates and a documented methodology.</p><ul><li><span>✓</span> Instant browser calculations</li><li><span>✓</span> Mobile-first controls</li><li><span>✓</span> No account or personal data</li><li><span>✓</span> Shareable results where useful</li></ul><a class="button button--secondary" href="/data-methodology/">View data methodology</a></aside>
+      </div>
+    </section>
+
+    <section class="section container-wide" aria-labelledby="recently-updated">
+      <div class="section-heading section-heading--small"><div><span class="eyebrow">Maintenance log</span><h2 id="recently-updated">Recently updated</h2><p>Latest reviewed calculators and guides in this collection.</p></div><span class="hub-section-count">Hub reviewed {dateFormatter.format(new Date(`${latestUpdate}T12:00:00Z`))}</span></div>
+      <div class="hub-updates">{updates.map((item) => <a href={item.href}><span>{item.name}</span><small>{item.type} · {item.category}</small><time datetime={item.updated}>{dateFormatter.format(new Date(`${item.updated}T12:00:00Z`))}</time><b aria-hidden="true">→</b></a>)}</div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  const search = document.querySelector<HTMLInputElement>('[data-hub-search]');
+  const filters = [...document.querySelectorAll<HTMLButtonElement>('[data-hub-filter]')];
+  const entries = [...document.querySelectorAll<HTMLElement>('[data-hub-entry]')];
+  const empty = document.querySelector<HTMLElement>('[data-hub-empty]');
+  let activeFilter = 'all';
+
+  const updateResults = () => {
+    const query = search?.value.toLowerCase().trim() ?? '';
+    let visible = 0;
+    entries.forEach((entry) => {
+      const matchesQuery = !query || entry.dataset.searchText?.toLowerCase().includes(query);
+      const matchesFilter = activeFilter === 'all' || entry.dataset.entryType === activeFilter;
+      const show = Boolean(matchesQuery && matchesFilter);
+      entry.toggleAttribute('hidden', !show);
+      if (show) visible += 1;
+    });
+    empty?.toggleAttribute('hidden', visible > 0);
+  };
+
+  search?.addEventListener('input', updateResults);
+  filters.forEach((button) => button.addEventListener('click', () => {
+    activeFilter = button.dataset.hubFilter ?? 'all';
+    filters.forEach((filter) => {
+      const selected = filter === button;
+      filter.classList.toggle('active', selected);
+      filter.setAttribute('aria-pressed', String(selected));
+    });
+    updateResults();
+  }));
+</script>

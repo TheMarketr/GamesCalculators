@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolShell from '../../components/ToolShell.astro';
+import { publishedTools, type GameConfig, type ToolConfig } from '../../data/games';
+import CircleCalculator from '../../games/minecraft/circle-generator/Calculator';
+import MinecraftXpCalculator from '../../games/minecraft/xp-calculator/Calculator';
+import EnchantCalculator from '../../games/minecraft/enchant-calculator/Calculator';
+import PortalCalculator from '../../games/minecraft/portal-calculator/Calculator';
+import GardenValueCalculator from '../../games/grow-a-garden/value-calculator/Calculator';
+import TradeCalculator from '../../games/shared/trade/Calculator';
+import BloxValueCalculator from '../../games/blox-fruits/value-calculator/Calculator';
+import BrainrotValueCalculator from '../../games/steal-a-brainrot/value-calculator/Calculator';
+import PetValueCalculator from '../../games/adopt-me/value-calculator/Calculator';
+import WflCalculator from '../../games/adopt-me/wfl-calculator/Calculator';
+import FortniteXpCalculator from '../../games/fortnite/xp-calculator/Calculator';
+import FpsCalculator from '../../games/fortnite/fps-calculator/Calculator';
+import CountdownCalculator from '../../games/gta-6/release-date/Calculator';
+import DownloadTimeCalculator from '../../games/gta-6/download-time-calculator/Calculator';
+import PlatformCalculator from '../../games/gta-6/platform-checker/Calculator';
+import GtaMapCalculator from '../../games/gta-6/map/Calculator';
+export function getStaticPaths(){return publishedTools.map((entry)=>({params:{game:entry.game.slug,tool:entry.slug},props:{game:entry.game,tool:entry}}))}
+interface Props { game: GameConfig; tool: ToolConfig }
+const { game, tool } = Astro.props;
+const faqs=[
+  {question:`Is this ${tool.shortName} free?`,answer:'Yes. It runs in your browser, requires no account and is free to use.'},
+  {question:'How current are the results?',answer:`The calculator logic and local reference data show an update date of ${tool.updated}. Game patches and player markets can change after that date.`},
+  {question:'Can I share my result?',answer:'Tools with useful share states include a share or copy-link button. Query parameters recreate supported calculator inputs without creating separate indexable pages.'},
+];
+const canonical=`/${game.slug}/${tool.slug}/`;
+const schema=[
+  {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:'https://gamescalculators.com/'},{'@type':'ListItem',position:2,name:game.name,item:`https://gamescalculators.com/${game.slug}/`},{'@type':'ListItem',position:3,name:tool.name,item:`https://gamescalculators.com${canonical}`}]},
+  {'@context':'https://schema.org','@type':'WebApplication',name:tool.name,description:tool.description,url:`https://gamescalculators.com${canonical}`,applicationCategory:'GameApplication',operatingSystem:'Any',offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}},
+  {'@context':'https://schema.org','@type':'FAQPage',mainEntity:faqs.map((faq)=>({'@type':'Question',name:faq.question,acceptedAnswer:{'@type':'Answer',text:faq.answer}}))},
+];
+---
+<BaseLayout title={tool.name} description={tool.description} canonical={canonical} schema={schema}>
+  <ToolShell game={game} tool={tool} faqs={faqs}>
+    {tool.kind==='circle'&&<CircleCalculator slot="calculator" client:load/>}
+    {tool.kind==='minecraft-xp'&&<MinecraftXpCalculator slot="calculator" client:load/>}
+    {tool.kind==='enchant'&&<EnchantCalculator slot="calculator" client:load/>}
+    {tool.kind==='portal'&&<PortalCalculator slot="calculator" client:load/>}
+    {tool.kind==='garden-value'&&<GardenValueCalculator slot="calculator" client:load/>}
+    {tool.kind==='trade'&&<TradeCalculator slot="calculator" gameSlug={game.slug as 'blox-fruits'|'grow-a-garden'} client:load/>}
+    {tool.kind==='item-value'&&<BloxValueCalculator slot="calculator" client:load/>}
+    {tool.kind==='brainrot-value'&&<BrainrotValueCalculator slot="calculator" client:load/>}
+    {tool.kind==='pet-value'&&<PetValueCalculator slot="calculator" mode={tool.slug==='pet-calculator'?'pet':'value'} client:load/>}
+    {tool.kind==='wfl'&&<WflCalculator slot="calculator" client:load/>}
+    {tool.kind==='fortnite-xp'&&<FortniteXpCalculator slot="calculator" client:load/>}
+    {tool.kind==='fps'&&<FpsCalculator slot="calculator" client:load/>}
+    {tool.kind==='countdown'&&<CountdownCalculator slot="calculator" client:load/>}
+    {tool.kind==='download-time'&&<DownloadTimeCalculator slot="calculator" client:load/>}
+    {tool.kind==='platform'&&<PlatformCalculator slot="calculator" client:load/>}
+    {tool.kind==='gta-map'&&<GtaMapCalculator slot="calculator" client:only="preact"/>}
+  </ToolShell>
+</BaseLayout>

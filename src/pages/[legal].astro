@@ -1,0 +1,6 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';import {legalPages,type LegalPage} from '../data/legal';
+export function getStaticPaths(){return legalPages.map((page)=>({params:{legal:page.slug},props:{page}}))}
+interface Props{page:LegalPage}const{page}=Astro.props;
+---
+<BaseLayout title={page.title} description={page.description}><article class="legal-page"><header><div class="container"><nav class="breadcrumbs"><a href="/">Home</a><span>›</span><span>{page.title}</span></nav><span class="eyebrow">GamesCalculators policy</span><h1>{page.title}</h1><p>{page.description}</p><time>Last updated {page.updated}</time></div></header><div class="container legal-body">{page.sections.map((section)=><section><h2>{section.heading}</h2>{section.paragraphs.map((paragraph)=><p>{paragraph}</p>)}</section>)}</div></article></BaseLayout>

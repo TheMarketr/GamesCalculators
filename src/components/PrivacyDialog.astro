@@ -1,0 +1,18 @@
+<dialog class="privacy-dialog" data-privacy-dialog aria-labelledby="privacy-title">
+  <form method="dialog">
+    <div class="dialog-heading"><div><span class="eyebrow">On this device</span><h2 id="privacy-title">Privacy settings</h2></div><button value="close" class="icon-button" aria-label="Close privacy settings">×</button></div>
+    <p>Your calculator history, favorites and progress stay in this browser. Clear any category below.</p>
+    <div class="privacy-actions"><button type="button" data-clear-prefix="gc:recent">Clear calculator data <span>Recent inputs and results</span></button><button type="button" data-clear-prefix="gc:favorites">Clear favorites <span>Saved games and tools</span></button><button type="button" data-clear-prefix="gc:progress">Clear progress <span>Trackers and collections</span></button><button type="button" data-clear-prefix="gc:map">Clear map history <span>Visited locations</span></button></div>
+    <div class="dialog-footer"><span data-privacy-status aria-live="polite"></span><button value="close" class="button button--secondary">Done</button></div>
+  </form>
+</dialog>
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-privacy-dialog]');
+  document.querySelectorAll('[data-privacy-open]').forEach((button) => button.addEventListener('click', () => dialog?.showModal()));
+  dialog?.querySelectorAll<HTMLButtonElement>('[data-clear-prefix]').forEach((button) => button.addEventListener('click', () => {
+    const prefix = button.dataset.clearPrefix ?? '';
+    Object.keys(localStorage).filter((key) => key.startsWith(prefix)).forEach((key) => localStorage.removeItem(key));
+    const status = dialog.querySelector<HTMLElement>('[data-privacy-status]');
+    if (status) status.textContent = 'Saved data cleared.';
+  }));
+</script>

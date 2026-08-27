@@ -1,0 +1,24 @@
+---
+import GlobalSearch from './search/GlobalSearch';
+import type { SearchEntry } from './search/GlobalSearch';
+interface Props { searchEntries: SearchEntry[] }
+const { searchEntries } = Astro.props;
+---
+<header class="site-header">
+  <div class="site-header__inner container-wide">
+    <a href="/" class="brand" aria-label="GamesCalculators home"><span class="brand-mark" aria-hidden="true"><i></i><b></b></span><span>Games<span>Calculators</span></span></a>
+    <nav class="desktop-nav" aria-label="Primary navigation"><a href="/#games">Games</a><a href="/#popular-tools">Tools</a><a href="/data-methodology/">Guides</a></nav>
+    <div class="header-search"><GlobalSearch entries={searchEntries} compact client:load /></div>
+    <button class="mobile-menu-button" type="button" aria-label="Open navigation" data-menu-toggle><span></span><span></span><span></span></button>
+  </div>
+  <nav class="mobile-nav" aria-label="Mobile navigation" data-mobile-nav hidden><a href="/#games">Browse games</a><a href="/#popular-tools">Popular tools</a><a href="/data-methodology/">Data methodology</a><a href="/privacy/">Privacy</a></nav>
+</header>
+<script>
+  const toggle = document.querySelector('[data-menu-toggle]');
+  const nav = document.querySelector('[data-mobile-nav]');
+  toggle?.addEventListener('click', () => {
+    const isHidden = nav?.hasAttribute('hidden');
+    nav?.toggleAttribute('hidden', !isHidden);
+    toggle.setAttribute('aria-expanded', String(isHidden));
+  });
+</script>

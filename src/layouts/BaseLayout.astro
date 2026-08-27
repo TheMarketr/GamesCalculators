@@ -1,0 +1,36 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import PrivacyDialog from '../components/PrivacyDialog.astro';
+import { games, publishedTools } from '../data/games';
+import { site } from '../config/site';
+import { guides } from '../data/guides';
+import type { SearchEntry } from '../components/search/GlobalSearch';
+
+interface Props {
+  title?: string; description?: string; canonical?: string; image?: string; noindex?: boolean;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+const { title = site.title, description = site.description, canonical = Astro.url.pathname, image = '/og.jpg', noindex = false, schema } = Astro.props;
+const pageTitle = title.includes('GamesCalculators') ? title : `${title} | GamesCalculators`;
+const canonicalUrl = new URL(canonical, site.url).toString();
+const imageUrl = image ? new URL(image, site.url).toString() : undefined;
+const searchEntries: SearchEntry[] = [
+  ...games.map((game) => ({ title: `${game.name} Calculators & Tools`, game: game.name, description: game.description, href: `/${game.slug}/`, keywords: [game.shortName ?? '', game.eyebrow], type: 'Game' as const })),
+  ...publishedTools.map((tool) => ({ title: tool.name, game: tool.game.name, description: tool.description, href: `/${tool.game.slug}/${tool.slug}/`, keywords: tool.keywords ?? [], type: 'Tool' as const })),
+  ...guides.map((guide) => ({ title: guide.title, game: guide.game, description: guide.description, href: `/${guide.slug}/`, keywords: [...guide.keywords], type: 'Guide' as const })),
+];
+const websiteSchema = { '@context': 'https://schema.org', '@type': 'WebSite', name: site.name, url: site.url, description: site.description, potentialAction: { '@type': 'SearchAction', target: `${site.url}/?q={search_term_string}`, 'query-input': 'required name=search_term_string' } };
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="generator" content={Astro.generator} /><meta name="theme-color" content="#090e1a" />
+    <meta name="description" content={description} /><meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} /><link rel="canonical" href={canonicalUrl} /><link rel="icon" type="image/png" href="/favicon.png" />
+    <meta property="og:type" content="website" /><meta property="og:site_name" content={site.name} /><meta property="og:title" content={pageTitle} /><meta property="og:description" content={description} /><meta property="og:url" content={canonicalUrl} />{imageUrl && <meta property="og:image" content={imageUrl} />}
+    <meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'} /><meta name="twitter:title" content={pageTitle} /><meta name="twitter:description" content={description} />{imageUrl && <meta name="twitter:image" content={imageUrl} />}
+    <title>{pageTitle}</title><script is:inline type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />{schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}
+  </head>
+  <body><a class="skip-link" href="#main-content">Skip to content</a><SiteHeader searchEntries={searchEntries} /><main id="main-content"><slot /></main><SiteFooter /><PrivacyDialog /></body>
+</html>

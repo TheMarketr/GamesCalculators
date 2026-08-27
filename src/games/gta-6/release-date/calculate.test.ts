@@ -1,0 +1,2 @@
+import {describe,expect,it} from 'vitest';import {calculateCountdown,GTA_VI_RELEASE_ISO} from './calculate';
+describe('GTA VI countdown',()=>{it('breaks remaining time into calendar units',()=>{const target=new Date(GTA_VI_RELEASE_ISO).getTime();expect(calculateCountdown(target-(2*86400+3*3600+4*60+5)*1000,target)).toMatchObject({days:2,hours:3,minutes:4,seconds:5,released:false})});it('never becomes negative',()=>expect(calculateCountdown(Date.now(),0).totalSeconds).toBe(0))});

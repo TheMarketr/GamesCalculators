@@ -1,0 +1,2 @@
+import {describe,expect,it,vi} from 'vitest';import {calculateDownload} from './calculate';
+describe('download time',()=>{it('converts GB and Mbps with efficiency overhead',()=>{vi.spyOn(Date,'now').mockReturnValue(1000);expect(calculateDownload(100,100,'Mbps')).toMatchObject({mbps:100,idealSeconds:8000,seconds:8888.888888888889});vi.restoreAllMocks()});it('converts Gbps to Mbps',()=>expect(calculateDownload(1,1,'Gbps',1).seconds).toBe(8))});

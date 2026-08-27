@@ -1,0 +1,2 @@
+import {describe,expect,it} from 'vitest';import {estimateFps} from './calculate';
+describe('FPS estimate',()=>{it('returns a conservative range around the center',()=>expect(estimateFps({gpuFps:200,cpuFactor:1,resolution:'1080p',preset:'medium'})).toEqual({low:170,high:230,center:200,bottleneck:'Balanced estimate'}));it('reduces the range at 4K epic',()=>expect(estimateFps({gpuFps:200,cpuFactor:1,resolution:'4k',preset:'epic'}).center).toBeLessThan(100))});

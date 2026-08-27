@@ -1,0 +1,3 @@
+import {describe,expect,it} from 'vitest';import {calculateTrade} from './calculate';import type {SelectedValueItem} from '../../../data/types';
+const item=(name:string,value:number,demand=8):SelectedValueItem=>({slug:name.toLowerCase(),name,category:'test',rarity:'test',value,demand,updated:'2026-08-26',quantity:1});
+describe('trade calculator',()=>{it('returns totals, gap and a good verdict',()=>expect(calculateTrade([item('A',100)],[item('B',120)])).toMatchObject({yourTotal:100,theirTotal:120,difference:20,percentage:20,verdict:'Good'}));it('treats a seven-percent band as fair',()=>expect(calculateTrade([item('A',100)],[item('B',106)]).verdict).toBe('Fair'))});

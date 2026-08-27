@@ -1,0 +1,2 @@
+import {describe,expect,it} from 'vitest';import {convertPortalCoordinates} from './calculate';
+describe('portal coordinates',()=>{it('divides Overworld X and Z by eight',()=>expect(convertPortalCoordinates(800,-240,'overworld')).toMatchObject({x:100,z:-30,target:'nether'}));it('multiplies Nether coordinates by eight',()=>expect(convertPortalCoordinates(100,-30,'nether')).toMatchObject({x:800,z:-240,target:'overworld'}))});

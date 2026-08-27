@@ -1,0 +1,22 @@
+---
+import type { GameConfig, ToolConfig } from '../data/games';
+import ToolCard from './ToolCard.astro';
+import AdPlaceholder from './AdPlaceholder.astro';
+import FAQSection from './FAQSection.astro';
+interface Faq { question: string; answer: string }
+interface Props { game: GameConfig; tool: ToolConfig; faqs: Faq[] }
+const { game, tool, faqs } = Astro.props;
+const related = game.tools.filter((candidate) => candidate.slug !== tool.slug).slice(0, 3);
+const updated = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(`${tool.updated}T12:00:00Z`));
+---
+<div class={`tool-page accent-${game.accent}`}>
+  <div class="tool-hero"><div class="container">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href={`/${game.slug}/`}>{game.shortName ?? game.name}</a><span>›</span><span aria-current="page">{tool.shortName}</span></nav>
+    <div class="tool-heading"><div><span class="eyebrow">{game.name} · {tool.category}</span><h1>{tool.name}</h1><p>{tool.description}</p></div><div class="update-badge"><span></span><small>Last updated</small><strong>{updated}</strong></div></div>
+  </div></div>
+  <div class="container tool-layout"><section class="calculator-shell" aria-label={`${tool.name} interactive tool`}><slot name="calculator" /></section><aside class="tool-side"><div class="side-card"><span class="eyebrow">How it works</span><h2>Transparent by design</h2><p>Change any input and the result updates instantly. The formula is tested separately from the interface, and data-driven values show an update date.</p><a href="/data-methodology/">Read the methodology →</a></div><div class="local-notice"><span>▣</span><p><strong>Your data stays local</strong>Inputs and saved progress remain in this browser. No account required.</p></div></aside></div>
+  <div class="container tool-content"><AdPlaceholder /><section class="explain-card"><span class="eyebrow">Understanding the result</span><h2>Use the result as a practical planning estimate</h2><p>Game rules, patches and community markets can change. This tool shows its assumptions directly, avoids false precision where outcomes vary, and keeps supporting copy concise so the interactive result stays first.</p></section>
+    {related.length > 0 && <section class="related-tools"><div class="section-heading section-heading--small"><div><span class="eyebrow">Keep planning</span><h2>Related {game.shortName ?? game.name} tools</h2></div><a href={`/${game.slug}/`}>View game hub →</a></div><div class="tool-grid">{related.map((item) => <ToolCard name={item.shortName} description={item.description} href={`/${game.slug}/${item.slug}/`} game={game.shortName ?? game.name} category={item.category} accent={game.accent} />)}</div></section>}
+    <AdPlaceholder /><FAQSection faqs={faqs} />
+  </div>
+</div>
