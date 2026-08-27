@@ -5,6 +5,7 @@ import preact from '@astrojs/preact';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import { sites } from '@openai/sites-vite-plugin';
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,6 +14,6 @@ export default defineConfig({
   trailingSlash: 'always',
   integrations: [preact(), mdx(), sitemap()],
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [sites(), tailwindcss()]
   }
 });
