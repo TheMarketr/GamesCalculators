@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="80" y1="40" x2="1120" y2="590" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111827"/>
+      <stop offset="0.55" stop-color="#312e81"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(910 140) rotate(140) scale(620 430)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a78bfa" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" rx="36" fill="url(#bg)"/>
+  <rect width="1200" height="630" rx="36" fill="url(#glow)"/>
+  <g fill="none" stroke="#fff" stroke-opacity=".12">
+    <path d="M0 112h1200M0 518h1200"/>
+    <path d="M130 0v630M1070 0v630"/>
+  </g>
+  <g transform="translate(96 119)">
+    <rect width="116" height="116" rx="28" fill="#0f172a"/>
+    <path d="M36 38h44a17 17 0 0 1 16.4 21.5l-6.8 24.4a11.7 11.7 0 0 1-21 3L63 79H53l-5.6 7.9a11.7 11.7 0 0 1-21-3l-6.8-24.4A17 17 0 0 1 36 38Z" fill="#7c3aed"/>
+    <path d="M42 50v20M32 60h20" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="75" cy="54" r="4.5" fill="#fff"/>
+    <circle cx="84" cy="66" r="4.5" fill="#fff"/>
+  </g>
+  <text x="96" y="310" fill="#fff" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="80" font-weight="800">GamesCalculators</text>
+  <text x="96" y="388" fill="#c7d2fe" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="38" font-weight="600">Fast, accurate calculators for the games you play.</text>
+  <g transform="translate(96 454)" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="26" font-weight="700">
+    <rect width="220" height="66" rx="33" fill="#fff" fill-opacity=".12"/>
+    <text x="34" y="43" fill="#fff">Values &amp; Trades</text>
+    <rect x="240" width="207" height="66" rx="33" fill="#fff" fill-opacity=".12"/>
+    <text x="274" y="43" fill="#fff">XP &amp; Progress</text>
+    <rect x="467" width="225" height="66" rx="33" fill="#fff" fill-opacity=".12"/>
+    <text x="501" y="43" fill="#fff">Guides &amp; Hubs</text>
+  </g>
+</svg>
