@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import { publishedTools } from '../../data/games';
+const groups = [
+  { id: 'values-trading', title: 'Values, trading and collections', description: 'Compare item values, offer gaps, demand, inventory totals and collection progress.', categories: ['Values', 'Trading', 'Inventory', 'Collection', 'Tracker', 'Pets', 'Reference', 'Comparison'] },
+  { id: 'planning', title: 'Planning, building and survival', description: 'Turn a target into materials, coordinates, crafting quantities, resources or a practical run plan.', categories: ['Planning', 'Building', 'Coordinates', 'Enchanting', 'Crafting', 'Survival', 'Map'] },
+  { id: 'progress-odds', title: 'Progress, income and probability', description: 'Estimate XP, mastery, time, earnings and multi-attempt odds with the assumptions visible.', categories: ['Progress', 'Income', 'Odds', 'Power'] },
+  { id: 'performance', title: 'Combat, builds, settings and performance', description: 'Model damage, allocations, sensitivity, platform status and realistic performance ranges.', categories: ['Combat', 'Builds', 'Settings', 'Performance', 'Release'] },
+];
+const schema = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Free Game Calculators and Online Tools', description: 'Browse all working game calculators by the problem they solve.', url: 'https://gamescalculators.com/tools/', hasPart: publishedTools.map((tool) => ({ '@type': 'WebApplication', name: tool.name, url: `https://gamescalculators.com/${tool.game.slug}/${tool.slug}/`, applicationCategory: 'GameApplication' })) };
+---
+<BaseLayout title="Free Game Calculators & Online Tools" description="Browse every working game calculator for values, trades, builds, progress, odds, coordinates, performance and planning." canonical="/tools/" schema={schema}>
+  <header class="directory-hero"><div class="container"><nav class="breadcrumbs"><a href="/">Home</a><span>›</span><span aria-current="page">Tools</span></nav><span class="eyebrow">Tools directory</span><h1>Find a calculator by the problem you need to solve</h1><p>Every listed tool is available now. Browse by intent to compare values, plan resources, estimate progress or check a game setup.</p><div class="directory-stats"><span><strong>{publishedTools.length}</strong> working tools</span><span><strong>{groups.length}</strong> problem groups</span><span><strong>0</strong> accounts required</span></div></div></header>
+  {groups.map((group, groupIndex) => { const tools = publishedTools.filter((tool) => group.categories.includes(tool.category)); return <section class:list={['section', { 'section--surface': groupIndex % 2 === 1 }]} id={group.id}><div class="container-wide"><div class="section-heading"><div><span class="eyebrow">{tools.length} working resources</span><h2>{group.title}</h2><p>{group.description}</p></div></div><div class="tool-grid">{tools.map((tool) => <ToolCard name={tool.shortName} description={tool.description} href={`/${tool.game.slug}/${tool.slug}/`} game={tool.game.shortName ?? tool.game.name} category={tool.category} accent={tool.game.accent} />)}</div></div></section>; })}
+</BaseLayout>

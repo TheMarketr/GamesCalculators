@@ -19,14 +19,12 @@ import DownloadTimeCalculator from '../../games/gta-6/download-time-calculator/C
 import PlatformCalculator from '../../games/gta-6/platform-checker/Calculator';
 import GtaMapCalculator from '../../games/gta-6/map/Calculator';
 import SecondaryCalculator from '../../games/secondary/Calculator';
+import { buildCalculatorContent } from '../../data/calculator-content';
 export function getStaticPaths(){return publishedTools.map((entry)=>({params:{game:entry.game.slug,tool:entry.slug},props:{game:entry.game,tool:entry}}))}
 interface Props { game: GameConfig; tool: ToolConfig }
 const { game, tool } = Astro.props;
-const faqs=[
-  {question:`Is this ${tool.shortName} free?`,answer:'Yes. It runs in your browser, requires no account and is free to use.'},
-  {question:'How current are the results?',answer:`The calculator logic and local reference data show an update date of ${tool.updated}. Game patches and player markets can change after that date.`},
-  {question:'Can I share my result?',answer:'Tools with useful share states include a share or copy-link button. Query parameters recreate supported calculator inputs without creating separate indexable pages.'},
-];
+const content = buildCalculatorContent(game, tool);
+const faqs = content.faqs;
 const canonical=`/${game.slug}/${tool.slug}/`;
 const schema=[
   {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:'https://gamescalculators.com/'},{'@type':'ListItem',position:2,name:game.name,item:`https://gamescalculators.com/${game.slug}/`},{'@type':'ListItem',position:3,name:tool.name,item:`https://gamescalculators.com${canonical}`}]},
@@ -35,7 +33,7 @@ const schema=[
 ];
 ---
 <BaseLayout title={tool.name} description={tool.description} canonical={canonical} schema={schema}>
-  <ToolShell game={game} tool={tool} faqs={faqs}>
+  <ToolShell game={game} tool={tool} faqs={faqs} content={content}>
     {tool.kind==='circle'&&<CircleCalculator slot="calculator" client:load/>}
     {tool.kind==='minecraft-xp'&&<MinecraftXpCalculator slot="calculator" client:load/>}
     {tool.kind==='enchant'&&<EnchantCalculator slot="calculator" client:load/>}

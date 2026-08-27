@@ -2,8 +2,8 @@ export const site = {
   name: 'GamesCalculators',
   domain: 'gamescalculators.com',
   url: 'https://gamescalculators.com',
-  title: 'Game Calculators, Tools & Interactive Guides',
+  title: 'Free Game Calculators & Online Tools for Your Favorite Games',
   description:
-    'Fast, free calculators and interactive tools for Minecraft, Roblox games, Fortnite, GTA VI and more.',
+    'Free game calculators, online tools and practical guides for Minecraft, Roblox games, Fortnite, GTA VI and more.',
   audience: '13+',
 } as const;

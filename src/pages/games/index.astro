@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GameCard from '../../components/GameCard.astro';
+import { games, publishedTools } from '../../data/games';
+import { guides } from '../../data/guides';
+const schema = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Game Calculator Hubs', description: 'Browse complete calculator, tool and guide collections for every supported game.', url: 'https://gamescalculators.com/games/', hasPart: games.map((game) => ({ '@type': 'CollectionPage', name: `${game.name} Calculators & Tools`, url: `https://gamescalculators.com/${game.slug}/` })) };
+---
+<BaseLayout title="Game Calculator Hubs" description="Browse all supported game hubs with free calculators, planning tools, searchable references and player guides." canonical="/games/" schema={schema}>
+  <header class="directory-hero"><div class="container"><nav class="breadcrumbs"><a href="/">Home</a><span>›</span><span aria-current="page">Games</span></nav><span class="eyebrow">Games directory</span><h1>Calculator hubs for every supported game</h1><p>Choose a game to find its working calculators, planning tools, searchable references and detailed guides in one collection.</p><div class="directory-stats"><span><strong>{games.length}</strong> game hubs</span><span><strong>{publishedTools.length}</strong> working tools</span><span><strong>{guides.length}</strong> gameplay guides</span></div></div></header>
+  <section class="section container-wide" aria-labelledby="all-game-hubs"><div class="section-heading"><div><span class="eyebrow">Browse the library</span><h2 id="all-game-hubs">All game hubs</h2><p>Each hub explains the gameplay decisions its tools support and keeps data review dates visible.</p></div></div><div class="game-grid">{games.map((game) => <GameCard game={game} />)}</div></section>
+  <section class="section section--surface"><div class="container directory-explainer"><div><span class="eyebrow">What is inside a hub?</span><h2>Tools, context and maintenance in one place</h2><p>A game hub is the long-term home for calculators, guides and reference data for that title. New resources can be added without forcing players to search the entire site.</p></div><ul><li><strong>Calculators</strong><span>Interactive inputs, transparent outputs and stated limits.</span></li><li><strong>References</strong><span>Searchable local data with visible review dates.</span></li><li><strong>Guides</strong><span>Gameplay context that explains when and why to use a tool.</span></li></ul></div></section>
+</BaseLayout>

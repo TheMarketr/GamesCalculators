@@ -33,6 +33,15 @@ export interface ToolConfig {
   keywords?: string[];
 }
 
+export interface GameImage {
+  src: string;
+  alt: string;
+  credit: string;
+  creditUrl: string;
+  license: string;
+  licenseUrl: string;
+}
+
 export interface GameConfig {
   slug: string;
   name: string;
@@ -41,6 +50,7 @@ export interface GameConfig {
   description: string;
   accent: Accent;
   glyph: string;
+  image?: GameImage;
   tools: ToolConfig[];
 }
 
@@ -101,6 +111,14 @@ export const games: GameConfig[] = [
   {
     slug: 'minecraft', name: 'Minecraft', eyebrow: 'Building and survival tools', accent: 'green', glyph: 'MC',
     description: 'Generate accurate block shapes, convert dimensions and plan XP or portal travel.',
+    image: {
+      src: '/images/games/minecraft-gameplay.png',
+      alt: 'A freely licensed Minecraft landscape gameplay screenshot',
+      credit: 'Minecraft gameplay screenshot by Xbox México',
+      creditUrl: 'https://commons.wikimedia.org/wiki/File:Minecraft_Beta_1.8.1_Gameplay_Screenshot.png',
+      license: 'CC BY 3.0',
+      licenseUrl: 'https://creativecommons.org/licenses/by/3.0/',
+    },
     tools: [
       { slug: 'circle-generator', name: 'Minecraft Circle Generator', shortName: 'Circle Generator', description: 'Generate filled or outlined pixel circles with block counts and row instructions.', kind: 'circle', category: 'Building', featured: true, updated, keywords: ['pixel circle', 'block circle'] },
       { slug: 'xp-calculator', name: 'Minecraft XP Calculator', shortName: 'XP Calculator', description: 'Calculate exact XP between levels and estimate common XP-source requirements.', kind: 'minecraft-xp', category: 'Progress', featured: true, updated, keywords: ['experience levels'] },
@@ -112,6 +130,14 @@ export const games: GameConfig[] = [
   {
     slug: 'fortnite', name: 'Fortnite', eyebrow: 'Performance and progress tools', accent: 'blue', glyph: 'FN',
     description: 'Estimate XP progress and realistic PC performance ranges for your settings.',
+    image: {
+      src: '/images/games/fortnite-gdc.jpg',
+      alt: 'Fortnite Battle Royale being presented at GDC 2018',
+      credit: 'Fortnite at GDC 2018 by Official GDC',
+      creditUrl: 'https://commons.wikimedia.org/wiki/File:Fortnite_Battle_Royale_at_GDC_2018.jpg',
+      license: 'CC BY 2.0',
+      licenseUrl: 'https://creativecommons.org/licenses/by/2.0/',
+    },
     tools: [
       { slug: 'xp-calculator', name: 'Fortnite XP Calculator', shortName: 'XP Calculator', description: 'Estimate XP, levels and matches needed to reach a Battle Pass target.', kind: 'fortnite-xp', category: 'Progress', featured: true, updated, keywords: ['battle pass xp', 'level calculator'] },
       { slug: 'fps-calculator', name: 'Fortnite FPS Calculator', shortName: 'FPS Calculator', description: 'Estimate a practical FPS range from your hardware, resolution and preset.', kind: 'fps', category: 'Performance', featured: true, updated, keywords: ['pc fps estimate'] },

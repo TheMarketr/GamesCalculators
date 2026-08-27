@@ -1,6 +1,6 @@
 ---
 interface Faq { question: string; answer: string }
-interface Props { faqs: Faq[] }
-const { faqs } = Astro.props;
+interface Props { faqs: Faq[]; gameName?: string }
+const { faqs, gameName } = Astro.props;
 ---
-<section class="faq-section" aria-labelledby="faq-title"><div class="section-heading section-heading--small"><div><span class="eyebrow">Quick answers</span><h2 id="faq-title">Frequently asked questions</h2></div></div><div class="faq-list">{faqs.map((faq) => <details><summary>{faq.question}<span>+</span></summary><p>{faq.answer}</p></details>)}</div></section>
+<section class="faq-section" aria-labelledby="faq-title"><div class="section-heading section-heading--small"><div><span class="eyebrow">Player questions</span><h2 id="faq-title">{gameName ? `${gameName} calculator FAQs` : 'Frequently asked questions'}</h2><p>Clear answers about calculations, data, independence, privacy and practical use.</p></div></div><div class="faq-list">{faqs.map((faq, index) => <details open={index === 0}><summary>{faq.question}<span aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}</div></section>

@@ -18,13 +18,11 @@
   </g>
   <g transform="translate(96 119)">
     <rect width="116" height="116" rx="28" fill="#0f172a"/>
-    <path d="M36 38h44a17 17 0 0 1 16.4 21.5l-6.8 24.4a11.7 11.7 0 0 1-21 3L63 79H53l-5.6 7.9a11.7 11.7 0 0 1-21-3l-6.8-24.4A17 17 0 0 1 36 38Z" fill="#7c3aed"/>
-    <path d="M42 50v20M32 60h20" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
-    <circle cx="75" cy="54" r="4.5" fill="#fff"/>
-    <circle cx="84" cy="66" r="4.5" fill="#fff"/>
+    <path d="M58 18 101 43 87 63 58 47 32 62v29l26 15 23-13v-8H56V65h45v38l-43 25-43-25V43l43-25Z" fill="#7c3aed" transform="translate(0 -15) scale(1 .92)"/>
+    <path d="M77 55h27v20H77z" fill="#22d3ee"/>
   </g>
   <text x="96" y="310" fill="#fff" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="80" font-weight="800">GamesCalculators</text>
-  <text x="96" y="388" fill="#c7d2fe" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="38" font-weight="600">Fast, accurate calculators for the games you play.</text>
+  <text x="96" y="388" fill="#c7d2fe" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="38" font-weight="600">Free Game Calculators &amp; Online Tools</text>
   <g transform="translate(96 454)" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="26" font-weight="700">
     <rect width="220" height="66" rx="33" fill="#fff" fill-opacity=".12"/>
     <text x="34" y="43" fill="#fff">Values &amp; Trades</text>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">GamesCalculators G logo</title>
+  <defs><linearGradient id="g" x1="8" y1="8" x2="58" y2="58" gradientUnits="userSpaceOnUse"><stop stop-color="#8b5cf6"/><stop offset=".5" stop-color="#6366f1"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+  <path fill="url(#g)" d="M32 3 59 19 50 31 32 21 16 30v18l16 9 14-8v-5H31V32h28v24L32 61 3 45V19L32 3Z"/>
+  <path fill="#07111f" d="m32 21 11 6-8 12h-4v5h15v5l-14 8-16-9V30l16-9Z" opacity=".32"/>
+</svg>

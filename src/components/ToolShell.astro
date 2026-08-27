@@ -1,11 +1,12 @@
 ---
 import type { GameConfig, ToolConfig } from '../data/games';
+import type { CalculatorContent } from '../data/calculator-content';
 import ToolCard from './ToolCard.astro';
-import AdPlaceholder from './AdPlaceholder.astro';
 import FAQSection from './FAQSection.astro';
+// Advertising components are intentionally kept in the codebase but are not rendered.
 interface Faq { question: string; answer: string }
-interface Props { game: GameConfig; tool: ToolConfig; faqs: Faq[] }
-const { game, tool, faqs } = Astro.props;
+interface Props { game: GameConfig; tool: ToolConfig; faqs: Faq[]; content: CalculatorContent }
+const { game, tool, faqs, content } = Astro.props;
 const related = game.tools.filter((candidate) => candidate.slug !== tool.slug).slice(0, 3);
 const updated = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(`${tool.updated}T12:00:00Z`));
 ---
@@ -15,8 +16,16 @@ const updated = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric'
     <div class="tool-heading"><div><span class="eyebrow">{game.name} · {tool.category}</span><h1>{tool.name}</h1><p>{tool.description}</p></div><div class="update-badge"><span></span><small>Last updated</small><strong>{updated}</strong></div></div>
   </div></div>
   <div class="container tool-layout"><section class="calculator-shell" aria-label={`${tool.name} interactive tool`}><slot name="calculator" /></section><aside class="tool-side"><div class="side-card"><span class="eyebrow">How it works</span><h2>Transparent by design</h2><p>Change any input and the result updates instantly. The formula is tested separately from the interface, and data-driven values show an update date.</p><a href="/data-methodology/">Read the methodology →</a></div><div class="local-notice"><span>▣</span><p><strong>Your data stays local</strong>Inputs and saved progress remain in this browser. No account required.</p></div></aside></div>
-  <div class="container tool-content"><AdPlaceholder /><section class="explain-card"><span class="eyebrow">Understanding the result</span><h2>Use the result as a practical planning estimate</h2><p>Game rules, patches and community markets can change. This tool shows its assumptions directly, avoids false precision where outcomes vary, and keeps supporting copy concise so the interactive result stays first.</p></section>
+  <div class="container tool-content">
+    <nav class="content-jump-nav" aria-label="Calculator page sections"><a href="#calculator-guide">How to use it</a><a href="#result-reading">Read the result</a><a href="#gameplay-context">Gameplay context</a><a href="#faq">FAQs</a></nav>
+    <section class="calculator-guide" id="calculator-guide" aria-labelledby="calculator-guide-title">
+      <div class="guide-copy"><span class="eyebrow">Calculator guide</span><h2 id="calculator-guide-title">What the {tool.name} solves</h2>{content.overview.map((paragraph) => <p>{paragraph}</p>)}<p>{content.problem}</p></div>
+      <aside class="intent-card"><span class="eyebrow">Useful when you want to</span><ul>{content.useCases.map((useCase) => <li><span aria-hidden="true">✓</span>{useCase}</li>)}</ul></aside>
+    </section>
+    <section class="how-to-panel" aria-labelledby="how-to-title"><div><span class="eyebrow">Step by step</span><h2 id="how-to-title">How to use this {game.shortName ?? game.name} calculator</h2></div><ol>{content.steps.map((step, index) => <li><span>{index + 1}</span><p>{step}</p></li>)}</ol></section>
+    <section class="result-reading" id="result-reading" aria-labelledby="result-reading-title"><div><span class="eyebrow">Understanding the output</span><h2 id="result-reading-title">Read the result before you act</h2><p>The calculator is a decision aid, not a promise about a random drop, live market, patch, or another player. Use the breakdown to understand why the answer changes.</p></div><ul>{content.resultTips.map((tip) => <li>{tip}</li>)}</ul></section>
+    <section class="knowledge-section" id="gameplay-context" aria-labelledby="gameplay-context-title"><div class="section-heading section-heading--small"><div><span class="eyebrow">Deeper gameplay context</span><h2 id="gameplay-context-title">Inputs, interpretation and limits</h2><p>Open each topic for the details that matter when applying this result in game.</p></div></div><div class="knowledge-accordion">{content.details.map((detail, index) => <details open={index === 0}><summary><span>{String(index + 1).padStart(2, '0')}</span>{detail.title}<b aria-hidden="true">+</b></summary><div><p>{detail.body}</p><ul>{detail.points.map((point) => <li>{point}</li>)}</ul></div></details>)}</div></section>
     {related.length > 0 && <section class="related-tools"><div class="section-heading section-heading--small"><div><span class="eyebrow">Keep planning</span><h2>Related {game.shortName ?? game.name} tools</h2></div><a href={`/${game.slug}/`}>View game hub →</a></div><div class="tool-grid">{related.map((item) => <ToolCard name={item.shortName} description={item.description} href={`/${game.slug}/${item.slug}/`} game={game.shortName ?? game.name} category={item.category} accent={game.accent} />)}</div></section>}
-    <AdPlaceholder /><FAQSection faqs={faqs} />
+    <div id="faq"><FAQSection faqs={faqs} gameName={game.shortName ?? game.name} /></div>
   </div>
 </div>

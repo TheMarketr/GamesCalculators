@@ -6,12 +6,12 @@ const { searchEntries } = Astro.props;
 ---
 <header class="site-header">
   <div class="site-header__inner container-wide">
-    <a href="/" class="brand" aria-label="GamesCalculators home"><span class="brand-mark" aria-hidden="true"><i></i><b></b></span><span>Games<span>Calculators</span></span></a>
-    <nav class="desktop-nav" aria-label="Primary navigation"><a href="/#games">Games</a><a href="/#popular-tools">Tools</a><a href="/data-methodology/">Guides</a></nav>
+    <a href="/" class="brand" aria-label="GamesCalculators home"><img class="brand-logo" src="/logo-g.svg" width="38" height="38" alt="" /><span>Games<span>Calculators</span></span></a>
+    <nav class="desktop-nav" aria-label="Primary navigation"><a href="/games/">Games</a><a href="/tools/">Tools</a><a href="/guides/">Guides</a></nav>
     <div class="header-search"><GlobalSearch entries={searchEntries} compact client:load /></div>
     <button class="mobile-menu-button" type="button" aria-label="Open navigation" data-menu-toggle><span></span><span></span><span></span></button>
   </div>
-  <nav class="mobile-nav" aria-label="Mobile navigation" data-mobile-nav hidden><a href="/#games">Browse games</a><a href="/#popular-tools">Popular tools</a><a href="/data-methodology/">Data methodology</a><a href="/privacy/">Privacy</a></nav>
+  <nav class="mobile-nav" aria-label="Mobile navigation" data-mobile-nav hidden><a href="/games/">Browse games</a><a href="/tools/">All tools</a><a href="/guides/">Player guides</a><a href="/data-methodology/">Data methodology</a><a href="/privacy/">Privacy</a></nav>
 </header>
 <script>
   const toggle = document.querySelector('[data-menu-toggle]');

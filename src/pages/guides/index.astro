@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { guides } from '../../data/guides';
+import { games } from '../../data/games';
+const schema = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Game Guides', description: 'Practical gameplay guides that explain calculator inputs, strategies and limitations.', url: 'https://gamescalculators.com/guides/', hasPart: guides.map((guide) => ({ '@type': 'Article', name: guide.title, url: `https://gamescalculators.com/${guide.slug}/` })) };
+---
+<BaseLayout title="Game Guides & Calculator Help" description="Read practical game guides for values, trading, progression, survival, enchanting and release planning." canonical="/guides/" schema={schema}>
+  <header class="directory-hero"><div class="container"><nav class="breadcrumbs"><a href="/">Home</a><span>›</span><span aria-current="page">Guides</span></nav><span class="eyebrow">Guides directory</span><h1>Gameplay context beyond the calculator result</h1><p>Use these guides to understand the mechanics, assumptions and player decisions behind our calculators and reference tools.</p><div class="directory-stats"><span><strong>{guides.length}</strong> detailed guides</span><span><strong>{games.length}</strong> supported games</span><span><strong>100%</strong> free to read</span></div></div></header>
+  <section class="section container-wide"><div class="section-heading"><div><span class="eyebrow">Learn before you decide</span><h2>All game guides</h2><p>Each article connects a gameplay goal to relevant calculations, cautions and next steps.</p></div></div><div class="guide-grid">{guides.map((guide) => { const game = games.find((entry) => entry.slug === guide.gameSlug); return <GuideCard guide={guide} accent={game?.accent} />; })}</div></section>
+  <section class="section section--surface"><div class="container directory-explainer"><div><span class="eyebrow">Editorial approach</span><h2>Useful, independent and clear about uncertainty</h2><p>Guides distinguish deterministic formulas from community values, probability, performance ranges and unconfirmed information.</p></div><ul><li><strong>Visible dates</strong><span>Articles and data references show when they were reviewed.</span></li><li><strong>Source awareness</strong><span>Confirmed publisher information takes priority over rumors.</span></li><li><strong>Corrections</strong><span>Players can report outdated data through the contact page.</span></li></ul></div></section>
+</BaseLayout>
