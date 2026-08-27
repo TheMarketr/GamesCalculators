@@ -11,10 +11,14 @@ if (!existsSync(archive)) {
   throw new Error(`Missing validated source archive: ${archive}`);
 }
 
-const result = spawnSync('tar', ['--exclude=package.json', '-xzf', archive], {
-  cwd: process.cwd(),
-  stdio: 'inherit',
-});
+const result = spawnSync(
+  'tar',
+  ['--exclude=package.json', '--exclude=pnpm-workspace.yaml', '-xzf', archive],
+  {
+    cwd: process.cwd(),
+    stdio: 'inherit',
+  },
+);
 
 if (result.error) {
   throw result.error;
