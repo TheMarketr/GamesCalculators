@@ -1,13 +1,41 @@
 import type { ValueItem } from '../types';
+
+const reviewed = '2026-08-28';
+const source = {
+  sourceType: 'community-market' as const,
+  sourceLabel: 'AdoptMe.rocks community value index',
+  sourceUrl: 'https://adoptme.rocks/',
+  unit: 'community index',
+};
+const pet = (slug: string, name: string, rarity: string, value: number): ValueItem => ({
+  slug, name, category: 'pet', rarity, value, demand: 0, updated: reviewed, ...source,
+  note: 'Fan-made community index snapshot; not an official Adopt Me trade value.',
+});
+
 export const adoptMePets: ValueItem[] = [
-  { slug: 'shadow-dragon', name: 'Shadow Dragon', category: 'pet', rarity: 'legendary', value: 275, demand: 9.8, updated: '2026-08-26' },
-  { slug: 'bat-dragon', name: 'Bat Dragon', category: 'pet', rarity: 'legendary', value: 240, demand: 9.7, updated: '2026-08-26' },
-  { slug: 'giraffe', name: 'Giraffe', category: 'pet', rarity: 'legendary', value: 125, demand: 9.1, updated: '2026-08-26' },
-  { slug: 'frost-dragon', name: 'Frost Dragon', category: 'pet', rarity: 'legendary', value: 92, demand: 9.4, updated: '2026-08-26' },
-  { slug: 'owl', name: 'Owl', category: 'pet', rarity: 'legendary', value: 72, demand: 9.0, updated: '2026-08-26' },
-  { slug: 'parrot', name: 'Parrot', category: 'pet', rarity: 'legendary', value: 61, demand: 8.7, updated: '2026-08-26' },
-  { slug: 'evil-unicorn', name: 'Evil Unicorn', category: 'pet', rarity: 'legendary', value: 43, demand: 8.2, updated: '2026-08-26' },
-  { slug: 'crow', name: 'Crow', category: 'pet', rarity: 'legendary', value: 40, demand: 8.0, updated: '2026-08-26' },
-  { slug: 'turtle', name: 'Turtle', category: 'pet', rarity: 'legendary', value: 12, demand: 8.3, updated: '2026-08-26' },
-  { slug: 'kangaroo', name: 'Kangaroo', category: 'pet', rarity: 'legendary', value: 9, demand: 7.6, updated: '2026-08-26' },
+  pet('bat-dragon', 'Bat Dragon', 'legendary', 288),
+  pet('shadow-dragon', 'Shadow Dragon', 'legendary', 195),
+  pet('giraffe', 'Giraffe', 'legendary', 130),
+  pet('frost-dragon', 'Frost Dragon', 'legendary', 100),
+  pet('owl', 'Owl', 'legendary', 83.43),
+  pet('parrot', 'Parrot', 'legendary', 65.66),
+  pet('crow', 'Crow', 'legendary', 54.22),
+  pet('evil-unicorn', 'Evil Unicorn', 'legendary', 46.99),
+  pet('giant-panda', 'Giant Panda', 'legendary', 36.14),
+  pet('african-wild-dog', 'African Wild Dog', 'ultra-rare', 34.34),
+  pet('hedgehog', 'Hedgehog', 'ultra-rare', 32.53),
+  pet('balloon-unicorn', 'Balloon Unicorn', 'legendary', 31.33),
+  pet('blazing-lion', 'Blazing Lion', 'legendary', 30.72),
+  pet('diamond-butterfly', 'Diamond Butterfly', 'legendary', 29.52),
+  pet('orchid-butterfly', 'Orchid Butterfly', 'legendary', 27.71),
+  pet('dalmatian', 'Dalmatian', 'ultra-rare', 26.51),
+  pet('arctic-reindeer', 'Arctic Reindeer', 'legendary', 22.89),
+  pet('haetae', 'Haetae', 'legendary', 16.87),
+  pet('pelican', 'Pelican', 'ultra-rare', 15.66),
+  pet('cow', 'Cow', 'rare', 15.21),
+  pet('peppermint-penguin', 'Peppermint Penguin', 'ultra-rare', 14.76),
+  pet('strawberry-shortcake-bat-dragon', 'Strawberry Shortcake Bat Dragon', 'legendary', 14.76),
+  pet('cryptid', 'Cryptid', 'legendary', 13.55),
+  pet('turtle', 'Turtle', 'legendary', 13.55),
+  pet('yeti', 'Yeti', 'ultra-rare', 0.78),
 ];

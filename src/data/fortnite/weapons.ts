@@ -1,0 +1,61 @@
+import type { ValueItem } from '../types';
+
+const reviewed = '2026-08-28';
+const source = {
+  sourceType: 'community-wiki' as const,
+  sourceLabel: 'Fortnite.GG all-weapons stat table',
+  sourceUrl: 'https://fortnite.gg/weapons',
+  unit: 'DPS',
+};
+const weapon = (slug: string, name: string, rarity: string, dps: number, damage: number, fireRate: number, magazine: number, reload: number, category = 'assault rifle'): ValueItem => ({
+  slug, name, category, rarity, value: dps, damage, fireRate, magazine, reload, demand: 0, updated: reviewed, ...source,
+  note: `${damage} damage · ${fireRate}/s fire rate · ${magazine} magazine · ${reload}s reload. Availability varies by mode and season.`,
+});
+
+/** Exact rarity-level stat rows; this is an all-weapons reference and does not claim every row is in the current loot pool. */
+export const fortniteWeapons: ValueItem[] = [
+  weapon('hammer-ar-common', 'Hammer Assault Rifle', 'common', 156.6, 27, 5.8, 20, 2.42),
+  weapon('hammer-ar-uncommon', 'Hammer Assault Rifle', 'uncommon', 168.2, 29, 5.8, 20, 2.31),
+  weapon('hammer-ar-rare', 'Hammer Assault Rifle', 'rare', 174, 30, 5.8, 20, 2.2),
+  weapon('hammer-ar-epic', 'Hammer Assault Rifle', 'epic', 185.6, 32, 5.8, 20, 2.09),
+  weapon('hammer-ar-legendary', 'Hammer Assault Rifle', 'legendary', 191.4, 33, 5.8, 20, 1.98),
+  weapon('tactical-ar-legendary', 'Tactical Assault Rifle', 'legendary', 161, 23, 7, 30, 1.98),
+  weapon('overclocked-pulse-rifle', 'Overclocked Pulse Rifle', 'mythic', 237.5, 38, 6.25, 20, 2.68),
+  weapon('heavy-ar-common', 'Heavy Assault Rifle', 'common', 135, 36, 3.75, 25, 3.08),
+  weapon('heavy-ar-uncommon', 'Heavy Assault Rifle', 'uncommon', 142.5, 38, 3.75, 25, 2.94),
+  weapon('heavy-ar-rare', 'Heavy Assault Rifle', 'rare', 150, 40, 3.75, 25, 2.8),
+  weapon('heavy-ar-epic', 'Heavy Assault Rifle', 'epic', 157.5, 42, 3.75, 25, 2.66),
+  weapon('heavy-ar-legendary', 'Heavy Assault Rifle', 'legendary', 165, 44, 3.75, 25, 2.52),
+  weapon('mk-seven-common', 'MK-Seven Assault Rifle', 'common', 162, 18, 9, 35, 3.41),
+  weapon('mk-seven-uncommon', 'MK-Seven Assault Rifle', 'uncommon', 171, 19, 9, 35, 3.26),
+  weapon('mk-seven-rare', 'MK-Seven Assault Rifle', 'rare', 180, 20, 9, 35, 3.1),
+  weapon('mk-seven-epic', 'MK-Seven Assault Rifle', 'epic', 189, 21, 9, 35, 2.95),
+  weapon('mk-seven-legendary', 'MK-Seven Assault Rifle', 'legendary', 198, 22, 9, 35, 2.79),
+  weapon('foundations-mk-seven', "The Foundation's MK-Seven Assault Rifle", 'mythic', 209, 22, 9.5, 35, 2.64),
+  weapon('ranger-ar-common', 'Ranger Assault Rifle', 'common', 124, 31, 4, 25, 2.75),
+  weapon('ranger-ar-uncommon', 'Ranger Assault Rifle', 'uncommon', 128, 32, 4, 25, 2.63),
+  weapon('ranger-ar-rare', 'Ranger Assault Rifle', 'rare', 136, 34, 4, 25, 2.5),
+  weapon('ranger-ar-epic', 'Ranger Assault Rifle', 'epic', 144, 36, 4, 25, 2.38),
+  weapon('ranger-ar-legendary', 'Ranger Assault Rifle', 'legendary', 148, 37, 4, 25, 2.25),
+  weapon('ranger-ar-mythic', 'Ranger Assault Rifle', 'mythic', 156, 39, 4, 25, 2.13),
+  weapon('sentinel-pump-common', 'Sentinel Pump Shotgun', 'common', 78.54, 92.4, 0.85, 4, 5.39, 'shotgun'),
+  weapon('sentinel-pump-uncommon', 'Sentinel Pump Shotgun', 'uncommon', 83.64, 98.4, 0.85, 4, 5.15, 'shotgun'),
+  weapon('sentinel-pump-rare', 'Sentinel Pump Shotgun', 'rare', 87.72, 103.2, 0.85, 4, 4.9, 'shotgun'),
+  weapon('sentinel-pump-epic', 'Sentinel Pump Shotgun', 'epic', 91.8, 108, 0.85, 4, 4.66, 'shotgun'),
+  weapon('sentinel-pump-legendary', 'Sentinel Pump Shotgun', 'legendary', 96.9, 114, 0.85, 4, 4.41, 'shotgun'),
+  weapon('combat-shotgun-common', 'Combat Shotgun', 'common', 103.7, 61, 1.7, 8, 5.5, 'shotgun'),
+  weapon('combat-shotgun-uncommon', 'Combat Shotgun', 'uncommon', 110.5, 65, 1.7, 8, 5.25, 'shotgun'),
+  weapon('combat-shotgun-rare', 'Combat Shotgun', 'rare', 115.6, 68, 1.7, 8, 5, 'shotgun'),
+  weapon('combat-shotgun-epic', 'Combat Shotgun', 'epic', 120.7, 71, 1.7, 8, 4.75, 'shotgun'),
+  weapon('combat-shotgun-legendary', 'Combat Shotgun', 'legendary', 127.5, 75, 1.7, 8, 4.5, 'shotgun'),
+  weapon('stinger-smg-common', 'Stinger SMG', 'common', 180, 15, 12, 30, 2.75, 'smg'),
+  weapon('stinger-smg-uncommon', 'Stinger SMG', 'uncommon', 192, 16, 12, 30, 2.63, 'smg'),
+  weapon('stinger-smg-rare', 'Stinger SMG', 'rare', 204, 17, 12, 30, 2.5, 'smg'),
+  weapon('stinger-smg-epic', 'Stinger SMG', 'epic', 216, 18, 12, 30, 2.38, 'smg'),
+  weapon('stinger-smg-legendary', 'Stinger SMG', 'legendary', 228, 19, 12, 30, 2.25, 'smg'),
+  weapon('twin-mag-smg-common', 'Twin Mag SMG', 'common', 208, 16, 13, 20, 1.3, 'smg'),
+  weapon('twin-mag-smg-uncommon', 'Twin Mag SMG', 'uncommon', 221, 17, 13, 20, 1.3, 'smg'),
+  weapon('twin-mag-smg-rare', 'Twin Mag SMG', 'rare', 234, 18, 13, 20, 1.3, 'smg'),
+  weapon('twin-mag-smg-epic', 'Twin Mag SMG', 'epic', 247, 19, 13, 20, 1.3, 'smg'),
+  weapon('twin-mag-smg-legendary', 'Twin Mag SMG', 'legendary', 260, 20, 13, 20, 1.3, 'smg'),
+];

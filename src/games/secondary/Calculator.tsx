@@ -10,13 +10,17 @@ type SortMode = 'score' | 'name' | 'value' | 'rating';
 
 function routeCatalog(gameSlug: string, toolSlug: string) {
   let items = getToolCatalog(gameSlug, toolSlug);
-  if (gameSlug === '99-nights' && (toolSlug === 'characters' || toolSlug === 'class-comparison')) items = items.filter((item) => item.category === 'role profile');
-  if (gameSlug === '99-nights' && toolSlug === 'items') items = items.filter((item) => item.category !== 'role profile');
-  if (gameSlug === '99-nights' && toolSlug === 'crafting') items = items.filter((item) => item.category === 'crafting');
+  if (gameSlug === '99-nights' && (toolSlug === 'characters' || toolSlug === 'class-comparison')) items = items.filter((item) => item.category === 'class');
+  if (gameSlug === '99-nights' && toolSlug === 'items') items = items.filter((item) => item.category === 'food');
+  if (gameSlug === '99-nights' && (toolSlug === 'crafting' || toolSlug === 'crafting-calculator')) items = items.filter((item) => item.category === 'crafting');
   if (gameSlug === 'mm2' && toolSlug === 'knife-values') items = items.filter((item) => item.category === 'knife');
   if (gameSlug === 'mm2' && toolSlug === 'godly-values') items = items.filter((item) => item.rarity === 'godly');
   return items;
 }
+
+const displayReference = (item: CatalogItem) => item.displayValue ?? formatCompact(item.value);
+const displayRating = (item: CatalogItem) => item.rating > 0 ? `${item.rating.toFixed(1)} / ${item.ratingMax ?? 10}${item.ratingLabel ? ` ${item.ratingLabel}` : ''}` : 'Not published';
+const catalogScore = (item: CatalogItem) => item.value * (item.rating > 0 ? .5 + item.rating / 20 : 1);
 
 function formatMetric(metric: CalculationMetric) {
   if (typeof metric.value === 'string') return metric.value;
@@ -74,16 +78,17 @@ function ReferenceExplorer({ gameSlug, toolSlug, toolName }: Props) {
   const filtered = [...catalog].filter((item) => (category === 'all' || item.category === category) && `${item.name} ${item.category} ${item.rarity} ${item.note}`.toLowerCase().includes(query.toLowerCase())).sort((a, b) => {
     if (sort === 'name') return a.name.localeCompare(b.name);
     if (sort === 'rating') return b.rating - a.rating;
-    if (sort === 'score') return (b.value * b.rating) - (a.value * a.rating);
+    if (sort === 'score') return catalogScore(b) - catalogScore(a);
     return b.value - a.value;
   });
 
   return <div class="calculator universal-tool">
     <div class="calculator-header"><div><span class="eyebrow">Searchable local reference</span><h2>Explore {toolName.replace(/^(Grow a Garden|Blox Fruits|Steal a Brainrot|99 Nights|Adopt Me|MM2|Pet Simulator 99|GTA VI)\s+/, '')}</h2></div><span class="reference-count">{filtered.length} shown</span></div>
     <div class="reference-controls"><label class="calc-field"><span>Search</span><input type="search" value={query} placeholder="Search names, categories or rarity" onInput={(event) => setQuery((event.currentTarget as HTMLInputElement).value)}/></label><label class="calc-field"><span>Category</span><select value={category} onChange={(event) => setCategory((event.currentTarget as HTMLSelectElement).value)}>{categories.map((item) => <option value={item} key={item}>{item}</option>)}</select></label><label class="calc-field"><span>Sort by</span><select value={sort} onChange={(event) => setSort((event.currentTarget as HTMLSelectElement).value as SortMode)}><option value="value">Value / power</option><option value="rating">Demand / utility</option><option value="score">Combined score</option><option value="name">Name</option></select></label></div>
-    <div class="interactive-table-wrap"><table class="interactive-table"><thead><tr><th>Name</th><th>Category</th><th>Tier</th><th>Reference</th><th>Rating</th></tr></thead><tbody>{filtered.map((item) => <tr key={item.slug}><th scope="row"><strong>{item.name}</strong><small>{item.note}</small></th><td>{item.category}</td><td><span class="value-badge">{item.rarity}</span></td><td>{formatCompact(item.value)}</td><td>{item.rating.toFixed(1)} / 10</td></tr>)}</tbody></table></div>
+    {catalog[0]?.sourceLabel && <p class="assumption-note"><strong>Data source:</strong> {catalog[0].sourceUrl ? <a href={catalog[0].sourceUrl} target="_blank" rel="noreferrer">{catalog[0].sourceLabel}</a> : catalog[0].sourceLabel}{catalog[0].reviewed ? ` · reviewed ${catalog[0].reviewed}` : ''}. Read each row note before comparing unlike metrics.</p>}
+    <div class="interactive-table-wrap"><table class="interactive-table"><thead><tr><th>Name</th><th>Category</th><th>Tier</th><th>Reference</th><th>Rating / context</th></tr></thead><tbody>{filtered.map((item) => <tr key={item.slug}><th scope="row"><strong>{item.name}</strong><small>{item.note}</small></th><td>{item.category}</td><td><span class="value-badge">{item.rarity}</span></td><td>{displayReference(item)}</td><td>{displayRating(item)}</td></tr>)}</tbody></table></div>
     {!filtered.length && <div class="empty-state"><strong>No matching entries</strong><small>Try a broader search or reset the category.</small></div>}
-    <p class="assumption-note">Values and ratings are editable local planning references. Check the update date and current game patch before making a trade or purchase decision.</p>
+    <p class="assumption-note">These are dated reference records, not guaranteed offers. Community market indexes can move, RAP can be manipulated, and item availability or game stats can change after updates.</p>
   </div>;
 }
 
@@ -95,23 +100,25 @@ function ComparisonWorkbench({ gameSlug, toolSlug, toolName }: Props) {
   const right = catalog.find((item) => item.slug === rightSlug) ?? catalog[1] ?? catalog[0];
   if (!left || !right) return <div class="calculator universal-tool"><p class="assumption-note">No comparison records are available.</p></div>;
   const valueGap = right.value ? (left.value - right.value) / right.value * 100 : 0;
-  const score = (item: CatalogItem) => item.value * (.5 + item.rating / 20);
-  const winner = score(left) >= score(right) ? left : right;
+  const winner = catalogScore(left) >= catalogScore(right) ? left : right;
+  const usesRating = left.rating > 0 || right.rating > 0;
+  const comparisonLabel = usesRating ? 'Higher blended score' : `Higher ${left.unit === right.unit && left.unit ? left.unit : 'numeric reference'}`;
 
   return <div class="calculator universal-tool">
     <div class="calculator-header"><div><span class="eyebrow">Side-by-side comparison</span><h2>Compare two options</h2></div><button class="text-button" type="button" onClick={() => { setLeftSlug(right.slug); setRightSlug(left.slug); }}>Swap</button></div>
     <div class="comparison-picker-grid"><label class="calc-field"><span>First option</span><select value={leftSlug} onChange={(event) => setLeftSlug((event.currentTarget as HTMLSelectElement).value)}>{catalog.map((item) => <option value={item.slug} key={item.slug}>{item.name}</option>)}</select></label><span aria-hidden="true">VS</span><label class="calc-field"><span>Second option</span><select value={rightSlug} onChange={(event) => setRightSlug((event.currentTarget as HTMLSelectElement).value)}>{catalog.map((item) => <option value={item.slug} key={item.slug}>{item.name}</option>)}</select></label></div>
-    <div class="comparison-cards"><article><span>{left.category}</span><h3>{left.name}</h3><strong>{formatCompact(left.value)}</strong><p>Rating {left.rating.toFixed(1)} / 10</p><small>{left.note}</small></article><article><span>{right.category}</span><h3>{right.name}</h3><strong>{formatCompact(right.value)}</strong><p>Rating {right.rating.toFixed(1)} / 10</p><small>{right.note}</small></article></div>
-    <div class="secondary-result-grid"><div class="result-metric"><span>Value gap</span><strong>{valueGap >= 0 ? '+' : ''}{valueGap.toFixed(1)}%</strong></div><div class="result-metric result-metric--good"><span>Higher blended score</span><strong>{winner.name}</strong></div></div>
-    <div class="calculator-actions"><button class="button button--primary" type="button" onClick={() => shareResult(toolName, `${left.name} vs ${right.name}: ${winner.name} has the higher blended planning score.`)}>Share comparison</button></div>
-    <p class="assumption-note">The blended score combines the displayed local reference and rating. Use it as one planning signal, not a guaranteed ranking.</p>
+    <div class="comparison-cards"><article><span>{left.category}</span><h3>{left.name}</h3><strong>{displayReference(left)}</strong><p>Rating {displayRating(left)}</p><small>{left.note}</small></article><article><span>{right.category}</span><h3>{right.name}</h3><strong>{displayReference(right)}</strong><p>Rating {displayRating(right)}</p><small>{right.note}</small></article></div>
+    <div class="secondary-result-grid"><div class="result-metric"><span>Numeric gap</span><strong>{valueGap >= 0 ? '+' : ''}{valueGap.toFixed(1)}%</strong></div><div class="result-metric result-metric--good"><span>{comparisonLabel}</span><strong>{winner.name}</strong></div></div>
+    <div class="calculator-actions"><button class="button button--primary" type="button" onClick={() => shareResult(toolName, `${left.name} vs ${right.name}: ${winner.name} has the higher displayed comparison metric.`)}>Share comparison</button></div>
+    {catalog[0]?.sourceLabel && <p class="assumption-note"><strong>Data source:</strong> {catalog[0].sourceUrl ? <a href={catalog[0].sourceUrl} target="_blank" rel="noreferrer">{catalog[0].sourceLabel}</a> : catalog[0].sourceLabel}{catalog[0].reviewed ? ` · reviewed ${catalog[0].reviewed}` : ''}.</p>}
+    <p class="assumption-note">When a source publishes a rating, the comparison blends it with the numeric reference. When it does not, the result compares only the documented metric shown above.</p>
   </div>;
 }
 
 function TradeSide({ title, catalog, selected, onChange }: { title: string; catalog: CatalogItem[]; selected: string[]; onChange: (items: string[]) => void }) {
   const [choice, setChoice] = useState(catalog[0]?.slug ?? '');
   const total = selected.reduce((sum, slug) => sum + (catalog.find((item) => item.slug === slug)?.value ?? 0), 0);
-  return <section class="offer-panel"><div class="offer-heading"><div><span>{title}</span><strong>{selected.length} / 4 items</strong></div></div><div class="item-picker"><select aria-label={`Choose an item for ${title}`} value={choice} onChange={(event) => setChoice((event.currentTarget as HTMLSelectElement).value)}>{catalog.map((item) => <option value={item.slug} key={item.slug}>{item.name}</option>)}</select><button type="button" disabled={!choice || selected.length >= 4} onClick={() => onChange([...selected, choice])}>+ Add</button></div><div class="offer-items">{selected.length ? selected.map((slug, index) => { const item = catalog.find((candidate) => candidate.slug === slug); return item && <div class="offer-item" key={`${slug}-${index}`}><span class="item-orb">{item.name.slice(0, 2).toUpperCase()}</span><span><strong>{item.name}</strong><small>{item.rarity} · Rating {item.rating.toFixed(1)}</small></span><b>{formatCompact(item.value)}</b><button type="button" aria-label={`Remove ${item.name}`} onClick={() => onChange(selected.filter((_, itemIndex) => itemIndex !== index))}>×</button></div>; }) : <div class="empty-state"><span>＋</span><strong>Add your first item</strong><small>Up to four entries per side.</small></div>}</div><div class="offer-total"><span>Total reference</span><strong>{formatCompact(total)}</strong></div></section>;
+  return <section class="offer-panel"><div class="offer-heading"><div><span>{title}</span><strong>{selected.length} / 4 items</strong></div></div><div class="item-picker"><select aria-label={`Choose an item for ${title}`} value={choice} onChange={(event) => setChoice((event.currentTarget as HTMLSelectElement).value)}>{catalog.map((item) => <option value={item.slug} key={item.slug}>{item.name}</option>)}</select><button type="button" disabled={!choice || selected.length >= 4} onClick={() => onChange([...selected, choice])}>+ Add</button></div><div class="offer-items">{selected.length ? selected.map((slug, index) => { const item = catalog.find((candidate) => candidate.slug === slug); return item && <div class="offer-item" key={`${slug}-${index}`}><span class="item-orb">{item.name.slice(0, 2).toUpperCase()}</span><span><strong>{item.name}</strong><small>{item.rarity}{item.rating > 0 ? ` · Rating ${item.rating.toFixed(1)}` : ''}</small></span><b>{displayReference(item)}</b><button type="button" aria-label={`Remove ${item.name}`} onClick={() => onChange(selected.filter((_, itemIndex) => itemIndex !== index))}>×</button></div>; }) : <div class="empty-state"><span>＋</span><strong>Add your first item</strong><small>Up to four entries per side.</small></div>}</div><div class="offer-total"><span>Total reference</span><strong>{formatCompact(total)}</strong></div></section>;
 }
 
 function TradeWorkbench({ gameSlug, toolSlug, toolName }: Props) {

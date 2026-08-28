@@ -91,7 +91,7 @@ export const games: GameConfig[] = [
     ...robloxMedia('grow-a-garden', 'Grow a Garden', '126884695634066'),
     tools: [
       { slug: 'value-calculator', name: 'Grow a Garden Value Calculator', shortName: 'Value Calculator', description: 'Calculate crop sell value using weight, growth and mutation multipliers.', kind: 'garden-value', category: 'Values', featured: true, updated, keywords: ['fruit value', 'crop price'] },
-      { slug: 'trade-calculator', name: 'Grow a Garden Trade Calculator', shortName: 'Trade Calculator', description: 'Compare multi-item garden trades and see the value gap instantly.', kind: 'trade', category: 'Trading', featured: true, updated, keywords: ['trade value'] },
+      { slug: 'trade-calculator', name: 'Grow a Garden Trade Calculator', shortName: 'Trade Calculator', description: 'Compare two crop bundles using reviewed base Sheckle values.', kind: 'trade', category: 'Trading', featured: true, updated, keywords: ['trade value'] },
       ...secondaryTools['grow-a-garden'],
     ],
   },
@@ -100,8 +100,8 @@ export const games: GameConfig[] = [
     description: 'Compare fruit values, check offers and plan your next Blox Fruits trade.',
     ...robloxMedia('blox-fruits', 'Blox Fruits', '2753915549'),
     tools: [
-      { slug: 'value-calculator', name: 'Blox Fruits Value Calculator', shortName: 'Value Calculator', description: 'Add fruits and calculate total trade value and average demand.', kind: 'item-value', category: 'Values', featured: true, updated, keywords: ['blox fruit calculator', 'fruit values'] },
-      { slug: 'trade-calculator', name: 'Blox Fruits Trade Calculator', shortName: 'Trade Calculator', description: 'Build both sides of a trade and get a fair-value range, demand and verdict.', kind: 'trade', category: 'Trading', featured: true, updated, keywords: ['trade value', 'trading'] },
+      { slug: 'value-calculator', name: 'Blox Fruits Value Calculator', shortName: 'Value Calculator', description: 'Total all 41 fruits by Dealer Beli price and separate permanent Robux price.', kind: 'item-value', category: 'Values', featured: true, updated, keywords: ['blox fruit calculator', 'fruit values'] },
+      { slug: 'trade-calculator', name: 'Blox Fruits Trade Calculator', shortName: 'Trade Calculator', description: 'Compare both sides by documented Dealer Beli baseline without inventing demand.', kind: 'trade', category: 'Trading', featured: true, updated, keywords: ['trade value', 'trading'] },
       ...secondaryTools['blox-fruits'],
     ],
   },
@@ -110,7 +110,7 @@ export const games: GameConfig[] = [
     description: 'Estimate collection value and income with quick, shareable results.',
     ...robloxMedia('steal-a-brainrot', 'Steal a Brainrot', '109983668079237'),
     tools: [
-      { slug: 'value-calculator', name: 'Steal a Brainrot Value Calculator', shortName: 'Value Calculator', description: 'Add Brainrots, quantities and mutations to total your collection value and income.', kind: 'brainrot-value', category: 'Values', featured: true, updated, keywords: ['brainrot values', 'income'] },
+      { slug: 'value-calculator', name: 'Steal a Brainrot Value Calculator', shortName: 'Value Calculator', description: 'Total documented acquisition cost and base income for 45 Brainrot records.', kind: 'brainrot-value', category: 'Values', featured: true, updated, keywords: ['brainrot values', 'income'] },
       ...secondaryTools['steal-a-brainrot'],
     ],
   },

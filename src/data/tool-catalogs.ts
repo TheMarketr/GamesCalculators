@@ -1,7 +1,12 @@
 import { adoptMePets } from './adopt-me/pets';
+import { nightsCatalog } from './99-nights/catalog';
 import { bloxFruits } from './blox-fruits/items';
+import { fortniteWeapons } from './fortnite/weapons';
 import { gardenItems } from './grow-a-garden/items';
+import { mm2Items } from './mm2/items';
+import { ps99Pets } from './pet-simulator-99/pets';
 import { brainrots } from './steal-a-brainrot/items';
+import type { ValueItem } from './types';
 
 export interface CatalogItem {
   slug: string;
@@ -11,9 +16,16 @@ export interface CatalogItem {
   value: number;
   rating: number;
   note: string;
+  unit?: string;
+  displayValue?: string;
+  sourceLabel?: string;
+  sourceUrl?: string;
+  reviewed?: string;
+  ratingLabel?: string;
+  ratingMax?: number;
 }
 
-const fromValues = (items: { slug: string; name: string; category: string; rarity: string; value: number; demand: number; income?: number }[], preferIncome = false): CatalogItem[] =>
+const fromValues = (items: ValueItem[], preferIncome = false): CatalogItem[] =>
   items.map((item) => ({
     slug: item.slug,
     name: item.name,
@@ -21,65 +33,79 @@ const fromValues = (items: { slug: string; name: string; category: string; rarit
     rarity: item.rarity,
     value: preferIncome && item.income !== undefined ? item.income : item.value,
     rating: item.demand,
-    note: preferIncome && item.income !== undefined ? `${item.income.toLocaleString()} income/sec reference` : 'Editable local planning value',
+    note: preferIncome && item.income !== undefined
+      ? `${item.income.toLocaleString()} cash/sec base income; acquisition cost ${item.value.toLocaleString()}.`
+      : item.note ?? 'Reviewed reference value.',
+    unit: preferIncome && item.income !== undefined ? 'cash/sec' : item.unit,
+    displayValue: `${(preferIncome && item.income !== undefined ? item.income : item.value).toLocaleString()}${preferIncome && item.income !== undefined ? ' cash/sec' : item.unit ? ` ${item.unit}` : ''}`,
+    sourceLabel: item.sourceLabel,
+    sourceUrl: item.sourceUrl,
+    reviewed: item.updated,
+    ratingLabel: item.ratingLabel,
+    ratingMax: item.ratingMax,
   }));
 
 const rows = (items: [string, string, string, string, number, number, string][]): CatalogItem[] =>
   items.map(([slug, name, category, rarity, value, rating, note]) => ({ slug, name, category, rarity, value, rating, note }));
 
-const gardenPets = rows([
-  ['red-fox', 'Red Fox', 'utility', 'rare', 72, 7.6, 'Stealing-crop utility profile'],
-  ['dragonfly', 'Dragonfly', 'mutation', 'divine', 96, 9.2, 'Mutation-focused utility profile'],
-  ['raccoon', 'Raccoon', 'utility', 'divine', 90, 8.8, 'High-impact utility profile'],
-  ['moon-cat', 'Moon Cat', 'growth', 'legendary', 68, 7.2, 'Growth-focused utility profile'],
-  ['polar-bear', 'Polar Bear', 'growth', 'legendary', 61, 6.8, 'Harvest support profile'],
-  ['bee', 'Bee', 'pollination', 'rare', 54, 6.5, 'Pollination support profile'],
-]);
-
-const nightsItems = rows([
-  ['scout-profile', 'Scout loadout', 'role profile', 'mobile', 78, 8.1, 'Mobility and early exploration'],
-  ['medic-profile', 'Medic loadout', 'role profile', 'support', 74, 8.5, 'Healing and party recovery'],
-  ['builder-profile', 'Builder loadout', 'role profile', 'utility', 82, 8.0, 'Base upgrades and crafting'],
-  ['gatherer-profile', 'Gatherer loadout', 'role profile', 'economy', 80, 7.8, 'Food, wood and fuel gathering'],
-  ['wood', 'Wood', 'resource', 'common', 12, 9.0, 'Core campfire and crafting resource'],
-  ['fuel-can', 'Fuel Can', 'fuel', 'uncommon', 36, 8.7, 'Compact fuel reserve'],
-  ['cooked-meal', 'Cooked Meal', 'food', 'common', 18, 8.4, 'Party food planning unit'],
-  ['bandage', 'Bandage', 'medical', 'uncommon', 24, 8.2, 'Emergency recovery supply'],
-  ['scrap', 'Scrap', 'crafting', 'common', 16, 7.9, 'General crafting material'],
-  ['bolt', 'Bolt', 'crafting', 'uncommon', 22, 7.6, 'Advanced crafting material'],
-]);
-
-const mm2Items = rows([
-  ['corrupt', 'Corrupt', 'knife', 'unique', 950, 9.8, 'Editable community-market planning index'],
-  ['harvester', 'Harvester', 'gun', 'ancient', 875, 9.4, 'Editable community-market planning index'],
-  ['icepiercer', 'Icepiercer', 'gun', 'ancient', 820, 9.2, 'Editable community-market planning index'],
-  ['batwing', 'Batwing', 'knife', 'ancient', 120, 8.2, 'Editable community-market planning index'],
-  ['luger', 'Luger', 'gun', 'godly', 78, 8.6, 'Editable community-market planning index'],
-  ['laser', 'Laser', 'gun', 'godly', 55, 8.1, 'Editable community-market planning index'],
-  ['lightbringer', 'Lightbringer', 'gun', 'godly', 42, 7.8, 'Editable community-market planning index'],
-  ['darkbringer', 'Darkbringer', 'gun', 'godly', 40, 7.7, 'Editable community-market planning index'],
-  ['seer', 'Seer', 'knife', 'godly', 8, 6.4, 'Editable community-market planning index'],
-]);
-
-const ps99Items = rows([
-  ['titanic-cat', 'Titanic Cat', 'pet', 'titanic', 12000000000, 9.8, 'Editable diamond planning reference'],
-  ['titanic-red-panda', 'Titanic Red Panda', 'pet', 'titanic', 9800000000, 9.5, 'Editable diamond planning reference'],
-  ['huge-cat', 'Huge Cat', 'pet', 'huge', 175000000, 9.3, 'Editable diamond planning reference'],
-  ['huge-dragon', 'Huge Dragon', 'pet', 'huge', 132000000, 8.9, 'Editable diamond planning reference'],
-  ['huge-happy-rock', 'Huge Happy Rock', 'pet', 'huge', 42000000, 8.4, 'Editable diamond planning reference'],
-  ['rainbow-exclusive', 'Rainbow Exclusive', 'pet', 'exclusive', 12000000, 7.8, 'Editable diamond planning reference'],
-  ['gold-exclusive', 'Golden Exclusive', 'pet', 'exclusive', 6500000, 7.3, 'Editable diamond planning reference'],
-  ['exclusive-pet', 'Exclusive Pet', 'pet', 'exclusive', 2200000, 6.9, 'Editable diamond planning reference'],
-]);
-
-const fortniteWeapons = rows([
-  ['balanced-ar', 'Balanced Assault Rifle', 'rifle', 'archetype', 185, 8.5, 'Balanced mid-range planning profile'],
-  ['burst-ar', 'Burst Assault Rifle', 'rifle', 'archetype', 198, 8.2, 'Burst accuracy planning profile'],
-  ['pump-shotgun', 'Pump Shotgun', 'shotgun', 'archetype', 170, 9.0, 'High single-shot planning profile'],
-  ['auto-shotgun', 'Auto Shotgun', 'shotgun', 'archetype', 205, 8.4, 'Close-range sustained profile'],
-  ['rapid-smg', 'Rapid SMG', 'smg', 'archetype', 218, 8.1, 'High fire-rate planning profile'],
-  ['precision-dmr', 'Precision DMR', 'marksman', 'archetype', 142, 7.8, 'Long-range planning profile'],
-]);
+const gardenPet = (slug: string, name: string, rarity: string, hunger: number, note: string): CatalogItem => ({
+  slug, name, category: 'pet', rarity, value: hunger, rating: 0, note, unit: 'hunger', displayValue: `${hunger.toLocaleString()} hunger`,
+  sourceLabel: 'Grow a Garden DB pet reference', sourceUrl: 'https://growagardendb.com/pets', reviewed: '2026-08-28',
+});
+const gardenPets = [
+  gardenPet('starfish', 'Starfish', 'common', 1_500, 'Gains additional XP per second.'),
+  gardenPet('crab', 'Crab', 'common', 3_000, 'Occasionally grants a small amount of Sheckles from another player.'),
+  gardenPet('seagull', 'Seagull', 'common', 3_500, 'Shoveled plants can drop an equivalent seed; fruits are excluded.'),
+  gardenPet('bunny', 'Bunny', 'common', 1_100, 'About every 40 seconds, eats a carrot at a 1.5× value bonus.'),
+  gardenPet('dog', 'Dog', 'common', 1_000, 'Every 60 seconds, has a 5% chance to dig up a random seed.'),
+  gardenPet('golden-lab', 'Golden Lab', 'common', 1_200, 'Every 60 seconds, has a 10% chance to dig up a Seed Shop seed.'),
+  gardenPet('bee', 'Bee', 'uncommon', 25_000, 'About every 25 minutes, applies Pollinated to a nearby fruit.'),
+  gardenPet('black-bunny', 'Black Bunny', 'uncommon', 1_300, 'Searches for a carrot and sells it at a marked-up value.'),
+  gardenPet('cat', 'Cat', 'uncommon', 1_400, 'Naps every 80 seconds; new fruit within 10 studs grows 1.25× larger.'),
+  gardenPet('chicken', 'Chicken', 'uncommon', 3_400, 'Increases egg hatch speed by 10%.'),
+  gardenPet('deer', 'Deer', 'uncommon', 2_500, 'Gives berry plants a 3% chance to remain after harvest.'),
+  gardenPet('monkey', 'Monkey', 'rare', 7_400, 'About a 2.5% chance to refund harvested fruit; rarer plants have lower odds.'),
+  gardenPet('orange-tabby', 'Orange Tabby', 'rare', 1_500, 'Naps every 90 seconds; new fruit within 15 studs grows 1.5× larger.'),
+  gardenPet('spotted-deer', 'Spotted Deer', 'rare', 2_500, 'Gives berry plants a 5% chance to remain after harvest.'),
+  gardenPet('seal', 'Seal', 'rare', 17_000, 'When selling pets, has a 2.42% chance to return the pet as its egg equivalent.'),
+  gardenPet('honey-bee', 'Honey Bee', 'rare', 25_000, 'About every 20 minutes, applies Pollinated to a nearby fruit.'),
+  gardenPet('wasp', 'Wasp', 'rare', 28_000, 'Pollinates about every 30 minutes and can advance another pet cooldown.'),
+  gardenPet('tarantula-hawk', 'Tarantula Hawk', 'legendary', 28_000, 'Pollinates about every 25 minutes and advances a pet cooldown about every 5 minutes.'),
+  gardenPet('capybara', 'Capybara', 'legendary', 30_000, 'Nearby pets do not lose hunger and gain about 3 XP per second.'),
+  gardenPet('sand-snake', 'Sand Snake', 'legendary', 28_000, 'Has a 1.31%–3% chance to duplicate a gear or seed-shop purchase.'),
+  gardenPet('meerkat', 'Meerkat', 'legendary', 22_000, 'Advances another pet cooldown with a chance to repeat immediately.'),
+  gardenPet('parasaurolophus', 'Parasaurolophus', 'legendary', 40_000, 'Reduces the open time of the cosmetic crate with the longest timer.'),
+  gardenPet('iguanodon', 'Iguanodon', 'legendary', 40_000, 'Grants bonus XP per second to active Dinosaur-type pets.'),
+  gardenPet('pachycephalosaurus', 'Pachycephalosaurus', 'legendary', 40_000, 'Grants a 6% chance to duplicate crafted items.'),
+  gardenPet('brown-mouse', 'Brown Mouse', 'mythical', 15_000, 'Gains 750 XP every 8 minutes and increases player jump height by 12%.'),
+  gardenPet('giant-ant', 'Giant Ant', 'mythical', 18_000, 'About a 10% chance to duplicate harvested crops, with rarity adjustments.'),
+  gardenPet('grey-mouse', 'Grey Mouse', 'mythical', 15_000, 'Gains 500 XP every 10 minutes and increases movement speed by 10%.'),
+  gardenPet('praying-mantis', 'Praying Mantis', 'mythical', 55_000, 'Creates a timed zone with 1.5× variant chance for nearby plants.'),
+  gardenPet('red-giant-ant', 'Red Giant Ant', 'mythical', 15_000, 'Has a 5% crop-duplication chance plus 5% for fruit-type crops.'),
+  gardenPet('snail', 'Snail', 'legendary', 12_000, 'Adds a 5.08% seed-drop chance on harvest and stacks with other Snails.'),
+  gardenPet('squirrel', 'Squirrel', 'mythical', 15_000, 'Can save a Reclaimer use and gains additional XP per second.'),
+  gardenPet('bear-bee', 'Bear Bee', 'mythical', 45_000, 'About every 25 minutes, applies Honey Glazed to a nearby fruit.'),
+  gardenPet('butterfly', 'Butterfly', 'mythical', 26_000, 'Can replace mutations on a heavily mutated fruit with Rainbow.'),
+  gardenPet('brontosaurus', 'Brontosaurus', 'mythical', 85_000, 'Increases the base size or weight of hatched pets, subject to a cap.'),
+  gardenPet('pack-bee', 'Pack Bee', 'mythical', 25_000, 'Increases backpack size and pollinates a plant about every 25 minutes.'),
+  gardenPet('hyacinth-macaw', 'Hyacinth Macaw', 'mythical', 12_000, 'About every 8 minutes, can apply Cloudtouched to a nearby fruit.'),
+  gardenPet('axolotl', 'Axolotl', 'mythical', 22_000, 'Gives Summer-type fruit a 6.76% chance to remain after collection.'),
+  gardenPet('dilophosaurus', 'Dilophosaurus', 'mythical', 30_000, 'Spits venom to advance cooldowns or grant XP to about three pets.'),
+  gardenPet('ankylosaurus', 'Ankylosaurus', 'mythical', 40_000, 'Can return stolen fruit when another player steals from you.'),
+  gardenPet('red-fox', 'Red Fox', 'divine', 35_000, 'Attempts to steal seeds from other plots about every 8 minutes.'),
+  gardenPet('t-rex', 'T-Rex', 'divine', 60_000, 'Moves a mutation from one fruit to about three other fruits.'),
+  gardenPet('dragonfly', 'Dragonfly', 'divine', 100_000, 'About every 5 minutes, turns a random fruit Gold.'),
+  gardenPet('spinosaurus', 'Spinosaurus', 'divine', 25_000, 'Devours mutations from three fruits and spreads them to other fruits.'),
+  gardenPet('disco-bee', 'Disco Bee', 'divine', 25_000, 'About every 15 minutes, has roughly a 16% chance to apply Disco.'),
+  gardenPet('queen-bee', 'Queen Bee', 'divine', 65_000, 'Pollinates fruit and refreshes the active pet with the highest cooldown.'),
+  gardenPet('raptor', 'Raptor', 'legendary', 40_000, 'Can grant Amber on collection with a chance that scales with weight.'),
+  gardenPet('triceratops', 'Triceratops', 'legendary', 40_000, 'Charges plants to advance growth time and can chain additional uses.'),
+  gardenPet('stegosaurus', 'Stegosaurus', 'legendary', 40_000, 'Has a base chance to duplicate harvested fruits, adjusted for rarity.'),
+  gardenPet('pterodactyl', 'Pterodactyl', 'mythical', 40_000, 'Can apply Windstruck to nearby fruits with a chance for Twisted instead.'),
+  gardenPet('turtle', 'Turtle', 'legendary', 10_000, 'Increases sprinkler duration by about 20%.'),
+  gardenPet('petal-bee', 'Petal Bee', 'legendary', 25_000, 'Pollinates fruit and can preserve flower-type fruit after harvest.'),
+  gardenPet('moth', 'Moth', 'legendary', 25_000, 'About every 13 minutes, restores all hunger to a random pet.'),
+];
 
 const gtaCharacters = rows([
   ['lucia-caminos', 'Lucia Caminos', 'protagonist', 'confirmed', 95, 9.8, 'Central playable character'],
@@ -106,10 +132,10 @@ export function getToolCatalog(gameSlug: string, toolSlug: string): CatalogItem[
   if (gameSlug === 'blox-fruits') return fromValues(bloxFruits);
   if (gameSlug === 'steal-a-brainrot') return fromValues(brainrots, toolSlug === 'income-comparison');
   if (gameSlug === 'adopt-me') return fromValues(adoptMePets);
-  if (gameSlug === '99-nights') return nightsItems;
-  if (gameSlug === 'mm2') return mm2Items;
-  if (gameSlug === 'pet-simulator-99') return ps99Items;
-  if (gameSlug === 'fortnite') return fortniteWeapons;
+  if (gameSlug === '99-nights') return fromValues(nightsCatalog);
+  if (gameSlug === 'mm2') return fromValues(mm2Items);
+  if (gameSlug === 'pet-simulator-99') return fromValues(ps99Pets);
+  if (gameSlug === 'fortnite') return fromValues(fortniteWeapons);
   if (gameSlug === 'gta-6') return toolSlug === 'characters' ? gtaCharacters : gtaLocations;
   return [];
 }
