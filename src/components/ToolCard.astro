@@ -1,9 +1,11 @@
 ---
 import type { Accent } from '../data/games';
+import { getToolIcon } from '../utils/tool-icons';
 interface Props { name: string; description: string; href: string; game: string; category?: string; accent?: Accent; compact?: boolean }
 const { name, description, href, game, category = 'Interactive tool', accent = 'cyan', compact = false } = Astro.props;
+const icon = getToolIcon({ name, category });
 ---
 <a href={href} class:list={['tool-card', `accent-${accent}`, { 'tool-card--compact': compact }] }>
-  <div class="tool-card__icon" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="tool-card__icon" aria-hidden="true"><span class="tool-card__emoji">{icon}</span></div>
   <div class="tool-card__body"><span class="eyebrow">{game} · {category}</span><h3>{name}</h3>{!compact && <p>{description}</p>}</div><span class="card-arrow" aria-hidden="true">↗</span>
 </a>
