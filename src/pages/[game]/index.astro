@@ -4,6 +4,7 @@ import GuideCard from '../../components/GuideCard.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { games, type GameConfig } from '../../data/games';
 import { guides } from '../../data/guides';
+import { calculatorContent } from '../../data/calculator-content';
 
 export function getStaticPaths() {
   return games.map((game) => ({ params: { game: game.slug }, props: { game } }));
@@ -15,10 +16,13 @@ const gameGuides = guides.filter((guide) => guide.gameSlug === game.slug);
 const featuredTools = (game.tools.some((tool) => tool.featured) ? game.tools.filter((tool) => tool.featured) : game.tools).slice(0, 3);
 const toolCategories = [...new Set(game.tools.map((tool) => tool.category))];
 const updates = [
-  ...game.tools.map((tool) => ({ name: tool.shortName, type: 'Tool', category: tool.category, updated: tool.updated, href: `/${game.slug}/${tool.slug}/` })),
-  ...gameGuides.map((guide) => ({ name: guide.title, type: 'Guide', category: guide.category, updated: guide.updated, href: `/${guide.slug}/` })),
-].sort((a, b) => b.updated.localeCompare(a.updated));
-const latestUpdate = updates[0]?.updated ?? '2026-08-27';
+  ...game.tools.flatMap((tool) => {
+    const reviewed = calculatorContent[`${game.slug}/${tool.slug}`]?.reviewed;
+    return reviewed ? [{ name: tool.shortName, type: 'Tool', category: tool.category, reviewed, href: `/${game.slug}/${tool.slug}/` }] : [];
+  }),
+  ...gameGuides.map((guide) => ({ name: guide.title, type: 'Guide', category: guide.category, reviewed: guide.updated, href: `/${guide.slug}/` })),
+].sort((a, b) => b.reviewed.localeCompare(a.reviewed));
+const latestReview = updates[0]?.reviewed;
 const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 const title = `${game.name} Calculators & Tools`;
 const breadcrumbSchema = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -76,8 +80,8 @@ const collectionSchema = { '@context': 'https://schema.org', '@type': 'Collectio
     <section class="section section--surface"><div class="container-wide"><aside class="hub-guide-card hub-guide-card--wide"><span class="eyebrow">Complete browser toolkit</span><h2>Every listed {game.shortName ?? game.name} utility is now available</h2><p>Calculations live apart from the interface. Game-specific values stay in editable local data files, with visible update dates and a documented methodology.</p><ul><li><span>✓</span> Responsive browser calculations</li><li><span>✓</span> Searchable references and comparisons</li><li><span>✓</span> Local-only inventory and collection saves</li><li><span>✓</span> Mobile-first controls and shareable results</li></ul><a class="button button--secondary" href="/data-methodology/">View data methodology</a></aside></div></section>
 
     <section class="section container-wide" aria-labelledby="recently-updated">
-      <div class="section-heading section-heading--small"><div><span class="eyebrow">Maintenance log</span><h2 id="recently-updated">Recently updated</h2><p>Latest reviewed calculators and guides in this collection.</p></div><span class="hub-section-count">Hub reviewed {dateFormatter.format(new Date(`${latestUpdate}T12:00:00Z`))}</span></div>
-      <div class="hub-updates">{updates.map((item) => <a href={item.href}><span>{item.name}</span><small>{item.type} · {item.category}</small><time datetime={item.updated}>{dateFormatter.format(new Date(`${item.updated}T12:00:00Z`))}</time><b aria-hidden="true">→</b></a>)}</div>
+      <div class="section-heading section-heading--small"><div><span class="eyebrow">Maintenance log</span><h2 id="recently-updated">Recently reviewed</h2><p>Editorial review dates for calculators and guides in this collection.</p></div>{latestReview && <span class="hub-section-count">Hub reviewed {dateFormatter.format(new Date(`${latestReview}T12:00:00Z`))}</span>}</div>
+      <div class="hub-updates">{updates.map((item) => <a href={item.href}><span>{item.name}</span><small>{item.type} · {item.category}</small><time datetime={item.reviewed}>{dateFormatter.format(new Date(`${item.reviewed}T12:00:00Z`))}</time><b aria-hidden="true">→</b></a>)}</div>
     </section>
   </div>
 </BaseLayout>

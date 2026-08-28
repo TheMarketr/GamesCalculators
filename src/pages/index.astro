@@ -5,7 +5,8 @@ import CalculatorCarousel from '../components/home/CalculatorCarousel';
 import FAQSection from '../components/FAQSection.astro';
 import GameCard from '../components/GameCard.astro';
 import ToolCard from '../components/ToolCard.astro';
-import { featuredTools, games, publishedTools, recentTools } from '../data/games';
+import { featuredTools, games, publishedTools } from '../data/games';
+import { calculatorContent } from '../data/calculator-content';
 import type { SearchEntry } from '../components/search/GlobalSearch';
 import { guides } from '../data/guides';
 
@@ -20,6 +21,10 @@ const illustratedGames = games.filter((game) => game.image);
 const gta = games.find((game) => game.slug === 'gta-6')!;
 const gtaExtendedGuide = guides.find((guide) => guide.slug === 'gta-6/guides/extended-look-breakdown')!;
 const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' });
+const recentReviewedTools = publishedTools
+  .map((tool) => ({ ...tool, reviewed: calculatorContent[`${tool.game.slug}/${tool.slug}`]?.reviewed }))
+  .filter((tool): tool is typeof tool & { reviewed: string } => Boolean(tool.reviewed))
+  .sort((a, b) => b.reviewed.localeCompare(a.reviewed));
 const homeFaqs = [
   { question: 'What is GamesCalculators?', answer: 'GamesCalculators is an independent library of free browser-based game calculators, planning tools, searchable references and player guides. It is built to help players turn game values, coordinates, progress, odds and trade offers into decisions they can review.' },
   { question: 'Are these game calculators official?', answer: 'No. GamesCalculators is an independent fan utility and is not affiliated with, sponsored by or endorsed by Minecraft, Roblox, Epic Games, Rockstar Games or other publishers. Game names identify compatibility only.' },
@@ -55,7 +60,7 @@ const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEn
 
   <section class="section section--surface" aria-labelledby="trust-heading"><div class="container-wide legitimacy-grid"><div><span class="eyebrow">Independent and transparent</span><h2 id="trust-heading">Why players can evaluate our answers</h2><p>Trust should come from visible assumptions and corrections—not a badge we give ourselves. Calculator formulas are separated from the interface, data pages show review dates, and uncertain inputs are labeled as estimates or samples.</p><div class="legitimacy-links"><a href="/data-methodology/">Data methodology</a><a href="/editorial-policy/">Editorial policy</a><a href="/disclaimer/">Independence disclaimer</a><a href="/contact/">Report an issue</a></div></div><div class="legitimacy-checks"><article><strong>{publishedTools.length}</strong><span>working calculators and tools</span></article><article><strong>{games.length}</strong><span>game hubs with focused resources</span></article><article><strong>{guides.length}</strong><span>supporting gameplay guides</span></article><article><strong>0</strong><span>game passwords requested</span></article></div></div></section>
 
-  <section class="section container-wide update-about-grid"><div class="updates-panel"><div class="section-heading section-heading--small"><div><span class="eyebrow">Maintenance log</span><h2>Recently reviewed tools</h2></div><a href="/data-methodology/">How updates work →</a></div><div class="update-list">{recentTools.slice(0, 5).map((tool) => <a href={`/${tool.game.slug}/${tool.slug}/`}><span class={`update-icon accent-${tool.game.accent}`}>{tool.game.glyph}</span><span><strong>{tool.shortName}</strong><small>{tool.game.shortName ?? tool.game.name}</small></span><time datetime={tool.updated}>Reviewed {dateFormatter.format(new Date(`${tool.updated}T12:00:00Z`))}</time></a>)}</div></div><aside class="about-card"><span class="eyebrow">Build a better answer</span><h2>Calculator first, explanation included.</h2><p>The interactive result stays easy to reach, with detailed gameplay context, step-by-step instructions, limitations and intent-focused FAQs below it.</p><a href="/guides/" class="button button--secondary">Browse player guides</a></aside></section>
+  <section class="section container-wide update-about-grid"><div class="updates-panel"><div class="section-heading section-heading--small"><div><span class="eyebrow">Maintenance log</span><h2>Recently reviewed tools</h2></div><a href="/data-methodology/">How updates work →</a></div><div class="update-list">{recentReviewedTools.slice(0, 5).map((tool) => <a href={`/${tool.game.slug}/${tool.slug}/`}><span class={`update-icon accent-${tool.game.accent}`}>{tool.game.glyph}</span><span><strong>{tool.shortName}</strong><small>{tool.game.shortName ?? tool.game.name}</small></span><time datetime={tool.reviewed}>Reviewed {dateFormatter.format(new Date(`${tool.reviewed}T12:00:00Z`))}</time></a>)}</div></div><aside class="about-card"><span class="eyebrow">Build a better answer</span><h2>Calculator first, explanation included.</h2><p>The interactive result stays easy to reach, with detailed gameplay context, step-by-step instructions, limitations and intent-focused FAQs below it.</p><a href="/guides/" class="button button--secondary">Browse player guides</a></aside></section>
 
   <section class="section section--surface"><div class="container"><FAQSection faqs={homeFaqs} /></div></section>
 </BaseLayout>

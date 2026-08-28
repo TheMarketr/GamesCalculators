@@ -4,35 +4,125 @@ import type { CalculatorContent } from '../data/calculator-content';
 import ToolCard from './ToolCard.astro';
 import FAQSection from './FAQSection.astro';
 import { getToolIcon } from '../utils/tool-icons';
-// Advertising components are intentionally kept in the codebase but are not rendered.
+
+// Advertising components remain available in the codebase but are intentionally not rendered.
 interface Faq { question: string; answer: string }
 interface Props { game: GameConfig; tool: ToolConfig; faqs: Faq[]; content: CalculatorContent }
+
 const { game, tool, faqs, content } = Astro.props;
 const related = game.tools.filter((candidate) => candidate.slug !== tool.slug).slice(0, 3);
-const updated = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(`${tool.updated}T12:00:00Z`));
+const reviewed = content.reviewed
+  ? new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(`${content.reviewed}T12:00:00Z`))
+  : undefined;
 const toolIcon = getToolIcon(tool);
-const knowledgeIcons = ['🎯', '🧩', '⚠️', '🔄'];
+const sections = [content.howItWorks, content.workedExample, content.howToUseResult, content.limitations];
+const knowledgeIcons = ['⚙️', '🧪', '🎯', '⚠️'];
 ---
 <div class={`tool-page accent-${game.accent}`}>
-  <div class="tool-hero"><div class="container">
-    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href={`/${game.slug}/`}>{game.shortName ?? game.name}</a><span>›</span><span aria-current="page">{tool.shortName}</span></nav>
-    <div class="tool-heading"><div class="tool-title-lockup">{game.icon ? <img class="tool-game-icon" src={game.icon.src} alt={`${game.name} game artwork`} width="80" height="80" loading="eager" decoding="async" /> : <span class="game-glyph">{game.glyph}</span>}<div><span class="eyebrow">{game.name} · {tool.category}</span><div class="tool-name-row"><span class="tool-type-icon" aria-hidden="true">{toolIcon}</span><h1>{tool.name}</h1></div><p>{tool.description}</p></div></div><div class="update-badge"><span></span><small>Last updated</small><strong>{updated}</strong></div></div>
-  </div></div>
-  <div class="container tool-layout"><section class="calculator-shell" aria-label={`${tool.name} interactive tool`}><div class="calculator-context"><span aria-hidden="true">{toolIcon}</span><div><strong>{tool.shortName}</strong><small>Interactive calculator</small></div><b><span aria-hidden="true">●</span> Ready</b></div><slot name="calculator" /></section><aside class="tool-side"><div class="side-card"><span class="side-card-icon" aria-hidden="true">🧮</span><span class="eyebrow">How it works</span><h2>Transparent by design</h2><p>Change any input and the result updates instantly. The formula is tested separately from the interface, and data-driven values show an update date.</p><a href="/data-methodology/">Read the methodology →</a></div><div class="local-notice"><span aria-hidden="true">🔒</span><p><strong>Your data stays local</strong>Inputs and saved progress remain in this browser. No account required.</p></div></aside></div>
-  <div class="container tool-content">
+  <div class="tool-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>›</span><a href={`/${game.slug}/`}>{game.shortName ?? game.name}</a><span>›</span><span aria-current="page">{tool.shortName}</span>
+      </nav>
+      <div class="tool-heading">
+        <div class="tool-title-lockup">
+          {game.icon
+            ? <img class="tool-game-icon" src={game.icon.src} alt={`${game.name} game artwork`} width="80" height="80" loading="eager" decoding="async" />
+            : <span class="game-glyph">{game.glyph}</span>}
+          <div>
+            <span class="eyebrow">{game.name} · {tool.category}</span>
+            <div class="tool-name-row"><span class="tool-type-icon" aria-hidden="true">{toolIcon}</span><h1>{tool.name}</h1></div>
+            <p>{tool.description}</p>
+          </div>
+        </div>
+        {reviewed && <div class="update-badge"><span></span><small>Last reviewed</small><strong>{reviewed}</strong></div>}
+      </div>
+    </div>
+  </div>
+
+  <div class="container tool-layout">
+    <section class="calculator-shell" aria-label={`${tool.name} interactive tool`}>
+      <div class="calculator-context"><span aria-hidden="true">{toolIcon}</span><div><strong>{tool.shortName}</strong><small>Interactive calculator</small></div><b><span aria-hidden="true">●</span> Ready</b></div>
+      <slot name="calculator" />
+    </section>
+    <aside class="tool-side">
+      <div class="side-card tool-method-card">
+        <span class="side-card-icon" aria-hidden="true">🧮</span>
+        <span class="eyebrow">Method at a glance</span>
+        <h2>{tool.shortName}</h2>
+        <p>{content.methodSummary}</p>
+        <a href="#how-it-works">See the calculation explained →</a>
+      </div>
+      <div class="local-notice"><span aria-hidden="true">🔒</span><p><strong>Calculated in this browser</strong>Your entries are not sent to a game account.</p></div>
+    </aside>
+  </div>
+
+  <div class="container tool-content" data-supporting-content>
     {game.gallery?.length && <section class="tool-media-strip" aria-label={`${game.name} official game imagery`}>
-      <div class="tool-media-copy"><span class="eyebrow">Recognize the game</span><strong>{game.name}</strong><p>Official or licensed game imagery is shown for identification. GamesCalculators remains an independent fan utility.</p></div>
+      <div class="tool-media-copy"><span class="eyebrow">Game reference</span><strong>{game.name}</strong><p>Official or licensed imagery identifies the game covered by this independent fan utility.</p></div>
       {game.gallery.slice(0, 2).map((media) => <figure><img src={media.src} alt={media.alt} width="768" height="432" loading="lazy" decoding="async" /><figcaption><a href={media.creditUrl} target="_blank" rel="license noopener">{media.credit}</a></figcaption></figure>)}
     </section>}
-    <nav class="content-jump-nav" aria-label="Calculator page sections"><a href="#calculator-guide"><span aria-hidden="true">📘</span> How to use it</a><a href="#result-reading"><span aria-hidden="true">📊</span> Read the result</a><a href="#gameplay-context"><span aria-hidden="true">🎮</span> Gameplay context</a><a href="#faq"><span aria-hidden="true">❓</span> FAQs</a></nav>
+
+    <nav class="content-jump-nav" aria-label="Calculator page sections">
+      <a href="#calculator-guide"><span aria-hidden="true">📘</span> Purpose</a>
+      <a href="#how-it-works"><span aria-hidden="true">⚙️</span> Mechanics</a>
+      {content.referenceData && <a href="#reference-data"><span aria-hidden="true">📋</span> Reference</a>}
+      <a href="#faq"><span aria-hidden="true">❓</span> FAQs</a>
+    </nav>
+
     <section class="calculator-guide" id="calculator-guide" aria-labelledby="calculator-guide-title">
-      <div class="guide-copy"><span class="eyebrow">Calculator guide</span><h2 id="calculator-guide-title">What the {tool.name} solves</h2>{content.overview.map((paragraph) => <p>{paragraph}</p>)}<p>{content.problem}</p></div>
-      <aside class="intent-card"><span class="eyebrow">Useful when you want to</span><ul>{content.useCases.map((useCase) => <li><span aria-hidden="true">✓</span>{useCase}</li>)}</ul></aside>
+      <div class="guide-copy">
+        <span class="eyebrow">Tool-specific guide</span>
+        <h2 id="calculator-guide-title">What the {tool.name} calculates</h2>
+        {content.intro.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+      <aside class="intent-card">
+        <span class="eyebrow">Use this tool to</span>
+        <ul>{content.useCases.map((useCase) => <li><span aria-hidden="true">✓</span>{useCase}</li>)}</ul>
+      </aside>
     </section>
-    <section class="how-to-panel" aria-labelledby="how-to-title"><div><span class="eyebrow">Step by step</span><h2 id="how-to-title">How to use this {game.shortName ?? game.name} calculator</h2></div><ol>{content.steps.map((step, index) => <li><span>{index + 1}</span><p>{step}</p></li>)}</ol></section>
-    <section class="result-reading" id="result-reading" aria-labelledby="result-reading-title"><div><span class="eyebrow">Understanding the output</span><h2 id="result-reading-title">Read the result before you act</h2><p>The calculator is a decision aid, not a promise about a random drop, live market, patch, or another player. Use the breakdown to understand why the answer changes.</p></div><ul>{content.resultTips.map((tip) => <li>{tip}</li>)}</ul></section>
-    <section class="knowledge-section" id="gameplay-context" aria-labelledby="gameplay-context-title"><div class="section-heading section-heading--small"><div><span class="eyebrow">Deeper gameplay context</span><h2 id="gameplay-context-title">Inputs, interpretation and limits</h2><p>Open each topic for the details that matter when applying this result in game.</p></div></div><div class="knowledge-accordion">{content.details.map((detail, index) => <details open={index === 0}><summary><span class="knowledge-icon" aria-hidden="true">{knowledgeIcons[index % knowledgeIcons.length]}</span>{detail.title}<small>{String(index + 1).padStart(2, '0')}</small><b aria-hidden="true">+</b></summary><div><p>{detail.body}</p><ul>{detail.points.map((point) => <li>{point}</li>)}</ul></div></details>)}</div></section>
-    {related.length > 0 && <section class="related-tools"><div class="section-heading section-heading--small"><div><span class="eyebrow">Keep planning</span><h2>Related {game.shortName ?? game.name} tools</h2></div><a href={`/${game.slug}/`}>View game hub →</a></div><div class="tool-grid">{related.map((item) => <ToolCard name={item.shortName} description={item.description} href={`/${game.slug}/${item.slug}/`} game={game.shortName ?? game.name} category={item.category} accent={game.accent} />)}</div></section>}
+
+    <section class="how-to-panel" aria-labelledby="how-to-title">
+      <div><span class="eyebrow">Input workflow</span><h2 id="how-to-title">Use the {tool.shortName}</h2></div>
+      <ol>{content.steps.map((step, index) => <li><span>{index + 1}</span><p>{step}</p></li>)}</ol>
+    </section>
+
+    <section class="knowledge-section" id="how-it-works" aria-labelledby="gameplay-context-title">
+      <div class="section-heading section-heading--small">
+        <div><span class="eyebrow">Mechanics, example, and decisions</span><h2 id="gameplay-context-title">A result you can audit</h2><p>Each section documents the calculation and the limits that apply to this specific gameplay problem.</p></div>
+      </div>
+      <div class="knowledge-accordion">
+        {sections.map((section, index) => <details open={index < 2}>
+          <summary><span class="knowledge-icon" aria-hidden="true">{knowledgeIcons[index]}</span>{section.title}<small>{String(index + 1).padStart(2, '0')}</small><b aria-hidden="true">+</b></summary>
+          <div>
+            {section.body.map((paragraph) => <p>{paragraph}</p>)}
+            {section.points?.length && <ul>{section.points.map((point) => <li>{point}</li>)}</ul>}
+          </div>
+        </details>)}
+      </div>
+    </section>
+
+    {content.referenceData && <section class="reference-data-section" id="reference-data" aria-labelledby="reference-data-title">
+      <div class="section-heading section-heading--small"><div><span class="eyebrow">Relevant reference data</span><h2 id="reference-data-title">{content.referenceData.title}</h2><p>{content.referenceData.note}</p></div></div>
+      <div class="reference-table-wrap">
+        <table>
+          <thead><tr>{content.referenceData.headers.map((header) => <th scope="col">{header}</th>)}</tr></thead>
+          <tbody>{content.referenceData.rows.map((row) => <tr>{row.map((cell, index) => index === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>)}</tr>)}</tbody>
+        </table>
+      </div>
+    </section>}
+
+    {content.sources?.length && <section class="editorial-sources" aria-labelledby="editorial-sources-title">
+      <span class="eyebrow">Editorial sources</span>
+      <h2 id="editorial-sources-title">Official references used for this page</h2>
+      <ul>{content.sources.map((source) => <li><a href={source.url} target="_blank" rel="noopener">{source.label} ↗</a></li>)}</ul>
+    </section>}
+
+    {related.length > 0 && <section class="related-tools">
+      <div class="section-heading section-heading--small"><div><span class="eyebrow">Keep planning</span><h2>Related {game.shortName ?? game.name} tools</h2></div><a href={`/${game.slug}/`}>View game hub →</a></div>
+      <div class="tool-grid">{related.map((item) => <ToolCard name={item.shortName} description={item.description} href={`/${game.slug}/${item.slug}/`} game={game.shortName ?? game.name} category={item.category} accent={game.accent} />)}</div>
+    </section>}
+
     <div id="faq"><FAQSection faqs={faqs} gameName={game.shortName ?? game.name} /></div>
   </div>
 </div>

@@ -13,6 +13,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "astro check",
+    "content:check": "node scripts/content-check.mjs",
     "safety:check": "node scripts/safety-check.mjs",
     "check": "node scripts/safety-check.mjs && astro check && vitest run && pnpm build",
     "astro": "astro"
