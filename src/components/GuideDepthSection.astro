@@ -1,0 +1,75 @@
+---
+import { getGuideDepth } from '../data/guide-depth';
+
+interface Props {
+  game: string;
+  gameSlug: string;
+  title: string;
+  category?: string;
+}
+
+const { game, gameSlug, title, category = '' } = Astro.props;
+const depth = getGuideDepth(gameSlug, title, category);
+---
+<section class="guide-depth" aria-labelledby="guide-depth-heading">
+  <div class="guide-depth__intro">
+    <span class="eyebrow">Detailed player handbook</span>
+    <h2 id="guide-depth-heading">How to apply this {game} guide with confidence</h2>
+    <p>{depth.game.context}</p>
+    <p>A strong {depth.focus.label} workflow does more than produce a number. It preserves the inputs, explains the tradeoff and gives you a repeatable check when the game, your inventory or your goal changes. Use the sections below as a working notebook for <em>{title}</em>, and update the baseline whenever new evidence replaces an assumption.</p>
+  </div>
+
+  <div class="guide-depth__accordions">
+    <details open>
+      <summary><span>01</span> Establish a reliable baseline</summary>
+      <div>
+        <p>{depth.game.measurement}</p>
+        <p>Before entering anything, copy the relevant values exactly as the game displays them. Include the mode, platform, version and any active boosts or variants that can change the outcome. Save the first result before experimenting. That untouched baseline gives every later comparison a stable reference and makes input mistakes much easier to spot.</p>
+        <p>When a value is unknown, label it as an estimate and test a low and high case. Do not hide uncertainty behind extra decimal places. A transparent range is more useful than a precise-looking answer built from an unsupported assumption.</p>
+      </div>
+    </details>
+    <details>
+      <summary><span>02</span> Compare options instead of chasing one score</summary>
+      <div>
+        <p>{depth.focus.decision}</p>
+        <p>Create at least two realistic alternatives: the plan you can execute with current resources and the upgrade you are considering. Change one important input at a time, then write down what improved and what became worse. This prevents several simultaneous changes from receiving credit for the same improvement.</p>
+        <p>Look beyond the headline total. Time, reversibility, resource cost, risk and personal goals can change which option is actually better. The calculator provides structure for that decision; it does not remove the need to read the live game state.</p>
+      </div>
+    </details>
+    <details>
+      <summary><span>03</span> Avoid the mistakes that create misleading answers</summary>
+      <div>
+        <p>{depth.focus.pitfall}</p>
+        <p>Also check units and naming. Levels are not always total experience, percentages are not always multipliers, and two similarly named items may be different variants. If the result looks dramatically different from the game, assume an input or rule mismatch first. Re-enter the smallest possible example and confirm each step before restoring the full scenario.</p>
+        <p>Do not average incompatible sources merely to make them agree. Prefer the newest authoritative source for fixed mechanics and clearly dated community evidence for player-driven markets. Record which source supports each change so an update can be corrected without rebuilding the guide from memory.</p>
+      </div>
+    </details>
+    <details>
+      <summary><span>04</span> Recheck the plan after updates</summary>
+      <div>
+        <p>{depth.game.verification}</p>
+        <p>Run a short control test after a major patch, season change or balance update. Use the same inputs as a saved baseline and compare the result with the current game. If the difference is repeatable, identify the smallest rule that explains it and update only that assumption. This is faster and safer than replacing every value at once.</p>
+        <p>Pay attention to dates on guides, videos and spreadsheets. A popular result can still describe an older version. When official notes are incomplete, mark the finding as observed and keep the test conditions visible until several independent repetitions support a firmer conclusion.</p>
+      </div>
+    </details>
+    <details>
+      <summary><span>05</span> Work through a practical scenario</summary>
+      <div>
+        <p>{depth.game.scenario}</p>
+        <p>Start the worked example with the current state, not the desired result. Enter the baseline, duplicate it as a second scenario and modify only the decision being tested. Compare the difference, calculate the cost of the change and ask what would make the choice fail. If the plan still works under a conservative assumption, it is more likely to survive normal gameplay variation.</p>
+        <p>{depth.focus.success}</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="guide-depth__review">
+    <h3>Final two-minute review</h3>
+    <ul>
+      <li>Are the game mode, version, platform and important variants recorded?</li>
+      <li>Did you preserve the original baseline before changing inputs?</li>
+      <li>Is every estimate labeled and tested as a range?</li>
+      <li>Did you compare the complete cost, risk and usefulness of each option?</li>
+      <li>Can you explain what new evidence would change the recommendation?</li>
+    </ul>
+  </div>
+</section>

@@ -3,6 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import FAQSection from '../../../components/FAQSection.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import GuideCard from '../../../components/GuideCard.astro';
+import GuideDepthSection from '../../../components/GuideDepthSection.astro';
 import { getGame, type GameConfig } from '../../../data/games';
 import { guides } from '../../../data/guides';
 import { richGuideArticles, type RichGuideArticle } from '../../../data/rich-guides';
@@ -40,10 +41,11 @@ const schema = [
     </header>
     <div class="container-wide rich-guide-layout">
       <main class="rich-guide-main">
-        <nav class="guide-jump-nav" aria-label="Guide sections"><a href="#overview">Overview</a><a href="#takeaways">Key points</a>{article.sections.map((section, index) => <a href={`#section-${index + 1}`}>{section.heading}</a>)}<a href="#checklist">Checklist</a><a href="#faq">FAQs</a></nav>
+        <nav class="guide-jump-nav" aria-label="Guide sections"><a href="#overview">Overview</a><a href="#takeaways">Key points</a>{article.sections.map((section, index) => <a href={`#section-${index + 1}`}>{section.heading}</a>)}<a href="#guide-depth-heading">Deep dive</a><a href="#checklist">Checklist</a><a href="#faq">FAQs</a></nav>
         <section id="overview" class="guide-intro-card">{article.lead.map((paragraph) => <p>{paragraph}</p>)}</section>
         <section id="takeaways" class="guide-takeaways"><span class="eyebrow">Key takeaways</span><h2>The useful version in one minute</h2><div>{article.takeaways.map((takeaway, index) => <article><strong>{String(index + 1).padStart(2, '0')}</strong><p>{takeaway}</p></article>)}</div></section>
         {article.sections.map((section, index) => <section id={`section-${index + 1}`} class="rich-guide-section"><span class="section-number">{String(index + 1).padStart(2, '0')}</span><div><h2>{section.heading}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{section.bullets && <ul>{section.bullets.map((bullet) => <li>{bullet}</li>)}</ul>}</div></section>)}
+        <GuideDepthSection game={article.game} gameSlug={article.gameSlug} title={article.title} category={article.category} />
         <section id="checklist" class="guide-checklist"><div><span class="eyebrow">Practical workflow</span><h2>{article.game} checklist</h2><p>Work through the list in order, then revisit the assumptions that changed.</p></div><ol>{article.checklist.map((item, index) => <li><span>{index + 1}</span>{item}</li>)}</ol></section>
         {article.sources?.length && <section class="guide-sources"><span class="eyebrow">Sources and status</span><h2>Where the confirmed details come from</h2><p>Official sources take priority. Press coverage is used for clearly attributed observations from the presentation.</p><ul>{article.sources.map((source) => <li><a href={source.url} target="_blank" rel="noopener">{source.label}</a><span>{source.note}</span></li>)}</ul></section>}
         <div id="faq"><FAQSection faqs={article.faqs} gameName={game.shortName ?? game.name} /></div>
