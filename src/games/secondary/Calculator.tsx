@@ -19,7 +19,7 @@ function routeCatalog(gameSlug: string, toolSlug: string) {
 }
 
 const displayReference = (item: CatalogItem) => item.displayValue ?? formatCompact(item.value);
-const displayRating = (item: CatalogItem) => item.rating > 0 ? `${item.rating.toFixed(1)} / ${item.ratingMax ?? 10}${item.ratingLabel ? ` ${item.ratingLabel}` : ''}` : 'Not published';
+const displayRating = (item: CatalogItem) => item.rating > 0 ? `${item.rating.toFixed(1)} / ${item.ratingMax ?? 10}${item.ratingLabel ? ` ${item.ratingLabel}` : ''}` : item.ratingLabel ?? 'Not published';
 const catalogScore = (item: CatalogItem) => item.value * (item.rating > 0 ? .5 + item.rating / 20 : 1);
 
 function formatMetric(metric: CalculationMetric) {
@@ -70,10 +70,11 @@ function FormulaWorkbench({ gameSlug, toolSlug, toolName }: Props) {
 }
 
 function ReferenceExplorer({ gameSlug, toolSlug, toolName }: Props) {
+  const isGtaReference = gameSlug === 'gta-6';
   const catalog = useMemo(() => routeCatalog(gameSlug, toolSlug), [gameSlug, toolSlug]);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('all');
-  const [sort, setSort] = useState<SortMode>(toolSlug.startsWith('best-') ? 'score' : 'value');
+  const [sort, setSort] = useState<SortMode>(isGtaReference ? 'name' : toolSlug.startsWith('best-') ? 'score' : 'value');
   const categories = ['all', ...new Set(catalog.map((item) => item.category))];
   const filtered = [...catalog].filter((item) => (category === 'all' || item.category === category) && `${item.name} ${item.category} ${item.rarity} ${item.note}`.toLowerCase().includes(query.toLowerCase())).sort((a, b) => {
     if (sort === 'name') return a.name.localeCompare(b.name);
@@ -84,11 +85,11 @@ function ReferenceExplorer({ gameSlug, toolSlug, toolName }: Props) {
 
   return <div class="calculator universal-tool">
     <div class="calculator-header"><div><span class="eyebrow">Searchable local reference</span><h2>Explore {toolName.replace(/^(Grow a Garden|Blox Fruits|Steal a Brainrot|99 Nights|Adopt Me|MM2|Pet Simulator 99|GTA VI)\s+/, '')}</h2></div><span class="reference-count">{filtered.length} shown</span></div>
-    <div class="reference-controls"><label class="calc-field"><span>Search</span><input type="search" value={query} placeholder="Search names, categories or rarity" onInput={(event) => setQuery((event.currentTarget as HTMLInputElement).value)}/></label><label class="calc-field"><span>Category</span><select value={category} onChange={(event) => setCategory((event.currentTarget as HTMLSelectElement).value)}>{categories.map((item) => <option value={item} key={item}>{item}</option>)}</select></label><label class="calc-field"><span>Sort by</span><select value={sort} onChange={(event) => setSort((event.currentTarget as HTMLSelectElement).value as SortMode)}><option value="value">Value / power</option><option value="rating">Demand / utility</option><option value="score">Combined score</option><option value="name">Name</option></select></label></div>
+    <div class="reference-controls"><label class="calc-field"><span>Search</span><input type="search" value={query} placeholder={isGtaReference ? 'Search facts, categories or status' : 'Search names, categories or rarity'} onInput={(event) => setQuery((event.currentTarget as HTMLInputElement).value)}/></label><label class="calc-field"><span>Category</span><select value={category} onChange={(event) => setCategory((event.currentTarget as HTMLSelectElement).value)}>{categories.map((item) => <option value={item} key={item}>{item}</option>)}</select></label><label class="calc-field"><span>Sort by</span><select value={sort} onChange={(event) => setSort((event.currentTarget as HTMLSelectElement).value as SortMode)}>{!isGtaReference && <><option value="value">Value / power</option><option value="rating">Demand / utility</option><option value="score">Combined score</option></>}<option value="name">Name</option></select></label></div>
     {catalog[0]?.sourceLabel && <p class="assumption-note"><strong>Data source:</strong> {catalog[0].sourceUrl ? <a href={catalog[0].sourceUrl} target="_blank" rel="noreferrer">{catalog[0].sourceLabel}</a> : catalog[0].sourceLabel}{catalog[0].reviewed ? ` · reviewed ${catalog[0].reviewed}` : ''}. Read each row note before comparing unlike metrics.</p>}
-    <div class="interactive-table-wrap"><table class="interactive-table"><thead><tr><th>Name</th><th>Category</th><th>Tier</th><th>Reference</th><th>Rating / context</th></tr></thead><tbody>{filtered.map((item) => <tr key={item.slug}><th scope="row"><strong>{item.name}</strong><small>{item.note}</small></th><td>{item.category}</td><td><span class="value-badge">{item.rarity}</span></td><td>{displayReference(item)}</td><td>{displayRating(item)}</td></tr>)}</tbody></table></div>
+    <div class="interactive-table-wrap"><table class="interactive-table"><thead><tr><th>Name</th><th>Category</th><th>{isGtaReference ? 'Status' : 'Tier'}</th><th>{isGtaReference ? 'Verification source' : 'Reference'}</th><th>{isGtaReference ? 'Evidence scope' : 'Rating / context'}</th></tr></thead><tbody>{filtered.map((item) => <tr key={item.slug}><th scope="row"><strong>{item.name}</strong><small>{item.note}</small></th><td>{item.category}</td><td><span class="value-badge">{item.rarity}</span></td><td>{isGtaReference && item.sourceUrl ? <a href={item.sourceUrl} target="_blank" rel="noreferrer">{item.displayValue ?? item.sourceLabel}</a> : displayReference(item)}</td><td>{displayRating(item)}</td></tr>)}</tbody></table></div>
     {!filtered.length && <div class="empty-state"><strong>No matching entries</strong><small>Try a broader search or reset the category.</small></div>}
-    <p class="assumption-note">These are dated reference records, not guaranteed offers. Community market indexes can move, RAP can be manipulated, and item availability or game stats can change after updates.</p>
+    <p class="assumption-note">{isGtaReference ? 'Pre-release records distinguish Rockstar-published facts, developer-interview details and observations from official footage. No numeric score or final mechanic formula is assigned.' : 'These are dated reference records, not guaranteed offers. Community market indexes can move, RAP can be manipulated, and item availability or game stats can change after updates.'}</p>
   </div>;
 }
 

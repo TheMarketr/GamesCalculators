@@ -108,8 +108,11 @@ export const secondaryTools = {
   'gta-6': [
     tool('cost', 'GTA VI Cost Planner', 'Model game price, tax, add-ons and savings without presenting unconfirmed pricing as fact.', 'Planning', ['gta 6 cost'], true),
     tool('map-size', 'GTA VI Map Size Estimator', 'Compare map-area scenarios and estimate travel time at different speeds.', 'Map'),
-    tool('map-locations', 'GTA VI Map Locations', 'Search and filter clearly labeled sample locations used by the map architecture.', 'Map'),
-    tool('characters', 'GTA VI Characters', 'Browse a concise character reference and filter by role.', 'Reference'),
+    tool('map-locations', 'GTA VI Map Locations', 'Search 9 sourced Leonida regions and districts without invented coordinates.', 'Map'),
+    tool('characters', 'GTA VI Characters', 'Browse 10 named GTA VI character profiles sourced from Rockstar.', 'Reference'),
+    tool('gameplay-systems', 'GTA VI Gameplay Systems', 'Search 24 sourced mechanics and activities, with each item labeled as interview-confirmed or observed in official footage.', 'Reference', ['gta 6 gameplay features', 'gta vi activities']),
+    tool('edition-content', 'GTA VI Edition Content', 'Search 22 official Standard, Ultimate and preorder inclusions without guessing their cash value.', 'Editions', ['gta 6 ultimate edition', 'gta vi preorder bonus']),
+    tool('launch-facts', 'GTA VI Launch Facts', 'Check 12 sourced launch facts and clearly marked unknowns covering platforms, preload, physical copies and PC status.', 'Release', ['gta 6 release date', 'gta vi preload']),
     tool('edition-comparison', 'GTA VI Edition Comparison', 'Compare the announced Standard and Ultimate editions using regional prices and the value you assign to included extras.', 'Planning'),
     tool('mission-earnings-calculator', 'GTA VI Mission Earnings Calculator', 'Estimate net payout, profit per hour and runs needed using the mission values you observe after launch.', 'Money', ['gta 6 mission payout', 'gta vi money per hour'], true),
     tool('payout-split-calculator', 'GTA VI Payout Split Calculator', 'Split a user-entered take after setup costs and compare leader and crew shares.', 'Money', ['gta 6 payout split', 'heist split calculator']),

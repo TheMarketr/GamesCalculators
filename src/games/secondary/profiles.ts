@@ -28,7 +28,7 @@ export interface CalculatorProfile {
 
 export type SecondaryMode = 'formula' | 'reference' | 'comparison' | 'trade' | 'portfolio' | 'tracker' | 'codes';
 const comparisonTools = new Set(['crop-comparison', 'fruit-comparison', 'best-fruits', 'income-comparison', 'class-comparison', 'weapon-comparison', 'pet-comparison']);
-const referenceTools = new Set(['prices', 'items', 'best-crops', 'fruit-values', 'values', 'characters', 'crafting', 'pet-values', 'value-list', 'trading-values', 'knife-values', 'godly-values', 'map-locations', 'pets']);
+const referenceTools = new Set(['prices', 'items', 'best-crops', 'fruit-values', 'values', 'characters', 'crafting', 'pet-values', 'value-list', 'trading-values', 'knife-values', 'godly-values', 'map-locations', 'pets', 'gameplay-systems', 'edition-content', 'launch-facts']);
 
 export function getSecondaryMode(gameSlug: string, toolSlug: string): SecondaryMode {
   if (toolSlug === 'codes') return 'codes';

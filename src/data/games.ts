@@ -213,7 +213,7 @@ export const games: GameConfig[] = [
   },
   {
     slug: 'gta-6', name: 'GTA VI', eyebrow: 'Release and planning tools', accent: 'sunset', glyph: 'VI',
-    description: 'Track the release countdown and prepare for download, platforms and map exploration.',
+    description: 'Explore sourced GTA VI characters, Leonida locations, gameplay systems, editions and launch facts alongside release and planning calculators.',
     icon: { src: '/images/games/gta-6/icon.jpg', alt: 'Official Grand Theft Auto VI cover artwork', ...gtaMedia },
     image: { src: '/images/games/gta-6/jason-lucia-robbery.jpg', alt: 'Official GTA VI artwork of Jason and Lucia during a robbery', ...gtaMedia },
     gallery: [
@@ -225,7 +225,7 @@ export const games: GameConfig[] = [
       { slug: 'release-date', name: 'GTA VI Release Date Countdown', shortName: 'Release Date Countdown', description: 'Count down live to the confirmed November 19, 2026 release date.', kind: 'countdown', category: 'Release', featured: true, updated, keywords: ['gta 6 release date', 'grand theft auto vi countdown'] },
       { slug: 'download-time-calculator', name: 'GTA VI Download Time Calculator', shortName: 'Download Time Calculator', description: 'Estimate download duration and completion time from file size and connection speed.', kind: 'download-time', category: 'Planning', updated, keywords: ['download speed', 'file size'] },
       { slug: 'platform-checker', name: 'GTA VI Platform Checker', shortName: 'Platform Checker', description: 'Check the currently announced GTA VI platform status for your system.', kind: 'platform', category: 'Release', updated, keywords: ['ps5', 'xbox', 'pc release'] },
-      { slug: 'map', name: 'GTA VI Interactive Map', shortName: 'Interactive Map', description: 'Explore a lightweight sample map architecture with search, filters and locally saved visited places.', kind: 'gta-map', category: 'Map', updated, keywords: ['gta 6 map', 'vice city locations'] },
+      { slug: 'map', name: 'GTA VI Interactive Map', shortName: 'Interactive Map', description: 'Explore a clearly labeled pre-release map interface with local filters and visited-state tracking.', kind: 'gta-map', category: 'Map', updated, keywords: ['gta 6 map', 'vice city locations'] },
       ...secondaryTools['gta-6'],
     ],
   },

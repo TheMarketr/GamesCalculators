@@ -3,6 +3,7 @@ import { nightsCatalog } from './99-nights/catalog';
 import { bloxFruits } from './blox-fruits/items';
 import { fortniteWeapons } from './fortnite/weapons';
 import { gardenItems } from './grow-a-garden/items';
+import { gtaCharacters, gtaEditionContents, gtaGameplaySystems, gtaLaunchFacts, gtaLocations } from './gta-6/reference';
 import { mm2Items } from './mm2/items';
 import { ps99Pets } from './pet-simulator-99/pets';
 import { brainrots } from './steal-a-brainrot/items';
@@ -44,9 +45,6 @@ const fromValues = (items: ValueItem[], preferIncome = false): CatalogItem[] =>
     ratingLabel: item.ratingLabel,
     ratingMax: item.ratingMax,
   }));
-
-const rows = (items: [string, string, string, string, number, number, string][]): CatalogItem[] =>
-  items.map(([slug, name, category, rarity, value, rating, note]) => ({ slug, name, category, rarity, value, rating, note }));
 
 const gardenPet = (slug: string, name: string, rarity: string, hunger: number, note: string): CatalogItem => ({
   slug, name, category: 'pet', rarity, value: hunger, rating: 0, note, unit: 'hunger', displayValue: `${hunger.toLocaleString()} hunger`,
@@ -107,26 +105,6 @@ const gardenPets = [
   gardenPet('moth', 'Moth', 'legendary', 25_000, 'About every 13 minutes, restores all hunger to a random pet.'),
 ];
 
-const gtaCharacters = rows([
-  ['lucia-caminos', 'Lucia Caminos', 'protagonist', 'confirmed', 95, 9.8, 'Central playable character'],
-  ['jason-duval', 'Jason Duval', 'protagonist', 'confirmed', 95, 9.8, 'Central playable character'],
-  ['cal-hampton', 'Cal Hampton', 'associate', 'confirmed', 72, 7.8, 'Jason associate'],
-  ['boobie-ike', 'Boobie Ike', 'entrepreneur', 'confirmed', 78, 8.0, 'Vice City entrepreneur'],
-  ['dre-quan-priest', "Dre'Quan Priest", 'music', 'confirmed', 76, 7.9, 'Music-industry character'],
-  ['real-dimez', 'Real Dimez', 'music', 'confirmed', 74, 7.7, 'Rap duo profile'],
-  ['raul-bautista', 'Raul Bautista', 'robbery crew', 'confirmed', 84, 8.5, 'Experienced bank robber'],
-  ['brian-heder', 'Brian Heder', 'associate', 'confirmed', 70, 7.5, 'Veteran smuggler'],
-]);
-
-const gtaLocations = rows([
-  ['vice-city', 'Vice City', 'city', 'confirmed region', 100, 10, 'Urban center of the Leonida setting'],
-  ['leonida-keys', 'Leonida Keys', 'coast', 'confirmed region', 76, 8.5, 'Island-chain region'],
-  ['grassrivers', 'Grassrivers', 'wetlands', 'confirmed region', 72, 8.2, 'Wetlands region'],
-  ['port-gellhorn', 'Port Gellhorn', 'city', 'confirmed region', 80, 8.6, 'Coastal city region'],
-  ['ambrosia', 'Ambrosia', 'industrial', 'confirmed region', 68, 7.8, 'Industrial region'],
-  ['mount-kalaga', 'Mount Kalaga', 'nature', 'confirmed region', 74, 8.0, 'Northern wilderness region'],
-]);
-
 export function getToolCatalog(gameSlug: string, toolSlug: string): CatalogItem[] {
   if (gameSlug === 'grow-a-garden') return toolSlug === 'pets' ? gardenPets : fromValues(gardenItems);
   if (gameSlug === 'blox-fruits') return fromValues(bloxFruits);
@@ -136,6 +114,12 @@ export function getToolCatalog(gameSlug: string, toolSlug: string): CatalogItem[
   if (gameSlug === 'mm2') return fromValues(mm2Items);
   if (gameSlug === 'pet-simulator-99') return fromValues(ps99Pets);
   if (gameSlug === 'fortnite') return fromValues(fortniteWeapons);
-  if (gameSlug === 'gta-6') return toolSlug === 'characters' ? gtaCharacters : gtaLocations;
+  if (gameSlug === 'gta-6') {
+    if (toolSlug === 'characters') return gtaCharacters;
+    if (toolSlug === 'map-locations') return gtaLocations;
+    if (toolSlug === 'gameplay-systems') return gtaGameplaySystems;
+    if (toolSlug === 'edition-content') return gtaEditionContents;
+    if (toolSlug === 'launch-facts') return gtaLaunchFacts;
+  }
   return [];
 }
