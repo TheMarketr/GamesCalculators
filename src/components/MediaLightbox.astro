@@ -1,0 +1,76 @@
+<dialog class="media-lightbox" data-media-lightbox aria-labelledby="media-lightbox-title">
+  <div class="media-lightbox__frame">
+    <button class="media-lightbox__close" type="button" data-media-close aria-label="Close image viewer">×</button>
+    <button class="media-lightbox__nav media-lightbox__nav--previous" type="button" data-media-previous aria-label="Previous image">‹</button>
+    <figure>
+      <img data-media-lightbox-image src="" alt="" width="1600" height="900" />
+      <figcaption>
+        <div><strong id="media-lightbox-title" data-media-lightbox-title></strong><span data-media-count></span></div>
+        <a data-media-lightbox-credit href="https://www.rockstargames.com/VI/media/screenshots" target="_blank" rel="license noopener">Official media source ↗</a>
+      </figcaption>
+    </figure>
+    <button class="media-lightbox__nav media-lightbox__nav--next" type="button" data-media-next aria-label="Next image">›</button>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-media-lightbox]');
+  if (dialog) {
+    const image = dialog.querySelector<HTMLImageElement>('[data-media-lightbox-image]');
+    const title = dialog.querySelector<HTMLElement>('[data-media-lightbox-title]');
+    const count = dialog.querySelector<HTMLElement>('[data-media-count]');
+    const credit = dialog.querySelector<HTMLAnchorElement>('[data-media-lightbox-credit]');
+    const closeButton = dialog.querySelector<HTMLButtonElement>('[data-media-close]');
+    const previousButton = dialog.querySelector<HTMLButtonElement>('[data-media-previous]');
+    const nextButton = dialog.querySelector<HTMLButtonElement>('[data-media-next]');
+    let activeItems: HTMLButtonElement[] = [];
+    let activeIndex = 0;
+    let opener: HTMLButtonElement | null = null;
+
+    const render = () => {
+      const item = activeItems[activeIndex];
+      if (!item || !image || !title || !count || !credit) return;
+      image.src = item.dataset.mediaSrc ?? '';
+      image.alt = item.dataset.mediaAlt ?? '';
+      title.textContent = item.dataset.mediaCaption ?? item.dataset.mediaAlt ?? '';
+      count.textContent = `${activeIndex + 1} of ${activeItems.length}`;
+      credit.textContent = item.dataset.mediaCredit ?? 'Official media source ↗';
+      credit.href = item.dataset.mediaCreditUrl ?? '#';
+      const hasMultiple = activeItems.length > 1;
+      if (previousButton) previousButton.hidden = !hasMultiple;
+      if (nextButton) nextButton.hidden = !hasMultiple;
+    };
+
+    const move = (direction: number) => {
+      if (!activeItems.length) return;
+      activeIndex = (activeIndex + direction + activeItems.length) % activeItems.length;
+      render();
+    };
+
+    document.querySelectorAll<HTMLButtonElement>('[data-media-open]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const galleryId = button.dataset.galleryId;
+        activeItems = Array.from(document.querySelectorAll<HTMLButtonElement>(`[data-gallery-id="${galleryId}"]`));
+        activeIndex = Math.max(0, activeItems.indexOf(button));
+        opener = button;
+        render();
+        dialog.showModal();
+        document.body.classList.add('lightbox-open');
+        closeButton?.focus();
+      });
+    });
+
+    closeButton?.addEventListener('click', () => dialog.close());
+    previousButton?.addEventListener('click', () => move(-1));
+    nextButton?.addEventListener('click', () => move(1));
+    dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+    dialog.addEventListener('close', () => {
+      document.body.classList.remove('lightbox-open');
+      opener?.focus();
+    });
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') move(-1);
+      if (event.key === 'ArrowRight') move(1);
+    });
+  }
+</script>

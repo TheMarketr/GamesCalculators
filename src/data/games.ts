@@ -36,6 +36,7 @@ export interface ToolConfig {
 export interface GameImage {
   src: string;
   alt: string;
+  caption?: string;
   credit: string;
   creditUrl: string;
   license: string;
@@ -82,6 +83,13 @@ const gtaMedia = {
   creditUrl: 'https://www.rockstargames.com/VI/media',
   license: 'Official downloadable media',
   licenseUrl: 'https://www.rockstargames.com/VI/media',
+};
+
+const gtaScreenshotMedia = {
+  credit: 'Grand Theft Auto VI official screenshot © Rockstar Games',
+  creditUrl: 'https://www.rockstargames.com/VI/media/screenshots',
+  license: 'Official downloadable media',
+  licenseUrl: 'https://www.rockstargames.com/VI/media/screenshots',
 };
 
 export const games: GameConfig[] = [
@@ -215,11 +223,19 @@ export const games: GameConfig[] = [
     slug: 'gta-6', name: 'GTA VI', eyebrow: 'Release and planning tools', accent: 'sunset', glyph: 'VI',
     description: 'Explore sourced GTA VI characters, Leonida locations, gameplay systems, editions and launch facts alongside release and planning calculators.',
     icon: { src: '/images/games/gta-6/icon.jpg', alt: 'Official Grand Theft Auto VI cover artwork', ...gtaMedia },
-    image: { src: '/images/games/gta-6/jason-lucia-robbery.jpg', alt: 'Official GTA VI artwork of Jason and Lucia during a robbery', ...gtaMedia },
+    image: { src: '/images/games/gta-6/jason-lucia-gameplay.jpg', alt: 'Jason and Lucia together in an official Grand Theft Auto VI screenshot', caption: 'Jason and Lucia in Leonida', ...gtaScreenshotMedia },
     gallery: [
-      { src: '/images/games/gta-6/jason-lucia-robbery.jpg', alt: 'Jason and Lucia in official GTA VI robbery artwork', ...gtaMedia },
-      { src: '/images/games/gta-6/vice-city-postcard.jpg', alt: 'Official GTA VI Vice City postcard artwork', ...gtaMedia },
-      { src: '/images/games/gta-6/jason-lucia.jpg', alt: 'Official GTA VI artwork featuring Jason and Lucia', ...gtaMedia },
+      { src: '/images/games/gta-6/jason-lucia-gameplay.jpg', alt: 'Jason and Lucia together with Vice City and police vehicles behind them in Grand Theft Auto VI', caption: 'Jason and Lucia in Leonida', ...gtaScreenshotMedia },
+      { src: '/images/games/gta-6/vice-city-11.jpg', alt: 'Vice City skyline and waterfront glowing at dusk in Grand Theft Auto VI', caption: 'Vice City at dusk', ...gtaScreenshotMedia },
+      { src: '/images/games/gta-6/jason-duval-07.jpg', alt: 'Jason Duval behind a chain-link fence during a police encounter in Grand Theft Auto VI', caption: 'Jason Duval', ...gtaScreenshotMedia },
+      { src: '/images/games/gta-6/lucia-caminos-09.jpg', alt: 'Lucia Caminos training with a heavy bag in a Grand Theft Auto VI gym', caption: 'Lucia Caminos training', ...gtaScreenshotMedia },
+      { src: '/images/games/gta-6/leonida-keys-06.jpg', alt: 'An iguana on a seawall beside the tropical Leonida Keys coast in Grand Theft Auto VI', caption: 'Leonida Keys wildlife', ...gtaScreenshotMedia },
+      { src: '/images/games/gta-6/port-gellhorn-06.jpg', alt: 'A Port Gellhorn neighborhood and palm-lined street at sunset in Grand Theft Auto VI', caption: 'Port Gellhorn at sunset', ...gtaScreenshotMedia },
+      { src: '/images/games/gta-6/grassrivers-06.jpg', alt: 'A hunter holding an alligator in the wetlands of Grassrivers in Grand Theft Auto VI', caption: 'Grassrivers wetlands', ...gtaScreenshotMedia },
+      { src: '/images/games/gta-6/mount-kalaga-01.jpg', alt: 'Dirt-bike racers passing industrial silos in Mount Kalaga National Park in Grand Theft Auto VI', caption: 'Mount Kalaga dirt-bike country', ...gtaScreenshotMedia },
+      { src: '/images/games/gta-6/jason-lucia-robbery.jpg', alt: 'Jason and Lucia in official Grand Theft Auto VI robbery artwork', caption: 'Jason and Lucia artwork', ...gtaMedia },
+      { src: '/images/games/gta-6/vice-city-postcard.jpg', alt: 'Official Grand Theft Auto VI Vice City postcard artwork', caption: 'Vice City postcard artwork', ...gtaMedia },
+      { src: '/images/games/gta-6/jason-lucia.jpg', alt: 'Official Grand Theft Auto VI artwork featuring Jason and Lucia', caption: 'Jason and Lucia key artwork', ...gtaMedia },
     ],
     tools: [
       { slug: 'release-date', name: 'GTA VI Release Date Countdown', shortName: 'Release Date Countdown', description: 'Count down live to the confirmed November 19, 2026 release date.', kind: 'countdown', category: 'Release', featured: true, updated, keywords: ['gta 6 release date', 'grand theft auto vi countdown'] },

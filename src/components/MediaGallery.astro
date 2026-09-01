@@ -1,0 +1,42 @@
+---
+import type { GameImage } from '../data/games';
+
+interface Props {
+  items: GameImage[];
+  galleryId: string;
+  title?: string;
+  description?: string;
+  limit?: number;
+  compact?: boolean;
+}
+
+const { items, galleryId, title, description, limit, compact = false } = Astro.props;
+const visibleItems = typeof limit === 'number' ? items.slice(0, limit) : items;
+---
+<section class:list={['media-gallery-section', compact && 'media-gallery-section--compact']} aria-labelledby={title ? `${galleryId}-title` : undefined} aria-label={!title ? 'Official game media' : undefined}>
+  {(title || description) && <div class="media-gallery-copy">
+    <div><span class="eyebrow">Official game media</span>{title && <h2 id={`${galleryId}-title`}>{title}</h2>}{description && <p>{description}</p>}</div>
+    <span class="media-gallery-hint"><span aria-hidden="true">↗</span> Select an image to enlarge</span>
+  </div>}
+  <div class="media-gallery" data-media-gallery={galleryId}>
+    {visibleItems.map((media, index) => <figure class="media-gallery__card">
+      <button
+        class="media-gallery__open"
+        type="button"
+        aria-label={`Open ${media.caption ?? media.alt} in image viewer`}
+        data-media-open
+        data-gallery-id={galleryId}
+        data-media-index={index}
+        data-media-src={media.src}
+        data-media-alt={media.alt}
+        data-media-caption={media.caption ?? media.alt}
+        data-media-credit={media.credit}
+        data-media-credit-url={media.creditUrl}
+      >
+        <img src={media.src} alt={media.alt} width="768" height="432" loading="lazy" decoding="async" />
+        <span class="media-gallery__zoom" aria-hidden="true">＋</span>
+      </button>
+      <figcaption><strong>{media.caption ?? media.alt}</strong><a href={media.creditUrl} target="_blank" rel="license noopener">Rockstar source ↗</a></figcaption>
+    </figure>)}
+  </div>
+</section>

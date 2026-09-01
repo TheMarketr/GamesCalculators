@@ -4,6 +4,7 @@ import FAQSection from '../../../components/FAQSection.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import GuideCard from '../../../components/GuideCard.astro';
 import GuideDepthSection from '../../../components/GuideDepthSection.astro';
+import MediaGallery from '../../../components/MediaGallery.astro';
 import { getGame, type GameConfig } from '../../../data/games';
 import { guides } from '../../../data/guides';
 import { richGuideArticles, type RichGuideArticle } from '../../../data/rich-guides';
@@ -43,6 +44,7 @@ const schema = [
       <main class="rich-guide-main">
         <nav class="guide-jump-nav" aria-label="Guide sections"><a href="#overview">Overview</a><a href="#takeaways">Key points</a>{article.sections.map((section, index) => <a href={`#section-${index + 1}`}>{section.heading}</a>)}<a href="#guide-depth-heading">Deep dive</a><a href="#checklist">Checklist</a><a href="#faq">FAQs</a></nav>
         <section id="overview" class="guide-intro-card">{article.lead.map((paragraph) => <p>{paragraph}</p>)}</section>
+        {game.slug === 'gta-6' && game.gallery && <MediaGallery items={game.gallery} galleryId={`guide-${article.slug.replaceAll('/', '-')}`} title="GTA VI visual field guide" description="Use these official Rockstar screenshots to put the guide's characters, terrain, and Leonida setting in context. Select a scene to inspect it full size." limit={6} compact />}
         <section id="takeaways" class="guide-takeaways"><span class="eyebrow">Key takeaways</span><h2>The useful version in one minute</h2><div>{article.takeaways.map((takeaway, index) => <article><strong>{String(index + 1).padStart(2, '0')}</strong><p>{takeaway}</p></article>)}</div></section>
         {article.sections.map((section, index) => <section id={`section-${index + 1}`} class="rich-guide-section"><span class="section-number">{String(index + 1).padStart(2, '0')}</span><div><h2>{section.heading}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{section.bullets && <ul>{section.bullets.map((bullet) => <li>{bullet}</li>)}</ul>}</div></section>)}
         <GuideDepthSection game={article.game} gameSlug={article.gameSlug} title={article.title} category={article.category} />

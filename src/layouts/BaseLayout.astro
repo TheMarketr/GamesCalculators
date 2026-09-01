@@ -3,6 +3,7 @@ import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import PrivacyDialog from '../components/PrivacyDialog.astro';
+import MediaLightbox from '../components/MediaLightbox.astro';
 import { games, publishedTools } from '../data/games';
 import { site } from '../config/site';
 import { guides } from '../data/guides';
@@ -32,5 +33,5 @@ const websiteSchema = { '@context': 'https://schema.org', '@type': 'WebSite', na
     <meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'} /><meta name="twitter:title" content={pageTitle} /><meta name="twitter:description" content={description} />{imageUrl && <meta name="twitter:image" content={imageUrl} />}
     <title>{pageTitle}</title><script is:inline type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />{schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}
   </head>
-  <body><a class="skip-link" href="#main-content">Skip to content</a><SiteHeader searchEntries={searchEntries} /><main id="main-content"><slot /></main><SiteFooter /><PrivacyDialog /></body>
+  <body><a class="skip-link" href="#main-content">Skip to content</a><SiteHeader searchEntries={searchEntries} /><main id="main-content"><slot /></main><SiteFooter /><PrivacyDialog /><MediaLightbox /></body>
 </html>

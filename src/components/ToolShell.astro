@@ -4,6 +4,7 @@ import type { CalculatorContent } from '../data/calculator-content';
 import ToolCard from './ToolCard.astro';
 import FAQSection from './FAQSection.astro';
 import { getToolIcon } from '../utils/tool-icons';
+import MediaGallery from './MediaGallery.astro';
 
 // Advertising components remain available in the codebase but are intentionally not rendered.
 interface Faq { question: string; answer: string }
@@ -17,6 +18,16 @@ const reviewed = content.reviewed
 const toolIcon = getToolIcon(tool);
 const sections = [content.howItWorks, content.workedExample, content.howToUseResult, content.limitations];
 const knowledgeIcons = ['⚙️', '🧪', '🎯', '⚠️'];
+const gtaMediaOrder = tool.slug.includes('map')
+  ? [1, 4, 5, 6, 7]
+  : tool.slug.includes('character')
+    ? [0, 2, 3, 8, 10]
+    : [0, 1, 2, 3, 7];
+const toolMedia = game.gallery
+  ? game.slug === 'gta-6'
+    ? gtaMediaOrder.map((index) => game.gallery![index]).filter(Boolean)
+    : game.gallery.slice(0, 2)
+  : [];
 ---
 <div class={`tool-page accent-${game.accent}`}>
   <div class="tool-hero">
@@ -58,10 +69,14 @@ const knowledgeIcons = ['⚙️', '🧪', '🎯', '⚠️'];
   </div>
 
   <div class="container tool-content" data-supporting-content>
-    {game.gallery?.length && <section class="tool-media-strip" aria-label={`${game.name} official game imagery`}>
-      <div class="tool-media-copy"><span class="eyebrow">Game reference</span><strong>{game.name}</strong><p>Official or licensed imagery identifies the game covered by this independent fan utility.</p></div>
-      {game.gallery.slice(0, 2).map((media) => <figure><img src={media.src} alt={media.alt} width="768" height="432" loading="lazy" decoding="async" /><figcaption><a href={media.creditUrl} target="_blank" rel="license noopener">{media.credit}</a></figcaption></figure>)}
-    </section>}
+    {toolMedia.length > 0 && <MediaGallery
+      items={toolMedia}
+      galleryId={`tool-${game.slug}-${tool.slug}`}
+      title={game.slug === 'gta-6' ? `${tool.shortName} visual reference` : `${game.name} visual reference`}
+      description={game.slug === 'gta-6' ? 'Explore official character and Leonida location screenshots related to this tool. Open any image for a larger view.' : 'Official or licensed imagery identifies the game covered by this independent fan utility.'}
+      limit={game.slug === 'gta-6' ? 5 : 2}
+      compact
+    />}
 
     <nav class="content-jump-nav" aria-label="Calculator page sections">
       <a href="#calculator-guide"><span aria-hidden="true">📘</span> Purpose</a>
