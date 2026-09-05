@@ -15,7 +15,7 @@ export const systemsToolContent = defineToolContent({
     faqs: [
       { question: 'Is the PS99 value total live RAP?', answer: 'No. It uses a dated August 28, 2026 BIG Games API RAP snapshot. Open the linked source for newer auction data before a major trade.' },
       { question: 'Does demand add diamonds to the total?', answer: 'No. Demand remains separate because there is no fixed conversion from liquidity to diamond value.' },
-      { question: 'What if my pet variant is not listed?', answer: 'Do not substitute an unrelated row. The dataset is flagged for expansion.' },
+      { question: 'What if my pet variant is not listed?', answer: 'Do not substitute an unrelated row. Check the linked BIG Games source for that exact variant and wait for the local snapshot to be reviewed again.' },
     ],
   }),
   'pet-simulator-99/trade-calculator': c({
@@ -48,7 +48,7 @@ export const systemsToolContent = defineToolContent({
     limitPoints: ['Not a complete pet list.', 'No official fixed prices.', 'Variant matching is essential.'],
     faqs: [
       { question: 'Are PS99 power and diamond value the same?', answer: 'No. Power supports gameplay progression; diamond value reflects community trading and rarity context.' },
-      { question: 'Does this page update from Trading Plaza live?', answer: 'No. It is a local editorial reference and is flagged for expansion.' },
+      { question: 'Does this page update from Trading Plaza live?', answer: 'No. It uses a dated local RAP snapshot, so current Trading Plaza listings can differ.' },
       { question: 'Why can RAP and a community value differ?', answer: 'RAP methodology, manipulation, low volume, demand, and current listings can produce different signals.' },
     ],
   }),
@@ -164,10 +164,10 @@ export const systemsToolContent = defineToolContent({
     mechanics: 'The page filters the same 50-row high-RAP catalog used by several PS99 tools but foregrounds pet identity and tier. It does not derive a market value from pet name or rarity.',
     example: 'A pet profile can be useful for power planning even when its trading reference is modest. The catalog exposes both roles rather than calling one metric universally best.',
     result: 'Use the page to identify the correct record and choose whether Power, Value, Comparison, or Trade Calculator answers the next question.',
-    limits: 'This catalog and Pet Values still share the same high-end RAP slice, so their intent remains close even though one emphasizes collection identity and the other market lookup. They remain flagged for human SEO review.',
-    limitPoints: ['Human SEO review recommended.', '50 high-RAP records.', 'No live game inventory.'],
+    limits: 'This catalog uses the same 50-record high-end RAP snapshot as Pet Values, but this page emphasizes pet identity and category while Pet Values is organized around price lookup. Neither page connects to a live game inventory.',
+    limitPoints: ['50 high-RAP records.', 'Identity and category are the primary focus.', 'No live game inventory.'],
     faqs: [
-      { question: 'How is PS99 Pets different from Pet Values?', answer: 'Pets foregrounds collection identity and tier; Pet Values foregrounds RAP. Because both currently use the same 50 high-RAP records, the routes remain flagged for SEO review.' },
+      { question: 'How is PS99 Pets different from Pet Values?', answer: 'Pets foregrounds collection identity, category, and tier; Pet Values foregrounds the RAP amount and market lookup.' },
       { question: 'Does the catalog list every PS99 pet?', answer: 'No. It covers 50 high-RAP records from a much larger upstream BIG Games API dataset and says so beside the table.' },
       { question: 'Can I determine trade fairness from a pet profile?', answer: 'No. Use complete quantities and both sides in the Trade Calculator.' },
     ],
@@ -185,7 +185,7 @@ export const systemsToolContent = defineToolContent({
     limits: 'The arithmetic does not model portal search, terrain, borders, nearby frames, or edition-specific linking behavior.',
     limitPoints: ['X/Z only.', 'Rounding can shift alignment.', 'Portal linking is not guaranteed.'],
     faqs: [
-      { question: 'Why does this page overlap Portal Calculator?', answer: 'This route emphasizes repeat coordinate conversion; Portal Calculator adds more explanation about planning and linking. Their intent remains close and merits human SEO review.' },
+      { question: 'How is this different from Minecraft Portal Calculator?', answer: 'This route is optimized for quick repeated X/Z conversions. Portal Calculator adds portal-pair planning and linking context around the converted coordinates.' },
       { question: 'Which source scale should I choose?', answer: 'Choose 8 when coordinates come from the Overworld and 1 when they come from the Nether.' },
       { question: 'Does Nether Y divide by eight?', answer: 'No. Only horizontal X and Z use the dimension scale.' },
     ],

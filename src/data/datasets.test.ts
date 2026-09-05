@@ -44,6 +44,18 @@ describe('expanded game datasets', () => {
     expect(adoptMePets.find((item) => item.slug === 'bat-dragon')?.value).toBe(288);
   });
 
+  it('normalizes the public MM2 snapshot without losing coverage', () => {
+    expect(mm2Items).toHaveLength(300);
+    expect(mm2Items.filter((item) => item.rarity === 'godly')).toHaveLength(135);
+    expect(mm2Items.filter((item) => item.category === 'knife')).toHaveLength(164);
+    expect(mm2Items.every((item) => !/origin:\s*\./i.test(item.note ?? ''))).toBe(true);
+    expect(mm2Items.every((item) => Boolean(item.ratingLabel))).toBe(true);
+    expect(mm2Items.find((item) => item.slug === 'candleflame')?.name).toBe('Candleflame');
+    expect(mm2Items.find((item) => item.slug === 'peppermint')?.name).toBe('Peppermint');
+    expect(mm2Items.find((item) => item.slug === 'makeshift')?.name).toBe('Makeshift');
+    expect(mm2Items.find((item) => item.slug === 'makeshift-knife')?.name).toBe('Makeshift (Knife)');
+  });
+
   it('builds the Fortnite XP milestone table from the reviewed per-level rate', () => {
     expect(fortniteXpReview.xpPerLevel).toBe(80_000);
     expect(fortniteXpMilestones.find((row) => row.levels === 100)?.xp).toBe(8_000_000);

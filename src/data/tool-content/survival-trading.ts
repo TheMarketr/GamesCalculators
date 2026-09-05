@@ -1,4 +1,8 @@
+import { mm2Items } from '../mm2/items';
 import { compactToolContent as c, defineToolContent } from './types';
+
+const mm2KnifeCount = mm2Items.filter((item) => item.category === 'knife').length;
+const mm2GodlyCount = mm2Items.filter((item) => item.rarity === 'godly').length;
 
 export const survivalTradingToolContent = defineToolContent({
   '99-nights/characters': c({
@@ -13,7 +17,7 @@ export const survivalTradingToolContent = defineToolContent({
     limits: 'The 28-class reference was reviewed from PC Gamer on August 28, 2026. Costs, event currencies, starting gear, upgrades, and balance can change after a patch.',
     limitPoints: ['No live class data is fetched.', 'Rating is planning context.', 'Party synergy is not simulated.'],
     faqs: [
-      { question: 'Is 99 Nights Characters a complete class list?', answer: 'No. It is a concise role-planning dataset and is flagged for expansion as verified character information changes.' },
+      { question: 'Is 99 Nights Characters a complete class list?', answer: 'It covers the 28 reviewed class records currently available here. Check current in-game class information after an update because costs, equipment, and abilities can change.' },
       { question: 'What does the character rating represent?', answer: 'It is an editorial comparison score for the listed profile, not an official in-game statistic.' },
       { question: 'Why choose a lower-rated support role?', answer: 'A party gap can matter more than overall rating. Food, fuel, crafting, or gathering coverage may improve survival more than duplicating combat.' },
     ],
@@ -343,7 +347,7 @@ export const survivalTradingToolContent = defineToolContent({
     faqs: [
       { question: 'Does MM2 Value Calculator judge a trade?', answer: 'No. It totals one side. Use MM2 Trade Calculator for an explicit two-offer gap.' },
       { question: 'Are knife and gun values added the same way?', answer: 'Yes, as numeric reference rows, while category remains visible for set and collector context.' },
-      { question: 'What if my MM2 weapon is missing?', answer: 'Do not substitute another item. The dataset is flagged for expansion.' },
+      { question: 'What if my MM2 weapon is missing?', answer: 'Do not substitute another item or variant. Check the linked source and return after the local snapshot has been reviewed again.' },
     ],
   }),
   'mm2/trading-values': c({
@@ -355,10 +359,10 @@ export const survivalTradingToolContent = defineToolContent({
     mechanics: 'The page filters the same underlying local catalog but gives demand and trade use priority. It does not create a new authoritative price or average live transactions.',
     example: 'Two rows at value 100 can show demand 9 and 4. The demand view explains why the first may be easier to use in an upgrade even though the value sort treats them as tied.',
     result: 'Use the page to shortlist liquid items and identify low-demand adds. A complete W/F/L still requires quantities and both offer sides.',
-    limits: 'The present experience still shares the core MM2 catalog with Value List and needs broader data. Demand labels are editorial/community snapshots.',
+    limits: 'This view uses the same 300-record snapshot as MM2 Value List but excludes records that lack a usable demand score or are marked untradeable. Demand remains a dated community signal rather than a guaranteed time-to-trade.',
     limitPoints: ['No live trade-feed sampling.', 'Demand-rated and tradeable rows only.', 'Untradeable records are excluded from this trading-focused cut.'],
     faqs: [
-      { question: 'How is MM2 Trading Values different from Value List?', answer: 'Trading Values prioritizes demand and offer liquidity; Value List is the broad catalog lookup. They still share a dataset and need human SEO review.' },
+      { question: 'How is MM2 Trading Values different from Value List?', answer: 'Trading Values prioritizes demand and offer liquidity while Value List is the broad 300-record lookup across every included category.' },
       { question: 'Can high demand increase a trade overpay?', answer: 'Players may pay more for liquidity or a desired upgrade, but the calculator does not apply an automatic demand premium.' },
       { question: 'Does demand predict how fast a weapon will trade?', answer: 'No. It is relative context, not a guaranteed time-to-sale.' },
     ],
@@ -372,12 +376,12 @@ export const survivalTradingToolContent = defineToolContent({
     mechanics: 'The route applies a knife category filter to the local MM2 records and retains category-specific explanations. No value is inferred merely because an item is a knife.',
     example: 'A Godly knife and a lower-rarity knife can sort differently by value and demand. The knife-only list makes the category consistent while preserving those market differences.',
     result: 'Use the filtered ranking for knife collection and substitution questions. Check complete offer value when the trade includes a gun, set, or several adds.',
-    limits: 'The knife page now filters 30+ knife rows from the reviewed MM2 snapshot, but it is still not every knife or variant. Community values and demand can move after events or market disruptions.',
-    limitPoints: ['Not all knives are covered.', 'Category does not equal value.', 'Human SEO review remains prudent as the dataset expands.'],
+    limits: `The knife page filters ${mm2KnifeCount} knife records from the reviewed MM2 snapshot. It does not claim every historical knife or variant, and community values can move after events, releases, or market disruptions.`,
+    limitPoints: [`${mm2KnifeCount} source-dated knife records.`, 'Category does not equal value.', 'Demand is a community snapshot, not a guaranteed offer.'],
     faqs: [
       { question: 'Does MM2 Knife Values include guns?', answer: 'No. This route is intentionally knife-specific; use the complete Value List for mixed categories.' },
       { question: 'Are all Godly knives worth the same?', answer: 'No. Rarity tier is only one field; availability, demand, and market history can separate them.' },
-      { question: 'Is the knife list complete?', answer: 'No. The current local knife subset is flagged for substantial expansion.' },
+      { question: 'How much of the local MM2 snapshot is knife-specific?', answer: `This page currently exposes ${mm2KnifeCount} knife records. The complete Value List also includes guns, sets, pets, and miscellaneous entries.` },
     ],
   }),
   'mm2/inventory-calculator': c({
@@ -440,12 +444,12 @@ export const survivalTradingToolContent = defineToolContent({
     mechanics: 'The route applies the Godly rarity filter to catalog records. Values remain stored community references; the filter does not create or boost them.',
     example: 'Two Godly weapons can share the same rarity while one has much stronger demand. Sorting within the tier surfaces the market distinction that a rarity badge alone misses.',
     result: 'Use the list for Godly-to-Godly comparisons and set planning. If lower tiers or adds enter the offer, use the complete value list and trade calculator.',
-    limits: 'The Godly filter covers 40+ rows from the reviewed snapshot but is not a promise of every Godly or variant. Market shifts, events, and duplication concerns can alter value and demand.',
-    limitPoints: ['Not a complete Godly list.', 'Rarity is not price.', 'The focused URL should receive human SEO review as coverage grows.'],
+    limits: `The Godly filter covers ${mm2GodlyCount} source-dated records from the September 2026 snapshot. It is substantial local coverage rather than a claim to every historical Godly or variant; market shifts, events, and duplication concerns can still alter value and demand.`,
+    limitPoints: [`${mm2GodlyCount} Godly records in the current snapshot.`, 'Rarity is not price.', 'Community demand and values can change between reviews.'],
     faqs: [
       { question: 'Are all MM2 Godly weapons high demand?', answer: 'No. Rarity and demand are separate; some Godly items can be less liquid than others.' },
       { question: 'Does this page include non-Godly weapons?', answer: 'No. Use MM2 Value List for the broader catalog.' },
-      { question: 'Is the Godly dataset complete?', answer: 'No. It is a focused local subset and is explicitly flagged for expansion.' },
+      { question: 'How many MM2 Godly records are included?', answer: `The current page contains ${mm2GodlyCount} Godly-tier records from the source-dated 300-item snapshot. Use the complete Value List for other rarity tiers.` },
     ],
   }),
   'mm2/collection-tracker': c({
@@ -455,7 +459,7 @@ export const survivalTradingToolContent = defineToolContent({
     useCases: ['Mark collected knives and guns.', 'See missing local catalog entries.', 'Plan collection trades by category.'],
     steps: ['Search the weapon.', 'Check items actually owned.', 'Filter missing entries.', 'Back up important notes before clearing browser storage.'],
     mechanics: 'Completion = checked local entries ÷ all current local entries. State is kept in browser storage and can change proportionally when the catalog expands.',
-    example: 'Checking seven of nine current rows shows 77.8%. Adding a tenth catalog row later changes the same seven checks to 70%.',
+    example: 'Checking 225 of the current 300 rows shows 75% completion. If a later reviewed snapshot grows to 310 rows while the same 225 remain checked, local-catalog completion becomes about 72.6%.',
     result: 'Use the missing list as a planning aid, but label it as local-catalog completion until every MM2 item and variant is covered.',
     limits: 'The tracker does not verify ownership, sync devices, or cover the full MM2 catalog. Browser cleanup can erase state.',
     limitPoints: ['No account connection.', 'Tracks the reviewed 300-record catalog only.', 'Not proof of ownership.'],

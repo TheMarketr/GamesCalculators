@@ -76,6 +76,34 @@ export const mm2LegacyItems: ValueItem[] = [
   weapon('icewing', 'Icewing', 'knife', 'ancient', 13, 1),
 ];
 
+const normalizeKey = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+/**
+ * The source occasionally repeats a search key inside the display name, such as
+ * "Peppermint (peppermint)" or "Apocalypse (apocalypse gun)". Keep useful
+ * variant qualifiers while removing the duplicated key text.
+ */
+const normalizeDisplayName = (value: string) => {
+  const match = value.match(/^(.*?)\s+\((.*?)\)$/);
+  if (!match) return value;
+
+  const [, base, qualifier] = match;
+  const baseKey = normalizeKey(base);
+  const qualifierKey = normalizeKey(qualifier);
+  if (qualifierKey === baseKey) return base;
+
+  if (qualifierKey.startsWith(`${baseKey} `)) {
+    const detail = qualifierKey.slice(baseKey.length).trim();
+    if (/^(?:gun|knife|set|pet)$/.test(detail)) return `${base} (${detail[0].toUpperCase()}${detail.slice(1)})`;
+    if (/^\d{4}$/.test(detail)) return `${base} (${detail})`;
+  }
+
+  return value;
+};
+
+const normalizeOrigin = (note: string) => note.replace(/origin:\s*\./i, 'origin: not documented in the cited snapshot.');
+const marketStatus = (note: string) => note.split(';', 1)[0]?.trim();
+
 /**
  * A 300-item, source-dated MM2 market snapshot. Numeric values and demand scores
  * come from the named Supreme Values category linked on each row; MM2 does not
@@ -83,9 +111,11 @@ export const mm2LegacyItems: ValueItem[] = [
  */
 export const mm2Items: ValueItem[] = sourceSnapshot.map((item) => ({
   ...item,
-  note: `${item.name}: ${item.note}`,
+  name: normalizeDisplayName(item.name),
+  note: `${normalizeDisplayName(item.name)}: ${normalizeOrigin(item.note)}`,
   sourceType: 'community-market' as const,
   sourceLabel: 'Supreme Values MM2 community list',
   unit: 'Supreme value',
   updated: item.lastReviewed,
+  ratingLabel: marketStatus(item.note),
 }));

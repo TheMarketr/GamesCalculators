@@ -17,6 +17,9 @@ const knownGenericPhrases = [
   'Read the result before you act',
   'Inputs, interpretation and limits',
   'players researching',
+  'human SEO review',
+  'flagged for SEO review',
+  'flagged for expansion',
 ];
 
 const placeholderPatterns = [

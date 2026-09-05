@@ -88,7 +88,7 @@ export const economyToolContent = defineToolContent({
     faqs: [
       { question: 'What belongs on the Grow a Garden Items page?', answer: 'Structured crop, pet, and garden-item records with clear category and status labels. The page is a catalog, not a specimen value formula.' },
       { question: 'Can rarity alone tell me an item’s value?', answer: 'No. Availability, utility, event supply, and demand can separate items inside the same rarity tier.' },
-      { question: 'What should I do when an item is missing?', answer: 'Do not substitute a similar item. The dataset is flagged for expansion; use verified current information until a reviewed row is added.' },
+      { question: 'What should I do when an item is missing?', answer: 'Do not substitute a similar item. Use verified current information until that exact entry is added to a reviewed local snapshot.' },
     ],
   }),
   'grow-a-garden/pets': c({
@@ -345,7 +345,7 @@ export const economyToolContent = defineToolContent({
     faqs: [
       { question: 'Does the tracker read my Roblox inventory?', answer: 'No. It records only the boxes you check on this device.' },
       { question: 'Why can completion drop after a site update?', answer: 'New catalog entries increase the denominator while preserving the units already checked.' },
-      { question: 'Is 100% here the same as owning every Brainrot?', answer: 'Only if the local catalog is complete, which it currently is not. The dataset is flagged for expansion.' },
+      { question: 'Is 100% here the same as owning every Brainrot?', answer: 'It means every entry in the current local catalog is checked. Newly verified or newly released Brainrots can increase the catalog total later.' },
     ],
   }),
   'steal-a-brainrot/income-comparison': c({
