@@ -1,0 +1,3 @@
+export const osrsSkills = ['Attack', 'Hitpoints', 'Mining', 'Strength', 'Agility', 'Smithing', 'Defence', 'Herblore', 'Fishing', 'Ranged', 'Thieving', 'Cooking', 'Prayer', 'Crafting', 'Firemaking', 'Magic', 'Fletching', 'Woodcutting', 'Runecraft', 'Slayer', 'Farming', 'Construction', 'Hunter', 'Sailing'] as const;
+export type OsrsSkill = typeof osrsSkills[number];
+export const osrsSkillsMeta = { source: 'Old School RuneScape skills', sourceUrl: 'https://oldschool.runescape.wiki/w/Skills', sourceType: 'Community wiki', reviewed: '2026-09-05', unit: 'skill level', notes: 'Sailing is retained as a separately selectable current skill; training rows are source-dated independently.' } as const;

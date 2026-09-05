@@ -18,6 +18,9 @@ import CountdownCalculator from '../../games/gta-6/release-date/Calculator';
 import DownloadTimeCalculator from '../../games/gta-6/download-time-calculator/Calculator';
 import PlatformCalculator from '../../games/gta-6/platform-checker/Calculator';
 import GtaMapCalculator from '../../games/gta-6/map/Calculator';
+import PokemonGoCalculator from '../../games/pokemon-go/Calculator';
+import OsrsCalculator from '../../games/osrs/Calculator';
+import PalworldCalculator from '../../games/palworld/Calculator';
 import SecondaryCalculator from '../../games/secondary/Calculator';
 import { buildCalculatorContent } from '../../data/calculator-content';
 export function getStaticPaths(){return publishedTools.map((entry)=>({params:{game:entry.game.slug,tool:entry.slug},props:{game:entry.game,tool:entry}}))}
@@ -53,6 +56,9 @@ const schema=[
     {tool.kind==='download-time'&&<DownloadTimeCalculator slot="calculator" client:load/>}
     {tool.kind==='platform'&&<PlatformCalculator slot="calculator" client:load/>}
     {tool.kind==='gta-map'&&<GtaMapCalculator slot="calculator" client:only="preact"/>}
+    {tool.kind==='pokemon-go'&&<PokemonGoCalculator slot="calculator" toolSlug={tool.slug} toolName={tool.name} client:load/>}
+    {tool.kind==='osrs'&&<OsrsCalculator slot="calculator" toolSlug={tool.slug} toolName={tool.name} client:load/>}
+    {tool.kind==='palworld'&&<PalworldCalculator slot="calculator" toolSlug={tool.slug} toolName={tool.name} client:load/>}
     {tool.kind==='secondary'&&<SecondaryCalculator slot="calculator" gameSlug={game.slug} toolSlug={tool.slug} toolName={tool.name} client:load/>}
   </ToolShell>
 </BaseLayout>

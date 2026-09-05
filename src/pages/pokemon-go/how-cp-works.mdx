@@ -1,0 +1,43 @@
+---
+layout: ../../layouts/GuideLayout.astro
+title: How Pokémon GO CP Works
+description: Understand base stats, IVs, CP multipliers, Pokémon level and why evolution changes combat power.
+game: Pokémon GO
+gameSlug: pokemon-go
+updated: 2026-09-05
+category: Stats
+---
+
+## CP combines species, appraisal and level
+
+Combat Power is a compressed summary of a Pokémon’s battle stats. The number begins with the species form’s base Attack, Defense and Stamina from the Game Master. Your individual Pokémon adds an Attack, Defense and Stamina IV from 0 to 15. A CP multiplier, often shortened to CPM, then scales those totals for the Pokémon’s current level.
+
+Forms matter. A regional, Mega or other alternate form can have a separate Game Master record. Choose the form shown in storage instead of assuming that every Pokémon with the same Pokédex number shares one stat line.
+
+## The established CP formula
+
+The player community has validated this calculation against displayed game results:
+
+`floor((Base Attack + Attack IV) × √(Base Defense + Defense IV) × √(Base Stamina + Stamina IV) × CPM² ÷ 10)`
+
+The game applies a minimum of 10 CP. HP uses a related but simpler calculation: floor((Base Stamina + Stamina IV) × CPM), again with a minimum of 10.
+
+Attack is not square-rooted, while Defense and Stamina are. That heavier Attack weighting explains why Attack IV can consume more of a Great or Ultra League CP budget. A low-Attack appraisal may fit an extra half-level beneath the cap and finish with more total bulk.
+
+## Pokémon level and the CP multiplier
+
+The level displayed by calculators is the Pokémon’s level, not the Trainer level. Each power-up advances the Pokémon by one half-level. The CPM rises with level, and the formula squares it, so changing level affects every effective stat and the final CP.
+
+The site stores reviewed multipliers locally. Its calculator does not need a live Niantic or community API while you use it, and a failed external service cannot prevent the calculation.
+
+## Why evolution changes CP
+
+Normal evolution keeps the Pokémon’s IVs and level but replaces the current species base stats with those of the evolved form. The [Pokémon GO Evolution Calculator](/pokemon-go/evolution-calculator/) performs both calculations with the same IV spread and CPM. A species whose evolved form has substantially higher base Attack will often show a pronounced CP jump.
+
+Current CP alone cannot reveal one unique level and IV spread. Several combinations can floor to the same display value. When appraisal and level are unavailable, an honest evolution estimate is a possible interval rather than a guaranteed exact number.
+
+## Use the number with the right tool
+
+Open the [Pokémon GO CP Calculator](/pokemon-go/cp-calculator/) for one auditable CP and HP result. Use the [Stats Calculator](/pokemon-go/stats-calculator/) when effective stats matter, the [PvP IV Calculator](/pokemon-go/pvp-iv-calculator/) for a league cap, and the [Power Up Calculator](/pokemon-go/power-up-calculator/) before committing Stardust or Candy XL.
+
+CP does not evaluate moves, type matchups, shields, breakpoints, weather or team role. It is an important roster number, but it is not a complete prediction of a battle.

@@ -1,11 +1,11 @@
 # Content Quality Check
 
-Generated: 2026-09-05T17:53:34.446Z
+Generated: 2026-09-05T20:56:40.313Z
 
 ## Summary
 
-- Structured calculator pages: 108
-- Generated calculator pages inspected: 108
+- Structured calculator pages: 141
+- Generated calculator pages inspected: 141
 - Exact duplicated substantive paragraph groups: 0
 - Highly similar paragraph pairs (Jaccard ≥ 0.82): 0
 - Generated exact duplicated paragraph groups: 0

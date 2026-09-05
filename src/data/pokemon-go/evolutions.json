@@ -1,0 +1,3960 @@
+{
+  "meta": {
+    "source": "PogoAPI normalized Pokémon GO data",
+    "sourceUrl": "https://pogoapi.net/",
+    "sourceType": "Community-maintained Game Master extraction",
+    "reviewed": "2026-09-05",
+    "unit": "Candy",
+    "notes": "Direct evolution edges; special evolution conditions are not inferred."
+  },
+  "records": [
+    {
+      "fromId": "1-normal",
+      "fromName": "Bulbasaur",
+      "toId": "2-normal",
+      "toName": "Ivysaur",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "2-normal",
+      "fromName": "Ivysaur",
+      "toId": "3-normal",
+      "toName": "Venusaur",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "4-normal",
+      "fromName": "Charmander",
+      "toId": "5-normal",
+      "toName": "Charmeleon",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "5-normal",
+      "fromName": "Charmeleon",
+      "toId": "6-normal",
+      "toName": "Charizard",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "7-normal",
+      "fromName": "Squirtle",
+      "toId": "8-normal",
+      "toName": "Wartortle",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "8-normal",
+      "fromName": "Wartortle",
+      "toId": "9-normal",
+      "toName": "Blastoise",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "10-normal",
+      "fromName": "Caterpie",
+      "toId": "11-normal",
+      "toName": "Metapod",
+      "candyRequired": 12
+    },
+    {
+      "fromId": "11-normal",
+      "fromName": "Metapod",
+      "toId": "12-normal",
+      "toName": "Butterfree",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "13-normal",
+      "fromName": "Weedle",
+      "toId": "14-normal",
+      "toName": "Kakuna",
+      "candyRequired": 12
+    },
+    {
+      "fromId": "14-normal",
+      "fromName": "Kakuna",
+      "toId": "15-normal",
+      "toName": "Beedrill",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "16-normal",
+      "fromName": "Pidgey",
+      "toId": "17-normal",
+      "toName": "Pidgeotto",
+      "candyRequired": 12
+    },
+    {
+      "fromId": "17-normal",
+      "fromName": "Pidgeotto",
+      "toId": "18-normal",
+      "toName": "Pidgeot",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "19-alola",
+      "fromName": "Rattata",
+      "toId": "20-alola",
+      "toName": "Raticate",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "19-normal",
+      "fromName": "Rattata",
+      "toId": "20-normal",
+      "toName": "Raticate",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "21-normal",
+      "fromName": "Spearow",
+      "toId": "22-normal",
+      "toName": "Fearow",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "23-normal",
+      "fromName": "Ekans",
+      "toId": "24-normal",
+      "toName": "Arbok",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "25-normal",
+      "fromName": "Pikachu",
+      "toId": "26-normal",
+      "toName": "Raichu",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "27-alola",
+      "fromName": "Sandshrew",
+      "toId": "28-alola",
+      "toName": "Sandslash",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "27-normal",
+      "fromName": "Sandshrew",
+      "toId": "28-normal",
+      "toName": "Sandslash",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "29-normal",
+      "fromName": "Nidoran♀",
+      "toId": "30-normal",
+      "toName": "Nidorina",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "30-normal",
+      "fromName": "Nidorina",
+      "toId": "31-normal",
+      "toName": "Nidoqueen",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "32-normal",
+      "fromName": "Nidoran♂",
+      "toId": "33-normal",
+      "toName": "Nidorino",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "33-normal",
+      "fromName": "Nidorino",
+      "toId": "34-normal",
+      "toName": "Nidoking",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "35-normal",
+      "fromName": "Clefairy",
+      "toId": "36-normal",
+      "toName": "Clefable",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "37-alola",
+      "fromName": "Vulpix",
+      "toId": "38-alola",
+      "toName": "Ninetales",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "37-normal",
+      "fromName": "Vulpix",
+      "toId": "38-normal",
+      "toName": "Ninetales",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "39-normal",
+      "fromName": "Jigglypuff",
+      "toId": "40-normal",
+      "toName": "Wigglytuff",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "41-normal",
+      "fromName": "Zubat",
+      "toId": "42-normal",
+      "toName": "Golbat",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "42-normal",
+      "fromName": "Golbat",
+      "toId": "169-normal",
+      "toName": "Crobat",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "43-normal",
+      "fromName": "Oddish",
+      "toId": "44-normal",
+      "toName": "Gloom",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "44-normal",
+      "fromName": "Gloom",
+      "toId": "45-normal",
+      "toName": "Vileplume",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "44-normal",
+      "fromName": "Gloom",
+      "toId": "182-normal",
+      "toName": "Bellossom",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "46-normal",
+      "fromName": "Paras",
+      "toId": "47-normal",
+      "toName": "Parasect",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "48-normal",
+      "fromName": "Venonat",
+      "toId": "49-normal",
+      "toName": "Venomoth",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "50-alola",
+      "fromName": "Diglett",
+      "toId": "51-alola",
+      "toName": "Dugtrio",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "50-normal",
+      "fromName": "Diglett",
+      "toId": "51-normal",
+      "toName": "Dugtrio",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "52-alola",
+      "fromName": "Meowth",
+      "toId": "53-alola",
+      "toName": "Persian",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "52-galarian",
+      "fromName": "Meowth",
+      "toId": "863-galarian",
+      "toName": "Perrserker",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "52-normal",
+      "fromName": "Meowth",
+      "toId": "53-normal",
+      "toName": "Persian",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "54-normal",
+      "fromName": "Psyduck",
+      "toId": "55-normal",
+      "toName": "Golduck",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "56-normal",
+      "fromName": "Mankey",
+      "toId": "57-normal",
+      "toName": "Primeape",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "57-normal",
+      "fromName": "Primeape",
+      "toId": "979-normal",
+      "toName": "Annihilape",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "58-hisuian",
+      "fromName": "Growlithe",
+      "toId": "59-hisuian",
+      "toName": "Arcanine",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "58-normal",
+      "fromName": "Growlithe",
+      "toId": "59-normal",
+      "toName": "Arcanine",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "60-normal",
+      "fromName": "Poliwag",
+      "toId": "61-normal",
+      "toName": "Poliwhirl",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "61-normal",
+      "fromName": "Poliwhirl",
+      "toId": "62-normal",
+      "toName": "Poliwrath",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "61-normal",
+      "fromName": "Poliwhirl",
+      "toId": "186-normal",
+      "toName": "Politoed",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "63-normal",
+      "fromName": "Abra",
+      "toId": "64-normal",
+      "toName": "Kadabra",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "64-normal",
+      "fromName": "Kadabra",
+      "toId": "65-normal",
+      "toName": "Alakazam",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "66-normal",
+      "fromName": "Machop",
+      "toId": "67-normal",
+      "toName": "Machoke",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "67-normal",
+      "fromName": "Machoke",
+      "toId": "68-normal",
+      "toName": "Machamp",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "69-normal",
+      "fromName": "Bellsprout",
+      "toId": "70-normal",
+      "toName": "Weepinbell",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "70-normal",
+      "fromName": "Weepinbell",
+      "toId": "71-normal",
+      "toName": "Victreebel",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "72-normal",
+      "fromName": "Tentacool",
+      "toId": "73-normal",
+      "toName": "Tentacruel",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "74-alola",
+      "fromName": "Geodude",
+      "toId": "75-alola",
+      "toName": "Graveler",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "74-normal",
+      "fromName": "Geodude",
+      "toId": "75-normal",
+      "toName": "Graveler",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "75-alola",
+      "fromName": "Graveler",
+      "toId": "76-alola",
+      "toName": "Golem",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "75-normal",
+      "fromName": "Graveler",
+      "toId": "76-normal",
+      "toName": "Golem",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "77-galarian",
+      "fromName": "Ponyta",
+      "toId": "78-galarian",
+      "toName": "Rapidash",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "77-normal",
+      "fromName": "Ponyta",
+      "toId": "78-normal",
+      "toName": "Rapidash",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "79-2020",
+      "fromName": "Slowpoke",
+      "toId": "80-2021",
+      "toName": "Slowbro",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "79-2020",
+      "fromName": "Slowpoke",
+      "toId": "199-2022",
+      "toName": "Slowking",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "79-galarian",
+      "fromName": "Slowpoke",
+      "toId": "80-galarian",
+      "toName": "Slowbro",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "79-galarian",
+      "fromName": "Slowpoke",
+      "toId": "199-galarian",
+      "toName": "Slowking",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "79-normal",
+      "fromName": "Slowpoke",
+      "toId": "80-normal",
+      "toName": "Slowbro",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "79-normal",
+      "fromName": "Slowpoke",
+      "toId": "199-normal",
+      "toName": "Slowking",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "81-normal",
+      "fromName": "Magnemite",
+      "toId": "82-normal",
+      "toName": "Magneton",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "82-normal",
+      "fromName": "Magneton",
+      "toId": "462-normal",
+      "toName": "Magnezone",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "83-galarian",
+      "fromName": "Farfetch’d",
+      "toId": "865-galarian",
+      "toName": "Sirfetch’d",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "84-normal",
+      "fromName": "Doduo",
+      "toId": "85-normal",
+      "toName": "Dodrio",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "86-normal",
+      "fromName": "Seel",
+      "toId": "87-normal",
+      "toName": "Dewgong",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "88-alola",
+      "fromName": "Grimer",
+      "toId": "89-alola",
+      "toName": "Muk",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "88-normal",
+      "fromName": "Grimer",
+      "toId": "89-normal",
+      "toName": "Muk",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "90-normal",
+      "fromName": "Shellder",
+      "toId": "91-normal",
+      "toName": "Cloyster",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "92-normal",
+      "fromName": "Gastly",
+      "toId": "93-normal",
+      "toName": "Haunter",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "93-normal",
+      "fromName": "Haunter",
+      "toId": "94-normal",
+      "toName": "Gengar",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "95-normal",
+      "fromName": "Onix",
+      "toId": "208-normal",
+      "toName": "Steelix",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "96-normal",
+      "fromName": "Drowzee",
+      "toId": "97-normal",
+      "toName": "Hypno",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "98-normal",
+      "fromName": "Krabby",
+      "toId": "99-normal",
+      "toName": "Kingler",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "100-hisuian",
+      "fromName": "Voltorb",
+      "toId": "101-hisuian",
+      "toName": "Electrode",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "100-normal",
+      "fromName": "Voltorb",
+      "toId": "101-normal",
+      "toName": "Electrode",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "102-normal",
+      "fromName": "Exeggcute",
+      "toId": "103-normal",
+      "toName": "Exeggutor",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "104-normal",
+      "fromName": "Cubone",
+      "toId": "105-normal",
+      "toName": "Marowak",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "108-normal",
+      "fromName": "Lickitung",
+      "toId": "463-normal",
+      "toName": "Lickilicky",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "109-normal",
+      "fromName": "Koffing",
+      "toId": "110-normal",
+      "toName": "Weezing",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "111-normal",
+      "fromName": "Rhyhorn",
+      "toId": "112-normal",
+      "toName": "Rhydon",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "112-normal",
+      "fromName": "Rhydon",
+      "toId": "464-normal",
+      "toName": "Rhyperior",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "113-normal",
+      "fromName": "Chansey",
+      "toId": "242-normal",
+      "toName": "Blissey",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "114-normal",
+      "fromName": "Tangela",
+      "toId": "465-normal",
+      "toName": "Tangrowth",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "116-normal",
+      "fromName": "Horsea",
+      "toId": "117-normal",
+      "toName": "Seadra",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "117-normal",
+      "fromName": "Seadra",
+      "toId": "230-normal",
+      "toName": "Kingdra",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "118-normal",
+      "fromName": "Goldeen",
+      "toId": "119-normal",
+      "toName": "Seaking",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "120-normal",
+      "fromName": "Staryu",
+      "toId": "121-normal",
+      "toName": "Starmie",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "123-normal",
+      "fromName": "Scyther",
+      "toId": "212-normal",
+      "toName": "Scizor",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "125-normal",
+      "fromName": "Electabuzz",
+      "toId": "466-normal",
+      "toName": "Electivire",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "126-normal",
+      "fromName": "Magmar",
+      "toId": "467-normal",
+      "toName": "Magmortar",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "129-normal",
+      "fromName": "Magikarp",
+      "toId": "130-normal",
+      "toName": "Gyarados",
+      "candyRequired": 400
+    },
+    {
+      "fromId": "133-normal",
+      "fromName": "Eevee",
+      "toId": "134-normal",
+      "toName": "Vaporeon",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "133-normal",
+      "fromName": "Eevee",
+      "toId": "135-normal",
+      "toName": "Jolteon",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "133-normal",
+      "fromName": "Eevee",
+      "toId": "136-normal",
+      "toName": "Flareon",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "133-normal",
+      "fromName": "Eevee",
+      "toId": "196-normal",
+      "toName": "Espeon",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "133-normal",
+      "fromName": "Eevee",
+      "toId": "197-normal",
+      "toName": "Umbreon",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "133-normal",
+      "fromName": "Eevee",
+      "toId": "470-normal",
+      "toName": "Leafeon",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "133-normal",
+      "fromName": "Eevee",
+      "toId": "471-normal",
+      "toName": "Glaceon",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "133-normal",
+      "fromName": "Eevee",
+      "toId": "700-normal",
+      "toName": "Sylveon",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "137-normal",
+      "fromName": "Porygon",
+      "toId": "233-normal",
+      "toName": "Porygon2",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "138-normal",
+      "fromName": "Omanyte",
+      "toId": "139-normal",
+      "toName": "Omastar",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "140-normal",
+      "fromName": "Kabuto",
+      "toId": "141-normal",
+      "toName": "Kabutops",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "147-normal",
+      "fromName": "Dratini",
+      "toId": "148-normal",
+      "toName": "Dragonair",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "148-normal",
+      "fromName": "Dragonair",
+      "toId": "149-normal",
+      "toName": "Dragonite",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "152-normal",
+      "fromName": "Chikorita",
+      "toId": "153-normal",
+      "toName": "Bayleef",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "153-normal",
+      "fromName": "Bayleef",
+      "toId": "154-normal",
+      "toName": "Meganium",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "155-normal",
+      "fromName": "Cyndaquil",
+      "toId": "156-normal",
+      "toName": "Quilava",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "156-normal",
+      "fromName": "Quilava",
+      "toId": "157-normal",
+      "toName": "Typhlosion",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "158-normal",
+      "fromName": "Totodile",
+      "toId": "159-normal",
+      "toName": "Croconaw",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "159-normal",
+      "fromName": "Croconaw",
+      "toId": "160-normal",
+      "toName": "Feraligatr",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "161-normal",
+      "fromName": "Sentret",
+      "toId": "162-normal",
+      "toName": "Furret",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "163-normal",
+      "fromName": "Hoothoot",
+      "toId": "164-normal",
+      "toName": "Noctowl",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "165-normal",
+      "fromName": "Ledyba",
+      "toId": "166-normal",
+      "toName": "Ledian",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "167-normal",
+      "fromName": "Spinarak",
+      "toId": "168-normal",
+      "toName": "Ariados",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "170-normal",
+      "fromName": "Chinchou",
+      "toId": "171-normal",
+      "toName": "Lanturn",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "172-normal",
+      "fromName": "Pichu",
+      "toId": "25-normal",
+      "toName": "Pikachu",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "173-normal",
+      "fromName": "Cleffa",
+      "toId": "35-normal",
+      "toName": "Clefairy",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "174-normal",
+      "fromName": "Igglybuff",
+      "toId": "39-normal",
+      "toName": "Jigglypuff",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "175-normal",
+      "fromName": "Togepi",
+      "toId": "176-normal",
+      "toName": "Togetic",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "176-normal",
+      "fromName": "Togetic",
+      "toId": "468-normal",
+      "toName": "Togekiss",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "177-normal",
+      "fromName": "Natu",
+      "toId": "178-normal",
+      "toName": "Xatu",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "179-normal",
+      "fromName": "Mareep",
+      "toId": "180-normal",
+      "toName": "Flaaffy",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "180-normal",
+      "fromName": "Flaaffy",
+      "toId": "181-normal",
+      "toName": "Ampharos",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "183-normal",
+      "fromName": "Marill",
+      "toId": "184-normal",
+      "toName": "Azumarill",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "187-normal",
+      "fromName": "Hoppip",
+      "toId": "188-normal",
+      "toName": "Skiploom",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "188-normal",
+      "fromName": "Skiploom",
+      "toId": "189-normal",
+      "toName": "Jumpluff",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "190-normal",
+      "fromName": "Aipom",
+      "toId": "424-normal",
+      "toName": "Ambipom",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "191-normal",
+      "fromName": "Sunkern",
+      "toId": "192-normal",
+      "toName": "Sunflora",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "193-normal",
+      "fromName": "Yanma",
+      "toId": "469-normal",
+      "toName": "Yanmega",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "194-normal",
+      "fromName": "Wooper",
+      "toId": "195-normal",
+      "toName": "Quagsire",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "194-paldea",
+      "fromName": "Wooper",
+      "toId": "980-normal",
+      "toName": "Clodsire",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "198-normal",
+      "fromName": "Murkrow",
+      "toId": "430-normal",
+      "toName": "Honchkrow",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "200-normal",
+      "fromName": "Misdreavus",
+      "toId": "429-normal",
+      "toName": "Mismagius",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "204-normal",
+      "fromName": "Pineco",
+      "toId": "205-normal",
+      "toName": "Forretress",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "206-normal",
+      "fromName": "Dunsparce",
+      "toId": "982-two",
+      "toName": "Dudunsparce",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "206-normal",
+      "fromName": "Dunsparce",
+      "toId": "982-three",
+      "toName": "Dudunsparce",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "207-normal",
+      "fromName": "Gligar",
+      "toId": "472-normal",
+      "toName": "Gliscor",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "209-normal",
+      "fromName": "Snubbull",
+      "toId": "210-normal",
+      "toName": "Granbull",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "211-hisuian",
+      "fromName": "Qwilfish",
+      "toId": "904-normal",
+      "toName": "Overqwil",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "215-hisuian",
+      "fromName": "Sneasel",
+      "toId": "903-normal",
+      "toName": "Sneasler",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "215-normal",
+      "fromName": "Sneasel",
+      "toId": "461-normal",
+      "toName": "Weavile",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "216-normal",
+      "fromName": "Teddiursa",
+      "toId": "217-normal",
+      "toName": "Ursaring",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "217-normal",
+      "fromName": "Ursaring",
+      "toId": "901-normal",
+      "toName": "Ursaluna",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "218-normal",
+      "fromName": "Slugma",
+      "toId": "219-normal",
+      "toName": "Magcargo",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "220-normal",
+      "fromName": "Swinub",
+      "toId": "221-normal",
+      "toName": "Piloswine",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "221-normal",
+      "fromName": "Piloswine",
+      "toId": "473-normal",
+      "toName": "Mamoswine",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "222-galarian",
+      "fromName": "Corsola",
+      "toId": "864-normal",
+      "toName": "Cursola",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "223-normal",
+      "fromName": "Remoraid",
+      "toId": "224-normal",
+      "toName": "Octillery",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "228-normal",
+      "fromName": "Houndour",
+      "toId": "229-normal",
+      "toName": "Houndoom",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "231-normal",
+      "fromName": "Phanpy",
+      "toId": "232-normal",
+      "toName": "Donphan",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "233-normal",
+      "fromName": "Porygon2",
+      "toId": "474-normal",
+      "toName": "Porygon-Z",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "236-normal",
+      "fromName": "Tyrogue",
+      "toId": "106-normal",
+      "toName": "Hitmonlee",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "236-normal",
+      "fromName": "Tyrogue",
+      "toId": "107-normal",
+      "toName": "Hitmonchan",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "236-normal",
+      "fromName": "Tyrogue",
+      "toId": "237-normal",
+      "toName": "Hitmontop",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "238-normal",
+      "fromName": "Smoochum",
+      "toId": "124-normal",
+      "toName": "Jynx",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "239-normal",
+      "fromName": "Elekid",
+      "toId": "125-normal",
+      "toName": "Electabuzz",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "240-normal",
+      "fromName": "Magby",
+      "toId": "126-normal",
+      "toName": "Magmar",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "246-normal",
+      "fromName": "Larvitar",
+      "toId": "247-normal",
+      "toName": "Pupitar",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "247-normal",
+      "fromName": "Pupitar",
+      "toId": "248-normal",
+      "toName": "Tyranitar",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "252-normal",
+      "fromName": "Treecko",
+      "toId": "253-normal",
+      "toName": "Grovyle",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "253-normal",
+      "fromName": "Grovyle",
+      "toId": "254-normal",
+      "toName": "Sceptile",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "255-normal",
+      "fromName": "Torchic",
+      "toId": "256-normal",
+      "toName": "Combusken",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "256-normal",
+      "fromName": "Combusken",
+      "toId": "257-normal",
+      "toName": "Blaziken",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "258-normal",
+      "fromName": "Mudkip",
+      "toId": "259-normal",
+      "toName": "Marshtomp",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "259-normal",
+      "fromName": "Marshtomp",
+      "toId": "260-normal",
+      "toName": "Swampert",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "261-normal",
+      "fromName": "Poochyena",
+      "toId": "262-normal",
+      "toName": "Mightyena",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "263-galarian",
+      "fromName": "Zigzagoon",
+      "toId": "264-galarian",
+      "toName": "Linoone",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "263-normal",
+      "fromName": "Zigzagoon",
+      "toId": "264-normal",
+      "toName": "Linoone",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "264-galarian",
+      "fromName": "Linoone",
+      "toId": "862-galarian",
+      "toName": "Obstagoon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "265-normal",
+      "fromName": "Wurmple",
+      "toId": "266-normal",
+      "toName": "Silcoon",
+      "candyRequired": 12
+    },
+    {
+      "fromId": "265-normal",
+      "fromName": "Wurmple",
+      "toId": "268-normal",
+      "toName": "Cascoon",
+      "candyRequired": 12
+    },
+    {
+      "fromId": "266-normal",
+      "fromName": "Silcoon",
+      "toId": "267-normal",
+      "toName": "Beautifly",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "268-normal",
+      "fromName": "Cascoon",
+      "toId": "269-normal",
+      "toName": "Dustox",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "270-normal",
+      "fromName": "Lotad",
+      "toId": "271-normal",
+      "toName": "Lombre",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "271-normal",
+      "fromName": "Lombre",
+      "toId": "272-normal",
+      "toName": "Ludicolo",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "273-normal",
+      "fromName": "Seedot",
+      "toId": "274-normal",
+      "toName": "Nuzleaf",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "274-normal",
+      "fromName": "Nuzleaf",
+      "toId": "275-normal",
+      "toName": "Shiftry",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "276-normal",
+      "fromName": "Taillow",
+      "toId": "277-normal",
+      "toName": "Swellow",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "278-normal",
+      "fromName": "Wingull",
+      "toId": "279-normal",
+      "toName": "Pelipper",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "280-normal",
+      "fromName": "Ralts",
+      "toId": "281-normal",
+      "toName": "Kirlia",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "281-normal",
+      "fromName": "Kirlia",
+      "toId": "475-normal",
+      "toName": "Gallade",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "281-normal",
+      "fromName": "Kirlia",
+      "toId": "282-normal",
+      "toName": "Gardevoir",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "283-normal",
+      "fromName": "Surskit",
+      "toId": "284-normal",
+      "toName": "Masquerain",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "285-normal",
+      "fromName": "Shroomish",
+      "toId": "286-normal",
+      "toName": "Breloom",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "287-normal",
+      "fromName": "Slakoth",
+      "toId": "288-normal",
+      "toName": "Vigoroth",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "288-normal",
+      "fromName": "Vigoroth",
+      "toId": "289-normal",
+      "toName": "Slaking",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "290-normal",
+      "fromName": "Nincada",
+      "toId": "291-normal",
+      "toName": "Ninjask",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "293-normal",
+      "fromName": "Whismur",
+      "toId": "294-normal",
+      "toName": "Loudred",
+      "candyRequired": 12
+    },
+    {
+      "fromId": "294-normal",
+      "fromName": "Loudred",
+      "toId": "295-normal",
+      "toName": "Exploud",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "296-normal",
+      "fromName": "Makuhita",
+      "toId": "297-normal",
+      "toName": "Hariyama",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "298-normal",
+      "fromName": "Azurill",
+      "toId": "183-normal",
+      "toName": "Marill",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "299-normal",
+      "fromName": "Nosepass",
+      "toId": "476-normal",
+      "toName": "Probopass",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "300-normal",
+      "fromName": "Skitty",
+      "toId": "301-normal",
+      "toName": "Delcatty",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "304-normal",
+      "fromName": "Aron",
+      "toId": "305-normal",
+      "toName": "Lairon",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "305-normal",
+      "fromName": "Lairon",
+      "toId": "306-normal",
+      "toName": "Aggron",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "307-normal",
+      "fromName": "Meditite",
+      "toId": "308-normal",
+      "toName": "Medicham",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "309-normal",
+      "fromName": "Electrike",
+      "toId": "310-normal",
+      "toName": "Manectric",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "315-normal",
+      "fromName": "Roselia",
+      "toId": "407-normal",
+      "toName": "Roserade",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "316-normal",
+      "fromName": "Gulpin",
+      "toId": "317-normal",
+      "toName": "Swalot",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "318-normal",
+      "fromName": "Carvanha",
+      "toId": "319-normal",
+      "toName": "Sharpedo",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "320-normal",
+      "fromName": "Wailmer",
+      "toId": "321-normal",
+      "toName": "Wailord",
+      "candyRequired": 400
+    },
+    {
+      "fromId": "322-normal",
+      "fromName": "Numel",
+      "toId": "323-normal",
+      "toName": "Camerupt",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "325-normal",
+      "fromName": "Spoink",
+      "toId": "326-normal",
+      "toName": "Grumpig",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "328-normal",
+      "fromName": "Trapinch",
+      "toId": "329-normal",
+      "toName": "Vibrava",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "329-normal",
+      "fromName": "Vibrava",
+      "toId": "330-normal",
+      "toName": "Flygon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "331-normal",
+      "fromName": "Cacnea",
+      "toId": "332-normal",
+      "toName": "Cacturne",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "333-normal",
+      "fromName": "Swablu",
+      "toId": "334-normal",
+      "toName": "Altaria",
+      "candyRequired": 400
+    },
+    {
+      "fromId": "339-normal",
+      "fromName": "Barboach",
+      "toId": "340-normal",
+      "toName": "Whiscash",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "341-normal",
+      "fromName": "Corphish",
+      "toId": "342-normal",
+      "toName": "Crawdaunt",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "343-normal",
+      "fromName": "Baltoy",
+      "toId": "344-normal",
+      "toName": "Claydol",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "345-normal",
+      "fromName": "Lileep",
+      "toId": "346-normal",
+      "toName": "Cradily",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "347-normal",
+      "fromName": "Anorith",
+      "toId": "348-normal",
+      "toName": "Armaldo",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "349-normal",
+      "fromName": "Feebas",
+      "toId": "350-normal",
+      "toName": "Milotic",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "353-normal",
+      "fromName": "Shuppet",
+      "toId": "354-normal",
+      "toName": "Banette",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "355-normal",
+      "fromName": "Duskull",
+      "toId": "356-normal",
+      "toName": "Dusclops",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "356-normal",
+      "fromName": "Dusclops",
+      "toId": "477-normal",
+      "toName": "Dusknoir",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "360-normal",
+      "fromName": "Wynaut",
+      "toId": "202-normal",
+      "toName": "Wobbuffet",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "361-normal",
+      "fromName": "Snorunt",
+      "toId": "478-normal",
+      "toName": "Froslass",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "361-normal",
+      "fromName": "Snorunt",
+      "toId": "362-normal",
+      "toName": "Glalie",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "363-normal",
+      "fromName": "Spheal",
+      "toId": "364-normal",
+      "toName": "Sealeo",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "364-normal",
+      "fromName": "Sealeo",
+      "toId": "365-normal",
+      "toName": "Walrein",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "366-normal",
+      "fromName": "Clamperl",
+      "toId": "367-normal",
+      "toName": "Huntail",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "366-normal",
+      "fromName": "Clamperl",
+      "toId": "368-normal",
+      "toName": "Gorebyss",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "371-normal",
+      "fromName": "Bagon",
+      "toId": "372-normal",
+      "toName": "Shelgon",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "372-normal",
+      "fromName": "Shelgon",
+      "toId": "373-normal",
+      "toName": "Salamence",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "374-normal",
+      "fromName": "Beldum",
+      "toId": "375-normal",
+      "toName": "Metang",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "375-normal",
+      "fromName": "Metang",
+      "toId": "376-normal",
+      "toName": "Metagross",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "387-normal",
+      "fromName": "Turtwig",
+      "toId": "388-normal",
+      "toName": "Grotle",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "388-normal",
+      "fromName": "Grotle",
+      "toId": "389-normal",
+      "toName": "Torterra",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "390-normal",
+      "fromName": "Chimchar",
+      "toId": "391-normal",
+      "toName": "Monferno",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "391-normal",
+      "fromName": "Monferno",
+      "toId": "392-normal",
+      "toName": "Infernape",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "393-normal",
+      "fromName": "Piplup",
+      "toId": "394-normal",
+      "toName": "Prinplup",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "394-normal",
+      "fromName": "Prinplup",
+      "toId": "395-normal",
+      "toName": "Empoleon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "396-normal",
+      "fromName": "Starly",
+      "toId": "397-normal",
+      "toName": "Staravia",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "397-normal",
+      "fromName": "Staravia",
+      "toId": "398-normal",
+      "toName": "Staraptor",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "399-normal",
+      "fromName": "Bidoof",
+      "toId": "400-normal",
+      "toName": "Bibarel",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "401-normal",
+      "fromName": "Kricketot",
+      "toId": "402-normal",
+      "toName": "Kricketune",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "403-normal",
+      "fromName": "Shinx",
+      "toId": "404-normal",
+      "toName": "Luxio",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "404-normal",
+      "fromName": "Luxio",
+      "toId": "405-normal",
+      "toName": "Luxray",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "406-normal",
+      "fromName": "Budew",
+      "toId": "315-normal",
+      "toName": "Roselia",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "408-normal",
+      "fromName": "Cranidos",
+      "toId": "409-normal",
+      "toName": "Rampardos",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "410-normal",
+      "fromName": "Shieldon",
+      "toId": "411-normal",
+      "toName": "Bastiodon",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "412-plant",
+      "fromName": "Burmy",
+      "toId": "413-plant",
+      "toName": "Wormadam",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "412-plant",
+      "fromName": "Burmy",
+      "toId": "414-normal",
+      "toName": "Mothim",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "412-sandy",
+      "fromName": "Burmy",
+      "toId": "413-sandy",
+      "toName": "Wormadam",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "412-sandy",
+      "fromName": "Burmy",
+      "toId": "414-normal",
+      "toName": "Mothim",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "412-trash",
+      "fromName": "Burmy",
+      "toId": "413-trash",
+      "toName": "Wormadam",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "412-trash",
+      "fromName": "Burmy",
+      "toId": "414-normal",
+      "toName": "Mothim",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "415-normal",
+      "fromName": "Combee",
+      "toId": "416-normal",
+      "toName": "Vespiquen",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "418-normal",
+      "fromName": "Buizel",
+      "toId": "419-normal",
+      "toName": "Floatzel",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "420-normal",
+      "fromName": "Cherubi",
+      "toId": "421-overcast",
+      "toName": "Cherrim",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "420-normal",
+      "fromName": "Cherubi",
+      "toId": "421-sunny",
+      "toName": "Cherrim",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "422-east-sea",
+      "fromName": "Shellos",
+      "toId": "423-east-sea",
+      "toName": "Gastrodon",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "422-west-sea",
+      "fromName": "Shellos",
+      "toId": "423-west-sea",
+      "toName": "Gastrodon",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "425-normal",
+      "fromName": "Drifloon",
+      "toId": "426-normal",
+      "toName": "Drifblim",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "427-normal",
+      "fromName": "Buneary",
+      "toId": "428-normal",
+      "toName": "Lopunny",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "431-normal",
+      "fromName": "Glameow",
+      "toId": "432-normal",
+      "toName": "Purugly",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "433-normal",
+      "fromName": "Chingling",
+      "toId": "358-normal",
+      "toName": "Chimecho",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "434-normal",
+      "fromName": "Stunky",
+      "toId": "435-normal",
+      "toName": "Skuntank",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "436-normal",
+      "fromName": "Bronzor",
+      "toId": "437-normal",
+      "toName": "Bronzong",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "438-normal",
+      "fromName": "Bonsly",
+      "toId": "185-normal",
+      "toName": "Sudowoodo",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "439-normal",
+      "fromName": "Mime Jr.",
+      "toId": "122-normal",
+      "toName": "Mr. Mime",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "440-normal",
+      "fromName": "Happiny",
+      "toId": "113-normal",
+      "toName": "Chansey",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "443-normal",
+      "fromName": "Gible",
+      "toId": "444-normal",
+      "toName": "Gabite",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "444-normal",
+      "fromName": "Gabite",
+      "toId": "445-normal",
+      "toName": "Garchomp",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "446-normal",
+      "fromName": "Munchlax",
+      "toId": "143-normal",
+      "toName": "Snorlax",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "447-normal",
+      "fromName": "Riolu",
+      "toId": "448-normal",
+      "toName": "Lucario",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "449-normal",
+      "fromName": "Hippopotas",
+      "toId": "450-normal",
+      "toName": "Hippowdon",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "451-normal",
+      "fromName": "Skorupi",
+      "toId": "452-normal",
+      "toName": "Drapion",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "453-normal",
+      "fromName": "Croagunk",
+      "toId": "454-normal",
+      "toName": "Toxicroak",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "456-normal",
+      "fromName": "Finneon",
+      "toId": "457-normal",
+      "toName": "Lumineon",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "458-normal",
+      "fromName": "Mantyke",
+      "toId": "226-normal",
+      "toName": "Mantine",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "459-normal",
+      "fromName": "Snover",
+      "toId": "460-normal",
+      "toName": "Abomasnow",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "495-normal",
+      "fromName": "Snivy",
+      "toId": "496-normal",
+      "toName": "Servine",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "496-normal",
+      "fromName": "Servine",
+      "toId": "497-normal",
+      "toName": "Serperior",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "498-normal",
+      "fromName": "Tepig",
+      "toId": "499-normal",
+      "toName": "Pignite",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "499-normal",
+      "fromName": "Pignite",
+      "toId": "500-normal",
+      "toName": "Emboar",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "501-normal",
+      "fromName": "Oshawott",
+      "toId": "502-normal",
+      "toName": "Dewott",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "502-normal",
+      "fromName": "Dewott",
+      "toId": "503-normal",
+      "toName": "Samurott",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "504-normal",
+      "fromName": "Patrat",
+      "toId": "505-normal",
+      "toName": "Watchog",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "506-normal",
+      "fromName": "Lillipup",
+      "toId": "507-normal",
+      "toName": "Herdier",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "507-normal",
+      "fromName": "Herdier",
+      "toId": "508-normal",
+      "toName": "Stoutland",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "509-normal",
+      "fromName": "Purrloin",
+      "toId": "510-normal",
+      "toName": "Liepard",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "511-normal",
+      "fromName": "Pansage",
+      "toId": "512-normal",
+      "toName": "Simisage",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "513-normal",
+      "fromName": "Pansear",
+      "toId": "514-normal",
+      "toName": "Simisear",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "515-normal",
+      "fromName": "Panpour",
+      "toId": "516-normal",
+      "toName": "Simipour",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "517-normal",
+      "fromName": "Munna",
+      "toId": "518-normal",
+      "toName": "Musharna",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "519-normal",
+      "fromName": "Pidove",
+      "toId": "520-normal",
+      "toName": "Tranquill",
+      "candyRequired": 12
+    },
+    {
+      "fromId": "520-normal",
+      "fromName": "Tranquill",
+      "toId": "521-normal",
+      "toName": "Unfezant",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "522-normal",
+      "fromName": "Blitzle",
+      "toId": "523-normal",
+      "toName": "Zebstrika",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "524-normal",
+      "fromName": "Roggenrola",
+      "toId": "525-normal",
+      "toName": "Boldore",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "525-normal",
+      "fromName": "Boldore",
+      "toId": "526-normal",
+      "toName": "Gigalith",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "527-normal",
+      "fromName": "Woobat",
+      "toId": "528-normal",
+      "toName": "Swoobat",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "529-normal",
+      "fromName": "Drilbur",
+      "toId": "530-normal",
+      "toName": "Excadrill",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "532-normal",
+      "fromName": "Timburr",
+      "toId": "533-normal",
+      "toName": "Gurdurr",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "533-normal",
+      "fromName": "Gurdurr",
+      "toId": "534-normal",
+      "toName": "Conkeldurr",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "535-normal",
+      "fromName": "Tympole",
+      "toId": "536-normal",
+      "toName": "Palpitoad",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "536-normal",
+      "fromName": "Palpitoad",
+      "toId": "537-normal",
+      "toName": "Seismitoad",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "540-normal",
+      "fromName": "Sewaddle",
+      "toId": "541-normal",
+      "toName": "Swadloon",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "541-normal",
+      "fromName": "Swadloon",
+      "toId": "542-normal",
+      "toName": "Leavanny",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "543-normal",
+      "fromName": "Venipede",
+      "toId": "544-normal",
+      "toName": "Whirlipede",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "544-normal",
+      "fromName": "Whirlipede",
+      "toId": "545-normal",
+      "toName": "Scolipede",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "546-normal",
+      "fromName": "Cottonee",
+      "toId": "547-normal",
+      "toName": "Whimsicott",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "548-normal",
+      "fromName": "Petilil",
+      "toId": "549-normal",
+      "toName": "Lilligant",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "551-normal",
+      "fromName": "Sandile",
+      "toId": "552-normal",
+      "toName": "Krokorok",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "552-normal",
+      "fromName": "Krokorok",
+      "toId": "553-normal",
+      "toName": "Krookodile",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "554-galarian",
+      "fromName": "Darumaka",
+      "toId": "555-galarian-standard",
+      "toName": "Darmanitan",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "554-normal",
+      "fromName": "Darumaka",
+      "toId": "555-standard",
+      "toName": "Darmanitan",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "557-normal",
+      "fromName": "Dwebble",
+      "toId": "558-normal",
+      "toName": "Crustle",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "559-normal",
+      "fromName": "Scraggy",
+      "toId": "560-normal",
+      "toName": "Scrafty",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "562-galarian",
+      "fromName": "Yamask",
+      "toId": "867-galarian",
+      "toName": "Runerigus",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "562-normal",
+      "fromName": "Yamask",
+      "toId": "563-normal",
+      "toName": "Cofagrigus",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "564-normal",
+      "fromName": "Tirtouga",
+      "toId": "565-normal",
+      "toName": "Carracosta",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "566-normal",
+      "fromName": "Archen",
+      "toId": "567-normal",
+      "toName": "Archeops",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "568-normal",
+      "fromName": "Trubbish",
+      "toId": "569-normal",
+      "toName": "Garbodor",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "570-hisuian",
+      "fromName": "Zorua",
+      "toId": "571-hisuian",
+      "toName": "Zoroark",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "570-normal",
+      "fromName": "Zorua",
+      "toId": "571-normal",
+      "toName": "Zoroark",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "572-normal",
+      "fromName": "Minccino",
+      "toId": "573-normal",
+      "toName": "Cinccino",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "574-normal",
+      "fromName": "Gothita",
+      "toId": "575-normal",
+      "toName": "Gothorita",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "575-normal",
+      "fromName": "Gothorita",
+      "toId": "576-normal",
+      "toName": "Gothitelle",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "577-normal",
+      "fromName": "Solosis",
+      "toId": "578-normal",
+      "toName": "Duosion",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "578-normal",
+      "fromName": "Duosion",
+      "toId": "579-normal",
+      "toName": "Reuniclus",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "580-normal",
+      "fromName": "Ducklett",
+      "toId": "581-normal",
+      "toName": "Swanna",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "582-normal",
+      "fromName": "Vanillite",
+      "toId": "583-normal",
+      "toName": "Vanillish",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "583-normal",
+      "fromName": "Vanillish",
+      "toId": "584-normal",
+      "toName": "Vanilluxe",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "585-autumn",
+      "fromName": "Deerling",
+      "toId": "586-autumn",
+      "toName": "Sawsbuck",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "585-spring",
+      "fromName": "Deerling",
+      "toId": "586-spring",
+      "toName": "Sawsbuck",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "585-summer",
+      "fromName": "Deerling",
+      "toId": "586-summer",
+      "toName": "Sawsbuck",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "585-winter",
+      "fromName": "Deerling",
+      "toId": "586-winter",
+      "toName": "Sawsbuck",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "588-normal",
+      "fromName": "Karrablast",
+      "toId": "589-normal",
+      "toName": "Escavalier",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "590-normal",
+      "fromName": "Foongus",
+      "toId": "591-normal",
+      "toName": "Amoonguss",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "592-female",
+      "fromName": "Frillish",
+      "toId": "593-female",
+      "toName": "Jellicent",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "592-normal",
+      "fromName": "Frillish",
+      "toId": "593-normal",
+      "toName": "Jellicent",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "595-normal",
+      "fromName": "Joltik",
+      "toId": "596-normal",
+      "toName": "Galvantula",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "597-normal",
+      "fromName": "Ferroseed",
+      "toId": "598-normal",
+      "toName": "Ferrothorn",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "599-normal",
+      "fromName": "Klink",
+      "toId": "600-normal",
+      "toName": "Klang",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "600-normal",
+      "fromName": "Klang",
+      "toId": "601-normal",
+      "toName": "Klinklang",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "602-normal",
+      "fromName": "Tynamo",
+      "toId": "603-normal",
+      "toName": "Eelektrik",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "603-normal",
+      "fromName": "Eelektrik",
+      "toId": "604-normal",
+      "toName": "Eelektross",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "605-normal",
+      "fromName": "Elgyem",
+      "toId": "606-normal",
+      "toName": "Beheeyem",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "607-normal",
+      "fromName": "Litwick",
+      "toId": "608-normal",
+      "toName": "Lampent",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "608-normal",
+      "fromName": "Lampent",
+      "toId": "609-normal",
+      "toName": "Chandelure",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "610-normal",
+      "fromName": "Axew",
+      "toId": "611-normal",
+      "toName": "Fraxure",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "611-normal",
+      "fromName": "Fraxure",
+      "toId": "612-normal",
+      "toName": "Haxorus",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "613-normal",
+      "fromName": "Cubchoo",
+      "toId": "614-normal",
+      "toName": "Beartic",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "613-winter-2020",
+      "fromName": "Cubchoo",
+      "toId": "614-winter-2020",
+      "toName": "Beartic",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "616-normal",
+      "fromName": "Shelmet",
+      "toId": "617-normal",
+      "toName": "Accelgor",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "619-normal",
+      "fromName": "Mienfoo",
+      "toId": "620-normal",
+      "toName": "Mienshao",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "622-normal",
+      "fromName": "Golett",
+      "toId": "623-normal",
+      "toName": "Golurk",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "624-normal",
+      "fromName": "Pawniard",
+      "toId": "625-normal",
+      "toName": "Bisharp",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "625-normal",
+      "fromName": "Bisharp",
+      "toId": "983-normal",
+      "toName": "Kingambit",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "627-normal",
+      "fromName": "Rufflet",
+      "toId": "628-normal",
+      "toName": "Braviary",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "629-normal",
+      "fromName": "Vullaby",
+      "toId": "630-normal",
+      "toName": "Mandibuzz",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "633-normal",
+      "fromName": "Deino",
+      "toId": "634-normal",
+      "toName": "Zweilous",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "634-normal",
+      "fromName": "Zweilous",
+      "toId": "635-normal",
+      "toName": "Hydreigon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "636-normal",
+      "fromName": "Larvesta",
+      "toId": "637-normal",
+      "toName": "Volcarona",
+      "candyRequired": 400
+    },
+    {
+      "fromId": "650-normal",
+      "fromName": "Chespin",
+      "toId": "651-normal",
+      "toName": "Quilladin",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "651-normal",
+      "fromName": "Quilladin",
+      "toId": "652-normal",
+      "toName": "Chesnaught",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "653-normal",
+      "fromName": "Fennekin",
+      "toId": "654-normal",
+      "toName": "Braixen",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "654-normal",
+      "fromName": "Braixen",
+      "toId": "655-normal",
+      "toName": "Delphox",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "656-normal",
+      "fromName": "Froakie",
+      "toId": "657-normal",
+      "toName": "Frogadier",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "657-normal",
+      "fromName": "Frogadier",
+      "toId": "658-normal",
+      "toName": "Greninja",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "659-normal",
+      "fromName": "Bunnelby",
+      "toId": "660-normal",
+      "toName": "Diggersby",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "661-normal",
+      "fromName": "Fletchling",
+      "toId": "662-normal",
+      "toName": "Fletchinder",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "662-normal",
+      "fromName": "Fletchinder",
+      "toId": "663-normal",
+      "toName": "Talonflame",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "664-archipelago",
+      "fromName": "Scatterbug",
+      "toId": "665-archipelago",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-continental",
+      "fromName": "Scatterbug",
+      "toId": "665-continental",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-elegant",
+      "fromName": "Scatterbug",
+      "toId": "665-elegant",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-fancy",
+      "fromName": "Scatterbug",
+      "toId": "665-fancy",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-garden",
+      "fromName": "Scatterbug",
+      "toId": "665-garden",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-high-plains",
+      "fromName": "Scatterbug",
+      "toId": "665-high-plains",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-icy-snow",
+      "fromName": "Scatterbug",
+      "toId": "665-icy-snow",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-jungle",
+      "fromName": "Scatterbug",
+      "toId": "665-jungle",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-marine",
+      "fromName": "Scatterbug",
+      "toId": "665-marine",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-meadow",
+      "fromName": "Scatterbug",
+      "toId": "665-meadow",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-modern",
+      "fromName": "Scatterbug",
+      "toId": "665-modern",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-monsoon",
+      "fromName": "Scatterbug",
+      "toId": "665-monsoon",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-ocean",
+      "fromName": "Scatterbug",
+      "toId": "665-ocean",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-pokeball",
+      "fromName": "Scatterbug",
+      "toId": "665-pokeball",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-polar",
+      "fromName": "Scatterbug",
+      "toId": "665-polar",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-river",
+      "fromName": "Scatterbug",
+      "toId": "665-river",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-sandstorm",
+      "fromName": "Scatterbug",
+      "toId": "665-sandstorm",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-savanna",
+      "fromName": "Scatterbug",
+      "toId": "665-savanna",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-sun",
+      "fromName": "Scatterbug",
+      "toId": "665-sun",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "664-tundra",
+      "fromName": "Scatterbug",
+      "toId": "665-tundra",
+      "toName": "Spewpa",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "665-archipelago",
+      "fromName": "Spewpa",
+      "toId": "666-archipelago",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-continental",
+      "fromName": "Spewpa",
+      "toId": "666-continental",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-elegant",
+      "fromName": "Spewpa",
+      "toId": "666-elegant",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-fancy",
+      "fromName": "Spewpa",
+      "toId": "666-fancy",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-garden",
+      "fromName": "Spewpa",
+      "toId": "666-garden",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-high-plains",
+      "fromName": "Spewpa",
+      "toId": "666-high-plains",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-icy-snow",
+      "fromName": "Spewpa",
+      "toId": "666-icy-snow",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-jungle",
+      "fromName": "Spewpa",
+      "toId": "666-jungle",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-marine",
+      "fromName": "Spewpa",
+      "toId": "666-marine",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-meadow",
+      "fromName": "Spewpa",
+      "toId": "666-meadow",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-modern",
+      "fromName": "Spewpa",
+      "toId": "666-modern",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-monsoon",
+      "fromName": "Spewpa",
+      "toId": "666-monsoon",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-ocean",
+      "fromName": "Spewpa",
+      "toId": "666-ocean",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-pokeball",
+      "fromName": "Spewpa",
+      "toId": "666-pokeball",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-polar",
+      "fromName": "Spewpa",
+      "toId": "666-polar",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-river",
+      "fromName": "Spewpa",
+      "toId": "666-river",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-sandstorm",
+      "fromName": "Spewpa",
+      "toId": "666-sandstorm",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-savanna",
+      "fromName": "Spewpa",
+      "toId": "666-savanna",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-sun",
+      "fromName": "Spewpa",
+      "toId": "666-sun",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "665-tundra",
+      "fromName": "Spewpa",
+      "toId": "666-tundra",
+      "toName": "Vivillon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "667-normal",
+      "fromName": "Litleo",
+      "toId": "668-normal",
+      "toName": "Pyroar",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "667-normal",
+      "fromName": "Litleo",
+      "toId": "668-female",
+      "toName": "Pyroar",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "669-blue",
+      "fromName": "Flabebe",
+      "toId": "670-blue",
+      "toName": "Floette",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "669-orange",
+      "fromName": "Flabebe",
+      "toId": "670-orange",
+      "toName": "Floette",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "669-red",
+      "fromName": "Flabebe",
+      "toId": "670-red",
+      "toName": "Floette",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "669-white",
+      "fromName": "Flabebe",
+      "toId": "670-white",
+      "toName": "Floette",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "669-yellow",
+      "fromName": "Flabebe",
+      "toId": "670-yellow",
+      "toName": "Floette",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "670-blue",
+      "fromName": "Floette",
+      "toId": "671-blue",
+      "toName": "Florges",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "670-orange",
+      "fromName": "Floette",
+      "toId": "671-orange",
+      "toName": "Florges",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "670-red",
+      "fromName": "Floette",
+      "toId": "671-red",
+      "toName": "Florges",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "670-white",
+      "fromName": "Floette",
+      "toId": "671-white",
+      "toName": "Florges",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "670-yellow",
+      "fromName": "Floette",
+      "toId": "671-yellow",
+      "toName": "Florges",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "672-normal",
+      "fromName": "Skiddo",
+      "toId": "673-normal",
+      "toName": "Gogoat",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "674-normal",
+      "fromName": "Pancham",
+      "toId": "675-normal",
+      "toName": "Pangoro",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "677-normal",
+      "fromName": "Espurr",
+      "toId": "678-normal",
+      "toName": "Meowstic",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "677-normal",
+      "fromName": "Espurr",
+      "toId": "678-female",
+      "toName": "Meowstic",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "679-normal",
+      "fromName": "Honedge",
+      "toId": "680-normal",
+      "toName": "Doublade",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "680-normal",
+      "fromName": "Doublade",
+      "toId": "681-shield",
+      "toName": "Aegislash",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "682-normal",
+      "fromName": "Spritzee",
+      "toId": "683-normal",
+      "toName": "Aromatisse",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "684-normal",
+      "fromName": "Swirlix",
+      "toId": "685-normal",
+      "toName": "Slurpuff",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "686-normal",
+      "fromName": "Inkay",
+      "toId": "687-normal",
+      "toName": "Malamar",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "688-normal",
+      "fromName": "Binacle",
+      "toId": "689-normal",
+      "toName": "Barbaracle",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "690-normal",
+      "fromName": "Skrelp",
+      "toId": "691-normal",
+      "toName": "Dragalge",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "692-normal",
+      "fromName": "Clauncher",
+      "toId": "693-normal",
+      "toName": "Clawitzer",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "694-normal",
+      "fromName": "Helioptile",
+      "toId": "695-normal",
+      "toName": "Heliolisk",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "696-normal",
+      "fromName": "Tyrunt",
+      "toId": "697-normal",
+      "toName": "Tyrantrum",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "698-normal",
+      "fromName": "Amaura",
+      "toId": "699-normal",
+      "toName": "Aurorus",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "704-normal",
+      "fromName": "Goomy",
+      "toId": "705-normal",
+      "toName": "Sliggoo",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "705-normal",
+      "fromName": "Sliggoo",
+      "toId": "706-normal",
+      "toName": "Goodra",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "708-normal",
+      "fromName": "Phantump",
+      "toId": "709-normal",
+      "toName": "Trevenant",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "710-average",
+      "fromName": "Pumpkaboo",
+      "toId": "711-average",
+      "toName": "Gourgeist",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "710-large",
+      "fromName": "Pumpkaboo",
+      "toId": "711-large",
+      "toName": "Gourgeist",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "710-small",
+      "fromName": "Pumpkaboo",
+      "toId": "711-small",
+      "toName": "Gourgeist",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "710-super",
+      "fromName": "Pumpkaboo",
+      "toId": "711-super",
+      "toName": "Gourgeist",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "712-normal",
+      "fromName": "Bergmite",
+      "toId": "713-normal",
+      "toName": "Avalugg",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "714-normal",
+      "fromName": "Noibat",
+      "toId": "715-normal",
+      "toName": "Noivern",
+      "candyRequired": 400
+    },
+    {
+      "fromId": "722-normal",
+      "fromName": "Rowlet",
+      "toId": "723-normal",
+      "toName": "Dartrix",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "723-normal",
+      "fromName": "Dartrix",
+      "toId": "724-normal",
+      "toName": "Decidueye",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "725-normal",
+      "fromName": "Litten",
+      "toId": "726-normal",
+      "toName": "Torracat",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "726-normal",
+      "fromName": "Torracat",
+      "toId": "727-normal",
+      "toName": "Incineroar",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "728-normal",
+      "fromName": "Popplio",
+      "toId": "729-normal",
+      "toName": "Brionne",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "729-normal",
+      "fromName": "Brionne",
+      "toId": "730-normal",
+      "toName": "Primarina",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "731-normal",
+      "fromName": "Pikipek",
+      "toId": "732-normal",
+      "toName": "Trumbeak",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "732-normal",
+      "fromName": "Trumbeak",
+      "toId": "733-normal",
+      "toName": "Toucannon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "734-normal",
+      "fromName": "Yungoos",
+      "toId": "735-normal",
+      "toName": "Gumshoos",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "736-normal",
+      "fromName": "Grubbin",
+      "toId": "737-normal",
+      "toName": "Charjabug",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "737-normal",
+      "fromName": "Charjabug",
+      "toId": "738-normal",
+      "toName": "Vikavolt",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "739-normal",
+      "fromName": "Crabrawler",
+      "toId": "740-normal",
+      "toName": "Crabominable",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "742-normal",
+      "fromName": "Cutiefly",
+      "toId": "743-normal",
+      "toName": "Ribombee",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "744-dusk",
+      "fromName": "Rockruff",
+      "toId": "745-dusk",
+      "toName": "Lycanroc",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "744-normal",
+      "fromName": "Rockruff",
+      "toId": "745-midday",
+      "toName": "Lycanroc",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "744-normal",
+      "fromName": "Rockruff",
+      "toId": "745-midnight",
+      "toName": "Lycanroc",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "747-normal",
+      "fromName": "Mareanie",
+      "toId": "748-normal",
+      "toName": "Toxapex",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "749-normal",
+      "fromName": "Mudbray",
+      "toId": "750-normal",
+      "toName": "Mudsdale",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "751-normal",
+      "fromName": "Dewpider",
+      "toId": "752-normal",
+      "toName": "Araquanid",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "753-normal",
+      "fromName": "Fomantis",
+      "toId": "754-normal",
+      "toName": "Lurantis",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "755-normal",
+      "fromName": "Morelull",
+      "toId": "756-normal",
+      "toName": "Shiinotic",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "757-normal",
+      "fromName": "Salandit",
+      "toId": "758-normal",
+      "toName": "Salazzle",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "759-normal",
+      "fromName": "Stufful",
+      "toId": "760-normal",
+      "toName": "Bewear",
+      "candyRequired": 400
+    },
+    {
+      "fromId": "761-normal",
+      "fromName": "Bounsweet",
+      "toId": "762-normal",
+      "toName": "Steenee",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "762-normal",
+      "fromName": "Steenee",
+      "toId": "763-normal",
+      "toName": "Tsareena",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "767-normal",
+      "fromName": "Wimpod",
+      "toId": "768-normal",
+      "toName": "Golisopod",
+      "candyRequired": 400
+    },
+    {
+      "fromId": "769-normal",
+      "fromName": "Sandygast",
+      "toId": "770-normal",
+      "toName": "Palossand",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "772-normal",
+      "fromName": "Type: Null",
+      "toId": "773-normal",
+      "toName": "Silvally",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "782-normal",
+      "fromName": "Jangmo-o",
+      "toId": "783-normal",
+      "toName": "Hakamo-o",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "783-normal",
+      "fromName": "Hakamo-o",
+      "toId": "784-normal",
+      "toName": "Kommo-o",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "789-normal",
+      "fromName": "Cosmog",
+      "toId": "790-normal",
+      "toName": "Cosmoem",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "790-normal",
+      "fromName": "Cosmoem",
+      "toId": "791-normal",
+      "toName": "Solgaleo",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "790-normal",
+      "fromName": "Cosmoem",
+      "toId": "792-normal",
+      "toName": "Lunala",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "803-normal",
+      "fromName": "Poipole",
+      "toId": "804-normal",
+      "toName": "Naganadel",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "808-normal",
+      "fromName": "Meltan",
+      "toId": "809-normal",
+      "toName": "Melmetal",
+      "candyRequired": 400
+    },
+    {
+      "fromId": "810-normal",
+      "fromName": "Grookey",
+      "toId": "811-normal",
+      "toName": "Thwackey",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "811-normal",
+      "fromName": "Thwackey",
+      "toId": "812-normal",
+      "toName": "Rillaboom",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "813-normal",
+      "fromName": "Scorbunny",
+      "toId": "814-normal",
+      "toName": "Raboot",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "814-normal",
+      "fromName": "Raboot",
+      "toId": "815-normal",
+      "toName": "Cinderace",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "816-normal",
+      "fromName": "Sobble",
+      "toId": "817-normal",
+      "toName": "Drizzile",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "817-normal",
+      "fromName": "Drizzile",
+      "toId": "818-normal",
+      "toName": "Inteleon",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "819-normal",
+      "fromName": "Skwovet",
+      "toId": "820-normal",
+      "toName": "Greedent",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "821-normal",
+      "fromName": "Rookidee",
+      "toId": "822-normal",
+      "toName": "Corvisquire",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "822-normal",
+      "fromName": "Corvisquire",
+      "toId": "823-normal",
+      "toName": "Corviknight",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "824-normal",
+      "fromName": "Blipbug",
+      "toId": "825-normal",
+      "toName": "Dottler",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "825-normal",
+      "fromName": "Dottler",
+      "toId": "826-normal",
+      "toName": "Orbeetle",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "827-normal",
+      "fromName": "Nickit",
+      "toId": "828-normal",
+      "toName": "Thievul",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "829-normal",
+      "fromName": "Gossifleur",
+      "toId": "830-normal",
+      "toName": "Eldegoss",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "831-normal",
+      "fromName": "Wooloo",
+      "toId": "832-normal",
+      "toName": "Dubwool",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "833-normal",
+      "fromName": "Chewtle",
+      "toId": "834-normal",
+      "toName": "Drednaw",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "835-normal",
+      "fromName": "Yamper",
+      "toId": "836-normal",
+      "toName": "Boltund",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "837-normal",
+      "fromName": "Rolycoly",
+      "toId": "838-normal",
+      "toName": "Carkol",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "838-normal",
+      "fromName": "Carkol",
+      "toId": "839-normal",
+      "toName": "Coalossal",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "840-normal",
+      "fromName": "Applin",
+      "toId": "842-normal",
+      "toName": "Appletun",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "840-normal",
+      "fromName": "Applin",
+      "toId": "841-normal",
+      "toName": "Flapple",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "840-normal",
+      "fromName": "Applin",
+      "toId": "1011-normal",
+      "toName": "Dipplin",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "843-normal",
+      "fromName": "Silicobra",
+      "toId": "844-normal",
+      "toName": "Sandaconda",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "846-normal",
+      "fromName": "Arrokuda",
+      "toId": "847-normal",
+      "toName": "Barraskewda",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "848-normal",
+      "fromName": "Toxel",
+      "toId": "849-low-key",
+      "toName": "Toxtricity",
+      "candyRequired": 400
+    },
+    {
+      "fromId": "848-normal",
+      "fromName": "Toxel",
+      "toId": "849-amped",
+      "toName": "Toxtricity",
+      "candyRequired": 400
+    },
+    {
+      "fromId": "850-normal",
+      "fromName": "Sizzlipede",
+      "toId": "851-normal",
+      "toName": "Centiskorch",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "852-normal",
+      "fromName": "Clobbopus",
+      "toId": "853-normal",
+      "toName": "Grapploct",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "854-antique",
+      "fromName": "Sinistea",
+      "toId": "855-antique",
+      "toName": "Polteageist",
+      "candyRequired": 400
+    },
+    {
+      "fromId": "854-phony",
+      "fromName": "Sinistea",
+      "toId": "855-phony",
+      "toName": "Polteageist",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "856-normal",
+      "fromName": "Hatenna",
+      "toId": "857-normal",
+      "toName": "Hattrem",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "857-normal",
+      "fromName": "Hattrem",
+      "toId": "858-normal",
+      "toName": "Hatterene",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "859-normal",
+      "fromName": "Impidimp",
+      "toId": "860-normal",
+      "toName": "Morgrem",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "860-normal",
+      "fromName": "Morgrem",
+      "toId": "861-normal",
+      "toName": "Grimmsnarl",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "868-normal",
+      "fromName": "Milcery",
+      "toId": "869-normal",
+      "toName": "Alcremie",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "872-normal",
+      "fromName": "Snom",
+      "toId": "873-normal",
+      "toName": "Frosmoth",
+      "candyRequired": 400
+    },
+    {
+      "fromId": "878-normal",
+      "fromName": "Cufant",
+      "toId": "879-normal",
+      "toName": "Copperajah",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "885-normal",
+      "fromName": "Dreepy",
+      "toId": "886-normal",
+      "toName": "Drakloak",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "886-normal",
+      "fromName": "Drakloak",
+      "toId": "887-normal",
+      "toName": "Dragapult",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "891-normal",
+      "fromName": "Kubfu",
+      "toId": "892-single-strike",
+      "toName": "Urshifu",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "891-normal",
+      "fromName": "Kubfu",
+      "toId": "892-rapid-strike",
+      "toName": "Urshifu",
+      "candyRequired": 200
+    },
+    {
+      "fromId": "906-normal",
+      "fromName": "Sprigatito",
+      "toId": "907-normal",
+      "toName": "Floragato",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "907-normal",
+      "fromName": "Floragato",
+      "toId": "908-normal",
+      "toName": "Meowscarada",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "909-normal",
+      "fromName": "Fuecoco",
+      "toId": "910-normal",
+      "toName": "Crocalor",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "910-normal",
+      "fromName": "Crocalor",
+      "toId": "911-normal",
+      "toName": "Skeledirge",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "912-normal",
+      "fromName": "Quaxly",
+      "toId": "913-normal",
+      "toName": "Quaxwell",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "913-normal",
+      "fromName": "Quaxwell",
+      "toId": "914-normal",
+      "toName": "Quaquaval",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "915-normal",
+      "fromName": "Lechonk",
+      "toId": "916-normal",
+      "toName": "Oinkologne",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "915-normal",
+      "fromName": "Lechonk",
+      "toId": "916-female",
+      "toName": "Oinkologne",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "917-normal",
+      "fromName": "Tarountula",
+      "toId": "918-normal",
+      "toName": "Spidops",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "919-normal",
+      "fromName": "Nymble",
+      "toId": "920-normal",
+      "toName": "Lokix",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "921-normal",
+      "fromName": "Pawmi",
+      "toId": "922-normal",
+      "toName": "Pawmo",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "922-normal",
+      "fromName": "Pawmo",
+      "toId": "923-normal",
+      "toName": "Pawmot",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "924-normal",
+      "fromName": "Tandemaus",
+      "toId": "925-family-of-four",
+      "toName": "Maushold",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "924-normal",
+      "fromName": "Tandemaus",
+      "toId": "925-family-of-three",
+      "toName": "Maushold",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "926-normal",
+      "fromName": "Fidough",
+      "toId": "927-normal",
+      "toName": "Dachsbun",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "928-normal",
+      "fromName": "Smoliv",
+      "toId": "929-normal",
+      "toName": "Dolliv",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "929-normal",
+      "fromName": "Dolliv",
+      "toId": "930-normal",
+      "toName": "Arboliva",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "932-normal",
+      "fromName": "Nacli",
+      "toId": "933-normal",
+      "toName": "Naclstack",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "933-normal",
+      "fromName": "Naclstack",
+      "toId": "934-normal",
+      "toName": "Garganacl",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "935-normal",
+      "fromName": "Charcadet",
+      "toId": "936-normal",
+      "toName": "Armarouge",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "935-normal",
+      "fromName": "Charcadet",
+      "toId": "937-normal",
+      "toName": "Ceruledge",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "938-normal",
+      "fromName": "Tadbulb",
+      "toId": "939-normal",
+      "toName": "Bellibolt",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "940-normal",
+      "fromName": "Wattrel",
+      "toId": "941-normal",
+      "toName": "Kilowattrel",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "942-normal",
+      "fromName": "Maschiff",
+      "toId": "943-normal",
+      "toName": "Mabosstiff",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "944-normal",
+      "fromName": "Shroodle",
+      "toId": "945-normal",
+      "toName": "Grafaiai",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "946-normal",
+      "fromName": "Bramblin",
+      "toId": "947-normal",
+      "toName": "Brambleghast",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "948-normal",
+      "fromName": "Toedscool",
+      "toId": "949-normal",
+      "toName": "Toedscruel",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "951-normal",
+      "fromName": "Capsakid",
+      "toId": "952-normal",
+      "toName": "Scovillain",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "953-normal",
+      "fromName": "Rellor",
+      "toId": "954-normal",
+      "toName": "Rabsca",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "955-normal",
+      "fromName": "Flittle",
+      "toId": "956-normal",
+      "toName": "Espathra",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "957-normal",
+      "fromName": "Tinkatink",
+      "toId": "958-normal",
+      "toName": "Tinkatuff",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "958-normal",
+      "fromName": "Tinkatuff",
+      "toId": "959-normal",
+      "toName": "Tinkaton",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "960-normal",
+      "fromName": "Wiglett",
+      "toId": "961-normal",
+      "toName": "Wugtrio",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "965-normal",
+      "fromName": "Varoom",
+      "toId": "966-normal",
+      "toName": "Revavroom",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "969-normal",
+      "fromName": "Glimmet",
+      "toId": "970-normal",
+      "toName": "Glimmora",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "971-normal",
+      "fromName": "Greavard",
+      "toId": "972-normal",
+      "toName": "Houndstone",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "974-normal",
+      "fromName": "Cetoddle",
+      "toId": "975-normal",
+      "toName": "Cetitan",
+      "candyRequired": 50
+    },
+    {
+      "fromId": "996-normal",
+      "fromName": "Frigibax",
+      "toId": "997-normal",
+      "toName": "Arctibax",
+      "candyRequired": 25
+    },
+    {
+      "fromId": "997-normal",
+      "fromName": "Arctibax",
+      "toId": "998-normal",
+      "toName": "Baxcalibur",
+      "candyRequired": 100
+    },
+    {
+      "fromId": "1011-normal",
+      "fromName": "Dipplin",
+      "toId": "1019-normal",
+      "toName": "Hydrapple",
+      "candyRequired": 400
+    },
+    {
+      "fromId": "1012-artisan",
+      "fromName": "Poltchageist",
+      "toId": "1013-masterpiece",
+      "toName": "Sinistcha",
+      "candyRequired": 400
+    },
+    {
+      "fromId": "1012-counterfeit",
+      "fromName": "Poltchageist",
+      "toId": "1013-unremarkable",
+      "toName": "Sinistcha",
+      "candyRequired": 50
+    }
+  ]
+}

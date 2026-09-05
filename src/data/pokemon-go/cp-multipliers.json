@@ -1,0 +1,408 @@
+{
+  "meta": {
+    "source": "PokeMiners Game Master and PogoAPI",
+    "sourceUrl": "https://raw.githubusercontent.com/PokeMiners/game_masters/master/latest/latest.json",
+    "sourceType": "Community-maintained Game Master extraction",
+    "reviewed": "2026-09-05",
+    "unit": "CP multiplier",
+    "notes": "Integer multipliers come from the current Game Master; half levels use extracted values or the established squared-average interpolation."
+  },
+  "records": [
+    {
+      "level": 1,
+      "multiplier": 0.094
+    },
+    {
+      "level": 1.5,
+      "multiplier": 0.1351374313235283
+    },
+    {
+      "level": 2,
+      "multiplier": 0.16639787
+    },
+    {
+      "level": 2.5,
+      "multiplier": 0.1926509141921997
+    },
+    {
+      "level": 3,
+      "multiplier": 0.21573247
+    },
+    {
+      "level": 3.5,
+      "multiplier": 0.23657265305519104
+    },
+    {
+      "level": 4,
+      "multiplier": 0.25572005
+    },
+    {
+      "level": 4.5,
+      "multiplier": 0.27353037893772125
+    },
+    {
+      "level": 5,
+      "multiplier": 0.29024988
+    },
+    {
+      "level": 5.5,
+      "multiplier": 0.3060573786497116
+    },
+    {
+      "level": 6,
+      "multiplier": 0.3210876
+    },
+    {
+      "level": 6.5,
+      "multiplier": 0.33544503152370453
+    },
+    {
+      "level": 7,
+      "multiplier": 0.34921268
+    },
+    {
+      "level": 7.5,
+      "multiplier": 0.362457737326622
+    },
+    {
+      "level": 8,
+      "multiplier": 0.3752356
+    },
+    {
+      "level": 8.5,
+      "multiplier": 0.38759241108516856
+    },
+    {
+      "level": 9,
+      "multiplier": 0.39956728
+    },
+    {
+      "level": 9.5,
+      "multiplier": 0.4111935495172506
+    },
+    {
+      "level": 10,
+      "multiplier": 0.4225
+    },
+    {
+      "level": 10.5,
+      "multiplier": 0.4329264134104144
+    },
+    {
+      "level": 11,
+      "multiplier": 0.44310755
+    },
+    {
+      "level": 11.5,
+      "multiplier": 0.4530599538719858
+    },
+    {
+      "level": 12,
+      "multiplier": 0.4627984
+    },
+    {
+      "level": 12.5,
+      "multiplier": 0.4723360780626535
+    },
+    {
+      "level": 13,
+      "multiplier": 0.48168495
+    },
+    {
+      "level": 13.5,
+      "multiplier": 0.4908558102324605
+    },
+    {
+      "level": 14,
+      "multiplier": 0.49985844
+    },
+    {
+      "level": 14.5,
+      "multiplier": 0.5087017565965652
+    },
+    {
+      "level": 15,
+      "multiplier": 0.51739395
+    },
+    {
+      "level": 15.5,
+      "multiplier": 0.5259425118565559
+    },
+    {
+      "level": 16,
+      "multiplier": 0.5343543
+    },
+    {
+      "level": 16.5,
+      "multiplier": 0.5426357612013817
+    },
+    {
+      "level": 17,
+      "multiplier": 0.5507927
+    },
+    {
+      "level": 17.5,
+      "multiplier": 0.5588305993005633
+    },
+    {
+      "level": 18,
+      "multiplier": 0.5667545
+    },
+    {
+      "level": 18.5,
+      "multiplier": 0.574569147080183
+    },
+    {
+      "level": 19,
+      "multiplier": 0.5822789
+    },
+    {
+      "level": 19.5,
+      "multiplier": 0.5898879119195044
+    },
+    {
+      "level": 20,
+      "multiplier": 0.5974
+    },
+    {
+      "level": 20.5,
+      "multiplier": 0.6048236563801765
+    },
+    {
+      "level": 21,
+      "multiplier": 0.6121573
+    },
+    {
+      "level": 21.5,
+      "multiplier": 0.6194041110575199
+    },
+    {
+      "level": 22,
+      "multiplier": 0.6265671
+    },
+    {
+      "level": 22.5,
+      "multiplier": 0.633649181574583
+    },
+    {
+      "level": 23,
+      "multiplier": 0.64065295
+    },
+    {
+      "level": 23.5,
+      "multiplier": 0.6475809663534164
+    },
+    {
+      "level": 24,
+      "multiplier": 0.65443563
+    },
+    {
+      "level": 24.5,
+      "multiplier": 0.6612192690372467
+    },
+    {
+      "level": 25,
+      "multiplier": 0.667934
+    },
+    {
+      "level": 25.5,
+      "multiplier": 0.6745819002389908
+    },
+    {
+      "level": 26,
+      "multiplier": 0.6811649
+    },
+    {
+      "level": 26.5,
+      "multiplier": 0.6876849085092545
+    },
+    {
+      "level": 27,
+      "multiplier": 0.69414365
+    },
+    {
+      "level": 27.5,
+      "multiplier": 0.7005428969860077
+    },
+    {
+      "level": 28,
+      "multiplier": 0.7068842
+    },
+    {
+      "level": 28.5,
+      "multiplier": 0.7131690979003906
+    },
+    {
+      "level": 29,
+      "multiplier": 0.7193991
+    },
+    {
+      "level": 29.5,
+      "multiplier": 0.7255756109952927
+    },
+    {
+      "level": 30,
+      "multiplier": 0.7317
+    },
+    {
+      "level": 30.5,
+      "multiplier": 0.7347410172224045
+    },
+    {
+      "level": 31,
+      "multiplier": 0.7377695
+    },
+    {
+      "level": 31.5,
+      "multiplier": 0.740785576403141
+    },
+    {
+      "level": 32,
+      "multiplier": 0.74378943
+    },
+    {
+      "level": 32.5,
+      "multiplier": 0.7467812150716782
+    },
+    {
+      "level": 33,
+      "multiplier": 0.74976104
+    },
+    {
+      "level": 33.5,
+      "multiplier": 0.7527291029691696
+    },
+    {
+      "level": 34,
+      "multiplier": 0.7556855
+    },
+    {
+      "level": 34.5,
+      "multiplier": 0.7586303651332855
+    },
+    {
+      "level": 35,
+      "multiplier": 0.76156384
+    },
+    {
+      "level": 35.5,
+      "multiplier": 0.7644860669970512
+    },
+    {
+      "level": 36,
+      "multiplier": 0.76739717
+    },
+    {
+      "level": 36.5,
+      "multiplier": 0.7702972739934921
+    },
+    {
+      "level": 37,
+      "multiplier": 0.7731865
+    },
+    {
+      "level": 37.5,
+      "multiplier": 0.7760649472475052
+    },
+    {
+      "level": 38,
+      "multiplier": 0.77893275
+    },
+    {
+      "level": 38.5,
+      "multiplier": 0.78179006
+    },
+    {
+      "level": 39,
+      "multiplier": 0.784637
+    },
+    {
+      "level": 39.5,
+      "multiplier": 0.78747358
+    },
+    {
+      "level": 40,
+      "multiplier": 0.7903
+    },
+    {
+      "level": 40.5,
+      "multiplier": 0.79280001
+    },
+    {
+      "level": 41,
+      "multiplier": 0.7953
+    },
+    {
+      "level": 41.5,
+      "multiplier": 0.79780001
+    },
+    {
+      "level": 42,
+      "multiplier": 0.8003
+    },
+    {
+      "level": 42.5,
+      "multiplier": 0.8028
+    },
+    {
+      "level": 43,
+      "multiplier": 0.8053
+    },
+    {
+      "level": 43.5,
+      "multiplier": 0.8078
+    },
+    {
+      "level": 44,
+      "multiplier": 0.8103
+    },
+    {
+      "level": 44.5,
+      "multiplier": 0.81279999
+    },
+    {
+      "level": 45,
+      "multiplier": 0.8153
+    },
+    {
+      "level": 45.5,
+      "multiplier": 0.8178038212187566
+    },
+    {
+      "level": 46,
+      "multiplier": 0.8203
+    },
+    {
+      "level": 46.5,
+      "multiplier": 0.8228037979980404
+    },
+    {
+      "level": 47,
+      "multiplier": 0.8253
+    },
+    {
+      "level": 47.5,
+      "multiplier": 0.8278037750578334
+    },
+    {
+      "level": 48,
+      "multiplier": 0.8303
+    },
+    {
+      "level": 48.5,
+      "multiplier": 0.8328037523930834
+    },
+    {
+      "level": 49,
+      "multiplier": 0.8353
+    },
+    {
+      "level": 49.5,
+      "multiplier": 0.8378037299988584
+    },
+    {
+      "level": 50,
+      "multiplier": 0.8403
+    }
+  ]
+}

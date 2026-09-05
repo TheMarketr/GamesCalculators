@@ -18,7 +18,8 @@ const pageFamilies: Record<string, string[]> = {
 };
 const familySlugs = pageFamilies[game.slug]?.includes(tool.slug) ? pageFamilies[game.slug] : [];
 const familyTools = familySlugs.map((slug) => game.tools.find((candidate) => candidate.slug === slug)).filter((candidate): candidate is ToolConfig => Boolean(candidate));
-const related = game.tools.filter((candidate) => candidate.slug !== tool.slug && !familySlugs.includes(candidate.slug)).slice(0, 3);
+const explicitRelated = tool.related?.map((slug) => game.tools.find((candidate) => candidate.slug === slug)).filter((candidate): candidate is ToolConfig => Boolean(candidate)) ?? [];
+const related = explicitRelated.length ? explicitRelated.slice(0, 3) : game.tools.filter((candidate) => candidate.slug !== tool.slug && !familySlugs.includes(candidate.slug)).slice(0, 3);
 const reviewed = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(`${tool.lastReviewed}T12:00:00Z`));
 const toolIcon = getToolIcon(tool);
 const typeCopy = {

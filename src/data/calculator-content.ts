@@ -4,6 +4,9 @@ import { economyToolContent } from './tool-content/economy';
 import { survivalTradingToolContent } from './tool-content/survival-trading';
 import { systemsToolContent } from './tool-content/systems';
 import { gtaToolContent } from './tool-content/gta';
+import { pokemonGoToolContent } from './tool-content/pokemon-go';
+import { osrsToolContent } from './tool-content/osrs';
+import { palworldToolContent } from './tool-content/palworld';
 
 export type {
   CalculatorContent,
@@ -19,6 +22,9 @@ export const calculatorContent: Record<string, CalculatorContent> = {
   ...survivalTradingToolContent,
   ...systemsToolContent,
   ...gtaToolContent,
+  ...pokemonGoToolContent,
+  ...osrsToolContent,
+  ...palworldToolContent,
 };
 
 export function buildCalculatorContent(game: GameConfig, tool: ToolConfig): CalculatorContent {

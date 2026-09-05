@@ -1,0 +1,2 @@
+export const osrsCombatMeta = { source: 'OSRS Wiki combat formulas', sourceUrl: 'https://oldschool.runescape.wiki/w/Damage_per_second/Melee', sourceType: 'Community wiki', reviewed: '2026-09-05', unit: 'game ticks and combat rolls', notes: 'One OSRS game tick is 0.6 seconds; calculation steps remain visible.' } as const;
+export const attackStyleBonuses = { accurate: 3, aggressive: 3, controlled: 1, defensive: 0 } as const;

@@ -15,7 +15,10 @@
     "typecheck": "astro check",
     "content:check": "node scripts/content-check.mjs",
     "safety:check": "node scripts/safety-check.mjs",
-    "check": "node scripts/safety-check.mjs && astro check && vitest run && pnpm build",
+    "check": "node scripts/safety-check.mjs && astro check && vitest run && pnpm build && node scripts/content-check.mjs",
+    "data:sync:pokemon-go": "node scripts/sync-pokemon-go.mjs",
+    "data:sync:osrs": "node scripts/sync-osrs-prices.mjs",
+    "data:sync:palworld": "node scripts/sync-palworld.mjs",
     "deploy:cloudflare": "pwsh -NoProfile -File scripts/deploy-cloudflare.ps1",
     "astro": "astro"
   },

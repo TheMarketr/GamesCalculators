@@ -4,6 +4,6 @@ export const site = {
   url: 'https://gamescalculators.com',
   title: 'Free Game Calculators & Online Tools for Your Favorite Games',
   description:
-    'Free game calculators, online tools and practical guides for Minecraft, Roblox games, Fortnite, GTA VI and more.',
+    'Free game calculators, online tools and practical guides for Pokémon GO, OSRS, Palworld, Minecraft, Roblox games, Fortnite, GTA VI and more.',
   audience: '13+',
 } as const;

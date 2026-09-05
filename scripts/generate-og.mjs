@@ -12,7 +12,8 @@ const output = path.join(dist, 'og');
 const gameNames = new Map([
   ['grow-a-garden', 'Grow a Garden'], ['blox-fruits', 'Blox Fruits'], ['steal-a-brainrot', 'Steal a Brainrot'],
   ['99-nights', '99 Nights in the Forest'], ['adopt-me', 'Adopt Me'], ['mm2', 'Murder Mystery 2'],
-  ['pet-simulator-99', 'Pet Simulator 99'], ['minecraft', 'Minecraft'], ['fortnite', 'Fortnite'], ['gta-6', 'GTA VI'],
+  ['pet-simulator-99', 'Pet Simulator 99'], ['minecraft', 'Minecraft'], ['fortnite', 'Fortnite'],
+  ['pokemon-go', 'Pokémon GO'], ['osrs', 'Old School RuneScape'], ['palworld', 'Palworld'], ['gta-6', 'GTA VI'],
 ]);
 
 const walk = async (directory) => (await Promise.all((await readdir(directory, { withFileTypes: true })).map(async (entry) => {
@@ -55,7 +56,7 @@ for (const file of htmlFiles) {
   const svg = svgFor(title, gameNames.get(firstPath));
   const raster = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
   const png = await sharp(raster)
-    .png({ palette: true, colours: 128, compressionLevel: 9, effort: 10 })
+    .png({ palette: true, colours: 128, compressionLevel: 9, effort: 6 })
     .toBuffer();
   await writeFile(path.join(output, `${keyFor(canonical)}.png`), png);
 }
