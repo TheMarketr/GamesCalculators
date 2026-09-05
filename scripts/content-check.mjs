@@ -187,6 +187,7 @@ const generatedParagraphs = generatedPages.flatMap(({ key, html }) => {
   const footer = html.indexOf('<footer', start);
   let supporting = html.slice(start, footer > start ? footer : undefined)
     .replace(/<section class="tool-media-strip"[\s\S]*?<\/section>/g, '')
+    .replace(/<section class="media-gallery-section[\s\S]*?<\/section>/g, '')
     .replace(/<section class="related-tools"[\s\S]*?<\/section>/g, '');
   return [...supporting.matchAll(/<p(?:\s[^>]*)?>([\s\S]*?)<\/p>/g)]
     .map((match) => decodeHtml(match[1]))

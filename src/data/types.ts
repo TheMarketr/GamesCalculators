@@ -6,6 +6,7 @@ export interface ValueItem {
   value: number;
   demand: number;
   updated: string;
+  lastReviewed: string;
   income?: number;
   /** Zero means the source does not publish a defensible demand score. */
   sourceType?: 'developer-set' | 'game-displayed' | 'community-market' | 'community-wiki';

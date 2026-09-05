@@ -8,7 +8,7 @@ const source = {
   unit: 'base Sheckles',
 };
 const crop = (slug: string, name: string, category: string, value: number, baseWeight: number): ValueItem => ({
-  slug, name, category, rarity: 'base crop', value, baseWeight, demand: 0, updated: reviewed, ...source,
+  slug, name, category, rarity: 'base crop', value, baseWeight, demand: 0, updated: reviewed, lastReviewed: reviewed, ...source,
   note: `${value.toLocaleString()} base Sheckles at ${baseWeight.toFixed(3)} kg before weight scaling or mutations.`,
 });
 

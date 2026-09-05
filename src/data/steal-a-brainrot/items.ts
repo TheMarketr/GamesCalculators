@@ -8,7 +8,7 @@ const source = {
   unit: 'cash cost',
 };
 const brainrot = (slug: string, name: string, rarity: string, value: number, income: number): ValueItem => ({
-  slug, name, category: 'brainrot', rarity, value, income, demand: 0, updated: reviewed, ...source,
+  slug, name, category: 'brainrot', rarity, value, income, demand: 0, updated: reviewed, lastReviewed: reviewed, ...source,
   note: `${value.toLocaleString()} acquisition cost; ${income.toLocaleString()} cash/sec base income. No trade-market value is implied.`,
 });
 

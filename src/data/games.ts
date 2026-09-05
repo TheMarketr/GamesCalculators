@@ -30,6 +30,8 @@ export interface ToolConfig {
   category: string;
   featured?: boolean;
   updated: string;
+  lastReviewed: string;
+  toolType: 'calculator' | 'generator' | 'reference' | 'tracker' | 'map';
   keywords?: string[];
 }
 
@@ -39,6 +41,8 @@ export interface GameImage {
   caption?: string;
   credit: string;
   creditUrl: string;
+  sourceLabel: string;
+  sourceUrl: string;
   license: string;
   licenseUrl: string;
 }
@@ -57,7 +61,7 @@ export interface GameConfig {
   tools: ToolConfig[];
 }
 
-const updated = '2026-08-27';
+const toolMeta = (toolType: ToolConfig['toolType'], lastReviewed: string) => ({ toolType, lastReviewed, updated: lastReviewed });
 
 const robloxMedia = (slug: string, gameName: string, placeId: string) => {
   const base = `/images/games/${slug}`;
@@ -65,6 +69,8 @@ const robloxMedia = (slug: string, gameName: string, placeId: string) => {
   const shared = {
     credit: `${gameName} official Roblox experience media`,
     creditUrl,
+    sourceLabel: `${gameName} on Roblox`,
+    sourceUrl: creditUrl,
     license: 'Publisher-provided game thumbnail',
     licenseUrl: 'https://create.roblox.com/docs/production/publishing/thumbnails',
   };
@@ -81,6 +87,8 @@ const robloxMedia = (slug: string, gameName: string, placeId: string) => {
 const gtaMedia = {
   credit: 'Grand Theft Auto VI official artwork © Rockstar Games',
   creditUrl: 'https://www.rockstargames.com/VI/media',
+  sourceLabel: 'Rockstar Games',
+  sourceUrl: 'https://www.rockstargames.com/VI/media',
   license: 'Official downloadable media',
   licenseUrl: 'https://www.rockstargames.com/VI/media',
 };
@@ -88,6 +96,8 @@ const gtaMedia = {
 const gtaScreenshotMedia = {
   credit: 'Grand Theft Auto VI official screenshot © Rockstar Games',
   creditUrl: 'https://www.rockstargames.com/VI/media/screenshots',
+  sourceLabel: 'Rockstar Games',
+  sourceUrl: 'https://www.rockstargames.com/VI/media/screenshots',
   license: 'Official downloadable media',
   licenseUrl: 'https://www.rockstargames.com/VI/media/screenshots',
 };
@@ -98,8 +108,8 @@ export const games: GameConfig[] = [
     description: 'Price crops, stack mutations and compare trade offers with editable, transparent values.',
     ...robloxMedia('grow-a-garden', 'Grow a Garden', '126884695634066'),
     tools: [
-      { slug: 'value-calculator', name: 'Grow a Garden Value Calculator', shortName: 'Value Calculator', description: 'Calculate crop sell value using weight, growth and mutation multipliers.', kind: 'garden-value', category: 'Values', featured: true, updated, keywords: ['fruit value', 'crop price'] },
-      { slug: 'trade-calculator', name: 'Grow a Garden Trade Calculator', shortName: 'Trade Calculator', description: 'Compare two crop bundles using reviewed base Sheckle values.', kind: 'trade', category: 'Trading', featured: true, updated, keywords: ['trade value'] },
+      { slug: 'value-calculator', name: 'Grow a Garden Value Calculator', shortName: 'Value Calculator', description: 'Calculate crop sell value using weight, growth and mutation multipliers.', kind: 'garden-value', category: 'Values', featured: true, ...toolMeta('calculator', '2026-08-25'), keywords: ['fruit value', 'crop price'] },
+      { slug: 'trade-calculator', name: 'Grow a Garden Trade Calculator', shortName: 'Trade Calculator', description: 'Compare two crop bundles using reviewed base Sheckle values.', kind: 'trade', category: 'Trading', featured: true, ...toolMeta('calculator', '2026-08-25'), keywords: ['trade value'] },
       ...secondaryTools['grow-a-garden'],
     ],
   },
@@ -108,8 +118,8 @@ export const games: GameConfig[] = [
     description: 'Compare fruit values, check offers and plan your next Blox Fruits trade.',
     ...robloxMedia('blox-fruits', 'Blox Fruits', '2753915549'),
     tools: [
-      { slug: 'value-calculator', name: 'Blox Fruits Value Calculator', shortName: 'Value Calculator', description: 'Total all 41 fruits by Dealer Beli price and separate permanent Robux price.', kind: 'item-value', category: 'Values', featured: true, updated, keywords: ['blox fruit calculator', 'fruit values'] },
-      { slug: 'trade-calculator', name: 'Blox Fruits Trade Calculator', shortName: 'Trade Calculator', description: 'Compare both sides by documented Dealer Beli baseline without inventing demand.', kind: 'trade', category: 'Trading', featured: true, updated, keywords: ['trade value', 'trading'] },
+      { slug: 'value-calculator', name: 'Blox Fruits Value Calculator', shortName: 'Value Calculator', description: 'Total all 41 priced Dealer fruits by Beli cost and separate permanent Robux price.', kind: 'item-value', category: 'Values', featured: true, ...toolMeta('calculator', '2026-09-04'), keywords: ['blox fruit calculator', 'fruit values'] },
+      { slug: 'trade-calculator', name: 'Blox Fruits Trade Calculator', shortName: 'Trade Calculator', description: 'Compare both sides by documented Dealer Beli baseline without inventing demand.', kind: 'trade', category: 'Trading', featured: true, ...toolMeta('calculator', '2026-09-04'), keywords: ['trade value', 'trading'] },
       ...secondaryTools['blox-fruits'],
     ],
   },
@@ -118,7 +128,7 @@ export const games: GameConfig[] = [
     description: 'Estimate collection value and income with quick, shareable results.',
     ...robloxMedia('steal-a-brainrot', 'Steal a Brainrot', '109983668079237'),
     tools: [
-      { slug: 'value-calculator', name: 'Steal a Brainrot Value Calculator', shortName: 'Value Calculator', description: 'Total documented acquisition cost and base income for 45 Brainrot records.', kind: 'brainrot-value', category: 'Values', featured: true, updated, keywords: ['brainrot values', 'income'] },
+      { slug: 'value-calculator', name: 'Steal a Brainrot Value Calculator', shortName: 'Value Calculator', description: 'Total documented acquisition cost and base income for 45 Brainrot records.', kind: 'brainrot-value', category: 'Values', featured: true, ...toolMeta('calculator', '2026-08-25'), keywords: ['brainrot values', 'income'] },
       ...secondaryTools['steal-a-brainrot'],
     ],
   },
@@ -133,9 +143,9 @@ export const games: GameConfig[] = [
     description: 'Compare pet values and check whether a trade looks like a win, fair or lose.',
     ...robloxMedia('adopt-me', 'Adopt Me', '920587237'),
     tools: [
-      { slug: 'value-calculator', name: 'Adopt Me Value Calculator', shortName: 'Value Calculator', description: 'Calculate a total from regular, neon, mega and fly/ride pet variants.', kind: 'pet-value', category: 'Values', featured: true, updated, keywords: ['pet values'] },
-      { slug: 'pet-calculator', name: 'Adopt Me Pet Calculator', shortName: 'Pet Calculator', description: 'Compare pet variants and understand each pet’s contribution to an offer.', kind: 'pet-value', category: 'Pets', updated, keywords: ['pet calculator'] },
-      { slug: 'wfl-calculator', name: 'Adopt Me WFL Calculator', shortName: 'WFL Calculator', description: 'Compare two offers and get a Win, Fair or Lose range with a visual value bar.', kind: 'wfl', category: 'Trading', featured: true, updated, keywords: ['win fair lose', 'trade calculator'] },
+      { slug: 'value-calculator', name: 'Adopt Me Value Calculator', shortName: 'Value Calculator', description: 'Calculate a total from regular, neon, mega and fly/ride pet variants.', kind: 'pet-value', category: 'Values', featured: true, ...toolMeta('calculator', '2026-08-25'), keywords: ['pet values'] },
+      { slug: 'pet-calculator', name: 'Adopt Me Pet Calculator', shortName: 'Pet Calculator', description: 'Compare pet variants and understand each pet’s contribution to an offer.', kind: 'pet-value', category: 'Pets', ...toolMeta('calculator', '2026-08-22'), keywords: ['pet calculator'] },
+      { slug: 'wfl-calculator', name: 'Adopt Me WFL Calculator', shortName: 'WFL Calculator', description: 'Compare two offers and get a Win, Fair or Lose range with a visual value bar.', kind: 'wfl', category: 'Trading', featured: true, ...toolMeta('calculator', '2026-08-25'), keywords: ['win fair lose', 'trade calculator'] },
       ...secondaryTools['adopt-me'],
     ],
   },
@@ -159,6 +169,8 @@ export const games: GameConfig[] = [
       alt: 'A freely licensed Minecraft landscape gameplay screenshot',
       credit: 'Minecraft gameplay screenshot by Xbox México',
       creditUrl: 'https://commons.wikimedia.org/wiki/File:Minecraft_Beta_1.8.1_Gameplay_Screenshot.png',
+      sourceLabel: 'Wikimedia Commons · CC BY 3.0',
+      sourceUrl: 'https://commons.wikimedia.org/wiki/File:Minecraft_Beta_1.8.1_Gameplay_Screenshot.png',
       license: 'CC BY 3.0',
       licenseUrl: 'https://creativecommons.org/licenses/by/3.0/',
     },
@@ -167,6 +179,8 @@ export const games: GameConfig[] = [
       alt: 'Minecraft gameplay landscape used to identify the game',
       credit: 'Minecraft gameplay screenshot by Xbox México',
       creditUrl: 'https://commons.wikimedia.org/wiki/File:Minecraft_Beta_1.8.1_Gameplay_Screenshot.png',
+      sourceLabel: 'Wikimedia Commons · CC BY 3.0',
+      sourceUrl: 'https://commons.wikimedia.org/wiki/File:Minecraft_Beta_1.8.1_Gameplay_Screenshot.png',
       license: 'CC BY 3.0',
       licenseUrl: 'https://creativecommons.org/licenses/by/3.0/',
     },
@@ -175,14 +189,16 @@ export const games: GameConfig[] = [
       alt: 'Minecraft landscape gameplay screenshot',
       credit: 'Minecraft gameplay screenshot by Xbox México',
       creditUrl: 'https://commons.wikimedia.org/wiki/File:Minecraft_Beta_1.8.1_Gameplay_Screenshot.png',
+      sourceLabel: 'Wikimedia Commons · CC BY 3.0',
+      sourceUrl: 'https://commons.wikimedia.org/wiki/File:Minecraft_Beta_1.8.1_Gameplay_Screenshot.png',
       license: 'CC BY 3.0',
       licenseUrl: 'https://creativecommons.org/licenses/by/3.0/',
     }],
     tools: [
-      { slug: 'circle-generator', name: 'Minecraft Circle Generator', shortName: 'Circle Generator', description: 'Generate filled or outlined pixel circles with block counts and row instructions.', kind: 'circle', category: 'Building', featured: true, updated, keywords: ['pixel circle', 'block circle'] },
-      { slug: 'xp-calculator', name: 'Minecraft XP Calculator', shortName: 'XP Calculator', description: 'Calculate exact XP between levels and estimate common XP-source requirements.', kind: 'minecraft-xp', category: 'Progress', featured: true, updated, keywords: ['experience levels'] },
-      { slug: 'enchant-calculator', name: 'Minecraft Enchant Calculator', shortName: 'Enchant Calculator', description: 'Plan enchanting-table levels, bookshelves and lapis requirements.', kind: 'enchant', category: 'Enchanting', featured: true, updated, keywords: ['enchantment cost'] },
-      { slug: 'portal-calculator', name: 'Minecraft Portal Calculator', shortName: 'Portal Calculator', description: 'Convert Overworld and Nether coordinates with safe rounding.', kind: 'portal', category: 'Coordinates', featured: true, updated, keywords: ['nether coordinates'] },
+      { slug: 'circle-generator', name: 'Minecraft Circle Generator', shortName: 'Circle Generator', description: 'Generate filled or outlined pixel circles with block counts and row instructions.', kind: 'circle', category: 'Building', featured: true, ...toolMeta('generator', '2026-09-02'), keywords: ['pixel circle', 'block circle'] },
+      { slug: 'xp-calculator', name: 'Minecraft XP Calculator', shortName: 'XP Calculator', description: 'Calculate exact XP between levels and estimate common XP-source requirements.', kind: 'minecraft-xp', category: 'Progress', featured: true, ...toolMeta('calculator', '2026-08-26'), keywords: ['experience levels'] },
+      { slug: 'enchant-calculator', name: 'Minecraft Enchant Calculator', shortName: 'Enchant Calculator', description: 'Plan enchanting-table levels, bookshelves and lapis requirements.', kind: 'enchant', category: 'Enchanting', featured: true, ...toolMeta('calculator', '2026-08-26'), keywords: ['enchantment cost'] },
+      { slug: 'portal-calculator', name: 'Minecraft Portal Calculator', shortName: 'Portal Calculator', description: 'Convert Overworld and Nether coordinates with safe rounding.', kind: 'portal', category: 'Coordinates', featured: true, ...toolMeta('calculator', '2026-08-26'), keywords: ['nether coordinates'] },
       ...secondaryTools.minecraft,
     ],
   },
@@ -194,6 +210,8 @@ export const games: GameConfig[] = [
       alt: 'Official Fortnite gameplay screenshot showing a player hurdling into an active Battle Royale fight',
       credit: 'Official Fortnite gameplay screenshot by Epic Games',
       creditUrl: 'https://cdn2.unrealengine.com/fortnite-overview-hurdling-forward-1200x607-1122166f8d35.jpg',
+      sourceLabel: 'Epic Games',
+      sourceUrl: 'https://www.fortnite.com/',
       license: 'Epic Games Fan Content Policy',
       licenseUrl: 'https://legal.epicgames.com/en-US/epicgames/fan-art-policy',
     },
@@ -202,6 +220,8 @@ export const games: GameConfig[] = [
       alt: 'Official Fortnite Battle Royale gameplay image used to identify the game',
       credit: 'Official Fortnite gameplay screenshot by Epic Games',
       creditUrl: 'https://cdn2.unrealengine.com/fortnite-overview-hurdling-forward-1200x607-1122166f8d35.jpg',
+      sourceLabel: 'Epic Games',
+      sourceUrl: 'https://www.fortnite.com/',
       license: 'Epic Games Fan Content Policy',
       licenseUrl: 'https://legal.epicgames.com/en-US/epicgames/fan-art-policy',
     },
@@ -210,12 +230,14 @@ export const games: GameConfig[] = [
       alt: 'Official Fortnite gameplay scene with combat, building and a hurdling player',
       credit: 'Official Fortnite gameplay screenshot by Epic Games',
       creditUrl: 'https://cdn2.unrealengine.com/fortnite-overview-hurdling-forward-1200x607-1122166f8d35.jpg',
+      sourceLabel: 'Epic Games',
+      sourceUrl: 'https://www.fortnite.com/',
       license: 'Epic Games Fan Content Policy',
       licenseUrl: 'https://legal.epicgames.com/en-US/epicgames/fan-art-policy',
     }],
     tools: [
-      { slug: 'xp-calculator', name: 'Fortnite XP Calculator', shortName: 'XP Calculator', description: 'Estimate XP, levels and matches needed to reach a Battle Pass target.', kind: 'fortnite-xp', category: 'Progress', featured: true, updated, keywords: ['battle pass xp', 'level calculator'] },
-      { slug: 'fps-calculator', name: 'Fortnite FPS Calculator', shortName: 'FPS Calculator', description: 'Estimate a practical FPS range from your hardware, resolution and preset.', kind: 'fps', category: 'Performance', featured: true, updated, keywords: ['pc fps estimate'] },
+      { slug: 'xp-calculator', name: 'Fortnite XP Calculator', shortName: 'XP Calculator', description: 'Estimate XP, levels and matches needed to reach a Battle Pass target.', kind: 'fortnite-xp', category: 'Progress', featured: true, ...toolMeta('calculator', '2026-08-26'), keywords: ['battle pass xp', 'level calculator'] },
+      { slug: 'fps-calculator', name: 'Fortnite FPS Calculator', shortName: 'FPS Calculator', description: 'Estimate a practical FPS range from your hardware, resolution and preset.', kind: 'fps', category: 'Performance', featured: true, ...toolMeta('calculator', '2026-08-26'), keywords: ['pc fps estimate'] },
       ...secondaryTools.fortnite,
     ],
   },
@@ -238,10 +260,10 @@ export const games: GameConfig[] = [
       { src: '/images/games/gta-6/jason-lucia.jpg', alt: 'Official Grand Theft Auto VI artwork featuring Jason and Lucia', caption: 'Jason and Lucia key artwork', ...gtaMedia },
     ],
     tools: [
-      { slug: 'release-date', name: 'GTA VI Release Date Countdown', shortName: 'Release Date Countdown', description: 'Count down live to the confirmed November 19, 2026 release date.', kind: 'countdown', category: 'Release', featured: true, updated, keywords: ['gta 6 release date', 'grand theft auto vi countdown'] },
-      { slug: 'download-time-calculator', name: 'GTA VI Download Time Calculator', shortName: 'Download Time Calculator', description: 'Estimate download duration and completion time from file size and connection speed.', kind: 'download-time', category: 'Planning', updated, keywords: ['download speed', 'file size'] },
-      { slug: 'platform-checker', name: 'GTA VI Platform Checker', shortName: 'Platform Checker', description: 'Check the currently announced GTA VI platform status for your system.', kind: 'platform', category: 'Release', updated, keywords: ['ps5', 'xbox', 'pc release'] },
-      { slug: 'map', name: 'GTA VI Interactive Map', shortName: 'Interactive Map', description: 'Explore a clearly labeled pre-release map interface with local filters and visited-state tracking.', kind: 'gta-map', category: 'Map', updated, keywords: ['gta 6 map', 'vice city locations'] },
+      { slug: 'release-date', name: 'GTA VI Release Date Countdown', shortName: 'Release Date Countdown', description: 'Count down live to the confirmed November 19, 2026 release date.', kind: 'countdown', category: 'Release', featured: true, ...toolMeta('calculator', '2026-08-31'), keywords: ['gta 6 release date', 'grand theft auto vi countdown'] },
+      { slug: 'download-time-calculator', name: 'GTA VI Download Time Calculator', shortName: 'Download Time Calculator', description: 'Estimate download duration and completion time from file size and connection speed.', kind: 'download-time', category: 'Planning', ...toolMeta('calculator', '2026-08-31'), keywords: ['download speed', 'file size'] },
+      { slug: 'platform-checker', name: 'GTA VI Platform Checker', shortName: 'Platform Checker', description: 'Check the currently announced GTA VI platform status for your system.', kind: 'platform', category: 'Release', ...toolMeta('reference', '2026-08-31'), keywords: ['ps5', 'xbox', 'pc release'] },
+      { slug: 'map', name: 'GTA VI Interactive Map', shortName: 'Interactive Map', description: 'Explore a clearly labeled pre-release map interface with local filters and visited-state tracking.', kind: 'gta-map', category: 'Map', ...toolMeta('map', '2026-08-31'), keywords: ['gta 6 map', 'vice city locations'] },
       ...secondaryTools['gta-6'],
     ],
   },

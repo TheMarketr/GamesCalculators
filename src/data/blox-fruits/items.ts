@@ -1,19 +1,19 @@
 import type { ValueItem } from '../types';
 
-const reviewed = '2026-08-28';
+const reviewed = '2026-09-04';
 const source = {
   sourceType: 'developer-set' as const,
-  sourceLabel: 'Blox Fruits Dealer prices (Beli)',
-  sourceUrl: 'https://bloxguidesgg.com/games/blox-fruits/values',
+  sourceLabel: 'Blox Fruits Wiki dealer-price table',
+  sourceUrl: 'https://bloxguidesgg.com/games/blox-fruits/wiki/fruits',
   unit: 'Beli',
 };
 
 const fruit = (slug: string, name: string, type: string, rarity: string, value: number, permanentPrice: number): ValueItem => ({
-  slug, name, category: `${type} fruit`, rarity, value, permanentPrice, demand: 0, updated: reviewed, ...source,
-  note: `${value.toLocaleString()} Beli dealer price; permanent version ${permanentPrice.toLocaleString()} Robux. This is not a community trade valuation.`,
+  slug, name, category: `${type} fruit`, rarity, value, permanentPrice, demand: 0, updated: reviewed, lastReviewed: reviewed, ...source,
+  note: `${value.toLocaleString()} Beli Dealer price; permanent version ${permanentPrice.toLocaleString()} Robux.${name === 'Tiger' ? ' Tiger replaced the former Leopard fruit after its rework.' : ''} This is not a community trade valuation.`,
 });
 
-/** Complete 41-fruit dealer-price table. Values are developer-set shop prices, not invented trade values. */
+/** 41 usable priced Dealer rows. Two source-listed Meme/admin variants have no usable Dealer price and are excluded. */
 export const bloxFruits: ValueItem[] = [
   fruit('rocket', 'Rocket', 'Natural', 'common', 5_000, 50),
   fruit('spin', 'Spin', 'Natural', 'common', 7_500, 75),

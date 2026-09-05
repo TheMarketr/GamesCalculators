@@ -330,7 +330,7 @@ export const survivalTradingToolContent = defineToolContent({
   }),
 
   'mm2/value-calculator': c({
-    name: 'MM2 Value Calculator', reviewed: '2026-08-28',
+    name: 'MM2 Value Calculator', reviewed: '2026-09-03',
     methodSummary: 'Totals weapon quantities from the local community-market planning index.',
     intro: 'The MM2 Value Calculator creates a one-sided weapon total from the current local catalog. It is useful for checking a collection subset or preparing an offer before another trader’s side is known.',
     useCases: ['Total selected knives and guns.', 'Find the largest contributor in a bundle.', 'Prepare rows for the Trade Calculator.'],
@@ -338,7 +338,7 @@ export const survivalTradingToolContent = defineToolContent({
     mechanics: 'Each row contributes community reference value × quantity. Demand and category stay visible but are not silently converted into value.',
     example: 'Two weapons at reference 40 and one at 75 total 155. If the 75-value row has weak demand, it still contributes 75 numerically but may take longer to retrade.',
     result: 'Use the total as bundle arithmetic and the row breakdown for liquidity checks. Confirm variants and current community data before negotiating.',
-    limits: 'MM2 values are unofficial. The 59-row August 28, 2026 Supreme Values snapshot can move with demand, events, supply, list methodology, or duplication concerns.',
+    limits: 'MM2 values are unofficial. The 300-record September 2026 Supreme Values snapshot can move with demand, events, supply, list methodology, or duplication concerns.',
     limitPoints: ['Missing weapons must not be guessed.', 'Demand is not a guaranteed sale.', 'No item authentication.'],
     faqs: [
       { question: 'Does MM2 Value Calculator judge a trade?', answer: 'No. It totals one side. Use MM2 Trade Calculator for an explicit two-offer gap.' },
@@ -347,7 +347,7 @@ export const survivalTradingToolContent = defineToolContent({
     ],
   }),
   'mm2/trading-values': c({
-    name: 'MM2 Trading Values', reviewed: '2026-08-28',
+    name: 'MM2 Trading Values', reviewed: '2026-09-03',
     methodSummary: 'Organizes catalog rows around demand, liquidity, and offer-building context.',
     intro: 'MM2 Trading Values is the demand-oriented view of the local weapon dataset. It differs from the broad Value List by emphasizing how community interest and category affect offer construction and retrading.',
     useCases: ['Browse weapons with demand filters.', 'Find liquid candidates for an upgrade.', 'Compare value with trading interest.'],
@@ -356,7 +356,7 @@ export const survivalTradingToolContent = defineToolContent({
     example: 'Two rows at value 100 can show demand 9 and 4. The demand view explains why the first may be easier to use in an upgrade even though the value sort treats them as tied.',
     result: 'Use the page to shortlist liquid items and identify low-demand adds. A complete W/F/L still requires quantities and both offer sides.',
     limits: 'The present experience still shares the core MM2 catalog with Value List and needs broader data. Demand labels are editorial/community snapshots.',
-    limitPoints: ['No live trade-feed sampling.', '59 reviewed weapon rows.', 'This route remains similar enough to Value List for human SEO review.'],
+    limitPoints: ['No live trade-feed sampling.', 'Demand-rated and tradeable rows only.', 'Untradeable records are excluded from this trading-focused cut.'],
     faqs: [
       { question: 'How is MM2 Trading Values different from Value List?', answer: 'Trading Values prioritizes demand and offer liquidity; Value List is the broad catalog lookup. They still share a dataset and need human SEO review.' },
       { question: 'Can high demand increase a trade overpay?', answer: 'Players may pay more for liquidity or a desired upgrade, but the calculator does not apply an automatic demand premium.' },
@@ -364,7 +364,7 @@ export const survivalTradingToolContent = defineToolContent({
     ],
   }),
   'mm2/knife-values': c({
-    name: 'MM2 Knife Values', reviewed: '2026-08-28',
+    name: 'MM2 Knife Values', reviewed: '2026-09-03',
     methodSummary: 'Restricts the local MM2 reference to knives and compares knife-specific value and demand.',
     intro: 'MM2 Knife Values is the knife-focused resource, excluding guns and unrelated catalog rows. Its search intent is category comparison: knife collectors can filter, rank, and prepare knife-only offers without a mixed weapon list.',
     useCases: ['Compare knife entries only.', 'Build a knife collection shortlist.', 'Review knife demand before a same-category swap.'],
@@ -381,7 +381,7 @@ export const survivalTradingToolContent = defineToolContent({
     ],
   }),
   'mm2/inventory-calculator': c({
-    name: 'MM2 Inventory Calculator', reviewed: '2026-08-28',
+    name: 'MM2 Inventory Calculator', reviewed: '2026-09-03',
     methodSummary: 'Totals user-selected weapon quantities and preserves the itemized breakdown in browser state.',
     intro: 'The MM2 Inventory Calculator organizes a selected weapon collection into value contributions. It does not inspect a Roblox inventory; every knife, gun, and quantity is entered by the player.',
     useCases: ['Total a trade-ready subset.', 'Find concentration in one high-value weapon.', 'Keep knife and gun rows itemized.'],
@@ -398,7 +398,7 @@ export const survivalTradingToolContent = defineToolContent({
     ],
   }),
   'mm2/weapon-comparison': c({
-    name: 'MM2 Weapon Comparison', reviewed: '2026-08-28',
+    name: 'MM2 Weapon Comparison', reviewed: '2026-09-03',
     methodSummary: 'Places two weapon profiles side by side for value, demand, rarity, and category.',
     intro: 'The MM2 Weapon Comparison is a two-item decision page. It helps explain where two knives or guns differ before a swap, without hiding category and demand behind one blended verdict.',
     useCases: ['Compare two potential upgrade targets.', 'Check a knife against a gun of similar value.', 'See whether demand supports the value difference.'],
@@ -406,7 +406,7 @@ export const survivalTradingToolContent = defineToolContent({
     mechanics: 'The comparison subtracts the two catalog references and displays descriptive fields. Any blended indicator is a planning summary, not an MM2 statistic.',
     example: 'Weapon A at value 75 and demand 8 leads Weapon B at value 80 and demand 5 in liquidity but trails by five value units. That is a trade-off, not an automatic winner.',
     result: 'Use the value difference to estimate an add and demand to judge retradeability. Collector set goals can make category more important than either numeric field.',
-    limits: 'Two selected rows cannot represent market negotiation, duplication risk, or unlisted variants. The comparison uses the same dated 59-row community snapshot as the value list.',
+    limits: 'Two selected rows cannot represent market negotiation, duplication risk, or unlisted variants. The comparison uses the same source-dated 300-record snapshot as the main value list.',
     limitPoints: ['Adds are excluded.', 'No item authentication.', 'Demand changes over time.'],
     faqs: [
       { question: 'Can Weapon Comparison handle a multi-item MM2 offer?', answer: 'No. It compares two rows. Use Trade Calculator for complete bundles.' },
@@ -432,7 +432,7 @@ export const survivalTradingToolContent = defineToolContent({
     ],
   }),
   'mm2/godly-values': c({
-    name: 'MM2 Godly Values', reviewed: '2026-08-28',
+    name: 'MM2 Godly Values', reviewed: '2026-09-03',
     methodSummary: 'Restricts the local catalog to Godly-tier entries and ranks their value and demand.',
     intro: 'MM2 Godly Values is the rarity-focused view for Godly weapons in the current local dataset. It supports comparisons within the tier rather than implying that every Godly is equal or that rarity alone determines market value.',
     useCases: ['Filter the catalog to Godly entries.', 'Compare Godly value with demand.', 'Prepare a same-tier upgrade shortlist.'],
@@ -449,7 +449,7 @@ export const survivalTradingToolContent = defineToolContent({
     ],
   }),
   'mm2/collection-tracker': c({
-    name: 'MM2 Collection Tracker', reviewed: '2026-08-28',
+    name: 'MM2 Collection Tracker', reviewed: '2026-09-03',
     methodSummary: 'Stores checked MM2 catalog entries locally and measures completion against that catalog version.',
     intro: 'The MM2 Collection Tracker is a browser-only checklist for the weapons currently represented in the local dataset. It supports collecting progress without asking for Roblox credentials.',
     useCases: ['Mark collected knives and guns.', 'See missing local catalog entries.', 'Plan collection trades by category.'],
@@ -458,7 +458,7 @@ export const survivalTradingToolContent = defineToolContent({
     example: 'Checking seven of nine current rows shows 77.8%. Adding a tenth catalog row later changes the same seven checks to 70%.',
     result: 'Use the missing list as a planning aid, but label it as local-catalog completion until every MM2 item and variant is covered.',
     limits: 'The tracker does not verify ownership, sync devices, or cover the full MM2 catalog. Browser cleanup can erase state.',
-    limitPoints: ['No account connection.', 'Tracks the reviewed 59-row catalog only.', 'Not proof of ownership.'],
+    limitPoints: ['No account connection.', 'Tracks the reviewed 300-record catalog only.', 'Not proof of ownership.'],
     faqs: [
       { question: 'Does MM2 Collection Tracker import my inventory?', answer: 'No. You mark entries manually; no Roblox credentials or inventory API are used.' },
       { question: 'Why can my percentage change after an update?', answer: 'New catalog entries increase the total being tracked while keeping existing checks.' },

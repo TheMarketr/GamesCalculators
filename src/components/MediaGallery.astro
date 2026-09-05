@@ -1,5 +1,6 @@
 ---
 import type { GameImage } from '../data/games';
+import MediaLightbox from './MediaLightbox.astro';
 
 interface Props {
   items: GameImage[];
@@ -32,11 +33,14 @@ const visibleItems = typeof limit === 'number' ? items.slice(0, limit) : items;
         data-media-caption={media.caption ?? media.alt}
         data-media-credit={media.credit}
         data-media-credit-url={media.creditUrl}
+        data-media-source-label={media.sourceLabel}
+        data-media-source-url={media.sourceUrl}
       >
         <img src={media.src} alt={media.alt} width="768" height="432" loading="lazy" decoding="async" />
         <span class="media-gallery__zoom" aria-hidden="true">＋</span>
       </button>
-      <figcaption><strong>{media.caption ?? media.alt}</strong><a href={media.creditUrl} target="_blank" rel="license noopener">Rockstar source ↗</a></figcaption>
+      <figcaption><strong>{media.caption ?? media.alt}</strong><a href={media.sourceUrl} target="_blank" rel="license noopener">{media.sourceLabel} ↗</a></figcaption>
     </figure>)}
   </div>
 </section>
+{visibleItems.length > 0 && <MediaLightbox initialImage={visibleItems[0]} />}

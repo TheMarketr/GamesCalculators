@@ -11,12 +11,24 @@ interface Faq { question: string; answer: string }
 interface Props { game: GameConfig; tool: ToolConfig; faqs: Faq[]; content: CalculatorContent }
 
 const { game, tool, faqs, content } = Astro.props;
-const related = game.tools.filter((candidate) => candidate.slug !== tool.slug).slice(0, 3);
-const reviewed = content.reviewed
-  ? new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(`${content.reviewed}T12:00:00Z`))
-  : undefined;
+const pageFamilies: Record<string, string[]> = {
+  mm2: ['value-list', 'trading-values', 'knife-values', 'godly-values'],
+  'adopt-me': ['value-calculator', 'pet-value-calculator', 'pet-calculator', 'wfl-calculator', 'trade-calculator', 'inventory-calculator'],
+  'grow-a-garden': ['prices', 'items', 'best-crops'],
+};
+const familySlugs = pageFamilies[game.slug]?.includes(tool.slug) ? pageFamilies[game.slug] : [];
+const familyTools = familySlugs.map((slug) => game.tools.find((candidate) => candidate.slug === slug)).filter((candidate): candidate is ToolConfig => Boolean(candidate));
+const related = game.tools.filter((candidate) => candidate.slug !== tool.slug && !familySlugs.includes(candidate.slug)).slice(0, 3);
+const reviewed = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(`${tool.lastReviewed}T12:00:00Z`));
 const toolIcon = getToolIcon(tool);
-const sections = [content.howItWorks, content.workedExample, content.howToUseResult, content.limitations];
+const typeCopy = {
+  calculator: { interactive: 'Interactive calculator', covers: `What the ${tool.name} calculates`, method: content.howItWorks.title, link: 'See the calculation explained →', local: 'Calculated in this browser', icon: '🧮' },
+  generator: { interactive: 'Interactive generator', covers: `What the ${tool.name} generates`, method: `How this ${game.name} generator works`, link: 'See the generation method →', local: 'Generated in this browser', icon: '🧱' },
+  reference: { interactive: 'Interactive reference', covers: `What the ${tool.name} covers`, method: 'How this reference is built', link: 'See the sourcing explained →', local: 'Filtered in this browser', icon: '📚' },
+  tracker: { interactive: 'Interactive tracker', covers: `What the ${tool.name} tracks`, method: 'How this tracker stores progress', link: 'See the tracking method →', local: 'Stored in this browser', icon: '✅' },
+  map: { interactive: 'Interactive map', covers: `What the ${tool.name} maps`, method: 'How this map is built', link: 'See the map method →', local: 'Explored in this browser', icon: '🗺️' },
+}[tool.toolType];
+const sections = [{ ...content.howItWorks, title: typeCopy.method }, content.workedExample, content.howToUseResult, content.limitations];
 const knowledgeIcons = ['⚙️', '🧪', '🎯', '⚠️'];
 const gtaMediaOrder = tool.slug.includes('map')
   ? [1, 4, 5, 6, 7]
@@ -46,25 +58,25 @@ const toolMedia = game.gallery
             <p>{tool.description}</p>
           </div>
         </div>
-        {reviewed && <div class="update-badge"><span></span><small>Last reviewed</small><strong>{reviewed}</strong></div>}
+        <div class="update-badge"><span></span><small>Last reviewed</small><strong>{reviewed}</strong></div>
       </div>
     </div>
   </div>
 
   <div class="container tool-layout">
     <section class="calculator-shell" aria-label={`${tool.name} interactive tool`}>
-      <div class="calculator-context"><span aria-hidden="true">{toolIcon}</span><div><strong>{tool.shortName}</strong><small>Interactive calculator</small></div><b><span aria-hidden="true">●</span> Ready</b></div>
+      <div class="calculator-context"><span aria-hidden="true">{toolIcon}</span><div><strong>{tool.shortName}</strong><small>{typeCopy.interactive}</small></div><b><span aria-hidden="true">●</span> Ready</b></div>
       <slot name="calculator" />
     </section>
     <aside class="tool-side">
       <div class="side-card tool-method-card">
-        <span class="side-card-icon" aria-hidden="true">🧮</span>
+        <span class="side-card-icon" aria-hidden="true">{typeCopy.icon}</span>
         <span class="eyebrow">Method at a glance</span>
         <h2>{tool.shortName}</h2>
         <p>{content.methodSummary}</p>
-        <a href="#how-it-works">See the calculation explained →</a>
+        <a href="#how-it-works">{typeCopy.link}</a>
       </div>
-      <div class="local-notice"><span aria-hidden="true">🔒</span><p><strong>Calculated in this browser</strong>Your entries are not sent to a game account.</p></div>
+      <div class="local-notice"><span aria-hidden="true">🔒</span><p><strong>{typeCopy.local}</strong>Your entries are not sent to a game account.</p></div>
     </aside>
   </div>
 
@@ -73,7 +85,7 @@ const toolMedia = game.gallery
       items={toolMedia}
       galleryId={`tool-${game.slug}-${tool.slug}`}
       title={game.slug === 'gta-6' ? `${tool.shortName} visual reference` : `${game.name} visual reference`}
-      description={game.slug === 'gta-6' ? 'Explore official character and Leonida location screenshots related to this tool. Open any image for a larger view.' : 'Official or licensed imagery identifies the game covered by this independent fan utility.'}
+      description={game.slug === 'gta-6' ? `Explore official character and Leonida location screenshots selected for the ${tool.shortName}. Open any image for a larger view.` : `Official or licensed ${game.name} imagery identifies the game covered by the ${tool.shortName}.`}
       limit={game.slug === 'gta-6' ? 5 : 2}
       compact
     />}
@@ -88,7 +100,7 @@ const toolMedia = game.gallery
     <section class="calculator-guide" id="calculator-guide" aria-labelledby="calculator-guide-title">
       <div class="guide-copy">
         <span class="eyebrow">Tool-specific guide</span>
-        <h2 id="calculator-guide-title">What the {tool.name} calculates</h2>
+        <h2 id="calculator-guide-title">{typeCopy.covers}</h2>
         {content.intro.map((paragraph) => <p>{paragraph}</p>)}
       </div>
       <aside class="intent-card">
@@ -96,6 +108,10 @@ const toolMedia = game.gallery
         <ul>{content.useCases.map((useCase) => <li><span aria-hidden="true">✓</span>{useCase}</li>)}</ul>
       </aside>
     </section>
+
+    {familyTools.length > 1 && <nav class="content-jump-nav" aria-label={`Related ${game.shortName ?? game.name} value pages`}>
+      {familyTools.map((sibling) => <a href={`/${game.slug}/${sibling.slug}/`} aria-current={sibling.slug === tool.slug ? 'page' : undefined}><span aria-hidden="true">{getToolIcon(sibling)}</span>{sibling.shortName}</a>)}
+    </nav>}
 
     <section class="how-to-panel" aria-labelledby="how-to-title">
       <div><span class="eyebrow">Input workflow</span><h2 id="how-to-title">Use the {tool.shortName}</h2></div>

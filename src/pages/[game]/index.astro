@@ -5,7 +5,6 @@ import MediaGallery from '../../components/MediaGallery.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { games, type GameConfig } from '../../data/games';
 import { guides } from '../../data/guides';
-import { calculatorContent } from '../../data/calculator-content';
 
 export function getStaticPaths() {
   return games.map((game) => ({ params: { game: game.slug }, props: { game } }));
@@ -17,10 +16,7 @@ const gameGuides = guides.filter((guide) => guide.gameSlug === game.slug);
 const featuredTools = (game.tools.some((tool) => tool.featured) ? game.tools.filter((tool) => tool.featured) : game.tools).slice(0, 3);
 const toolCategories = [...new Set(game.tools.map((tool) => tool.category))];
 const updates = [
-  ...game.tools.flatMap((tool) => {
-    const reviewed = calculatorContent[`${game.slug}/${tool.slug}`]?.reviewed;
-    return reviewed ? [{ name: tool.shortName, type: 'Tool', category: tool.category, reviewed, href: `/${game.slug}/${tool.slug}/` }] : [];
-  }),
+  ...game.tools.map((tool) => ({ name: tool.shortName, type: 'Tool', category: tool.category, reviewed: tool.lastReviewed, href: `/${game.slug}/${tool.slug}/` })),
   ...gameGuides.map((guide) => ({ name: guide.title, type: 'Guide', category: guide.category, reviewed: guide.updated, href: `/${guide.slug}/` })),
 ].sort((a, b) => b.reviewed.localeCompare(a.reviewed));
 const latestReview = updates[0]?.reviewed;

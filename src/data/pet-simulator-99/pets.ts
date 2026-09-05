@@ -8,7 +8,7 @@ const source = {
   unit: 'diamonds RAP',
 };
 const pet = (slug: string, name: string, rarity: string, billions: number): ValueItem => ({
-  slug, name, category: 'pet', rarity, value: billions * 1_000_000_000, demand: 0, updated: reviewed, ...source,
+  slug, name, category: 'pet', rarity, value: billions * 1_000_000_000, demand: 0, updated: reviewed, lastReviewed: reviewed, ...source,
   note: `${billions.toLocaleString()}B Recent Auction Price from the synced BIG Games API snapshot; RAP is not a guaranteed trade price.`,
 });
 

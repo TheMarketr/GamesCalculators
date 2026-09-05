@@ -1,12 +1,18 @@
+---
+import type { GameImage } from '../data/games';
+
+interface Props { initialImage: GameImage }
+const { initialImage } = Astro.props;
+---
 <dialog class="media-lightbox" data-media-lightbox aria-labelledby="media-lightbox-title">
   <div class="media-lightbox__frame">
     <button class="media-lightbox__close" type="button" data-media-close aria-label="Close image viewer">×</button>
     <button class="media-lightbox__nav media-lightbox__nav--previous" type="button" data-media-previous aria-label="Previous image">‹</button>
     <figure>
-      <img data-media-lightbox-image src="" alt="" width="1600" height="900" />
+      <img data-media-lightbox-image src={initialImage.src} alt={initialImage.alt} width="1600" height="900" />
       <figcaption>
         <div><strong id="media-lightbox-title" data-media-lightbox-title></strong><span data-media-count></span></div>
-        <a data-media-lightbox-credit href="https://www.rockstargames.com/VI/media/screenshots" target="_blank" rel="license noopener">Official media source ↗</a>
+        <a data-media-lightbox-credit href={initialImage.sourceUrl} target="_blank" rel="license noopener">{initialImage.sourceLabel} ↗</a>
       </figcaption>
     </figure>
     <button class="media-lightbox__nav media-lightbox__nav--next" type="button" data-media-next aria-label="Next image">›</button>
@@ -34,8 +40,8 @@
       image.alt = item.dataset.mediaAlt ?? '';
       title.textContent = item.dataset.mediaCaption ?? item.dataset.mediaAlt ?? '';
       count.textContent = `${activeIndex + 1} of ${activeItems.length}`;
-      credit.textContent = item.dataset.mediaCredit ?? 'Official media source ↗';
-      credit.href = item.dataset.mediaCreditUrl ?? '#';
+      credit.textContent = `${item.dataset.mediaSourceLabel ?? 'Official media source'} ↗`;
+      credit.href = item.dataset.mediaSourceUrl ?? item.dataset.mediaCreditUrl ?? '#';
       const hasMultiple = activeItems.length > 1;
       if (previousButton) previousButton.hidden = !hasMultiple;
       if (nextButton) nextButton.hidden = !hasMultiple;

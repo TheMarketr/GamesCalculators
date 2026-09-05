@@ -6,16 +6,16 @@ const foodSource = 'https://dinokid.wiki/food/';
 const recipeSource = 'https://99nightsintheforest.com/wiki';
 
 const gameClass = (slug: string, name: string, cost: number, stars: number, tier: string, currency = 'diamonds'): ValueItem => ({
-  slug, name, category: 'class', rarity: `${stars}-star · ${tier} tier`, value: cost, demand: stars, ratingLabel: 'stars', ratingMax: 5, updated: reviewed,
+  slug, name, category: 'class', rarity: `${stars}-star · ${tier} tier`, value: cost, demand: stars, ratingLabel: 'stars', ratingMax: 5, updated: reviewed, lastReviewed: reviewed,
   sourceType: 'community-wiki', sourceLabel: 'PC Gamer class reference', sourceUrl: classSource, unit: currency,
   note: `${cost} ${currency}; ${stars}-star class. ${tier} is the source's editorial tier, not an in-game stat.`,
 });
 const food = (slug: string, name: string, hunger: number, note: string): ValueItem => ({
-  slug, name, category: 'food', rarity: 'consumable', value: hunger, demand: 0, updated: reviewed,
+  slug, name, category: 'food', rarity: 'consumable', value: hunger, demand: 0, updated: reviewed, lastReviewed: reviewed,
   sourceType: 'community-wiki', sourceLabel: 'DinoKid food reference', sourceUrl: foodSource, unit: 'hunger units', note,
 });
 const recipe = (slug: string, name: string, materials: number, bench: number, note: string): ValueItem => ({
-  slug, name, category: 'crafting', rarity: `bench ${bench}`, value: materials, demand: 0, updated: reviewed,
+  slug, name, category: 'crafting', rarity: `bench ${bench}`, value: materials, demand: 0, updated: reviewed, lastReviewed: reviewed,
   sourceType: 'community-wiki', sourceLabel: '99 Nights community recipe reference', sourceUrl: recipeSource, unit: 'material pieces', note,
 });
 

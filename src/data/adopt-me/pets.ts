@@ -8,7 +8,7 @@ const source = {
   unit: 'community index',
 };
 const pet = (slug: string, name: string, rarity: string, value: number): ValueItem => ({
-  slug, name, category: 'pet', rarity, value, demand: 0, updated: reviewed, ...source,
+  slug, name, category: 'pet', rarity, value, demand: 0, updated: reviewed, lastReviewed: reviewed, ...source,
   note: 'Fan-made community index snapshot; not an official Adopt Me trade value.',
 });
 

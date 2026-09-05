@@ -26,9 +26,12 @@ const { game, tool } = Astro.props;
 const content = buildCalculatorContent(game, tool);
 const faqs = content.faqs;
 const canonical=`/${game.slug}/${tool.slug}/`;
+const primarySchema = tool.toolType === 'reference'
+  ? {'@context':'https://schema.org','@type':'CollectionPage',name:tool.name,description:tool.description,url:`https://gamescalculators.com${canonical}`,dateModified:tool.lastReviewed,about:{'@type':'VideoGame',name:game.name}}
+  : {'@context':'https://schema.org','@type':'WebApplication',name:tool.name,description:tool.description,url:`https://gamescalculators.com${canonical}`,dateModified:tool.lastReviewed,applicationCategory:'GameApplication',operatingSystem:'Any',offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}};
 const schema=[
   {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:'https://gamescalculators.com/'},{'@type':'ListItem',position:2,name:game.name,item:`https://gamescalculators.com/${game.slug}/`},{'@type':'ListItem',position:3,name:tool.name,item:`https://gamescalculators.com${canonical}`}]},
-  {'@context':'https://schema.org','@type':'WebApplication',name:tool.name,description:tool.description,url:`https://gamescalculators.com${canonical}`,applicationCategory:'GameApplication',operatingSystem:'Any',offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}},
+  primarySchema,
   {'@context':'https://schema.org','@type':'FAQPage',mainEntity:faqs.map((faq)=>({'@type':'Question',name:faq.question,acceptedAnswer:{'@type':'Answer',text:faq.answer}}))},
 ];
 ---

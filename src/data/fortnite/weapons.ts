@@ -8,7 +8,7 @@ const source = {
   unit: 'DPS',
 };
 const weapon = (slug: string, name: string, rarity: string, dps: number, damage: number, fireRate: number, magazine: number, reload: number, category = 'assault rifle'): ValueItem => ({
-  slug, name, category, rarity, value: dps, damage, fireRate, magazine, reload, demand: 0, updated: reviewed, ...source,
+  slug, name, category, rarity, value: dps, damage, fireRate, magazine, reload, demand: 0, updated: reviewed, lastReviewed: reviewed, ...source,
   note: `${damage} damage · ${fireRate}/s fire rate · ${magazine} magazine · ${reload}s reload. Availability varies by mode and season.`,
 });
 

@@ -8,13 +8,14 @@ import { getCalculatorProfile, getSecondaryMode } from './profiles';
 type Props = { gameSlug: string; toolSlug: string; toolName: string };
 type SortMode = 'score' | 'name' | 'value' | 'rating';
 
-function routeCatalog(gameSlug: string, toolSlug: string) {
+export function routeCatalog(gameSlug: string, toolSlug: string) {
   let items = getToolCatalog(gameSlug, toolSlug);
   if (gameSlug === '99-nights' && (toolSlug === 'characters' || toolSlug === 'class-comparison')) items = items.filter((item) => item.category === 'class');
   if (gameSlug === '99-nights' && toolSlug === 'items') items = items.filter((item) => item.category === 'food');
   if (gameSlug === '99-nights' && (toolSlug === 'crafting' || toolSlug === 'crafting-calculator')) items = items.filter((item) => item.category === 'crafting');
   if (gameSlug === 'mm2' && toolSlug === 'knife-values') items = items.filter((item) => item.category === 'knife');
   if (gameSlug === 'mm2' && toolSlug === 'godly-values') items = items.filter((item) => item.rarity === 'godly');
+  if (gameSlug === 'mm2' && toolSlug === 'trading-values') items = items.filter((item) => item.rating > 0 && !item.note.toLowerCase().includes('untradeable'));
   return items;
 }
 
@@ -71,10 +72,17 @@ function FormulaWorkbench({ gameSlug, toolSlug, toolName }: Props) {
 
 function ReferenceExplorer({ gameSlug, toolSlug, toolName }: Props) {
   const isGtaReference = gameSlug === 'gta-6';
+  const isMm2Knife = gameSlug === 'mm2' && toolSlug === 'knife-values';
+  const isMm2Godly = gameSlug === 'mm2' && toolSlug === 'godly-values';
+  const isMm2Trading = gameSlug === 'mm2' && toolSlug === 'trading-values';
   const catalog = useMemo(() => routeCatalog(gameSlug, toolSlug), [gameSlug, toolSlug]);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('all');
-  const [sort, setSort] = useState<SortMode>(isGtaReference ? 'name' : toolSlug.startsWith('best-') ? 'score' : 'value');
+  const [sort, setSort] = useState<SortMode>(isGtaReference ? 'name' : isMm2Trading ? 'rating' : toolSlug.startsWith('best-') ? 'score' : 'value');
+  const firstColumn = isMm2Knife ? 'MM2 knife' : isMm2Godly ? 'MM2 Godly item' : isMm2Trading ? 'MM2 trading item' : 'Name';
+  const tierColumn = isMm2Knife ? 'Knife rarity' : isMm2Godly ? 'Godly class' : isGtaReference ? 'Status' : 'Tier';
+  const referenceColumn = isMm2Trading ? 'Community value' : isGtaReference ? 'Verification source' : 'Reference';
+  const contextColumn = isMm2Trading ? 'Demand' : isGtaReference ? 'Evidence scope' : 'Rating / context';
   const categories = ['all', ...new Set(catalog.map((item) => item.category))];
   const filtered = [...catalog].filter((item) => (category === 'all' || item.category === category) && `${item.name} ${item.category} ${item.rarity} ${item.note}`.toLowerCase().includes(query.toLowerCase())).sort((a, b) => {
     if (sort === 'name') return a.name.localeCompare(b.name);
@@ -87,7 +95,7 @@ function ReferenceExplorer({ gameSlug, toolSlug, toolName }: Props) {
     <div class="calculator-header"><div><span class="eyebrow">Searchable local reference</span><h2>Explore {toolName.replace(/^(Grow a Garden|Blox Fruits|Steal a Brainrot|99 Nights|Adopt Me|MM2|Pet Simulator 99|GTA VI)\s+/, '')}</h2></div><span class="reference-count">{filtered.length} shown</span></div>
     <div class="reference-controls"><label class="calc-field"><span>Search</span><input type="search" value={query} placeholder={isGtaReference ? 'Search facts, categories or status' : 'Search names, categories or rarity'} onInput={(event) => setQuery((event.currentTarget as HTMLInputElement).value)}/></label><label class="calc-field"><span>Category</span><select value={category} onChange={(event) => setCategory((event.currentTarget as HTMLSelectElement).value)}>{categories.map((item) => <option value={item} key={item}>{item}</option>)}</select></label><label class="calc-field"><span>Sort by</span><select value={sort} onChange={(event) => setSort((event.currentTarget as HTMLSelectElement).value as SortMode)}>{!isGtaReference && <><option value="value">Value / power</option><option value="rating">Demand / utility</option><option value="score">Combined score</option></>}<option value="name">Name</option></select></label></div>
     {catalog[0]?.sourceLabel && <p class="assumption-note"><strong>Data source:</strong> {catalog[0].sourceUrl ? <a href={catalog[0].sourceUrl} target="_blank" rel="noreferrer">{catalog[0].sourceLabel}</a> : catalog[0].sourceLabel}{catalog[0].reviewed ? ` · reviewed ${catalog[0].reviewed}` : ''}. Read each row note before comparing unlike metrics.</p>}
-    <div class="interactive-table-wrap"><table class="interactive-table"><thead><tr><th>Name</th><th>Category</th><th>{isGtaReference ? 'Status' : 'Tier'}</th><th>{isGtaReference ? 'Verification source' : 'Reference'}</th><th>{isGtaReference ? 'Evidence scope' : 'Rating / context'}</th></tr></thead><tbody>{filtered.map((item) => <tr key={item.slug}><th scope="row"><strong>{item.name}</strong><small>{item.note}</small></th><td>{item.category}</td><td><span class="value-badge">{item.rarity}</span></td><td>{isGtaReference && item.sourceUrl ? <a href={item.sourceUrl} target="_blank" rel="noreferrer">{item.displayValue ?? item.sourceLabel}</a> : displayReference(item)}</td><td>{displayRating(item)}</td></tr>)}</tbody></table></div>
+    <div class="interactive-table-wrap"><table class="interactive-table"><thead><tr><th>{firstColumn}</th><th>Category</th><th>{tierColumn}</th><th>{referenceColumn}</th><th>{contextColumn}</th></tr></thead><tbody>{filtered.map((item) => <tr key={item.slug}><th scope="row"><strong>{item.name}</strong><small>{item.note}</small></th><td>{item.category}</td><td><span class="value-badge">{item.rarity}</span></td><td>{isGtaReference && item.sourceUrl ? <a href={item.sourceUrl} target="_blank" rel="noreferrer">{item.displayValue ?? item.sourceLabel}</a> : <>{displayReference(item)}{item.sourceUrl && <small><a href={item.sourceUrl} target="_blank" rel="noreferrer">Source ↗</a></small>}</>}</td><td>{displayRating(item)}</td></tr>)}</tbody></table></div>
     {!filtered.length && <div class="empty-state"><strong>No matching entries</strong><small>Try a broader search or reset the category.</small></div>}
     <p class="assumption-note">{isGtaReference ? 'Pre-release records distinguish Rockstar-published facts, developer-interview details and observations from official footage. No numeric score or final mechanic formula is assigned.' : 'These are dated reference records, not guaranteed offers. Community market indexes can move, RAP can be manipulated, and item availability or game stats can change after updates.'}</p>
   </div>;

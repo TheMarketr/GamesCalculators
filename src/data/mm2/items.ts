@@ -1,4 +1,5 @@
 import type { ValueItem } from '../types';
+import sourceSnapshot from './source-snapshot.json';
 
 const reviewed = '2026-08-28';
 const source = {
@@ -8,12 +9,12 @@ const source = {
   unit: 'Supreme value',
 };
 const weapon = (slug: string, name: string, category: 'knife' | 'gun' | 'weapon', rarity: string, value: number, demand: number): ValueItem => ({
-  slug, name, category, rarity, value, demand, updated: reviewed, ...source,
+  slug, name, category, rarity, value, demand, updated: reviewed, lastReviewed: reviewed, ...source,
   note: `Community-market snapshot: ${value.toLocaleString()} value, ${demand}/10 demand. Not an official MM2 price.`,
 });
 
 /** Community reference snapshot. Market values can move between editorial reviews. */
-export const mm2Items: ValueItem[] = [
+export const mm2LegacyItems: ValueItem[] = [
   weapon('gingerscope', 'Gingerscope', 'gun', 'ancient', 17_750, 6),
   weapon('travelers-axe', "Traveler's Axe", 'knife', 'ancient', 8_100, 5),
   weapon('travelers-gun', "Traveler's Gun", 'gun', 'godly', 5_600, 5),
@@ -74,3 +75,17 @@ export const mm2Items: ValueItem[] = [
   weapon('logchopper', 'Logchopper', 'knife', 'ancient', 18, 1),
   weapon('icewing', 'Icewing', 'knife', 'ancient', 13, 1),
 ];
+
+/**
+ * A 300-item, source-dated MM2 market snapshot. Numeric values and demand scores
+ * come from the named Supreme Values category linked on each row; MM2 does not
+ * publish official player-to-player prices.
+ */
+export const mm2Items: ValueItem[] = sourceSnapshot.map((item) => ({
+  ...item,
+  note: `${item.name}: ${item.note}`,
+  sourceType: 'community-market' as const,
+  sourceLabel: 'Supreme Values MM2 community list',
+  unit: 'Supreme value',
+  updated: item.lastReviewed,
+}));

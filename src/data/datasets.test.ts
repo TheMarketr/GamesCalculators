@@ -12,7 +12,7 @@ import { getToolCatalog } from './tool-catalogs';
 import type { ValueItem } from './types';
 
 const datasets: Record<string, { items: ValueItem[]; minimum: number }> = {
-  mm2: { items: mm2Items, minimum: 50 },
+  mm2: { items: mm2Items, minimum: 200 },
   ps99: { items: ps99Pets, minimum: 50 },
   garden: { items: gardenItems, minimum: 50 },
   blox: { items: bloxFruits, minimum: 41 },
@@ -30,7 +30,7 @@ describe('expanded game datasets', () => {
       expect(dataset.items.length).toBeGreaterThanOrEqual(dataset.minimum);
       expect(new Set(dataset.items.map((item) => item.slug)).size).toBe(dataset.items.length);
       expect(dataset.items.every((item) => item.value > 0)).toBe(true);
-      expect(dataset.items.every((item) => item.updated === '2026-08-28')).toBe(true);
+      expect(dataset.items.every((item) => item.updated === item.lastReviewed && /^2026-\d{2}-\d{2}$/.test(item.lastReviewed))).toBe(true);
       expect(dataset.items.every((item) => Boolean(item.sourceLabel && item.sourceUrl && item.unit))).toBe(true);
     });
   }
@@ -40,7 +40,7 @@ describe('expanded game datasets', () => {
     expect(gardenItems.find((item) => item.slug === 'bone-blossom')?.baseWeight).toBe(2.85);
     expect(brainrots.find((item) => item.slug === 'garama-and-madundung')?.income).toBe(50_000_000);
     expect(ps99Pets.find((item) => item.slug === 'huge-empyrean-axolotl')?.value).toBe(915_200_000_000);
-    expect(mm2Items.find((item) => item.slug === 'gingerscope')?.value).toBe(17_750);
+    expect(mm2Items.find((item) => item.slug === 'gingerscope')?.value).toBe(17_250);
     expect(adoptMePets.find((item) => item.slug === 'bat-dragon')?.value).toBe(288);
   });
 

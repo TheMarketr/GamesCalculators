@@ -10,6 +10,7 @@ export interface GtaReferenceRecord {
   sourceLabel: string;
   sourceUrl: string;
   reviewed: string;
+  lastReviewed: string;
   ratingLabel: string;
 }
 
@@ -41,6 +42,7 @@ const record = (
   sourceLabel,
   sourceUrl,
   reviewed,
+  lastReviewed: reviewed,
   ratingLabel: evidence,
 });
 

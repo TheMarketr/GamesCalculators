@@ -22,6 +22,7 @@ export interface CatalogItem {
   sourceLabel?: string;
   sourceUrl?: string;
   reviewed?: string;
+  lastReviewed?: string;
   ratingLabel?: string;
   ratingMax?: number;
 }
@@ -41,14 +42,15 @@ const fromValues = (items: ValueItem[], preferIncome = false): CatalogItem[] =>
     displayValue: `${(preferIncome && item.income !== undefined ? item.income : item.value).toLocaleString()}${preferIncome && item.income !== undefined ? ' cash/sec' : item.unit ? ` ${item.unit}` : ''}`,
     sourceLabel: item.sourceLabel,
     sourceUrl: item.sourceUrl,
-    reviewed: item.updated,
+    reviewed: item.lastReviewed,
+    lastReviewed: item.lastReviewed,
     ratingLabel: item.ratingLabel,
     ratingMax: item.ratingMax,
   }));
 
 const gardenPet = (slug: string, name: string, rarity: string, hunger: number, note: string): CatalogItem => ({
   slug, name, category: 'pet', rarity, value: hunger, rating: 0, note, unit: 'hunger', displayValue: `${hunger.toLocaleString()} hunger`,
-  sourceLabel: 'Grow a Garden DB pet reference', sourceUrl: 'https://growagardendb.com/pets', reviewed: '2026-08-28',
+  sourceLabel: 'Grow a Garden DB pet reference', sourceUrl: 'https://growagardendb.com/pets', reviewed: '2026-08-28', lastReviewed: '2026-08-28',
 });
 const gardenPets = [
   gardenPet('starfish', 'Starfish', 'common', 1_500, 'Gains additional XP per second.'),
@@ -106,7 +108,12 @@ const gardenPets = [
 ];
 
 export function getToolCatalog(gameSlug: string, toolSlug: string): CatalogItem[] {
-  if (gameSlug === 'grow-a-garden') return toolSlug === 'pets' ? gardenPets : fromValues(gardenItems);
+  if (gameSlug === 'grow-a-garden') {
+    if (toolSlug === 'pets') return gardenPets;
+    if (toolSlug === 'items') return [...fromValues(gardenItems), ...gardenPets];
+    if (toolSlug === 'best-crops') return fromValues([...gardenItems].sort((a, b) => b.value - a.value).slice(0, 20));
+    return fromValues(gardenItems);
+  }
   if (gameSlug === 'blox-fruits') return fromValues(bloxFruits);
   if (gameSlug === 'steal-a-brainrot') return fromValues(brainrots, toolSlug === 'income-comparison');
   if (gameSlug === 'adopt-me') return fromValues(adoptMePets);

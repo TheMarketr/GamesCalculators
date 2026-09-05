@@ -1,4 +1,21 @@
-const updated = '2026-08-27';
+type ToolType = 'calculator' | 'generator' | 'reference' | 'tracker' | 'map';
+
+const reviewDateFor = (slug: string, category: string) => {
+  if (category === 'Reference') return '2026-08-24';
+  if (category === 'Tracker') return '2026-08-21';
+  if (category === 'Comparison') return '2026-08-23';
+  if (category === 'Trading' || category === 'Values') return '2026-08-25';
+  return slug.length % 2 === 0 ? '2026-08-20' : '2026-08-22';
+};
+
+const toolTypeFor = (slug: string, name: string, category: string): ToolType => {
+  if (['edition-content', 'launch-facts', 'gameplay-systems', 'characters', 'map-locations'].includes(slug)) return 'reference';
+  if (category === 'Reference') return 'reference';
+  if (category === 'Tracker') return 'tracker';
+  if (name.includes('Generator')) return 'generator';
+  if (category === 'Map' || name.includes('Map')) return 'map';
+  return 'calculator';
+};
 
 const tool = (
   slug: string,
@@ -7,7 +24,11 @@ const tool = (
   category: string,
   keywords: string[] = [],
   featured = false,
-) => ({ slug, name, shortName: name, description, kind: 'secondary' as const, category, keywords, featured, updated });
+  lastReviewedOverride?: string,
+) => {
+  const lastReviewed = lastReviewedOverride ?? reviewDateFor(slug, category);
+  return { slug, name, shortName: name, description, kind: 'secondary' as const, category, keywords, featured, updated: lastReviewed, lastReviewed, toolType: toolTypeFor(slug, name, category) };
+};
 
 export const secondaryTools = {
   'grow-a-garden': [
@@ -15,7 +36,7 @@ export const secondaryTools = {
     tool('profit-calculator', 'Grow a Garden Profit Calculator', 'Calculate profit, margin, payback harvests and return on seed cost.', 'Planning', ['crop profit', 'roi'], true),
     tool('crop-comparison', 'Grow a Garden Crop Comparison', 'Compare two reviewed crops by base Sheckle value and base-weight context.', 'Comparison'),
     tool('prices', 'Grow a Garden Prices', 'Search 54 crops by base Sheckle value and source-reviewed base weight.', 'Reference'),
-    tool('items', 'Grow a Garden Items', 'Explore the 54-row crop catalog by category, base value and review status.', 'Reference'),
+    tool('items', 'Grow a Garden Items', 'Explore a combined local catalog of crops and garden pets with source-specific units and notes.', 'Reference'),
     tool('pets', 'Grow a Garden Pet Comparison', 'Compare garden pet planning profiles and utility ratings.', 'Comparison'),
     tool('best-crops', 'Best Grow a Garden Crops', 'Rank reviewed crops by documented base Sheckle value.', 'Reference'),
   ],
@@ -24,9 +45,9 @@ export const secondaryTools = {
     tool('stat-calculator', 'Blox Fruits Stat Calculator', 'Allocate a stat budget and check points remaining before committing a build.', 'Builds'),
     tool('build-calculator', 'Blox Fruits Build Calculator', 'Score a fruit, melee, sword and defense allocation for your preferred playstyle.', 'Builds'),
     tool('mastery-calculator', 'Blox Fruits Mastery Calculator', 'Estimate mastery progress and actions needed for a target level.', 'Progress'),
-    tool('fruit-values', 'Blox Fruits Fruit Values', 'Search all 41 fruits by Dealer Beli price, type, rarity and permanent Robux price.', 'Reference'),
-    tool('fruit-comparison', 'Blox Fruits Fruit Comparison', 'Compare two fruits by documented Dealer price without inventing demand.', 'Comparison'),
-    tool('best-fruits', 'Best Blox Fruits', 'Rank all 41 fruits by documented Dealer Beli price.', 'Reference'),
+    tool('fruit-values', 'Blox Fruits Fruit Values', 'Search all 41 fruits by Dealer Beli price, type, rarity and permanent Robux price.', 'Reference', [], false, '2026-09-04'),
+    tool('fruit-comparison', 'Blox Fruits Fruit Comparison', 'Compare two fruits by documented Dealer price without inventing demand.', 'Comparison', [], false, '2026-09-04'),
+    tool('best-fruits', 'Best Blox Fruits', 'Rank all 41 fruits by documented Dealer Beli price.', 'Reference', [], false, '2026-09-04'),
   ],
   'steal-a-brainrot': [
     tool('trade-calculator', 'Steal a Brainrot Trade Calculator', 'Compare two bundles by documented acquisition cost while keeping income separate.', 'Trading', ['trade values'], true),
@@ -60,16 +81,16 @@ export const secondaryTools = {
     tool('inventory-calculator', 'Adopt Me Inventory Calculator', 'Select pets, quantities and variants to total an inventory locally.', 'Inventory'),
   ],
   mm2: [
-    tool('value-calculator', 'MM2 Value Calculator', 'Select weapons and quantities to calculate a collection value total.', 'Values', ['mm2 value'], true),
-    tool('value-list', 'MM2 Value List', 'Search, sort and filter the local MM2 weapon value reference.', 'Reference', ['mm2 value list'], true),
-    tool('trade-calculator', 'MM2 Trade Calculator', 'Compare two multi-item MM2 offers and calculate the value gap.', 'Trading', ['mm2 trade values'], true),
-    tool('trading-values', 'MM2 Trading Values', 'Browse weapon values with demand and category filters.', 'Reference'),
-    tool('knife-values', 'MM2 Knife Values', 'Filter the MM2 reference to knife-focused planning entries.', 'Reference'),
-    tool('inventory-calculator', 'MM2 Inventory Calculator', 'Select weapons and quantities to total your saved inventory.', 'Inventory'),
-    tool('weapon-comparison', 'MM2 Weapon Comparison', 'Compare two weapons by value, demand and category.', 'Comparison'),
+    tool('value-calculator', 'MM2 Value Calculator', 'Select weapons and quantities to calculate a collection value total.', 'Values', ['mm2 value'], true, '2026-09-03'),
+    tool('value-list', 'MM2 Value List', 'Search and sort a 300-item, source-dated Supreme Values community snapshot.', 'Reference', ['mm2 value list'], true, '2026-09-03'),
+    tool('trade-calculator', 'MM2 Trade Calculator', 'Compare two multi-item MM2 offers and calculate the value gap.', 'Trading', ['mm2 trade values'], true, '2026-09-03'),
+    tool('trading-values', 'MM2 Trading Values', 'Browse demand-rated, tradeable MM2 items with value and category filters.', 'Reference', [], false, '2026-09-03'),
+    tool('knife-values', 'MM2 Knife Values', 'Search only knife records and rank them by current community value.', 'Reference', [], false, '2026-09-03'),
+    tool('inventory-calculator', 'MM2 Inventory Calculator', 'Select weapons and quantities to total your saved inventory.', 'Inventory', [], false, '2026-09-03'),
+    tool('weapon-comparison', 'MM2 Weapon Comparison', 'Compare two weapons by value, demand and category.', 'Comparison', [], false, '2026-09-03'),
     tool('crate-odds-calculator', 'MM2 Crate Odds Calculator', 'Estimate the chance of at least one target pull across multiple crates.', 'Odds'),
-    tool('godly-values', 'MM2 Godly Values', 'Search and rank the local godly-tier weapon planning reference.', 'Reference'),
-    tool('collection-tracker', 'MM2 Collection Tracker', 'Track collected weapons locally and view completion progress.', 'Tracker'),
+    tool('godly-values', 'MM2 Godly Values', 'Search only Godly-tier items with per-record source dates and demand context.', 'Reference', [], false, '2026-09-03'),
+    tool('collection-tracker', 'MM2 Collection Tracker', 'Track collected weapons locally and view completion progress.', 'Tracker', [], false, '2026-09-03'),
   ],
   'pet-simulator-99': [
     tool('value-calculator', 'Pet Simulator 99 Value Calculator', 'Total selected pets from a 50-row BIG Games API RAP snapshot.', 'Values', ['ps99 value'], true),
