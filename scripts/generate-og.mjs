@@ -1,6 +1,10 @@
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { Resvg } from '@resvg/resvg-js';
+import sharp from 'sharp';
+
+sharp.cache(false);
+sharp.concurrency(1);
 
 const root = path.resolve(import.meta.dirname, '..');
 const dist = path.join(root, 'dist');
@@ -49,7 +53,10 @@ for (const file of htmlFiles) {
   const title = meta(html, 'og:title') || 'GamesCalculators';
   const firstPath = new URL(canonical).pathname.split('/').filter(Boolean)[0];
   const svg = svgFor(title, gameNames.get(firstPath));
-  const png = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
+  const raster = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
+  const png = await sharp(raster)
+    .png({ palette: true, colours: 128, compressionLevel: 9, effort: 10 })
+    .toBuffer();
   await writeFile(path.join(output, `${keyFor(canonical)}.png`), png);
 }
 console.log(`Generated ${htmlFiles.length} PNG social cards in ${output}`);
