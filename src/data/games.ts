@@ -88,6 +88,22 @@ const robloxMedia = (slug: string, gameName: string, placeId: string) => {
   } satisfies Pick<GameConfig, 'icon' | 'image' | 'gallery'>;
 };
 
+const originalClusterMedia = (slug: string, gameName: string, subject: string) => {
+  const base = `/images/games/${slug}`;
+  const shared = {
+    credit: 'Original GamesCalculators illustration',
+    creditUrl: '/media-credits/',
+    sourceLabel: 'GamesCalculators original artwork',
+    sourceUrl: '/media-credits/',
+    license: 'Original site artwork',
+    licenseUrl: '/media-credits/',
+  };
+  return {
+    icon: { src: `${base}/icon.webp`, alt: `${gameName} calculator artwork featuring ${subject}`, ...shared },
+    image: { src: `${base}/scene.webp`, alt: `Original ${gameName} tools illustration featuring ${subject}`, ...shared },
+  } satisfies Pick<GameConfig, 'icon' | 'image'>;
+};
+
 const gtaMedia = {
   credit: 'Grand Theft Auto VI official artwork © Rockstar Games',
   creditUrl: 'https://www.rockstargames.com/VI/media',
@@ -248,6 +264,7 @@ export const games: GameConfig[] = [
   {
     slug: 'pokemon-go', name: 'Pokémon GO', eyebrow: 'Pokémon stats and progression tools', accent: 'blue', glyph: 'PG',
     description: 'Calculate CP, evolution results, IV performance, PvP rankings, power-up costs and other Pokémon GO stats with transparent formulas and current game data.',
+    ...originalClusterMedia('pokemon-go', 'Pokémon GO', 'a capture device, map route and stat display'),
     tools: [
       { slug: 'cp-calculator', name: 'Pokémon GO CP Calculator', shortName: 'CP Calculator', description: 'Calculate exact CP, HP and effective stats from a Pokémon species, level and IV spread.', kind: 'pokemon-go', category: 'Stats', featured: true, ...toolMeta('calculator', '2026-09-05'), keywords: ['pokemon go cp calculator', 'calculator pokemon go', 'combat power'], related: ['evolution-calculator', 'stats-calculator', 'power-up-calculator'] },
       { slug: 'evolution-calculator', name: 'Pokémon GO Evolution Calculator', shortName: 'Evolution Calculator', description: 'Predict evolved CP and HP exactly, or estimate a range when only current CP is known.', kind: 'pokemon-go', category: 'Evolution', featured: true, ...toolMeta('calculator', '2026-09-05'), keywords: ['pokemon go evolution calculator', 'pokemon go evolution cp calculator'], related: ['cp-calculator', 'stats-calculator', 'power-up-calculator'] },
@@ -263,6 +280,7 @@ export const games: GameConfig[] = [
   {
     slug: 'osrs', name: 'Old School RuneScape', shortName: 'OSRS', eyebrow: 'Skill, combat and economy calculators', accent: 'amber', glyph: 'OS',
     description: 'Plan XP, skills, combat, drops, gear and training in Old School RuneScape with exact formulas and source-dated game data.',
+    ...originalClusterMedia('osrs', 'Old School RuneScape', 'a pickaxe, sword and coins'),
     tools: [
       { slug: 'skill-calculator', name: 'OSRS Skill Calculator', shortName: 'Skill Calculator', description: 'Plan XP, actions and time for any OSRS skill with searchable local training methods.', kind: 'osrs', category: 'Skills', featured: true, ...toolMeta('calculator', '2026-09-05'), keywords: ['osrs skill calculator', 'calculator osrs', 'skill actions'], related: ['xp-calculator', 'woodcutting-calculator', 'mining-calculator'] },
       { slug: 'xp-calculator', name: 'OSRS XP Calculator', shortName: 'XP Calculator', description: 'Convert exact OSRS levels and total XP in either direction with no equipment dataset.', kind: 'osrs', category: 'Skills', featured: true, ...toolMeta('calculator', '2026-09-05'), keywords: ['osrs xp calculator', 'osrs level calculator', 'xp to level'], related: ['skill-calculator', 'construction-calculator', 'agility-calculator'] },
@@ -285,6 +303,7 @@ export const games: GameConfig[] = [
   {
     slug: 'palworld', name: 'Palworld', eyebrow: 'Breeding, stats and work calculators', accent: 'sky', glyph: 'PW',
     description: 'Plan Pal breeding, reverse breeding, Potential, passive inheritance and work efficiency using transparent Palworld mechanics.',
+    ...originalClusterMedia('palworld', 'Palworld', 'two fantasy creatures, an egg and stat graphics'),
     tools: [
       { slug: 'breeding-calculator', name: 'Palworld Breeding Calculator', shortName: 'Breeding Calculator', description: 'Find the expected child with special-combination overrides and normal breeding-rank matching.', kind: 'palworld', category: 'Breeding', featured: true, ...toolMeta('calculator', '2026-09-05'), keywords: ['palworld breeding calculator', 'palworld calculator breeding', 'pal breeding'], related: ['reverse-breeding-calculator', 'passive-inheritance-calculator', 'breeding-combos'] },
       { slug: 'iv-calculator', name: 'Palworld IV Calculator', shortName: 'IV Calculator', description: 'Estimate HP, Attack and Defense Potential ranges from rounded displayed Pal stats.', kind: 'palworld', category: 'Stats', featured: true, ...toolMeta('calculator', '2026-09-05'), keywords: ['palworld iv calculator', 'palworld potential calculator'], related: ['stat-calculator', 'breeding-calculator', 'passive-inheritance-calculator'] },
