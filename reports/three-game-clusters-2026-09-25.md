@@ -122,7 +122,15 @@ Browser QA: all 21 routes at 320px; crosshair, sensitivity, Coin Master rewards 
 - Vite retains a non-blocking >500 KB warning for existing large calculator bundles. New calculator entry modules are approximately 17 KB (VALORANT), 10 KB (MONOPOLY GO) and 9 KB (Coin Master), before compression and shared runtime imports.
 - Compiled production preview also passed crosshair copy/reset and new-game search smoke checks.
 
-Deployment verification is recorded separately after the authorized Cloudflare upload.
+### Production deployment
+
+- Implementation commit: `13b6c210718560fe967283bcc532f99773738054`, pushed to GitHub `main`.
+- The exact locally checked `dist` artifact was uploaded through the existing authorized Cloudflare Pages credential; no untested rebuild was substituted.
+- Cloudflare deployment: `a6b66c04.gamescalculators.pages.dev`, production custom domain `https://gamescalculators.com`.
+- `node scripts/verify-new-clusters-live.mjs`: all 21 new URLs returned HTTP 200, correct canonical, one H1 and no noindex. Live sitemap now contains 223 URLs, preserving all 202 existing entries with no missing new pages.
+- Live browser smoke test: changing VALORANT sensitivity to 0.5 at 800 DPI returned CS2 1.590909, 400 eDPI and 32.66 cm/360. Reset restored the default. Original VALORANT artwork loaded at its expected 1200px intrinsic width.
+- GitHub's new deployment run 36153992362 failed before starting, consistent with the billing lock. Direct Cloudflare publication succeeded independently; scheduled reward refresh remains externally blocked as documented above.
+- Final documentation/live-audit script commit does not change the deployed application artifact.
 
 ### Remaining verification boundaries
 
