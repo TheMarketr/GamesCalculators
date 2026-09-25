@@ -23,6 +23,8 @@ describe('Pokémon GO progression calculations', () => {
     expect(trainerLevelFromXp(0)).toBe(1);
     expect(trainerLevelFromXp(2_500)).toBe(2);
     expect(calculateTrainerXp(1, 0, 2).xpRemaining).toBe(2_500);
+    expect(trainerLevelFromXp(203_353_000)).toBe(80);
+    expect(calculateTrainerXp(70, 85_853_000, 80).xpRemaining).toBe(117_500_000);
   });
 
   it('applies trade friendship and distance rules', () => {

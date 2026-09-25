@@ -3,7 +3,7 @@
     "source": "PokeMiners Game Master and PogoAPI",
     "sourceUrl": "https://raw.githubusercontent.com/PokeMiners/game_masters/master/latest/latest.json",
     "sourceType": "Community-maintained Game Master extraction",
-    "reviewed": "2026-09-05",
+    "reviewed": "2026-09-25",
     "unit": "CP multiplier",
     "notes": "Integer multipliers come from the current Game Master; half levels use extracted values or the established squared-average interpolation."
   },

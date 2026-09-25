@@ -5,11 +5,16 @@ import { calculateBreeding, calculateMutation, calculatePalStats, calculatePassi
 const pal = (id: string, rank: number, order: number): Pal => ({ id, bpClass: id, name: id, number: String(order), breedingPower: rank, rarity: 1, maleProbability: 50, elements: [], order, isBoss: false, regularEligible: true, baseHp: 70, baseAttack: 70, baseDefense: 70 });
 
 describe('Palworld mechanics', () => {
-  it('uses the normal rounded-average rank and deterministic tie order', () => {
+  it('uses the 1.0 rounded-average rank and higher-rank tie rule', () => {
     const a = pal('a', 400, 0); const b = pal('b', 600, 1); const early = pal('early', 490, 2); const late = pal('late', 510, 3);
     const result = calculateBreeding(a, b, [early, late], []);
     expect(result.targetRank).toBe(500);
-    expect(result.child.id).toBe('early');
+    expect(result.child.id).toBe('late');
+  });
+
+  it('keeps same-species breeding true before rank matching', () => {
+    const parent = pal('same', 700, 0);
+    expect(calculateBreeding(parent, parent, [pal('other', 700, 1)], []).child.id).toBe('same');
   });
 
   it('applies a special breeding override before rank selection', () => {

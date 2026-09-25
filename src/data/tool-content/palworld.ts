@@ -5,12 +5,12 @@ const statsWiki = { label: 'Palworld Wiki — Pal Stats', url: 'https://palworld
 
 export const palworldToolContent = defineToolContent({
   'palworld/breeding-calculator': c({
-    name: 'Palworld Breeding Calculator', reviewed: '2026-09-05', methodSummary: 'Checks the reviewed special-combination table first, then averages parent breeding ranks and selects the closest regular-eligible child with deterministic tie ordering.',
+    name: 'Palworld Breeding Calculator', reviewed: '2026-09-25', methodSummary: 'Checks same-species and 164 reviewed Palworld 1.0 special-combination rules first, then averages parent CombiRanks and selects the closest eligible child.',
     intro: ['The Palworld Breeding Calculator predicts the egg species from Parent A and Parent B. Its decision path mirrors the important game distinction: named special combinations override the hidden breeding-rank system, while ordinary pairs use rank averaging.', 'The parent list uses stable internal IDs, leaving subspecies separate. Boss-only records are not treated as ordinary children when the reviewed data marks them ineligible.'],
     useCases: ['Check whether two owned parents form a special pair', 'See the target rank behind a normal child', 'Swap parent order without changing the result'],
     steps: ['Search or scroll to the precise Parent A form.', 'Select Parent B and review both hidden ranks.', 'Read the special badge or expand the normal rank equation before preparing Cake.'],
-    mechanics: ['The engine performs an order-independent lookup in 203 reviewed special records. If none matches, target rank is floor((Parent A rank + Parent B rank + 1) ÷ 2).', 'Every regular-eligible child is compared with that target. The smallest absolute rank gap wins; stable source order resolves an equal-distance tie so the same inputs remain reproducible.'],
-    example: ['Incineram (internal Baphomet) plus Maraith (GhostBeast) matches the special table and returns Incineram Noct before rank arithmetic can choose another Pal. A separate unit fixture proves that a normal target of 500 chooses the earlier source-order candidate when ranks 490 and 510 tie.'],
+    mechanics: ['The engine first returns the same species for a matching parent pair, then performs an order-independent lookup in 164 reviewed Palworld 1.0 special records. If neither rule matches, target rank is floor((Parent A rank + Parent B rank + 1) ÷ 2).', 'Every generic-pool child is compared with that target. The smallest absolute rank gap wins; current 1.0 mechanics resolve an equal-distance tie toward the higher CombiRank.'],
+    example: ['Incineram plus Maraith matches the current special table and returns Incineram Noct before rank arithmetic can choose another Pal. For a normal target exactly between ranks 490 and 510, the updated 1.0 tie rule selects the rank-510 candidate.'],
     result: ['Use the expected child to plan an egg queue, then open Passive Inheritance for trait odds. A correct species result does not guarantee gender, Passive Skills, Potential, Alpha status, or a mutation.'],
     limits: ['Patches can change ranks, eligibility, or special recipes. Gender-restricted combinations, newly released Pals, breeding speed, incubation, and inherited attributes require separate checks. The result is tied to the displayed review date.'],
     referenceData: { title: 'Palworld breeding decision order', note: 'A special record always takes precedence.', headers: ['Stage', 'Rule', 'Output'], rows: [['Special lookup', 'Either parent order', 'Named child'], ['Rank average', 'floor((A+B+1)/2)', 'Target rank'], ['Candidate search', 'Smallest absolute gap', 'Regular child'], ['Tie', 'Stable source order', 'Deterministic child']] },
@@ -23,7 +23,7 @@ export const palworldToolContent = defineToolContent({
     ],
   }),
   'palworld/reverse-breeding-calculator': c({
-    name: 'Palworld Reverse Breeding Calculator', reviewed: '2026-09-05', methodSummary: 'Enumerates unordered parent pairs, runs the same special-first child algorithm, filters the desired result, and sorts owned-parent combinations to the top.',
+    name: 'Palworld Reverse Breeding Calculator', reviewed: '2026-09-25', methodSummary: 'Enumerates unordered parent pairs, runs the current Palworld 1.0 child algorithm, filters the desired result, and sorts owned-parent combinations to the top.',
     intro: ['The Palworld Reverse Breeding Calculator starts with the child you want and finds parent pairs that produce it. This reverses both special overrides and normal rank matching instead of assuming that one target rank corresponds to one recipe.', 'An owned-Pal list is stored only in the current browser. Results can require both parents owned, at least one owned, exclude high-rarity parents, include or remove specials, and cap parent rarity.'],
     useCases: ['Find a route from a Pal already in the box', 'Avoid spending a Legendary parent on routine breeding', 'Separate special recipes from rank-based alternatives'],
     steps: ['Choose the exact desired child or subspecies.', 'Mark available parent Pals in the local owned panel.', 'Apply ownership, rarity, and special-combination filters before selecting a pair.'],
@@ -41,7 +41,7 @@ export const palworldToolContent = defineToolContent({
     ],
   }),
   'palworld/iv-calculator': c({
-    name: 'Palworld IV Calculator', reviewed: '2026-09-05', methodSummary: 'Brute-forces the player-facing 0–100 Potential values through the double-floored stat equation and reports every value matching the displayed integer.',
+    name: 'Palworld IV & Potential Calculator', reviewed: '2026-09-25', methodSummary: 'Brute-forces the player-facing 0–100 Potential values through the double-floored stat equation and reports every value matching the displayed integer.',
     intro: ['Players commonly search for a Palworld IV Calculator, while the current in-game system calls the genetic values Potential. This reverse calculator estimates HP, Attack, and Defense Potential from species scaling, level, displayed stats, passives, Souls, and Condensation.', 'Because the game floors stats before and after multipliers, one displayed number can correspond to several Potential values. The output preserves that interval instead of printing unsupported decimal precision.'],
     useCases: ['Estimate a Pal before Ability Glasses are available', 'Explain a wide low-level Potential range', 'Correct for passive, Soul and Condensation bonuses'],
     steps: ['Select the exact Pal form and enter its level.', 'Copy displayed HP, Attack, and Defense from a stable state.', 'Expand modifiers and enter every active bonus before judging the returned ranges.'],
@@ -59,7 +59,7 @@ export const palworldToolContent = defineToolContent({
     ],
   }),
   'palworld/stat-calculator': c({
-    name: 'Palworld Stat Calculator', reviewed: '2026-09-05', methodSummary: 'Runs the forward HP, Attack and Defense formulas from species scaling, level and Potential, then applies passives, Souls and Condensation in documented rounding order.',
+    name: 'Palworld Stat Calculator', reviewed: '2026-09-25', methodSummary: 'Runs the forward HP, Attack and Defense formulas from species scaling, level and Potential, then applies passives, Souls and Condensation in documented rounding order.',
     intro: ['The Palworld Stat Calculator is the forward companion to the IV/Potential page. Enter a Pal, level, three Potential values, passive percentages, Soul bonuses, and Condensation stars to estimate displayed HP, Attack, and Defense.', 'A second column recalculates the same Pal at 100 Potential in all three stats while preserving every modifier. That makes the gap a genetics comparison rather than a different-build comparison.'],
     useCases: ['Project a leveled Pal before investing resources', 'Measure the gap from current genetics to 100 Potential', 'Audit how final multipliers affect each displayed stat'],
     steps: ['Choose a Pal that has a reviewed species-scaling row.', 'Enter level and all three 0–100 Potential values.', 'Add passive, Soul and Condensation modifiers, then inspect both floor stages.'],
@@ -77,7 +77,7 @@ export const palworldToolContent = defineToolContent({
     ],
   }),
   'palworld/passive-inheritance-calculator': c({
-    name: 'Palworld Passive Inheritance Calculator', reviewed: '2026-09-05', methodSummary: 'Deduplicates the combined parent passive pool, applies one-through-four inheritance weights, and uses combinations to estimate whether all requested names are selected.',
+    name: 'Palworld Passive Inheritance Calculator', reviewed: '2026-09-25', methodSummary: 'Deduplicates the combined parent passive pool, applies one-through-four inheritance weights, and uses combinations to estimate whether all requested names are selected.',
     intro: ['The Palworld Passive Inheritance Calculator estimates trait outcomes from the unique passive names carried by both parents. Duplicate names on both parents are removed because the reviewed mechanic builds one combined selection pool.', 'The page distinguishes “all requested inherited” from “all requested with no extra random passive.” That second number is often the practical target when breeding a clean four-trait build.'],
     useCases: ['Compare 2+2, 3+1 and 4+0 parent distributions', 'Measure the penalty from unwanted passives in the pool', 'Separate inheritance success from random-passive risk'],
     steps: ['Enter comma-separated passives on Parent A and Parent B.', 'List only the traits desired on the child.', 'Check how many requested names are present before interpreting probability.'],
@@ -95,7 +95,7 @@ export const palworldToolContent = defineToolContent({
     ],
   }),
   'palworld/mutation-calculator': c({
-    name: 'Palworld Mutation Calculator', reviewed: '2026-09-05', methodSummary: 'Maps Cake type to its reviewed per-egg mutation rate, then applies independent-attempt probability across an integer egg batch.',
+    name: 'Palworld Mutation Calculator', reviewed: '2026-09-25', methodSummary: 'Maps Cake type to its reviewed per-egg mutation rate, then applies independent-attempt probability across an integer egg batch.',
     intro: ['The Palworld Mutation Calculator estimates the chance that an egg batch contains at least one mutated egg. The current reviewed rates are one percent for normal Cake and three percent for Extravagant Vegetable Cake.', 'Expected mutations and cumulative probability are shown together but mean different things. One expected mutation over 100 normal-Cake eggs is a long-run average; an individual 100-egg batch still has a substantial zero-mutation chance.'],
     useCases: ['Compare normal and Extravagant Vegetable Cake', 'Set an egg batch for a desired cumulative chance', 'Understand the chance of zero mutations'],
     steps: ['Enter the number of eggs the breeding queue will produce.', 'Select the exact Cake type consumed by those eggs.', 'Read at-least-one and zero-mutation probabilities before budgeting ingredients.'],
@@ -113,16 +113,16 @@ export const palworldToolContent = defineToolContent({
     ],
   }),
   'palworld/work-speed-calculator': c({
-    name: 'Palworld Work Speed Calculator', reviewed: '2026-09-05', methodSummary: 'Multiplies base Work Speed by passive, food, Soul and building bonuses, converts it to workload per second, and rounds completion time upward.',
+    name: 'Palworld Work Speed Calculator', reviewed: '2026-09-25', methodSummary: 'Multiplies base Work Speed by passive, food, Soul and building bonuses, converts it to workload per second, and rounds completion time upward.',
     intro: ['The Palworld Work Speed Calculator compares two worker setups on the same task. It can load reviewed base speeds for general work-suitability levels or Handiwork/Kindling/Medicine scaling, then applies explicit bonus percentages and Workload.', 'Effective Work Speed is not displayed as an abstract score only: dividing it by 100 gives Workload completed per second, and Workload divided by that rate produces a completion time.'],
     useCases: ['Compare Artisan-heavy passive sets', 'See time saved by food or base upgrades', 'Test two setups against one building workload'],
     steps: ['Choose the work category and suitability level as a base-speed starting point.', 'Enter identical workload in Setup A and Setup B.', 'Change passive, food, Soul or building bonuses and compare rounded seconds.'],
     mechanics: ['Effective Work Speed equals base speed × (1+passive%) × (1+food%) × (1+Soul%) × (1+building%). Work completed each second equals effective speed divided by 100.', 'Completion time is ceiling(Workload ÷ work per second). Time saved compares the modified result with the same base speed and workload at zero bonuses.'],
     example: ['Base Work Speed 200 with Artisan’s 50% bonus becomes 300. A 600-Workload task then progresses at three Workload per second and finishes in 200 seconds; the tested fixture confirms each stage.'],
     result: ['Use seconds saved for the practical comparison. A large percentage increase can matter little on a short craft, while repeated high-Workload production compounds the time difference.'],
-    limits: ['Transporting changes carrying capacity, Cooling changes spoil time, Electricity fills storage, and Ranch work affects output; those are not ordinary workload completion formulas. Sanity, hunger, travel, breaks, and assignment failures also reduce real throughput.'],
+    limits: ['Transporting changes carrying capacity, Cooling changes spoil time, Electricity fills storage, and Ranch work affects output; those are not ordinary workload completion formulas. Palworld 1.0.4 fixed a resumed-game work-speed multiplier issue for the Ancient Material Synthesizer, so verify that workstation after loading a save. Sanity, hunger, travel, breaks, and assignment failures also reduce real throughput.'],
     referenceData: { title: 'Palworld base Work Speed examples', note: 'General and crafting categories scale differently by suitability level.', headers: ['Level', 'General jobs', 'Handiwork-style jobs'], rows: [['0', '70', '70'], ['1', '150', '200'], ['2', '300', '600'], ['3', '500', '1,800'], ['4', '1,000', '5,400']] },
-    sources: [{ label: 'Palworld Wiki — Workload', url: 'https://palworld.wiki.gg/wiki/Workload' }, { label: 'Palworld Wiki — Passive Skills', url: 'https://palworld.wiki.gg/wiki/Passive_Skills' }],
+    sources: [{ label: 'Palworld Wiki — Workload', url: 'https://palworld.wiki.gg/wiki/Workload' }, { label: 'Palworld Wiki — Passive Skills', url: 'https://palworld.wiki.gg/wiki/Passive_Skills' }, { label: 'Palworld 1.0.4 patch notes', url: 'https://palworld.wiki.gg/wiki/1.0.4' }],
     faqs: [
       { question: 'How is Palworld Work Speed converted to time?', answer: 'Effective Work Speed divided by 100 is Workload per second; Workload divided by that rate is rounded up.' },
       { question: 'Do Palworld Work Speed bonuses add or multiply?', answer: 'Bonuses within one entered category are summed before entry, while the displayed categories are applied as separate multipliers.' },
@@ -131,7 +131,7 @@ export const palworldToolContent = defineToolContent({
     ],
   }),
   'palworld/breeding-combos': c({
-    name: 'Palworld Breeding Combos', reviewed: '2026-09-05', methodSummary: 'Builds a searchable local reference of special overrides and rank-calculated parent pairs, while clearly labeling which rule produced each child.',
+    name: 'Palworld Breeding Combos', reviewed: '2026-09-25', methodSummary: 'Builds a searchable local reference from 164 Palworld 1.0 special overrides and current rank-calculated parent pairs, clearly labeling which rule produced each child.',
     intro: ['Palworld Breeding Combos is a searchable reference, not a fake calculator. It lists Parent A, Parent B, expected child, combination type, and review date, with special combinations shown by default.', 'Selecting all calculated rows expands the reference to unordered parent pairs evaluated from the same static Pal and rank datasets used by the flagship calculator. Search can match either parent or the child.'],
     useCases: ['Look up a named special combination', 'Find rows mentioning one owned parent', 'Confirm whether a child came from an override or rank calculation'],
     steps: ['Start with Special only when checking an exception recipe.', 'Enter a parent or child name to narrow the table.', 'Open the forward or reverse calculator from the links beneath the rows for a decision-focused workflow.'],

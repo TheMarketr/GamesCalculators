@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { levelForXp, xpForLevel } from '../../data/osrs/xp';
-import { calculateCombatLevel, calculateDropProbability, calculateDps, calculateMaxHit, calculateToaUniqueChance, hitChance } from './calculate';
+import { calculateCombatLevel, calculateDropProbability, calculateDps, calculateMaxHit, calculateToaUniqueChance, calculateZmiPlan, hitChance } from './calculate';
 
 describe('OSRS exact formulas', () => {
   it('matches the level 99 XP threshold and reverse lookup', () => {
@@ -41,5 +41,13 @@ describe('OSRS exact formulas', () => {
     expect(result.scaledRaidLevel).toBe(340);
     expect(result.pointsPerPercent).toBe(3_700);
     expect(result.chancePercent).toBe(10);
+  });
+
+  it('uses the reviewed Ourania level band and daeyalt multiplier', () => {
+    const pure = calculateZmiPlan({ currentXp: 1_000_000, targetLevel: 75, runecraftLevel: 70, essence: 'pure', essencePerHour: 2_538 });
+    const daeyalt = calculateZmiPlan({ currentXp: 1_000_000, targetLevel: 75, runecraftLevel: 70, essence: 'daeyalt', essencePerHour: 2_538 });
+    expect(pure.xpPerEssence).toBe(14.59);
+    expect(daeyalt.xpPerEssence).toBe(21.89);
+    expect(daeyalt.essenceRequired).toBeLessThan(pure.essenceRequired);
   });
 });

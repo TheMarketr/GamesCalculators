@@ -363,8 +363,8 @@ export const richGuideArticles: RichGuideArticle[] = [
     sources: [{ label: 'Rockstar Support — Platforms, editions and versions', url: 'https://support.rockstargames.com/articles/4QfG4FmZCf5W1gS8jy4UVT/grand-theft-auto-vi-platform-editions-and-versions', note: 'Official platform, edition, physical-code and preload details.' }, { label: 'Rockstar Games — GTA VI', url: 'https://www.rockstargames.com/VI', note: 'Official release date and product information.' }],
   },
   {
-    slug: 'pokemon-go/guides/evolution-cp-guide', gameSlug: 'pokemon-go', game: 'Pokémon GO', category: 'Evolution', readingTime: '8 min read', updated: '2026-09-06',
-    title: 'Pokémon GO Evolution CP and Candy Guide', description: 'Predict evolved CP, preserve the same IVs and level, and check Candy or special requirements before evolving a Pokémon.', keywords: ['pokemon go evolution calculator', 'pokemon go evolution cp calculator', 'pokemon go evolution candy'],
+    slug: 'pokemon-go/guides/evolution-cp-guide', gameSlug: 'pokemon-go', game: 'Pokémon GO', category: 'Evolution', readingTime: '8 min read', updated: '2026-09-25',
+    title: 'Pokémon GO Evolution CP Guide and Calculator', description: 'Learn how Pokémon GO evolution CP is calculated, why IVs and level stay the same, and when to use an exact result or CP range.', keywords: ['pokemon go evolution calculator', 'pokemon go evolution cp calculator', 'evolution calculator pokemon go', 'pokemon go evolution candy'],
     lead: ['Evolution changes a Pokémon’s species base stats while preserving the individual Pokémon’s IV spread and level. That is why an exact evolution forecast needs the species, target evolution, level and all three IVs—not only the current CP shown on the summary screen.', 'The Evolution Calculator uses the same CP formula on the current and evolved species records. Its quick mode returns a range because one displayed CP can correspond to more than one level-and-IV combination.'],
     takeaways: ['Exact mode needs level and IVs.', 'Evolution keeps the IV spread.', 'Base stats drive the CP change.', 'Check Candy and special requirements in game.'],
     sections: [
@@ -385,8 +385,8 @@ export const richGuideArticles: RichGuideArticle[] = [
     ],
   },
   {
-    slug: 'pokemon-go/guides/pvp-iv-rank-guide', gameSlug: 'pokemon-go', game: 'Pokémon GO', category: 'PvP', readingTime: '9 min read', updated: '2026-09-06',
-    title: 'Pokémon GO PvP IV Rank Guide', description: 'Understand league CP caps, stat product, rank percentages and why low Attack IVs can improve some Great and Ultra League spreads.', keywords: ['pokemon go pvp iv calculator', 'pokemon go iv rank', 'great league ivs'],
+    slug: 'pokemon-go/guides/pvp-iv-rank-guide', gameSlug: 'pokemon-go', game: 'Pokémon GO', category: 'PvP', readingTime: '9 min read', updated: '2026-09-25',
+    title: 'Pokémon GO PvP IV Rank Guide for Great League', description: 'Understand Great League IV rank, stat product, CP caps and why low Attack can improve some Pokémon GO PvP spreads.', keywords: ['pokemon go pvp iv calculator', 'great league iv calculator', 'pokemon go iv rank', 'great league ivs'],
     lead: ['A perfect 15/15/15 appraisal is not automatically rank one for a capped Pokémon GO league. Because Attack contributes strongly to CP, a lower Attack IV can sometimes let a species reach a higher level below 1,500 or 2,500 CP and gain more combined bulk.', 'PvP IV rank compares one species and league across all 4,096 IV spreads. It does not compare movesets, typings, matchups or species viability, so rank should inform a build rather than replace battle analysis.'],
     takeaways: ['Rank is species-and-league specific.', 'Stat product measures combined bulk and pressure.', 'Low Attack can buy extra levels under a cap.', 'Master League usually rewards maximum stats.'],
     sections: [
@@ -407,7 +407,7 @@ export const richGuideArticles: RichGuideArticle[] = [
     ],
   },
   {
-    slug: 'osrs/guides/xp-to-99-planning', gameSlug: 'osrs', game: 'Old School RuneScape', category: 'Skills', readingTime: '9 min read', updated: '2026-09-06',
+    slug: 'osrs/guides/xp-to-99-planning', gameSlug: 'osrs', game: 'Old School RuneScape', category: 'Skills', readingTime: '9 min read', updated: '2026-09-25',
     title: 'OSRS XP to 99 Planning Guide', description: 'Convert an OSRS level goal into exact remaining XP, actions and realistic training time without confusing level progress with total progress.', keywords: ['osrs xp calculator', 'osrs skill calculator', 'xp to 99 osrs'],
     lead: ['Old School RuneScape skill levels follow an exponential XP curve. Level 92 sits near the halfway point to level 99 by total experience, so a character can be high level while still having millions of XP left.', 'A defensible training plan begins with exact total XP, not a visual estimate from the level number. The XP Calculator finds the target threshold, while the Skill Calculator converts the remainder into actions for one reviewed method.'],
     takeaways: ['Use total XP whenever possible.', 'Level 99 requires 13,034,431 XP.', 'Round required actions upward.', 'Measure a sustainable actions-per-hour rate.'],
@@ -445,12 +445,12 @@ export const richGuideArticles: RichGuideArticle[] = [
     sources: [{ label: 'OSRS Wiki — Drop rate', url: 'https://oldschool.runescape.wiki/w/Drop_rate', note: 'Community-maintained terminology and encounter-specific drop documentation.' }],
   },
   {
-    slug: 'palworld/guides/breeding-rank-combos', gameSlug: 'palworld', game: 'Palworld', category: 'Breeding', readingTime: '9 min read', updated: '2026-09-06',
-    title: 'Palworld Breeding Rank and Combos Guide', description: 'Understand normal breeding-rank results, special combination overrides and reverse parent searches before committing Cakes and breeding slots.', keywords: ['palworld breeding calculator', 'palworld breeding combos', 'palworld reverse breeding'],
+    slug: 'palworld/guides/breeding-rank-combos', gameSlug: 'palworld', game: 'Palworld', category: 'Breeding', readingTime: '9 min read', updated: '2026-09-25',
+    title: 'Palworld 1.0 Breeding Rank and Combos Guide', description: 'Use current Palworld 1.0 CombiRanks, 164 special combinations and reverse parent searches before committing Cakes.', keywords: ['palworld breeding calculator', 'palworld breeding combos', 'palworld reverse breeding'],
     lead: ['Most Palworld offspring are selected from a hidden breeding-rank calculation, but named special combinations override that normal result. A correct calculator must test the special table first and only use rank matching when no exception applies.', 'The parent order does not change an ordinary pair. Reverse breeding starts from the desired child and searches all eligible pairs, which is more useful when you are planning from the Pals already owned.'],
     takeaways: ['Special combinations take priority.', 'Normal ranks average the parents.', 'Nearest eligible child rank wins.', 'Reverse search reduces unnecessary catches.'],
     sections: [
-      { heading: 'Follow the normal rank calculation', paragraphs: ['The normal target is the floored result of Parent A rank plus Parent B rank plus one, divided by two. Palworld then selects the eligible child species nearest that target.', 'Lower rank numbers generally represent rarer or stronger Pals. When candidates are equally distant, the documented index ordering resolves the tie, so name sorting cannot be used as a substitute.'] },
+      { heading: 'Follow the Palworld 1.0 rank calculation', paragraphs: ['The normal target is the floored result of Parent A rank plus Parent B rank plus one, divided by two. Palworld then selects the generic-pool child species nearest that target.', 'When candidates are equally distant in the current 1.0 data, the higher CombiRank wins. Older guides that resolve the tie by Paldeck order can therefore return the wrong child.'] },
       { heading: 'Check special pairs before averaging', paragraphs: ['Some offspring require exact parent combinations or use exceptions that override the general rank. The Breeding Calculator labels these results so a special child is not mistaken for a lucky normal match.', 'Subspecies and newly added Pals need stable identifiers in the dataset. Similar display names are not enough because different forms can have different eligibility or special rules.'] },
       { heading: 'Use reverse breeding with an owned roster', paragraphs: ['Select the desired child, mark owned parents and filter out combinations that require unavailable or unwanted Pals. Pairs with both parents owned are the fastest experiments, while one-owned pairs become focused capture targets.', 'After finding a species pair, inspect passive skills and Potential separately. Producing the correct species does not guarantee the desired inherited traits.'] },
     ],
@@ -461,11 +461,11 @@ export const richGuideArticles: RichGuideArticle[] = [
       { question: 'Does parent order change a Palworld breeding result?', answer: 'Ordinary breeding pairs are symmetric. The calculator normalizes the pair while preserving exact Pal forms.' },
       { question: 'Why is a Pal missing from reverse breeding results?', answer: 'It may be ineligible as a normal child, restricted to a special combination or represented as a distinct subspecies in the reviewed data.' },
     ],
-    sources: [{ label: 'The Palworld Wiki — Breeding', url: 'https://palworld.wiki.gg/wiki/Breeding', note: 'Breeding rank formula, eligible-child behavior, tie handling and special combinations.' }],
+    sources: [{ label: 'The Palworld Wiki — Breeding', url: 'https://palworld.wiki.gg/wiki/Breeding', note: 'Breeding rules, inheritance and current terminology.' }, { label: 'Palworld 1.0 breeding data export', url: 'https://github.com/helios57/palworld', note: 'Current 299-Pal CombiRank pool, exclusions and 164 special combinations.' }],
   },
   {
-    slug: 'palworld/guides/iv-potential-guide', gameSlug: 'palworld', game: 'Palworld', category: 'Stats', readingTime: '9 min read', updated: '2026-09-06',
-    title: 'Palworld IV and Potential Guide', description: 'Estimate HP, Attack and Defense Potential from displayed stats, understand rounding ranges and compare a current Pal with 100 Potential.', keywords: ['palworld iv calculator', 'palworld potential calculator', 'palworld stat calculator'],
+    slug: 'palworld/guides/iv-potential-guide', gameSlug: 'palworld', game: 'Palworld', category: 'Stats', readingTime: '9 min read', updated: '2026-09-25',
+    title: 'Palworld IV and Potential Calculator Guide', description: 'Calculate HP, Attack and Defense Potential from displayed Palworld stats and understand why rounding can produce an IV range.', keywords: ['palworld iv calculator', 'palworld potential', 'palworld potential calculator', 'palworld stat calculator'],
     lead: ['Players often call Palworld’s hidden stat quality IVs, while the current game terminology is Potential. HP, Attack and Defense Potential are separate values, so one strong displayed stat does not prove that all three are high.', 'Displayed stats are rounded after species scaling, level and bonuses are applied. Reverse calculation can therefore return several Potential values that fit the same number, especially at low levels where adjacent values create only a small difference.'],
     takeaways: ['Potential is separate for three stats.', 'Displayed rounding can create a range.', 'Passives and Souls must be entered correctly.', 'Higher levels narrow many estimates.'],
     sections: [

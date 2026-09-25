@@ -1,5 +1,6 @@
 import type { EquipmentItem, Monster, TrainingMethod } from '../../data/osrs/types';
 import { levelForXp, xpForLevel } from '../../data/osrs/xp';
+import { zmiExperienceForLevel, type ZmiEssenceType } from '../../data/osrs/zmi';
 
 export function calculateSkillPlan(input: { currentLevel?: number; currentXp?: number; targetLevel?: number; targetXp?: number; method: TrainingMethod; xpPerActionOverride?: number; actionsPerHour?: number }) {
   const currentXp = Math.max(0, input.currentXp ?? xpForLevel(input.currentLevel ?? 1));
@@ -15,6 +16,16 @@ export function calculateXpProgress(currentXp: number, targetLevel: number) {
   const safeXp = Math.max(0, Math.floor(currentXp)); const targetXp = xpForLevel(targetLevel); const level = levelForXp(safeXp, 99); const xpRemaining = Math.max(0, targetXp - safeXp);
   const levelFloor = xpForLevel(level); const nextFloor = xpForLevel(Math.min(99, level + 1));
   return { currentXp: safeXp, currentLevel: level, targetLevel, targetXp, xpRemaining, percentToTarget: targetXp ? Math.min(100, safeXp / targetXp * 100) : 100, currentLevelProgress: nextFloor === levelFloor ? 100 : (safeXp - levelFloor) / (nextFloor - levelFloor) * 100 };
+}
+
+export function calculateZmiPlan(input: { currentXp: number; targetLevel: number; runecraftLevel: number; essence: ZmiEssenceType; essencePerHour: number }) {
+  const currentXp = Math.max(0, Math.floor(input.currentXp));
+  const targetXp = xpForLevel(input.targetLevel);
+  const xpRemaining = Math.max(0, targetXp - currentXp);
+  const xpPerEssence = zmiExperienceForLevel(input.runecraftLevel, input.essence);
+  const essenceRequired = Math.ceil(xpRemaining / xpPerEssence);
+  const rate = Math.max(0, input.essencePerHour);
+  return { currentXp, targetXp, xpRemaining, xpPerEssence, essenceRequired, hours: rate ? essenceRequired / rate : null };
 }
 
 export interface CombatLevels { attack: number; strength: number; defence: number; hitpoints: number; ranged: number; magic: number; prayer: number }

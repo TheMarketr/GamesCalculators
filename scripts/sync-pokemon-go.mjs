@@ -51,7 +51,11 @@ for (let level = 45.5; level < 50; level += 1) {
   }
 }
 const cpMultipliers = [...cpmByLevel.entries()].filter(([level]) => level <= 50).sort((a, b) => a[0] - b[0]).map(([level, multiplier]) => ({ level, multiplier }));
-const trainerXp = Object.fromEntries(playerLevel.requiredExperience.slice(0, playerLevel.defaultLevelCap ?? 70).map((xp, index) => [String(index + 1), xp]));
+// The current Game Master keeps `defaultLevelCap` at 70 because Level-Up
+// Research begins there, while the XP table itself contains the published
+// progression through level 80. Use the complete reviewed threshold table so
+// the static calculator does not silently stop at the research boundary.
+const trainerXp = Object.fromEntries(playerLevel.requiredExperience.map((xp, index) => [String(index + 1), xp]));
 
 const species = raw.species.map((record) => ({
   id: `${record.pokemon_id}-${slug(record.form || 'normal')}`,
@@ -91,7 +95,7 @@ const payloads = {
       bySpecies: Object.fromEntries(currentMoveMap),
     },
   },
-  'trainer-xp.json': { meta: { ...source, source: 'PokeMiners Game Master', sourceUrl: gameMasterUrl, unit: 'Trainer XP', notes: `Cumulative XP thresholds through the current Game Master level cap of ${playerLevel.defaultLevelCap ?? Object.keys(trainerXp).length}.` }, records: trainerXp },
+  'trainer-xp.json': { meta: { ...source, source: 'PokeMiners Game Master', sourceUrl: gameMasterUrl, unit: 'Trainer XP', notes: `Cumulative XP thresholds through the current published Trainer cap of ${Object.keys(trainerXp).length}; official Level-Up Research also applies from levels 70 to 80.` }, records: trainerXp },
 };
 
 for (const [file, payload] of Object.entries(payloads)) {

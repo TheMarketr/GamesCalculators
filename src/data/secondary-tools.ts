@@ -120,7 +120,7 @@ export const secondaryTools = {
     tool('account-value-calculator', 'Fortnite Account Value Calculator', 'Create a private collection estimate from cosmetic counts and user-set values.', 'Collection'),
     tool('edpi-calculator', 'Fortnite eDPI Calculator', 'Calculate mouse eDPI with low, medium or high sensitivity guidance.', 'Settings', ['fortnite edpi'], true),
     tool('sensitivity-calculator', 'Fortnite Sensitivity Calculator', 'Convert sensitivity between DPI settings while preserving eDPI.', 'Settings'),
-    tool('level-calculator', 'Fortnite Level Calculator', 'Estimate XP and matches needed to reach a target level.', 'Progress'),
+    tool('level-calculator', 'Fortnite Level Calculator & Leveling Simulator', 'Simulate Fortnite levels, XP remaining and matches needed for a Battle Pass target.', 'Progress', ['fortnite leveling simulator', 'fortnite level calculator', 'battle pass levels'], false, '2026-09-25'),
     tool('battle-pass-calculator', 'Fortnite Battle Pass Calculator', 'Plan daily XP and matches required before a season deadline.', 'Progress'),
     tool('ttk-calculator', 'Fortnite TTK Calculator', 'Estimate shots and time to eliminate for damage, fire rate and health.', 'Combat'),
     tool('weapon-comparison', 'Fortnite Weapon Comparison', 'Compare 44 rifle, shotgun and SMG rows by DPS, damage, fire rate, magazine and reload.', 'Comparison'),

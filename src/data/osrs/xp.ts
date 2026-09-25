@@ -1,4 +1,4 @@
-export const osrsXpMeta = { source: 'OSRS Wiki — Experience', sourceUrl: 'https://oldschool.runescape.wiki/w/Experience', sourceType: 'Community wiki', reviewed: '2026-09-05', unit: 'experience points', notes: 'The local table is generated from the exact integer formula through level 126 for virtual-level calculations.' } as const;
+export const osrsXpMeta = { source: 'OSRS Wiki — Experience', sourceUrl: 'https://oldschool.runescape.wiki/w/Experience', sourceType: 'Community wiki', reviewed: '2026-09-25', unit: 'experience points', notes: 'The local table is generated from the exact integer formula through level 126 for virtual-level calculations.' } as const;
 
 export function xpForLevel(level: number) {
   const target = Math.max(1, Math.min(126, Math.floor(level)));

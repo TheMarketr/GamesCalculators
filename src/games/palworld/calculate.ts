@@ -5,11 +5,12 @@ import type { Pal } from '../../data/palworld/types';
 
 const rankChildCache = new Map<number, Pal>();
 export function calculateBreeding(parentA: Pal, parentB: Pal, candidates = regularBreedingPals, specials = specialBreedingCombinations) {
-  const special = specials.find((combo) => (combo.parentAId === parentA.id && combo.parentBId === parentB.id) || (combo.parentAId === parentB.id && combo.parentBId === parentA.id));
   const targetRank = Math.floor((parentA.breedingPower + parentB.breedingPower + 1) / 2);
+  if (parentA.id === parentB.id) return { child: parentA, targetRank, special: true, combination: null };
+  const special = specials.find((combo) => (combo.parentAId === parentA.id && combo.parentBId === parentB.id) || (combo.parentAId === parentB.id && combo.parentBId === parentA.id));
   if (special) return { child: candidates.find((pal) => pal.id === special.childId) ?? palsById.get(special.childId)!, targetRank, special: true, combination: special };
   const cached = candidates === regularBreedingPals ? rankChildCache.get(targetRank) : undefined;
-  const child = cached ?? [...candidates].sort((a, b) => Math.abs(a.breedingPower - targetRank) - Math.abs(b.breedingPower - targetRank) || a.order - b.order || a.name.localeCompare(b.name))[0];
+  const child = cached ?? [...candidates].sort((a, b) => Math.abs(a.breedingPower - targetRank) - Math.abs(b.breedingPower - targetRank) || b.breedingPower - a.breedingPower || a.name.localeCompare(b.name))[0];
   if (!cached && candidates === regularBreedingPals && child) rankChildCache.set(targetRank, child);
   return { child, targetRank, special: false, combination: null };
 }

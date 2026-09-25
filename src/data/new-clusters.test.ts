@@ -25,7 +25,8 @@ describe('Pokémon GO static data', () => {
     expect(cpMultipliers.length).toBeGreaterThanOrEqual(99);
     expect(cpMultipliers.every((row) => row.level >= 1 && row.level <= 50 && row.multiplier > 0 && row.multiplier < 1)).toBe(true);
     expect(pokemonEvolutions.length).toBeGreaterThan(500);
-    expect(trainerXpByLevel.size).toBeGreaterThanOrEqual(50);
+    expect(trainerXpByLevel.size).toBe(80);
+    expect(trainerXpByLevel.get(80)).toBe(203_353_000);
     for (const meta of [cpMultiplierMeta, evolutionMeta, trainerXpMeta]) expect(validReviewDate(meta.reviewed)).toBe(true);
   });
 });
@@ -47,7 +48,7 @@ describe('OSRS static data', () => {
 
 describe('Palworld static data', () => {
   it('keeps Pal IDs unique and validates stat ranges', () => {
-    expect(pals.length).toBeGreaterThan(200);
+    expect(pals.length).toBe(299);
     expect(new Set(pals.map((pal) => pal.id)).size).toBe(pals.length);
     expect(statPals.length).toBeGreaterThan(150);
     expect(statPals.every((pal) => pal.baseHp! > 0 && pal.baseAttack! > 0 && pal.baseDefense! > 0)).toBe(true);
@@ -56,7 +57,7 @@ describe('Palworld static data', () => {
 
   it('keeps every special breeding reference connected to a known Pal', () => {
     const ids = new Set(pals.map((pal) => pal.id));
-    expect(specialBreedingCombinations.length).toBeGreaterThan(150);
+    expect(specialBreedingCombinations.length).toBe(164);
     expect(specialBreedingCombinations.every((combo) => ids.has(combo.parentAId) && ids.has(combo.parentBId) && ids.has(combo.childId))).toBe(true);
     expect(validReviewDate(specialBreedingMeta.reviewed)).toBe(true);
   });
@@ -64,13 +65,13 @@ describe('Palworld static data', () => {
 
 describe('new cluster registration', () => {
   it('publishes all requested hubs, tools and semantic related links', () => {
-    const expectedCounts = { 'pokemon-go': 9, osrs: 16, palworld: 8 } as const;
+    const expectedCounts = { 'pokemon-go': 9, osrs: 17, palworld: 8 } as const;
     for (const [slug, count] of Object.entries(expectedCounts)) {
       const game = games.find((entry) => entry.slug === slug);
       expect(game?.tools).toHaveLength(count);
       expect(game?.tools.every((tool) => tool.related?.length === 3)).toBe(true);
       expect(game?.tools.every((tool) => tool.related?.every((related) => game.tools.some((candidate) => candidate.slug === related)))).toBe(true);
     }
-    expect(publishedTools.filter((tool) => tool.game.slug === 'pokemon-go' || tool.game.slug === 'osrs' || tool.game.slug === 'palworld')).toHaveLength(33);
+    expect(publishedTools.filter((tool) => tool.game.slug === 'pokemon-go' || tool.game.slug === 'osrs' || tool.game.slug === 'palworld')).toHaveLength(34);
   });
 });

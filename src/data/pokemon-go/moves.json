@@ -3,7 +3,7 @@
     "source": "PogoAPI normalized Pokémon GO data",
     "sourceUrl": "https://pogoapi.net/",
     "sourceType": "Community-maintained Game Master extraction",
-    "reviewed": "2026-09-05",
+    "reviewed": "2026-09-25",
     "unit": "Damage, energy and milliseconds",
     "notes": "PvE and PvP records are kept distinct."
   },

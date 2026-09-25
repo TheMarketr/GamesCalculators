@@ -348,7 +348,7 @@ export const priorityToolContent = defineToolContent({
   },
 
   'adopt-me/wfl-calculator': {
-    reviewed: '2026-08-28',
+    reviewed: '2026-09-25',
     methodSummary: 'Compares both pet offers, calculates the relative gap, and assigns W/F/L inside a visible ±8% band.',
     intro: ['The Adopt Me WFL Calculator compares your complete pet offer with the other player’s offer and turns the entered community references into a Win, Fair, or Lose range. It includes regular, neon, mega neon, fly, and ride context so variants are not silently treated as identical.', 'WFL is a shorthand for the numerical comparison, not a promise about future value. Adopt Me trading also depends on demand, age, availability, exotic status, personal preference, and whether an item is easy to retrade.'],
     useCases: ['Check a multi-pet offer before pressing Accept.', 'See whether fly, ride, neon, or mega status is represented consistently.', 'Measure the exact add needed to move an apparent lose into the fair band.'],

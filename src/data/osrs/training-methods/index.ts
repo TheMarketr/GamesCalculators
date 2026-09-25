@@ -1,7 +1,7 @@
 import type { TrainingMethod } from '../types';
 
 const wiki = (page: string) => `https://oldschool.runescape.wiki/w/${page}`;
-const method = (id: string, skill: string, name: string, xpPerAction: number, levelRequired: number, actionsPerHour: number | null, page: string, note: string): TrainingMethod => ({ id, skill, name, xpPerAction, levelRequired, actionsPerHour, source: 'OSRS Wiki', sourceUrl: wiki(page), reviewed: '2026-09-05', note });
+const method = (id: string, skill: string, name: string, xpPerAction: number, levelRequired: number, actionsPerHour: number | null, page: string, note: string, reviewed = '2026-09-05'): TrainingMethod => ({ id, skill, name, xpPerAction, levelRequired, actionsPerHour, source: 'OSRS Wiki', sourceUrl: wiki(page), reviewed, note });
 
 export const osrsTrainingMethods: TrainingMethod[] = [
   method('attack-controlled-hit', 'Attack', 'Controlled damage dealt', 1.33, 1, null, 'Attack', 'XP per damage in controlled mode; enter a measured actions/hour rate.'),
@@ -11,7 +11,7 @@ export const osrsTrainingMethods: TrainingMethod[] = [
   method('ranged-rapid-hit', 'Ranged', 'Ranged damage dealt', 4, 1, null, 'Ranged', 'Standard Ranged XP per damage before Hitpoints XP.'),
   method('magic-high-alch', 'Magic', 'High Level Alchemy', 65, 55, 1_200, 'High_Level_Alchemy', '65 Magic XP per cast; click rate varies.'),
   method('prayer-dragon-altar', 'Prayer', 'Dragon bones on gilded altar', 252, 1, 1_000, 'Dragon_bones', 'Uses the 3.5× gilded altar experience multiplier.'),
-  method('runecraft-zmi', 'Runecraft', 'Ourania Altar average essence', 20, 1, 1_500, 'Ourania_Altar', 'Illustrative per-essence average; replace it with the current level-specific observed value.'),
+  method('runecraft-zmi', 'Runecraft', 'Ourania Altar pure essence (70–79)', 14.59, 70, 2_538, 'Ourania_Altar', 'Current level-band value; use the dedicated ZMI calculator when a target crosses bands or uses daeyalt essence.', '2026-09-25'),
   method('woodcutting-oak', 'Woodcutting', 'Oak logs', 37.5, 15, 1_100, 'Oak', 'XP per successful oak log.'),
   method('woodcutting-willow', 'Woodcutting', 'Willow logs', 67.5, 30, 1_000, 'Willow', 'XP per successful willow log.'),
   method('woodcutting-teak', 'Woodcutting', 'Teak logs', 85, 35, 1_400, 'Teak', 'XP per teak log before method-specific tick manipulation.'),

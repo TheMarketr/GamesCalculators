@@ -6,7 +6,7 @@ const helpCenter = { label: 'Pokémon GO Help Center', url: 'https://niantic.hel
 
 export const pokemonGoToolContent = defineToolContent({
   'pokemon-go/cp-calculator': c({
-    name: 'Pokémon GO CP Calculator', reviewed: '2026-09-05', methodSummary: 'Combines the selected form’s three base stats with level-specific CP multiplier data and the entered IVs, then floors the established CP expression.',
+    name: 'Pokémon GO CP Calculator', reviewed: '2026-09-25', methodSummary: 'Combines the selected form’s three base stats with level-specific CP multiplier data and the entered IVs, then floors the established CP expression.',
     intro: ['The Pokémon GO CP Calculator finds combat power and HP for one exact species form, Pokémon level, and Attack/Defense/Stamina IV spread. It also exposes effective stats so the familiar CP number is connected to the inputs that produced it.', 'Form records remain separate: an alternate, Mega, or regional form is not silently replaced by the normal species. That matters whenever the Game Master assigns different base stats.'],
     useCases: ['Check a raid catch at a known encounter level', 'Compare two IV spreads without changing species or level', 'Audit the CP formula before spending Stardust'],
     steps: ['Choose the precise Pokémon form shown in storage.', 'Set its half-level and enter all three appraisal IVs, or use a quick preset.', 'Read CP and HP first, then inspect effective stats and the expanded equation.'],
@@ -24,7 +24,7 @@ export const pokemonGoToolContent = defineToolContent({
     ],
   }),
   'pokemon-go/evolution-calculator': c({
-    name: 'Pokémon GO Evolution Calculator', reviewed: '2026-09-05', methodSummary: 'Recalculates the target species with the same level and IV spread, or enumerates plausible source combinations to give a quick-mode CP interval.',
+    name: 'Pokémon GO Evolution CP Calculator', reviewed: '2026-09-25', methodSummary: 'Recalculates the target species with the same level and IV spread, or enumerates plausible source combinations to give a quick-mode CP interval.',
     intro: ['The Pokémon GO Evolution Calculator predicts what CP and HP a chosen direct evolution will have. Exact mode keeps level and IVs unchanged while replacing the species base stats; quick mode handles the weaker case where only the current CP is available.', 'Direct evolution edges and verified Candy amounts are stored apart from species stats. The page does not pretend that Candy alone satisfies walking, item, gender, time, lure, buddy, or regional conditions.'],
     useCases: ['Preview an evolution before committing Candy', 'Compare current HP with evolved HP at the same level', 'Get a labeled range when appraisal details are incomplete'],
     steps: ['Select the current form and a direct target from its reviewed family.', 'Use exact mode when level and all three IVs are known; otherwise enter current CP in quick mode.', 'Check the CP difference and read any Candy value as one requirement, not a complete eligibility verdict.'],
@@ -42,7 +42,7 @@ export const pokemonGoToolContent = defineToolContent({
     ],
   }),
   'pokemon-go/stats-calculator': c({
-    name: 'Pokémon GO Stats Calculator', reviewed: '2026-09-05', methodSummary: 'Calculates CP, floored HP, three effective stats, IV percentage, and stat product, then compares the same Pokémon with perfect IVs.',
+    name: 'Pokémon GO Stats Calculator', reviewed: '2026-09-25', methodSummary: 'Calculates CP, floored HP, three effective stats, IV percentage, and stat product, then compares the same Pokémon with perfect IVs.',
     intro: ['The Pokémon GO Stats Calculator looks beyond the CP headline. It translates base stats, a level multiplier, and appraisal IVs into effective Attack, effective Defense, effective Stamina, displayed HP, and a league-oriented stat product.', 'The comparison holds species and level fixed. Its bars therefore answer how much this individual spread differs from 15/15/15, rather than mixing in a stronger species or an extra power-up.'],
     useCases: ['Inspect the defensive weight hidden behind CP', 'Compare an appraisal with a perfect specimen at equal level', 'Carry a stat product into a PvP IV investigation'],
     steps: ['Choose the exact form and current half-level.', 'Enter the appraisal numbers for Attack, Defense, and HP/Stamina.', 'Review each effective stat and use the perfect-IV bars as an equal-level benchmark.'],
@@ -60,7 +60,7 @@ export const pokemonGoToolContent = defineToolContent({
     ],
   }),
   'pokemon-go/pvp-iv-calculator': c({
-    name: 'Pokémon GO PvP IV Calculator', reviewed: '2026-09-05', methodSummary: 'Finds each IV spread’s highest level under a league cap, ranks all 4,096 combinations by stat product, and caches the table in the browser.',
+    name: 'Pokémon GO PvP IV Rank Calculator', reviewed: '2026-09-25', methodSummary: 'Finds each IV spread’s highest level under a league cap, ranks all 4,096 combinations by stat product, and caches the table in the browser.',
     intro: ['The Pokémon GO PvP IV Calculator evaluates an individual appraisal for Great League, Ultra League, Master League, or a custom CP limit. It returns the best eligible level, final CP, effective stats, rank, and percentage of the top stat product.', 'Unlike IV percentage, the rank respects CP-cap pressure. Low Attack can be valuable because Attack raises CP quickly; the saved CP room may allow extra half-levels that add Defense and HP.'],
     useCases: ['Check whether a caught spread is worth keeping for a capped league', 'Compare your final level with the rank-one combination', 'Investigate a custom tournament CP limit'],
     steps: ['Select the correct form because regional and alternate stats can differ.', 'Enter appraisal IVs and choose the league or provide a custom cap.', 'Read rank with final level, then consider matchup breakpoints before investing.'],
@@ -78,7 +78,7 @@ export const pokemonGoToolContent = defineToolContent({
     ],
   }),
   'pokemon-go/power-up-calculator': c({
-    name: 'Pokémon GO Power Up Calculator', reviewed: '2026-09-05', methodSummary: 'Sums every half-level Stardust, Candy, and Candy XL row between two levels while recalculating CP at both endpoints.',
+    name: 'Pokémon GO Power Up Calculator', reviewed: '2026-09-25', methodSummary: 'Sums every half-level Stardust, Candy, and Candy XL row between two levels while recalculating CP at both endpoints.',
     intro: ['The Pokémon GO Power Up Calculator turns a level target into a complete resource bill. Alongside current and target CP, it reports Stardust, regular Candy, Candy XL, CP gained, and the exact count of Power Up button presses.', 'The local table is walked one half-level at a time. This avoids multiplying a single cost tier across a path that crosses several different Stardust and Candy bands.'],
     useCases: ['Budget a level 20 raid catch to level 40', 'See when a target begins using Candy XL', 'Compare CP gained with the resources consumed'],
     steps: ['Select a species form and enter the IV spread whose CP should be projected.', 'Set current and target Pokémon levels; the target selector cannot move backward.', 'Review endpoint CP, then inspect each resource total before confirming upgrades in game.'],
@@ -96,7 +96,7 @@ export const pokemonGoToolContent = defineToolContent({
     ],
   }),
   'pokemon-go/purify-calculator': c({
-    name: 'Pokémon GO Purify Calculator', reviewed: '2026-09-05', methodSummary: 'Adds two points to each Shadow IV, caps every stat at 15, and recalculates the resulting appraisal percentage without mixing in combat bonuses.',
+    name: 'Pokémon GO Purify Calculator', reviewed: '2026-09-25', methodSummary: 'Adds two points to each Shadow IV, caps every stat at 15, and recalculates the resulting appraisal percentage without mixing in combat bonuses.',
     intro: ['The Pokémon GO Purify Calculator answers the deterministic appraisal question: what will this Shadow Pokémon’s Attack, Defense, and Stamina IVs become after purification? Each stat gains two points but cannot exceed 15.', 'The page deliberately isolates IVs. Shadow attack/defense battle modifiers, Return, resource discounts, and the Pokémon’s post-purification level are separate decisions with different assumptions.'],
     useCases: ['Check whether a 13 IV reaches 15', 'Preview the purified appraisal percentage', 'Separate appraisal gains from Shadow battle value'],
     steps: ['Choose the species for a readable result label.', 'Enter the three Shadow IVs from the appraisal screen.', 'Compare the purified spread and the yes/no indicators for perfect individual stats.'],
@@ -114,7 +114,7 @@ export const pokemonGoToolContent = defineToolContent({
     ],
   }),
   'pokemon-go/trade-calculator': c({
-    name: 'Pokémon GO Trade Calculator', reviewed: '2026-09-05', methodSummary: 'Looks up the standard Stardust tier from friendship and registration class, then maps catch distance to Candy and reviewed Candy XL conditions.',
+    name: 'Pokémon GO Trade Calculator', reviewed: '2026-09-25', methodSummary: 'Looks up the standard Stardust tier from friendship and registration class, then maps catch distance to Candy and reviewed Candy XL conditions.',
     intro: ['The Pokémon GO Trade Calculator models actual trade resources instead of assigning fictional market prices to Pokémon. It combines friendship level, whether the species/form is registered, Legendary or Shiny special status, and catch distance.', 'The output is an estimate to compare with the confirmation screen. Special Trade availability, daily limits, age, distance between players, temporary bonuses, and Mythical restrictions can still prevent or change a trade.'],
     useCases: ['Budget an unregistered Legendary trade', 'Check Candy from a long-distance exchange', 'Identify whether the chosen class is a Special Trade'],
     steps: ['Select the current friendship tier shared by both Trainers.', 'Classify the received Pokémon by registration and special status.', 'Enter the distance between the Pokémon’s catch locations, then verify the in-game prompt.'],
@@ -132,7 +132,7 @@ export const pokemonGoToolContent = defineToolContent({
     ],
   }),
   'pokemon-go/dps-calculator': c({
-    name: 'Pokémon GO DPS Calculator', reviewed: '2026-09-05', methodSummary: 'Loads the species move pool for the selected battle mode, calculates neutral damage from effective Attack and target Defense, then completes an energy-funded move cycle.',
+    name: 'Pokémon GO DPS Calculator', reviewed: '2026-09-25', methodSummary: 'Loads the species move pool for the selected battle mode, calculates neutral damage from effective Attack and target Defense, then completes an energy-funded move cycle.',
     intro: ['The Pokémon GO DPS Calculator compares a selected Fast Move and Charged Move under explicit PvE or PvP timing data. It reports individual DPS, energy generation and use, the number of Fast Moves per Charged Move, complete cycle time, and combined DPS.', 'Raids/Gyms and Trainer Battles use different move records, so the mode selector changes power, energy, and timing together. A move name shared by both modes is not assumed to have shared numbers.'],
     useCases: ['Compare legal moves in the current species pool', 'See how energy cost changes cycle length', 'Run a neutral target-Defense scenario without hidden typing'],
     steps: ['Choose PvE or PvP before selecting the species and moves.', 'Set level, Attack IV, and an optional neutral target Defense.', 'Read cycle DPS with Fast Move count; then account for real matchup modifiers outside this model.'],
@@ -150,21 +150,21 @@ export const pokemonGoToolContent = defineToolContent({
     ],
   }),
   'pokemon-go/xp-calculator': c({
-    name: 'Pokémon GO XP Calculator', reviewed: '2026-09-05', methodSummary: 'Reads cumulative Trainer XP thresholds from the current Game Master, subtracts total earned XP, and optionally divides the remainder by a player-supplied action yield.',
-    intro: ['The Pokémon GO XP Calculator plans Trainer-level progression using cumulative thresholds from the reviewed Game Master snapshot. Enter total XP and a target level to see XP remaining, levels left, and progress through the selected interval.', 'A reverse lookup detects the level implied by total XP. If the typed current level lags behind that threshold, the calculator uses the higher detected level so it does not report already-completed progress as remaining.'],
+    name: 'Pokémon GO Trainer XP Calculator', reviewed: '2026-09-25', methodSummary: 'Reads cumulative Trainer XP thresholds through level 80 from the current Game Master, subtracts total earned XP, and optionally divides the remainder by a player-supplied action yield.',
+    intro: ['The Pokémon GO Trainer XP Calculator plans progression through the current level 80 cap using cumulative thresholds from the reviewed Game Master snapshot. Enter total XP and a target level to see XP remaining, levels left, and progress through the selected interval.', 'A reverse lookup detects the level implied by total XP. For levels 70 through 80, the official game also requires Level-Up Research; completing the XP total alone may not advance the account.'],
     useCases: ['Measure progress toward a Trainer milestone', 'Convert total XP into the matching reviewed level', 'Estimate actions using a personal average XP yield'],
     steps: ['Enter the current Trainer level and the total XP shown on the profile.', 'Choose a target from the current local level table.', 'Optionally enter XP per catch, raid, friendship action, or mixed session average.'],
     mechanics: ['Core remaining XP equals target cumulative XP minus current total XP, never below zero. Reverse lookup selects the highest level whose threshold is not greater than total XP.', 'The optional action estimate is ceil(remaining XP ÷ entered XP per action). It does not choose a reward amount because catches, throws, events, friendship milestones, raids, and bonuses have different XP values.'],
-    example: ['In the reviewed table, level 2 begins at 2,500 cumulative XP. A new level 1 Trainer with zero XP targeting level 2 therefore needs 2,500 XP. Entering 500 XP per repeated action would show five actions, while the deterministic core remains 2,500.'],
+    example: ['The reviewed table places level 70 at 85,853,000 cumulative XP and level 80 at 203,353,000. A level 70 Trainer starting exactly at that threshold needs 117,500,000 more XP for level 80, plus every required Level-Up Research task along the way.'],
     result: ['Use the XP remainder for a goal, then replace the optional action rate with an observed average from the activity you actually plan to repeat. Recalculate during an event if bonuses materially change that average.'],
-    limits: ['Level-up research tasks or non-XP requirements are not represented. The Game Master table can change, and per-action XP is a user scenario rather than an official promise. Total XP must come from the same account being planned.'],
-    referenceData: { title: 'Trainer XP calculation fields', note: 'Cumulative thresholds and scenario inputs are kept separate.', headers: ['Field', 'Source', 'Function'], rows: [['Level thresholds', 'Current Game Master', 'Deterministic target'], ['Current total XP', 'Trainer profile', 'Progress subtraction'], ['XP per action', 'User observation', 'Optional action estimate'], ['Detected level', 'Reverse table lookup', 'Input consistency check']] },
-    sources: [gameMaster],
+    limits: ['Level-Up Research tasks from levels 70 to 80 are not calculated. The Game Master table can change, and per-action XP is a user scenario rather than an official promise. Total XP must come from the same account being planned.'],
+    referenceData: { title: 'Current Pokémon GO Trainer milestones', note: 'The XP engine covers the threshold; the app separately enforces Level-Up Research above 70.', headers: ['Milestone', 'Cumulative XP', 'Extra requirement'], rows: [['Level 50', '12,753,000', 'XP threshold'], ['Level 60', '34,353,000', 'XP threshold'], ['Level 70', '85,853,000', 'Level-Up Research begins after this point'], ['Level 80', '203,353,000', 'XP plus required research']] },
+    sources: [gameMaster, { label: 'Pokémon GO Help Center — leveling and Level-Up Research', url: 'https://niantic.helpshift.com/hc/en/6-pokemon-go/faq/101-how-do-i-level-up-and-earn-medals/' }],
     faqs: [
       { question: 'Does Pokémon GO XP Calculator use total XP or XP within a level?', answer: 'It uses cumulative total Trainer XP, matching the reviewed Game Master thresholds and profile total.' },
       { question: 'How is Pokémon GO Trainer level detected from XP?', answer: 'The engine returns the highest level whose cumulative threshold is less than or equal to the entered total.' },
       { question: 'Why is Pokémon GO XP per action editable?', answer: 'Rewards vary widely by activity, throw, event, friendship milestone, and bonus, so your measured average is more honest than one default claim.' },
-      { question: 'Does Pokémon GO Trainer XP include level-up research requirements?', answer: 'No. XP arithmetic cannot complete separate tasks or requirements that the game may attach to a Trainer level.' },
+      { question: 'Does Pokémon GO Trainer XP include level-up research requirements?', answer: 'No. The calculator measures XP through level 80, but Trainers must also complete the official Level-Up Research required from levels 70 to 80.' },
     ],
   }),
 });

@@ -381,7 +381,7 @@ export const systemsToolContent = defineToolContent({
     ],
   }),
   'fortnite/level-calculator': c({
-    name: 'Fortnite Level Calculator', reviewed: '2026-08-28',
+    name: 'Fortnite Level Calculator & Leveling Simulator', reviewed: '2026-09-25',
     methodSummary: 'Converts a level gap into XP and matches using editable current-season assumptions.',
     intro: 'The Fortnite Level Calculator is the lightweight level-to-level planner for players who want a direct XP and match estimate without a season-deadline schedule.',
     useCases: ['Estimate levels remaining.', 'Compare match XP routines.', 'Plan a short grind target.'],

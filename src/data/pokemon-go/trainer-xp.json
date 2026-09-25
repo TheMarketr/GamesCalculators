@@ -3,9 +3,9 @@
     "source": "PokeMiners Game Master",
     "sourceUrl": "https://raw.githubusercontent.com/PokeMiners/game_masters/master/latest/latest.json",
     "sourceType": "Community-maintained Game Master extraction",
-    "reviewed": "2026-09-05",
+    "reviewed": "2026-09-25",
     "unit": "Trainer XP",
-    "notes": "Cumulative XP thresholds through the current Game Master level cap of 70."
+    "notes": "Cumulative XP thresholds through the current published Trainer cap of 80; official Level-Up Research also applies from levels 70 to 80."
   },
   "records": {
     "1": 0,
@@ -77,6 +77,16 @@
     "67": 65603000,
     "68": 71853000,
     "69": 78603000,
-    "70": 85853000
+    "70": 85853000,
+    "71": 93853000,
+    "72": 102603000,
+    "73": 112103000,
+    "74": 122353000,
+    "75": 133353000,
+    "76": 145353000,
+    "77": 158353000,
+    "78": 172353000,
+    "79": 187353000,
+    "80": 203353000
   }
 }

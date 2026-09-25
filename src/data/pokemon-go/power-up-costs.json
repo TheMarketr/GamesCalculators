@@ -3,7 +3,7 @@
     "source": "PogoAPI normalized Pokémon GO data",
     "sourceUrl": "https://pogoapi.net/",
     "sourceType": "Community-maintained Game Master extraction",
-    "reviewed": "2026-09-05",
+    "reviewed": "2026-09-25",
     "unit": "Stardust and Candy per power-up",
     "notes": "Costs are summed across half-level power-ups."
   },
