@@ -2,10 +2,24 @@ import { useEffect, useState } from 'preact/hooks';
 
 const slides = [
   {
+    game: 'Pokémon GO',
+    category: 'Combat Power calculator',
+    title: 'CP Calculator',
+    href: '/pokemon-go/cp-calculator/',
+    icon: '/images/games/pokemon-go/icon.webp',
+    accent: 'sky',
+    inputLabel: 'Species · level · IVs',
+    inputValue: 'Charizard · L40 · 15/15/15',
+    resultLabel: 'Calculated CP',
+    resultValue: '2,889',
+    bars: [38, 56, 74, 92, 78, 62, 46],
+  },
+  {
     game: 'Minecraft',
     category: 'Building calculator',
     title: 'Circle Generator',
     href: '/minecraft/circle-generator/',
+    icon: '/images/games/minecraft-gameplay.png',
     accent: 'green',
     inputLabel: 'Diameter',
     inputValue: '21 blocks',
@@ -18,6 +32,7 @@ const slides = [
     category: 'Progress calculator',
     title: 'XP Calculator',
     href: '/fortnite/xp-calculator/',
+    icon: '/images/games/fortnite-gameplay.jpg',
     accent: 'blue',
     inputLabel: 'Target level',
     inputValue: 'Level 100',
@@ -30,6 +45,7 @@ const slides = [
     category: 'Trading calculator',
     title: 'WFL Calculator',
     href: '/adopt-me/wfl-calculator/',
+    icon: '/images/games/adopt-me/icon.png',
     accent: 'coral',
     inputLabel: 'Offer comparison',
     inputValue: '4 pets vs 3 pets',
@@ -63,7 +79,7 @@ export default function CalculatorCarousel() {
     >
       <div class="carousel-browser-bar"><span><i /><i /><i /></span><small>gamescalculators.com</small><b>G</b></div>
       <div class="carousel-slide" aria-live="polite">
-        <div class="carousel-slide-heading"><span class="carousel-glyph">{slide.game.slice(0, 2).toUpperCase()}</span><div><small>{slide.game} · {slide.category}</small><strong>{slide.title}</strong></div><span class="working-badge">WORKING</span></div>
+        <div class="carousel-slide-heading"><span class="carousel-glyph"><img src={slide.icon} alt="" width="44" height="44" loading="eager" decoding="async" /></span><div><small>{slide.game} · {slide.category}</small><strong>{slide.title}</strong></div><span class="working-badge">WORKING</span></div>
         <div class="carousel-mini-tool"><div class="carousel-input"><span>{slide.inputLabel}</span><strong>{slide.inputValue}</strong></div><div class="carousel-bars" aria-hidden="true">{slide.bars.map((width) => <i style={{ width: `${width}%` }} />)}</div></div>
         <div class="carousel-result"><span><small>{slide.resultLabel}</small><strong>{slide.resultValue}</strong></span><a href={slide.href}>Use calculator <b aria-hidden="true">↗</b></a></div>
       </div>

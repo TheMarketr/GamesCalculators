@@ -31,6 +31,16 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'n
 const recentReviewedTools = publishedTools
   .map((tool) => ({ ...tool, reviewed: tool.lastReviewed }))
   .sort((a, b) => b.reviewed.localeCompare(a.reviewed));
+const heroBenefits = [
+  { icon: '✓', title: `${publishedTools.length} working tools`, detail: 'Calculators, generators and references' },
+  { icon: '◉', title: 'Mobile friendly', detail: 'Designed for phone, tablet and desktop' },
+  { icon: '◇', title: 'No sign-up', detail: 'Open a tool and start calculating' },
+  { icon: '↻', title: 'Dated data reviews', detail: 'See when formulas and datasets were checked' },
+  { icon: 'ƒ', title: 'Transparent formulas', detail: 'Understand how each result is calculated' },
+  { icon: '⌁', title: 'Game-specific guides', detail: 'Examples, mechanics and useful next steps' },
+  { icon: '▣', title: 'Local-first privacy', detail: 'Saved lists stay in your current browser' },
+  { icon: '∞', title: 'Free browser access', detail: 'No download or paid subscription required' },
+];
 const homeFaqs = [
   { question: 'What is GamesCalculators?', answer: 'GamesCalculators is an independent library of free browser-based game calculators, planning tools, searchable references and player guides. It is built to help players turn game values, coordinates, progress, odds and trade offers into decisions they can review.' },
   { question: 'Are these game calculators official?', answer: 'No. GamesCalculators is an independent fan utility and is not affiliated with, sponsored by or endorsed by Minecraft, Roblox, Epic Games, Rockstar Games or other publishers. Game names identify compatibility only.' },
@@ -49,7 +59,13 @@ const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEn
     <div class="container hero-grid">
       <div class="hero-copy"><div class="status-pill"><span></span> Free browser tools for players</div><h1>Free game calculators<br /><em>& online tools.</em></h1><p>Useful calculators, planners and interactive references for your favorite games—built to explain the answer as clearly as the result.</p><GlobalSearch entries={searchEntries} client:load /><div class="hero-suggestions"><span>Popular:</span><a href="/pokemon-go/cp-calculator/">Pokémon GO CP</a><a href="/osrs/dps-calculator/">OSRS DPS</a><a href="/palworld/breeding-calculator/">Palworld Breeding</a></div></div>
       <CalculatorCarousel client:load />
-    </div><div class="trust-strip container"><span><b>✓</b> Working tools</span><span><b>◎</b> Mobile friendly</span><span><b>◇</b> No sign-up</span><span><b>↻</b> Dated data reviews</span></div>
+    </div>
+    <div class="hero-benefit-marquee" aria-label="GamesCalculators benefits">
+      <div class="hero-benefit-track">
+        <div class="hero-benefit-group">{heroBenefits.map((benefit) => <article class="hero-benefit-card"><span aria-hidden="true">{benefit.icon}</span><div><strong>{benefit.title}</strong><small>{benefit.detail}</small></div></article>)}</div>
+        <div class="hero-benefit-group" aria-hidden="true">{heroBenefits.map((benefit) => <article class="hero-benefit-card"><span>{benefit.icon}</span><div><strong>{benefit.title}</strong><small>{benefit.detail}</small></div></article>)}</div>
+      </div>
+    </div>
   </section>
 
   <section class="section container-wide"><a class="home-news-feature accent-sunset" href={`/${gtaExtendedGuide.slug}/`}><div><span class="status-pill"><span></span> Research updated August 31</span><span class="eyebrow">GTA VI · An Extended Look</span><h2>What Rockstar showed—and what is still unconfirmed</h2><p>Our source-graded breakdown covers Jason and Lucia, character switching, body and relationship systems, wanted-state feedback, activities, editions and the questions Rockstar has not answered.</p><div><span>16 min guide</span><span>Official sources</span><span>77 sourced records</span></div><strong>Read the Extended Look breakdown →</strong></div>{gta.image && <img src={gta.image.src} alt={gta.image.alt} width="1200" height="675" loading="eager" decoding="async" />}</a></section>

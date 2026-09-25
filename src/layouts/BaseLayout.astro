@@ -14,6 +14,30 @@ interface Props {
 }
 const { title = site.title, description = site.description, canonical = Astro.url.pathname, image, noindex = false, schema } = Astro.props;
 const pageTitle = title.includes('GamesCalculators') ? title : `${title} | GamesCalculators`;
+const trimMetaDescription = (value: string, maximum = 150) => {
+  const normalized = value.replace(/\s+/g, ' ').trim();
+  if (normalized.length <= maximum) return normalized;
+  const candidate = normalized.slice(0, maximum - 1);
+  const lastSpace = candidate.lastIndexOf(' ');
+  const cutoff = lastSpace >= maximum - 24 ? lastSpace : maximum - 1;
+  return `${candidate.slice(0, cutoff).replace(/[\s,;:–—-]+$/g, '').replace(/[.!?]+$/g, '')}.`;
+};
+const buildMetaDescription = (value: string, pageName: string) => {
+  let result = value.replace(/\s+/g, ' ').trim();
+  if (result.length < 135) {
+    const suffix = /guide/i.test(pageName)
+      ? 'Read practical steps, examples, limitations and related calculator advice for players.'
+      : /(privacy|cookies|terms|disclaimer|policy|methodology|dmca|contact|credits)/i.test(pageName)
+        ? 'Read how this information applies to visitors, local data and browser-based game tools.'
+        : /calculators\s*&\s*tools/i.test(pageName)
+          ? 'Explore working tools, reviewed data and game-specific guides for clearer decisions.'
+          : 'Use this free browser tool for clear inputs, transparent results and practical game planning.';
+    result = `${result.replace(/[.!?]+$/g, '')}. ${suffix}`;
+  }
+  if (result.length < 135) result = `${result.replace(/[.!?]+$/g, '')}. Built for players.`;
+  return trimMetaDescription(result);
+};
+const metaDescription = buildMetaDescription(description, title);
 const canonicalUrl = new URL(canonical, site.url).toString();
 const ogKey = canonical === '/' ? 'home' : canonical.replace(/^\/+|\/+$/g, '').replaceAll('/', '--');
 const imageUrl = new URL(image ?? `/og/${ogKey}.png`, site.url).toString();
@@ -28,9 +52,9 @@ const websiteSchema = { '@context': 'https://schema.org', '@type': 'WebSite', na
 <html lang="en">
   <head>
     <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="generator" content={Astro.generator} /><meta name="theme-color" content="#090e1a" />
-    <meta name="description" content={description} /><meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} /><link rel="canonical" href={canonicalUrl} /><link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta property="og:type" content="website" /><meta property="og:site_name" content={site.name} /><meta property="og:title" content={pageTitle} /><meta property="og:description" content={description} /><meta property="og:url" content={canonicalUrl} /><meta property="og:image" content={imageUrl} /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" /><meta property="og:image:type" content="image/png" />
-    <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={pageTitle} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={imageUrl} />
+    <meta name="description" content={metaDescription} /><meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} /><link rel="canonical" href={canonicalUrl} /><link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" /><meta property="og:site_name" content={site.name} /><meta property="og:title" content={pageTitle} /><meta property="og:description" content={metaDescription} /><meta property="og:url" content={canonicalUrl} /><meta property="og:image" content={imageUrl} /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" /><meta property="og:image:type" content="image/png" />
+    <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={pageTitle} /><meta name="twitter:description" content={metaDescription} /><meta name="twitter:image" content={imageUrl} />
     <title>{pageTitle}</title><script is:inline type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />{schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}
   </head>
   <body><a class="skip-link" href="#main-content">Skip to content</a><SiteHeader searchEntries={searchEntries} /><main id="main-content"><slot /></main><SiteFooter /><PrivacyDialog /></body>

@@ -31,7 +31,7 @@ const collectionSchema = { '@context': 'https://schema.org', '@type': 'Collectio
   ...gameGuides.map((guide) => ({ '@type': 'Article', name: guide.title, url: `https://gamescalculators.com/${guide.slug}/` })),
 ] };
 ---
-<BaseLayout title={title} description={`${game.description} Browse free ${game.name} calculators, tools and player guides.`} schema={[breadcrumbSchema, collectionSchema]}>
+<BaseLayout title={title} description={game.description} schema={[breadcrumbSchema, collectionSchema]}>
   <div class={`game-hub accent-${game.accent}`}>
     <section class="game-hub-hero">
       <div class="container-wide">
