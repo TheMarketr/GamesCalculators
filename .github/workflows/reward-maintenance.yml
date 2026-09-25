@@ -1,0 +1,50 @@
+name: Reward maintenance engine
+on:
+  workflow_call:
+    inputs:
+      game:
+        required: true
+        type: string
+concurrency:
+  group: reward-dataset-writes
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.16.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Check official reward source
+        env:
+          REWARD_GAME: ${{ inputs.game }}
+        run: |
+          case "$REWARD_GAME" in
+            monopoly-go) node scripts/check-monopoly-go-rewards.mjs ;;
+            coin-master) node scripts/sync-coin-master-rewards.mjs ;;
+            *) exit 1 ;;
+          esac
+      - name: Validate datasets and formulas
+        run: pnpm test
+      - name: Save changed data and request validated deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git add src/data/monopoly-go/rewards.json src/data/coin-master/rewards.json
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Refresh official reward link checks'
+          git push origin HEAD:main
+          gh workflow run deploy-cloudflare-pages.yml --ref main

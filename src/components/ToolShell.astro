@@ -42,7 +42,7 @@ const toolMedia = game.gallery
     : game.gallery.slice(0, 2)
   : [];
 ---
-<div class={`tool-page accent-${game.accent}`}>
+<div class={`tool-page accent-${game.accent}`} data-ads-disabled={tool.adsDisabled ? 'true' : undefined}>
   <div class="tool-hero">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
@@ -146,7 +146,7 @@ const toolMedia = game.gallery
 
     {content.sources?.length && <section class="editorial-sources" aria-labelledby="editorial-sources-title">
       <span class="eyebrow">Editorial sources</span>
-      <h2 id="editorial-sources-title">Official references used for this page</h2>
+      <h2 id="editorial-sources-title">Sources used for this page</h2>
       <ul>{content.sources.map((source) => <li><a href={source.url} target="_blank" rel="noopener">{source.label} ↗</a></li>)}</ul>
     </section>}
 

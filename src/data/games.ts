@@ -1,4 +1,5 @@
 import { secondaryTools } from './secondary-tools';
+import { newClusters } from './new-clusters';
 
 export type Accent = 'lime' | 'cyan' | 'pink' | 'amber' | 'coral' | 'violet' | 'sky' | 'green' | 'blue' | 'sunset';
 
@@ -22,9 +23,13 @@ export type ToolKind =
   | 'pokemon-go'
   | 'osrs'
   | 'palworld'
+  | 'monopoly-go'
+  | 'valorant'
+  | 'coin-master'
   | 'secondary';
 
 export interface ToolConfig {
+  adsDisabled?: boolean;
   slug: string;
   name: string;
   shortName: string;
@@ -52,6 +57,8 @@ export interface GameImage {
 }
 
 export interface GameConfig {
+  hubTitle?: string;
+  seoTitle?: string;
   slug: string;
   name: string;
   shortName?: string;
@@ -123,6 +130,7 @@ const gtaScreenshotMedia = {
 };
 
 export const games: GameConfig[] = [
+  ...newClusters(originalClusterMedia),
   {
     slug: 'grow-a-garden', name: 'Grow a Garden', eyebrow: 'Roblox garden utilities', accent: 'lime', glyph: 'GG',
     description: 'Price crops, stack mutations and compare trade offers with editable, transparent values.',

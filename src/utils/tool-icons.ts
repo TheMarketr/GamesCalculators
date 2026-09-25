@@ -13,6 +13,9 @@ export function getToolIcon(tool: ToolLike | string): string {
     ? tool.toLowerCase()
     : `${tool.slug ?? ''} ${tool.name ?? ''} ${tool.shortName ?? ''} ${tool.category ?? ''}`.toLowerCase();
 
+  if (includesAny(value, ['crosshair'])) return '🎯';
+  if (includesAny(value, ['tycoon', 'free-spins', 'free-dice', 'reward'])) return '🎁';
+  if (includesAny(value, ['golden-blitz', 'sticker-safe'])) return '🃏';
   if (includesAny(value, ['trade', 'wfl', 'fair', 'comparison', 'compare'])) return '⚖️';
   if (includesAny(value, ['circle', 'dome', 'sphere', 'oval', 'building', 'staircase'])) return '🧱';
   if (includesAny(value, ['coordinate', 'portal', 'distance'])) return '🧭';

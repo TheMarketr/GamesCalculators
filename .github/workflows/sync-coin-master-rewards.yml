@@ -1,0 +1,13 @@
+name: Sync Coin Master official rewards
+on:
+  schedule:
+    - cron: '43 */4 * * *'
+  workflow_dispatch:
+jobs:
+  sync:
+    permissions:
+      contents: write
+      actions: write
+    uses: ./.github/workflows/reward-maintenance.yml
+    with:
+      game: coin-master

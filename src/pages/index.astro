@@ -17,13 +17,18 @@ const searchEntries: SearchEntry[] = [
 const trendSlugs = ['minecraft', 'pokemon-go', 'osrs', 'palworld', 'blox-fruits', 'fortnite', 'gta-6'];
 const trending = trendSlugs.map((slug) => games.find((game) => game.slug === slug)!);
 const newFeatureKeys = [
+  'valorant/crosshair',
+  'valorant/sens-converter',
+  'coin-master/free-spins',
+  'monopoly-go/events',
+  'monopoly-go/tycoon-club',
   'pokemon-go/cp-calculator',
   'osrs/dps-calculator',
   'osrs/drop-rate-calculator',
   'palworld/breeding-calculator',
   'palworld/iv-calculator',
 ];
-const newFeaturedTools = newFeatureKeys.map((key) => publishedTools.find((tool) => `${tool.game.slug}/${tool.slug}` === key)!);
+const newFeaturedTools = newFeatureKeys.slice(0, 5).map((key) => publishedTools.find((tool) => `${tool.game.slug}/${tool.slug}` === key)!);
 const illustratedGames = games.filter((game) => game.image);
 const gta = games.find((game) => game.slug === 'gta-6')!;
 const gtaExtendedGuide = guides.find((guide) => guide.slug === 'gta-6/guides/extended-look-breakdown')!;

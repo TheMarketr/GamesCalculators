@@ -22,6 +22,9 @@ import PokemonGoCalculator from '../../games/pokemon-go/Calculator';
 import OsrsCalculator from '../../games/osrs/Calculator';
 import PalworldCalculator from '../../games/palworld/Calculator';
 import SecondaryCalculator from '../../games/secondary/Calculator';
+import MonopolyCalculator from '../../games/monopoly-go/Calculator';
+import ValorantCalculator from '../../games/valorant/Calculator';
+import CoinCalculator from '../../games/coin-master/Calculator';
 import { buildCalculatorContent } from '../../data/calculator-content';
 export function getStaticPaths(){return publishedTools.map((entry)=>({params:{game:entry.game.slug,tool:entry.slug},props:{game:entry.game,tool:entry}}))}
 interface Props { game: GameConfig; tool: ToolConfig }
@@ -40,6 +43,9 @@ const schema=[
 ---
 <BaseLayout title={tool.name} description={tool.description} canonical={canonical} schema={schema}>
   <ToolShell game={game} tool={tool} faqs={faqs} content={content}>
+    {tool.kind==='monopoly-go'&&<MonopolyCalculator slot="calculator" toolSlug={tool.slug} client:load/>}
+    {tool.kind==='valorant'&&<ValorantCalculator slot="calculator" toolSlug={tool.slug} client:load/>}
+    {tool.kind==='coin-master'&&<CoinCalculator slot="calculator" toolSlug={tool.slug} client:load/>}
     {tool.kind==='circle'&&<CircleCalculator slot="calculator" client:load/>}
     {tool.kind==='minecraft-xp'&&<MinecraftXpCalculator slot="calculator" client:load/>}
     {tool.kind==='enchant'&&<EnchantCalculator slot="calculator" client:load/>}

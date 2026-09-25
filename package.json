@@ -20,6 +20,8 @@
     "data:sync:pokemon-go": "node scripts/sync-pokemon-go.mjs",
     "data:sync:osrs": "node scripts/sync-osrs-prices.mjs",
     "data:sync:palworld": "node scripts/sync-palworld.mjs",
+    "data:check:monopoly-go": "node scripts/check-monopoly-go-rewards.mjs",
+    "data:sync:coin-master": "node scripts/sync-coin-master-rewards.mjs",
     "deploy:cloudflare": "pwsh -NoProfile -File scripts/deploy-cloudflare.ps1",
     "astro": "astro"
   },

@@ -14,6 +14,7 @@ const gameNames = new Map([
   ['99-nights', '99 Nights in the Forest'], ['adopt-me', 'Adopt Me'], ['mm2', 'Murder Mystery 2'],
   ['pet-simulator-99', 'Pet Simulator 99'], ['minecraft', 'Minecraft'], ['fortnite', 'Fortnite'],
   ['pokemon-go', 'Pokémon GO'], ['osrs', 'Old School RuneScape'], ['palworld', 'Palworld'], ['gta-6', 'GTA VI'],
+  ['monopoly-go', 'MONOPOLY GO'], ['valorant', 'VALORANT'], ['coin-master', 'Coin Master'],
 ]);
 
 const walk = async (directory) => (await Promise.all((await readdir(directory, { withFileTypes: true })).map(async (entry) => {

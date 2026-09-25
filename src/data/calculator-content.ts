@@ -7,6 +7,9 @@ import { gtaToolContent } from './tool-content/gta';
 import { pokemonGoToolContent } from './tool-content/pokemon-go';
 import { osrsToolContent } from './tool-content/osrs';
 import { palworldToolContent } from './tool-content/palworld';
+import { monopolyGoToolContent } from './tool-content/monopoly-go';
+import { valorantToolContent } from './tool-content/valorant';
+import { coinMasterToolContent } from './tool-content/coin-master';
 
 export type {
   CalculatorContent,
@@ -17,6 +20,9 @@ export type {
 import type { CalculatorContent } from './tool-content/types';
 
 export const calculatorContent: Record<string, CalculatorContent> = {
+  ...monopolyGoToolContent,
+  ...valorantToolContent,
+  ...coinMasterToolContent,
   ...priorityToolContent,
   ...economyToolContent,
   ...survivalTradingToolContent,

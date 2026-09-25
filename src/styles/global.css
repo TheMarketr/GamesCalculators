@@ -135,3 +135,24 @@
 @keyframes hero-benefit-rotate{to{transform:translateX(-50%)}}
 @media(max-width:760px){.hero-benefit-marquee{margin-top:3rem}.hero-benefit-card{flex-basis:255px;min-height:74px}.hero-benefit-track{animation-duration:48s}}
 @media(prefers-reduced-motion:reduce){.hero-benefit-track{animation:none}.carousel-bars i{animation:none}}
+/* New utility islands reuse the site's panels, input and button treatments. */
+.cluster-field{display:flex;flex-direction:column;gap:.5rem;min-width:0;margin:.6rem 0;font-size:1rem}
+.cluster-field input,.cluster-field select,.cluster-field textarea{width:100%;min-width:0;max-width:100%;min-height:44px;padding:.65rem;background:#101a2b;color:#f3f6ff;border:1px solid #354258;border-radius:5px;font:inherit}
+.cluster-field input[type=range]{padding:0;accent-color:var(--accent,#20cbe1)}
+.cluster-field input[type=color]{padding:.2rem}
+.cluster-toggle{display:flex;align-items:center;gap:.65rem;min-height:44px}
+.cluster-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem;margin:1rem 0}
+.universal-tool button{min-height:44px;padding:.65rem .9rem;background:#263348;border:1px solid #43506a;border-radius:5px;color:#f3f6ff;cursor:pointer;font:inherit}
+.universal-tool button:disabled{opacity:.5;cursor:not-allowed}
+.cluster-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));gap:1rem;margin:1.2rem 0}
+.cluster-card{min-width:0;padding:1.2rem;background:#171f2e;border:1px solid #344057;border-radius:5px;overflow-wrap:anywhere}
+.cluster-card h3{margin:.6rem 0}.cluster-card p{margin:.75rem 0}.cluster-card--claimed{border-color:#56b999;background:#142b29}
+.cluster-code{display:block;max-height:7rem;overflow:auto;overflow-wrap:anywhere;white-space:normal;font-size:1rem}
+.crosshair-editor{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem}
+.crosshair-preview{background:#0c111c;border:1px solid #3b4860;border-radius:5px;overflow:hidden;min-width:0}
+.crosshair-preview svg{display:block;width:100%;height:auto;max-height:300px}
+.crosshair-preview--light{background:#e1e7ed}.crosshair-preview--practice{background-color:#39404b;background-image:linear-gradient(#65708055 1px,transparent 1px),linear-gradient(90deg,#65708055 1px,transparent 1px);background-size:24px 24px}
+.crosshair-editor details{border-bottom:1px solid #354258;padding:.7rem 0}.crosshair-editor summary{cursor:pointer;min-height:44px;padding:.5rem 0}
+.universal-tool progress{max-width:100%;width:100%;accent-color:#27c9a1}
+.universal-tool :focus-visible{outline:3px solid #27c9e8;outline-offset:3px}
+@media(max-width:640px){.crosshair-editor{grid-template-columns:1fr}.cluster-actions>*{max-width:100%}.universal-tool .primary-result strong{overflow-wrap:anywhere}}

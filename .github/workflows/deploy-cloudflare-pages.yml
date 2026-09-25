@@ -34,8 +34,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build production site
-        run: pnpm build
+      - name: Validate and build production site
+        run: pnpm check
 
       - name: Deploy production to Cloudflare Pages
         run: pnpm dlx wrangler@4.126.0 pages deploy dist --project-name=gamescalculators --branch=main --commit-dirty=true --commit-hash="$GITHUB_SHA"

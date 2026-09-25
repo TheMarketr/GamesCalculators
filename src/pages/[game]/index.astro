@@ -21,7 +21,7 @@ const updates = [
 ].sort((a, b) => b.reviewed.localeCompare(a.reviewed));
 const latestReview = updates[0]?.reviewed;
 const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-const title = `${game.name} Calculators & Tools`;
+const title = game.hubTitle ?? `${game.name} Calculators & Tools`;
 const breadcrumbSchema = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
   { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gamescalculators.com/' },
   { '@type': 'ListItem', position: 2, name: title, item: `https://gamescalculators.com/${game.slug}/` },
@@ -31,7 +31,7 @@ const collectionSchema = { '@context': 'https://schema.org', '@type': 'Collectio
   ...gameGuides.map((guide) => ({ '@type': 'Article', name: guide.title, url: `https://gamescalculators.com/${guide.slug}/` })),
 ] };
 ---
-<BaseLayout title={title} description={game.description} schema={[breadcrumbSchema, collectionSchema]}>
+<BaseLayout title={game.seoTitle ?? title} description={game.description} schema={[breadcrumbSchema, collectionSchema]}>
   <div class={`game-hub accent-${game.accent}`}>
     <section class="game-hub-hero">
       <div class="container-wide">

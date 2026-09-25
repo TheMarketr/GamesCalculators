@@ -1,0 +1,13 @@
+name: Check MONOPOLY GO reward links
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+jobs:
+  check:
+    permissions:
+      contents: write
+      actions: write
+    uses: ./.github/workflows/reward-maintenance.yml
+    with:
+      game: monopoly-go
