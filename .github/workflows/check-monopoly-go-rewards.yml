@@ -1,7 +1,7 @@
 name: Check MONOPOLY GO reward links
 on:
-  schedule:
-    - cron: '17 * * * *'
+  # Cloudflare's reward-refresh Worker owns hourly live checks.
+  # Keep this static snapshot maintenance workflow available only on demand.
   workflow_dispatch:
 jobs:
   check:

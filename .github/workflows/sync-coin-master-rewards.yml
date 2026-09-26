@@ -1,7 +1,7 @@
 name: Sync Coin Master official rewards
 on:
-  schedule:
-    - cron: '43 */4 * * *'
+  # Cloudflare's reward-refresh Worker owns hourly live checks.
+  # Keep this static snapshot maintenance workflow available only on demand.
   workflow_dispatch:
 jobs:
   sync:

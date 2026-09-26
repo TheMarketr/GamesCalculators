@@ -1,9 +1,8 @@
 name: Deploy Cloudflare Pages
 
 on:
-  push:
-    branches:
-      - main
+  # Direct Cloudflare deployment remains available through deploy:cloudflare.
+  # GitHub-hosted runners are currently blocked by the account billing lock.
   workflow_dispatch:
 
 concurrency:
