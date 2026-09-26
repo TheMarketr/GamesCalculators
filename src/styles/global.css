@@ -160,4 +160,16 @@
 .crosshair-editor details{border-bottom:1px solid #354258;padding:.7rem 0}.crosshair-editor summary{cursor:pointer;min-height:44px;padding:.5rem 0}
 .universal-tool progress{max-width:100%;width:100%;accent-color:#27c9a1}
 .universal-tool :focus-visible{outline:3px solid #27c9e8;outline-offset:3px}
+/* Phone titles use the full content width, not the space beside two icons. */
+@media(max-width:700px){
+  .tool-hero .breadcrumbs{flex-wrap:wrap;align-items:baseline;row-gap:.3rem}
+  .tool-title-lockup{grid-template-columns:minmax(0,1fr);gap:.85rem;text-align:left}
+  .tool-title-lockup>div{min-width:0;width:100%}
+  .tool-game-icon{width:56px;height:56px;border-radius:14px}
+  .tool-heading .tool-name-row{display:block;margin:.6rem 0 .9rem}
+  .tool-heading .tool-type-icon{display:none}
+  .tool-heading h1{max-width:100%;font-size:clamp(2rem,8vw,2.6rem);line-height:1.08;letter-spacing:-.04em;overflow-wrap:break-word;text-align:left}
+  .tool-heading p{max-width:100%;text-align:left}
+  .tool-heading .update-badge{max-width:100%}
+}
 @media(max-width:640px){.crosshair-editor{grid-template-columns:1fr}.cluster-actions>*{max-width:100%}.universal-tool .primary-result strong{overflow-wrap:anywhere}.reward-summary{grid-template-columns:1fr}.crosshair-slider{grid-template-columns:40px minmax(0,1fr) 4rem 40px}}
