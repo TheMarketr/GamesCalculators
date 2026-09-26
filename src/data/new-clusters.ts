@@ -1,4 +1,38 @@
-import type { GameConfig, ToolConfig } from "./games";
+import type { GameConfig, GameImage, ToolConfig } from "./games";
+const visualFiles: Record<string, string[]> = {
+  'monopoly-go/free-dice-links': ['free-dice-links', 'scene'],
+  'monopoly-go/events': ['events'],
+  'monopoly-go/golden-blitz': ['golden-blitz'],
+  'monopoly-go/tycoon-club': ['tycoon-club'],
+  'monopoly-go/sticker-safe-calculator': ['sticker-safe'],
+  'monopoly-go/partner-event': ['partner-event'],
+  'monopoly-go/wiki': ['scene'],
+  'valorant/crosshair': ['crosshair', 'crosshair-codes'],
+  'valorant/crosshair-codes': ['crosshair-codes'],
+  'valorant/best-crosshairs': ['crosshair-codes'],
+  'valorant/crosshair-settings': ['crosshair', 'crosshair-codes'],
+  'valorant/sens-converter': ['sens-converter'],
+  'valorant/edpi-calculator': ['sens-converter'],
+  'valorant/scoped-sensitivity-calculator': ['sens-converter'],
+  'valorant/rank-progress-calculator': ['rank-progress'],
+  'coin-master/free-spins': ['free-spins', 'reward-calendar'],
+  'coin-master/reward-calendar-tracker': ['reward-calendar'],
+  'coin-master/how-to-get-free-spins': ['free-spins'],
+  'coin-master/village-mania-guide': ['village-mania'],
+};
+function toolVisuals(game: string, slug: string): GameImage[] {
+  return (visualFiles[`${game}/${slug}`] ?? []).map((file) => ({
+    src: `/images/games/${game}/${file}.webp`,
+    alt: `Original illustrated visual for ${game.replaceAll('-', ' ')} ${slug.replaceAll('-', ' ')}`,
+    caption: `Illustration of ${file.replaceAll('-', ' ')} concepts`,
+    credit: 'Original GamesCalculators illustration',
+    creditUrl: '/media-credits/',
+    sourceLabel: 'GamesCalculators original artwork',
+    sourceUrl: '/media-credits/',
+    license: 'Original site artwork',
+    licenseUrl: '/media-credits/',
+  }));
+}
 type Entry = [
   string,
   string,
@@ -20,9 +54,10 @@ function tools(kind: ToolConfig["kind"], entries: Entry[]): ToolConfig[] {
       related,
       keywords,
       kind,
+      media: toolVisuals(kind, slug),
       lastReviewed: "2026-09-25",
       updated: "2026-09-25",
-      featured: i < 2,
+      featured: i < (kind === 'monopoly-go' || kind === 'coin-master' ? 3 : 2),
       ...(slug === "free-spins" ? { adsDisabled: true } : {}),
     }),
   );
@@ -44,13 +79,22 @@ export function newClusters(
       hubTitle: "MONOPOLY GO Tools & Rewards",
       seoTitle: "MONOPOLY GO Tools, Rewards & Events",
       description:
-        "Explore MONOPOLY GO events, Golden Blitz rules and Tycoon Club rewards, then plan sticker-safe stars and Partner attraction points.",
+        "Find source-tracked MONOPOLY GO free dice links, check events and Tycoon Club rewards, then plan sticker-safe stars and Partner points.",
       ...media(
         "monopoly-go",
         "MONOPOLY GO",
         "dice, green board tiles and reward cards",
       ),
       tools: tools("monopoly-go", [
+        [
+          "free-dice-links",
+          "MONOPOLY GO Free Dice Links Today",
+          "Check source-tracked MONOPOLY GO free dice links, view last-check times and keep a private claimed checklist without sharing your game account.",
+          "Free rewards",
+          "tracker",
+          ["events", "tycoon-club", "wiki"],
+          ["monopoly go free dice links", "monopoly go free dice", "monopoly go dice links", "monopoly go free dice links today", "monopoly go free rolls"],
+        ],
         [
           "tycoon-club",
           "MONOPOLY GO Tycoon Club",

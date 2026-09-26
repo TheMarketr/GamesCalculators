@@ -1,6 +1,8 @@
 import { useEffect, useState } from "preact/hooks";
 import events from "../../data/monopoly-go/events.json";
+import rewards from "../../data/monopoly-go/rewards.json";
 import { monopolyTopics } from "../../data/monopoly-go/topics";
+import RewardFeed from "../shared/RewardFeed";
 import { safeProgress, partnerProgress, eventStatus } from "./calculate";
 import { readLocal, writeLocal } from "../shared/local-progress";
 
@@ -51,6 +53,7 @@ export default function MonopolyCalculator({ toolSlug }: { toolSlug: string }) {
     setClaims(next);
     setStorageError(!writeLocal("gc-mgo-club-v1", next));
   };
+  if (toolSlug === "free-dice-links") return <RewardFeed records={rewards} game="monopoly-go" />;
   if (toolSlug === "sticker-safe-calculator") {
     let result;
     try {
@@ -75,6 +78,9 @@ export default function MonopolyCalculator({ toolSlug }: { toolSlug: string }) {
                 : `${result.days} estimated days`}
             </p>
             <progress value={result.percent} max="100" />
+            <div class="cluster-actions" aria-label="Example safe targets">
+              {[500, 700, 1000].map((value) => <button type="button" onClick={() => setTarget(value)}>{value} star example</button>)}
+            </div>
           </div>
         ) : (
           <p role="alert">
@@ -134,6 +140,7 @@ export default function MonopolyCalculator({ toolSlug }: { toolSlug: string }) {
                   hours until your 24-hour reminder
                 </p>
               )}
+              <progress value={claims[id] && now ? Math.min(24, (now - claims[id]) / 3600000) : 0} max="24" aria-label={`${title} 24-hour reminder progress`} />
               <button onClick={() => mark(id)}>
                 {claims[id] ? "Clear checkmark" : "Mark collected"}
               </button>
@@ -210,6 +217,7 @@ export default function MonopolyCalculator({ toolSlug }: { toolSlug: string }) {
               {result.yourHalfRemaining.toLocaleString()} points to your 50%
               share
             </p>
+            <div class="partner-progress"><label>YOU · {yours.toLocaleString()} points<progress value={Math.min(yours, target)} max={target} /></label><label>PARTNER · {partner.toLocaleString()} points<progress value={Math.min(partner, target)} max={target} /></label><label>TOTAL · {(yours + partner).toLocaleString()} / {target.toLocaleString()}<progress value={Math.min(yours + partner, target)} max={target} /></label></div>
           </div>
         ) : (
           <p role="alert">Enter valid point totals.</p>
@@ -236,8 +244,8 @@ export default function MonopolyCalculator({ toolSlug }: { toolSlug: string }) {
       <h2>{blitz ? "Golden Blitz status" : "Confirmed event schedule"}</h2>
       <p class="assumption-note">
         {blitz
-          ? "No confirmed upcoming Golden Blitz found."
-          : "No active or upcoming event is confirmed in this local schedule. Check the official game announcements for newly released events."}
+          ? "No confirmed upcoming Golden Blitz is tracked in this snapshot."
+          : "This schedule includes only source-confirmed entries. Check publisher announcements for newly released events."}
       </p>
       <a
         href="https://www.monopolygo.com/"
@@ -265,12 +273,18 @@ export default function MonopolyCalculator({ toolSlug }: { toolSlug: string }) {
         </div>
       ) : (
         <>
+          <h3>Live and upcoming</h3>
+          {!events.some((event) => now > 0 && new Date(event.endUtc).getTime() > now) && <p>No confirmed current event in our source snapshot.</p>}
+          {events.filter((event) => now > 0 && new Date(event.endUtc).getTime() > now).map((event) => (
+            <article class="cluster-card" key={event.id}>
+              <strong>{event.name}</strong><p>{eventStatus(event.startUtc, event.endUtc, now)}</p>
+              <p><time dateTime={event.startUtc}>{new Date(event.startUtc).toLocaleString()}</time> – <time dateTime={event.endUtc}>{new Date(event.endUtc).toLocaleString()}</time></p>
+              <p>{event.rewards}</p><a href={event.sourceUrl} target="_blank" rel="noopener noreferrer">{event.source} ↗</a>
+            </article>
+          ))}
           <h3>Confirmed event archive</h3>
-          <p>
-            These are ended events, retained for context. Times switch to your
-            device timezone after loading.
-          </p>
-          {events.map((event) => (
+          <p>Ended events are retained for context. After loading, times use your device timezone.</p>
+          {events.filter((event) => !now || new Date(event.endUtc).getTime() <= now).map((event) => (
             <article class="cluster-card" key={event.id}>
               <strong>{event.name}</strong>
               <p>

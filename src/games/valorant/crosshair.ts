@@ -137,14 +137,17 @@ export function parseCrosshair(code: string): Crosshair {
   if (tokens.length === 1) return { ...defaultCrosshair };
   if (tokens[1] !== "P")
     throw new Error(
-      "Only primary profiles beginning 0;P are supported. ADS, sniper and global sections are not edited.",
+      "This code contains ADS, sniper, or other settings that this editor does not currently support. Primary crosshair settings were not imported to avoid losing data.",
     );
   if ((tokens.length - 2) % 2) throw new Error("Incomplete key/value pair.");
   const next = { ...defaultCrosshair },
     seen = new Set<string>();
   for (let i = 2; i < tokens.length; i += 2) {
-    const key = tokens[i] as keyof Crosshair,
+    const rawKey = tokens[i],
       value = tokens[i + 1];
+    if (rawKey === 'A' || rawKey === 'S' || rawKey === 'G')
+      throw new Error('This code contains ADS or sniper settings that this editor does not currently support. Primary crosshair settings were not imported to avoid losing data.');
+    const key = rawKey as keyof Crosshair;
     if (!Object.hasOwn(next, key) || seen.has(key))
       throw new Error(`Unsupported or repeated token: ${key}`);
     seen.add(key);
@@ -276,6 +279,20 @@ export const crosshairProfiles = [
       "1b": 0,
     },
   },
+  { id: 'pink-precision', name: 'Pink precision', style: 'Small', priority: 'Precision', settings: { ...defaultCrosshair, c: 6, h: 0, '0l': 3, '0t': 1, '0o': 3, '1b': 0 } },
+  { id: 'lime-compact', name: 'Lime compact', style: 'Small', priority: 'Minimal obstruction', settings: { ...defaultCrosshair, c: 2, h: 0, '0l': 2, '0t': 2, '0o': 2, '1b': 0 } },
+  { id: 'thin-cyan', name: 'Thin cyan', style: 'Classic', priority: 'Precision', settings: { ...defaultCrosshair, c: 5, h: 0, '0l': 6, '0t': 1, '0o': 4, '1b': 0 } },
+  { id: 'thick-white', name: 'Thick white', style: 'Large', priority: 'Visibility', settings: { ...defaultCrosshair, c: 0, h: 1, '0l': 7, '0t': 4, '0o': 5, '1b': 0 } },
+  { id: 'minimal-green', name: 'Minimal green', style: 'Minimal', priority: 'Minimal obstruction', settings: { ...defaultCrosshair, c: 1, h: 0, '0l': 2, '0t': 1, '0o': 2, '1b': 0 } },
+  { id: 'red-visibility', name: 'Red visibility', style: 'High Visibility', priority: 'Visibility', settings: { ...defaultCrosshair, c: 7, h: 1, o: 1, t: 2, '0l': 6, '0t': 3, '0o': 4, '1b': 0 } },
+  { id: 'yellow-compact', name: 'Yellow compact', style: 'Small', priority: 'Visibility', settings: { ...defaultCrosshair, c: 4, h: 1, '0l': 3, '0t': 2, '0o': 2, '1b': 0 } },
+  { id: 'white-dot', name: 'White dot', style: 'Dot', priority: 'Precision', settings: { ...defaultCrosshair, c: 0, d: 1, z: 1, h: 0, '0b': 0, '1b': 0 } },
+  { id: 'cyan-dot', name: 'Cyan dot', style: 'Dot', priority: 'Minimal obstruction', settings: { ...defaultCrosshair, c: 5, d: 1, z: 2, h: 0, '0b': 0, '1b': 0 } },
+  { id: 'green-box', name: 'Green hollow box', style: 'Circle', priority: 'Precision', settings: { ...defaultCrosshair, c: 1, h: 0, '0l': 3, '0t': 3, '0o': 3, '1b': 0 } },
+  { id: 'white-ring', name: 'White ring-like', style: 'Circle', priority: 'Visibility', settings: { ...defaultCrosshair, c: 0, h: 1, '0l': 4, '0t': 3, '0o': 4, '1b': 0 } },
+  { id: 'pink-classic', name: 'Pink classic', style: 'Classic', priority: 'Visibility', settings: { ...defaultCrosshair, c: 6, h: 1, '0l': 5, '0t': 2, '0o': 3, '1b': 0 } },
+  { id: 'cyan-balanced', name: 'Cyan balanced', style: 'Medium', priority: 'Precision', settings: { ...defaultCrosshair, c: 5, h: 1, '0l': 5, '0t': 2, '0o': 4, '1b': 0 } },
+  { id: 'yellow-bold', name: 'Yellow bold', style: 'High Visibility', priority: 'Visibility', settings: { ...defaultCrosshair, c: 4, h: 1, o: 1, '0l': 7, '0t': 3, '0o': 5, '1b': 0 } },
 ].map((p) => ({
   ...p,
   source: "GamesCalculators original practice profile",

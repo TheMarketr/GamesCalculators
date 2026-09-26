@@ -9,6 +9,7 @@ import {
   type Crosshair,
 } from "./crosshair";
 import CrosshairPreview from "./CrosshairPreview";
+import type { PreviewState } from './preview-geometry';
 
 function Crosshairs({ mode }: { mode: string }) {
   const [s, setS] = useState<Crosshair>({ ...crosshairProfiles[0].settings }),
@@ -16,6 +17,9 @@ function Crosshairs({ mode }: { mode: string }) {
     [copyFallback, setCopyFallback] = useState(""),
     [message, setMessage] = useState(""),
     [background, setBackground] = useState("dark"),
+    [previewState, setPreviewState] = useState<PreviewState>('standing'),
+    [zoom, setZoom] = useState(2),
+    [brightness, setBrightness] = useState(100),
     [style, setStyle] = useState("All"),
     [priority, setPriority] = useState("All"),
     [color, setColor] = useState("All"),
@@ -50,15 +54,12 @@ function Crosshairs({ mode }: { mode: string }) {
   const slider = (key: keyof Crosshair, label: string, max = 20, step = 1) => (
     <label class="cluster-field">
       {label}
-      <input
-        type="range"
-        min="0"
-        max={max}
-        step={step}
-        value={s[key]}
-        onInput={(e) => update(key, e.currentTarget.valueAsNumber)}
-      />
-      <output>{s[key]}</output>
+      <span class="crosshair-slider">
+        <button type="button" aria-label={`Decrease ${label}`} onClick={() => update(key, Math.max(0, Number((Number(s[key]) - step).toFixed(2))))}>−</button>
+        <input type="range" min="0" max={max} step={step} value={s[key]} onInput={(e) => update(key, e.currentTarget.valueAsNumber)} />
+        <input type="number" aria-label={`${label} exact value`} min="0" max={max} step={step} value={s[key]} onInput={(e) => { const n=e.currentTarget.valueAsNumber; if (Number.isFinite(n)) update(key, Math.max(0, Math.min(max, n))); }} />
+        <button type="button" aria-label={`Increase ${label}`} onClick={() => update(key, Math.min(max, Number((Number(s[key]) + step).toFixed(2))))}>+</button>
+      </span>
     </label>
   );
   const check = (key: keyof Crosshair, label: string) => (
@@ -81,7 +82,7 @@ function Crosshairs({ mode }: { mode: string }) {
             : "Build your primary crosshair"}
       </h2>
       <p>
-        Original practice profiles, with a static enlarged preview. Import
+        Original practice profiles, with a fixed-scale live preview. Import
         supports primary 0;P profiles; advanced ADS and sniper sections are
         rejected with an explanation.
       </p>
@@ -102,6 +103,8 @@ function Crosshairs({ mode }: { mode: string }) {
                   "Small",
                   "Medium",
                   "Large",
+                  "Minimal",
+                  "High Visibility",
                 ].map((v) => (
                   <option>{v}</option>
                 ))}
@@ -156,7 +159,10 @@ function Crosshairs({ mode }: { mode: string }) {
             </label>
           </div>
           <div class="cluster-cards">
-            {crosshairProfiles
+            {(mode === 'best-crosshairs' ? [...crosshairProfiles].sort((a,b) => {
+              const score = (p: typeof a) => (style !== 'All' && p.style === style ? 5 : 0) + (priority !== 'All' && p.priority === priority ? 5 : 0) + (color !== 'All' && String(p.settings.c) === color ? 3 : 0) + (outline !== 'All' && !!p.settings.h === (outline === 'Yes') ? 2 : 0) + (dot !== 'All' && !!p.settings.d === (dot === 'Yes') ? 2 : 0);
+              return score(b) - score(a);
+            }).slice(0,3) : crosshairProfiles
               .filter(
                 (p) =>
                   (style === "All" || p.style === style) &&
@@ -165,10 +171,10 @@ function Crosshairs({ mode }: { mode: string }) {
                   (outline === "All" ||
                     !!p.settings.h === (outline === "Yes")) &&
                   (dot === "All" || !!p.settings.d === (dot === "Yes")),
-              )
+              ))
               .map((p) => (
                 <article class="cluster-card" key={p.id}>
-                  <CrosshairPreview settings={p.settings} />
+                  <CrosshairPreview settings={p.settings} zoom={2} />
                   <h3>{p.name}</h3>
                   <p>
                     {p.priority} · {p.note}
@@ -192,8 +198,7 @@ function Crosshairs({ mode }: { mode: string }) {
               ))}
           </div>
           <p>
-            Matching profiles appear above. If none match, broaden a filter; the
-            finder does not invent a new recommendation.
+            {mode === 'best-crosshairs' ? 'Recommended based on your selected preferences. Compare all three in the editor before deciding.' : 'Matching profiles appear above. If none match, broaden a filter.'}
           </p>
           <button
             onClick={() => {
@@ -211,7 +216,9 @@ function Crosshairs({ mode }: { mode: string }) {
         <>
           <div class="crosshair-editor">
             <div>
-              <CrosshairPreview settings={s} background={background} />
+              <div class="crosshair-state-tabs" role="group" aria-label="Preview movement state">{(['standing','moving','firing','moving-firing'] as PreviewState[]).map(value => <button type="button" class={previewState === value ? 'is-active' : ''} aria-pressed={previewState === value} onClick={() => setPreviewState(value)}>{value === 'moving-firing' ? 'Moving + firing' : value[0].toUpperCase() + value.slice(1)}</button>)}</div>
+              <CrosshairPreview settings={s} background={background} zoom={zoom} state={previewState} brightness={brightness} />
+              <div class="crosshair-state-tabs" role="group" aria-label="Preview zoom">{[1,2,3].map(value => <button type="button" class={zoom === value ? 'is-active' : ''} aria-pressed={zoom === value} onClick={() => setZoom(value)}>{value}×</button>)}</div>
               <label class="cluster-field">
                 Preview background
                 <select
@@ -220,12 +227,14 @@ function Crosshairs({ mode }: { mode: string }) {
                 >
                   <option value="dark">Dark</option>
                   <option value="light">Light</option>
-                  <option value="practice">Practice grid</option>
+                  <option value="practice">Practice Range Style</option>
+                  <option value="bright-map">Bright Map</option>
+                  <option value="dark-map">Dark Map</option>
                 </select>
               </label>
+              <label class="cluster-field">Background brightness <input type="range" min="50" max="150" value={brightness} onInput={e => setBrightness(e.currentTarget.valueAsNumber)} /> <output>{brightness}%</output></label>
               <p>
-                Preview enlarged up to 3× to fit. Movement and firing flags are
-                saved in the code; weapon spread is not simulated.
+                Preview geometry uses a fixed coordinate scale: one preview unit corresponds to one entered line setting unit before your chosen zoom. Movement and firing states visualize your crosshair error settings. They do not simulate weapon recoil or bullet spread.
               </p>
               <div class="cluster-actions">
                 <button onClick={() => copy(serializeCrosshair(s))}>
@@ -311,7 +320,7 @@ function Crosshairs({ mode }: { mode: string }) {
                 {slider("a", "Dot opacity", 1, 0.05)}
               </details>
               {(["0", "1"] as const).map((p) => (
-                <details>
+                <details open={mode === 'crosshair-settings'}>
                   <summary>{p === "0" ? "Inner" : "Outer"} lines</summary>
                   {check(`${p}b`, "Show lines")}
                   {slider(`${p}a`, "Line opacity", 1, 0.05)}
@@ -492,6 +501,8 @@ function Sensitivity({ mode }: { mode: string }) {
               cm/360{" "}
               {mode === "scoped-sensitivity-calculator" ? "(hipfire only)" : ""}
             </p>
+            {mode === 'sens-converter' && <div class="sens-flow"><div><small>FROM</small><strong>{source.game}</strong><span>{sens} sensitivity · {dpi} DPI</span></div><span aria-hidden="true">↓</span><div><small>TO</small><strong>{destination.game}</strong><span>{result.converted.toFixed(4)} sensitivity</span></div></div>}
+            {mode === 'edpi-calculator' && <div class="sens-flow"><div><small>MOUSE</small><strong>{dpi} DPI</strong></div><span aria-hidden="true">×</span><div><small>VALORANT</small><strong>{sens} sensitivity</strong></div><span aria-hidden="true">=</span><div><small>eDPI</small><strong>{result.edpi.toFixed(2)}</strong></div></div>}
           </div>
           {mode === "edpi-calculator" && (
             <>
@@ -641,6 +652,7 @@ function Rank() {
       </div>
       {result ? (
         <div class="primary-result">
+          <div class="rank-flow"><strong>{ranks[current]}</strong><span>→</span><strong>{ranks[target]}</strong></div>
           <span>Estimated games</span>
           <strong>
             {result.games === null ? "No positive climb" : result.games}
@@ -653,6 +665,7 @@ function Rank() {
             Expected wins within the estimate:{" "}
             {result.expectedWins ?? "not available"}
           </p>
+          <progress value={Math.min(100, rr)} max="100" aria-label="Current rank RR progress" />
         </div>
       ) : (
         <p role="alert">

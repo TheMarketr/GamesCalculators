@@ -107,10 +107,13 @@ export async function saveRewards(game, rows) {
   return false;
 }
 export async function addReward(game) {
-  const [claimUrl, sourceUrl, label, ...rest] = process.argv.slice(2);
-  if (!claimUrl || !sourceUrl || !label || rest.length)
+  const [claimUrl, quantity, type, sourceUrl, ...rest] = process.argv.slice(2);
+  const amount = quantity === 'unknown' ? null : Number(quantity);
+  const allowedTypes = game === 'monopoly-go' ? ['dice', 'other'] : ['spins', 'coins', 'other'];
+  if (!claimUrl || !sourceUrl || !allowedTypes.includes(type) || rest.length ||
+      (amount !== null && (!Number.isSafeInteger(amount) || amount <= 0)))
     throw new Error(
-      "Usage: <claim-url> <official-source-url> <label>. Quantities must be reviewed separately; do not infer them from links.",
+      `Usage: <claim-url> <positive-amount|unknown> <${allowedTypes.join('|')}> <official-source-url>. Enter an amount only when the official source states it.`,
     );
   const url = normalize(claimUrl, game),
     source = validSource(sourceUrl, game);
@@ -131,15 +134,15 @@ export async function addReward(game) {
   const now = new Date().toISOString();
   rows.unshift({
     id: fingerprint(url, game),
-    type: "other",
-    label,
+    type,
+    ...(game === 'monopoly-go' ? { amount } : { spins: type === 'spins' ? amount : null, coins: type === 'coins' ? amount : null }),
+    label: amount === null ? (game === 'monopoly-go' ? 'Official MONOPOLY GO reward' : 'Official Coin Master reward') : `${amount} ${type === 'dice' ? 'Free Dice' : type === 'spins' ? 'Free Spins' : 'Coins'}`,
     claimUrl: url,
     source: "Official publisher page",
     sourceUrl: source,
     discoveredAt: now,
     checkedAt: now,
-    notes:
-      "Reward quantity and account eligibility are not independently verified.",
+    notes: amount === null ? 'Reward quantity and account eligibility are not independently verified.' : 'Quantity transcribed from the linked official source. Account eligibility and in-game redemption are not independently verified.',
   });
   await saveRewards(game, rows);
   console.log(

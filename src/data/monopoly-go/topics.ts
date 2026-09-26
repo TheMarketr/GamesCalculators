@@ -17,6 +17,16 @@ export const monopolySources = {
   },
 };
 export const monopolyTopics = [
+  { name: 'Free Dice Links', detail: 'Source-tracked mply.io links may grant dice once per eligible account. Check discovery time and the game response; a reachable URL is not a guaranteed reward.', href: '/monopoly-go/free-dice-links/' },
+  { name: 'Roll multiplier', detail: 'A higher multiplier consumes more dice in one roll and scales eligible landing rewards. It does not choose the next tile for you.', href: '/monopoly-go/wiki/' },
+  { name: 'Shields', detail: 'Shields protect landmarks from Shutdown attempts when available. Check your current shield capacity on the board rather than treating collected shields as an unlimited reserve.', href: '/monopoly-go/wiki/' },
+  { name: 'Sticker album', detail: 'Albums organize seasonal sticker sets. A complete set and a completed album are different goals; current set requirements belong to the live game screen.', href: '/monopoly-go/sticker-safe-calculator/' },
+  { name: 'Sticker duplicates', detail: 'An extra sticker can be traded when its current rules allow it or contribute stars toward a safe. A Gold duplicate still needs an eligible Golden Blitz window for trading.', href: '/monopoly-go/golden-blitz/' },
+  { name: 'Bank Heist', detail: 'A Railroad landing can initiate a Bank Heist. Its outcome affects the event points shown for the active tournament, so use current event rules rather than a fixed point table.', href: '/monopoly-go/events/' },
+  { name: 'Shutdown', detail: 'Shutdown is a Railroad mini-game targeting another board. Available shields can stop building damage; event scoring depends on the active tournament.', href: '/monopoly-go/events/' },
+  { name: 'Boards', detail: 'Boards contain landmarks that you build and upgrade. Prices vary with progress, so this wiki does not publish an unsupported universal board-cost table.', href: '/monopoly-go/wiki/' },
+  { name: 'Net Worth', detail: 'Net Worth tracks long-term account progression as landmarks and boards advance. It is not an exchange rate for dice or sticker stars.', href: '/monopoly-go/wiki/' },
+  { name: 'Milestones', detail: 'Timed events and tournaments have separate point milestones. Inspect the active reward ladder before spending rolls to chase a specific tier.', href: '/monopoly-go/events/' },
   {
     name: "Dice rolls",
     detail:

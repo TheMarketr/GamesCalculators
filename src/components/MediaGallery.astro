@@ -16,7 +16,7 @@ const visibleItems = typeof limit === 'number' ? items.slice(0, limit) : items;
 ---
 <section class:list={['media-gallery-section', compact && 'media-gallery-section--compact']} aria-labelledby={title ? `${galleryId}-title` : undefined} aria-label={!title ? 'Official game media' : undefined}>
   {(title || description) && <div class="media-gallery-copy">
-    <div><span class="eyebrow">Official game media</span>{title && <h2 id={`${galleryId}-title`}>{title}</h2>}{description && <p>{description}</p>}</div>
+    <div><span class="eyebrow">Game visuals</span>{title && <h2 id={`${galleryId}-title`}>{title}</h2>}{description && <p>{description}</p>}</div>
     <span class="media-gallery-hint"><span aria-hidden="true">↗</span> Select an image to enlarge</span>
   </div>}
   <div class="media-gallery" data-media-gallery={galleryId}>

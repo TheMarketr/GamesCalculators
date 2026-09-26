@@ -25,8 +25,8 @@ export const valorantToolContent = defineToolContent({
     steps: ['Choose a color and preview background.', 'Adjust inner lines, outer lines, outlines and the center dot.', 'Copy the code and import it through the Crosshair Profile controls in VALORANT.'],
     mechanics: 'The preview places four rectangular arms around a central offset and adds a square dot when enabled. Vertical length can be separated from horizontal length. The exported semicolon-delimited code stores primary settings under P; line prefixes 0 and 1 identify inner and outer lines. Import validates numeric ranges and rejects unsupported profile sections rather than losing them.',
     example: 'A cyan classic profile uses four-pixel inner arms, two-pixel thickness and a two-pixel center offset, with outer lines disabled. Increasing offset from two to four opens the center without changing arm thickness or color.',
-    result: 'Test the copied profile in the practice range at your actual resolution. The browser preview is enlarged up to three times for inspection, so it should not be compared pixel-for-pixel with a screenshot of gameplay. Use Share profile to retain a complete supported setup in the URL.',
-    limits: 'ADS and sniper sections are not supported by this primary editor. Movement and firing flags are exported, but weapon-dependent expansion is not simulated. Code round trips are tested locally; no automated in-game import test is performed.',
+    result: 'Test the copied profile in the practice range at your actual resolution. Choose a fixed 1×, 2× or 3× preview zoom; no control silently rescales the crosshair to fit. Use Share profile to retain a supported setup in the URL.',
+    limits: 'ADS and sniper sections are not supported by this primary editor. Moving and firing tabs illustrate the configured error multipliers as line-offset changes, not actual weapon recoil or bullet spread. No automated in-game import test is performed.',
     sources: [patch, custom, tokens],
     faqs: [
       {
@@ -35,30 +35,30 @@ export const valorantToolContent = defineToolContent({
       },
       {
         question: 'Why is the VALORANT crosshair preview larger than my game crosshair?',
-        answer: 'It is enlarged up to three times so small thickness and offset changes are visible. Confirm the final appearance at your game resolution.',
+        answer: 'The preview uses your chosen fixed 1×, 2× or 3× zoom. Its units are illustrative and not guaranteed to equal in-game screen pixels at your resolution.',
       },
       {
         question: 'Does the VALORANT crosshair editor simulate firing error?',
-        answer: 'No. It stores the movement and firing flags and multipliers, while the preview remains a static marker.',
+        answer: 'The firing tab visualizes the entered line-offset multiplier. It does not model a weapon’s recoil pattern or predict bullet spread.',
       },
     ],
   }),
   'valorant/crosshair-codes': c({
     name: 'VALORANT Crosshair Codes',
     reviewed: '2026-09-25',
-    methodSummary: 'Filters six original practice profiles by shape, color, outline and dot properties, then exposes their primary-profile codes.',
+    methodSummary: 'Filters 20 original practice profiles by shape, color, outline and dot properties, then exposes their primary-profile codes.',
     intro: 'Browse VALORANT crosshair codes with a visible preview before copying them. These are GamesCalculators practice profiles, with no professional-player attribution. The gallery gives each profile a purpose and links directly to its editable version.',
     useCases: ['Compare dot and classic profiles', 'Find an outlined marker for brighter backgrounds', 'Copy a starting profile before making small changes'],
     steps: ['Choose a style or leave all styles visible.', 'Narrow the list using color, outline and center-dot filters.', 'Copy the selected code or open that profile in the editor.'],
     mechanics: 'Each card reads from a local settings record. Preview and code use the same record, which prevents a thumbnail from accidentally describing a different configuration. Filters combine with AND logic, so a Dot choice plus an incompatible color can leave no matching cards.',
     example: 'Selecting Dot and green leaves the Green dot profile. Its two-pixel dot has both line layers disabled. Selecting an additional incompatible outline preference removes that card until the filter is broadened.',
     result: 'Treat the gallery as a set of starting points. A small marker can reduce obstruction, while an outline can improve separation from the map. After importing, test target visibility rather than choosing a profile simply because it looks decorative in a large preview.',
-    limits: 'The collection is intentionally limited to six original profiles. The Circle category contains a pixel hollow-box approximation, not a smooth circle. Profiles have not been associated with esports players or their current tournament settings.',
+    limits: 'The collection contains 20 original practice profiles. The Circle category contains pixel hollow-box approximations, not smooth circles. Profiles have not been associated with esports players or their current tournament settings.',
     sources: [patch, tokens],
     faqs: [
       {
         question: 'Are these VALORANT crosshair codes used by professional players?',
-        answer: 'No player association is claimed. All six are original practice presets designed to demonstrate different shapes and contrast choices.',
+        answer: 'No player association is claimed. All 20 are original practice presets designed to demonstrate different shapes and contrast choices.',
       },
       {
         question: 'Why does the VALORANT crosshair codes gallery return no matches?',
@@ -77,8 +77,8 @@ export const valorantToolContent = defineToolContent({
     intro: 'The best VALORANT crosshair depends on what you can see clearly while aiming. This finder narrows original profiles according to your priorities: precision, visibility or minimal obstruction. It does not score your performance or claim that one configuration improves every player.',
     useCases: ['Choose a less obstructive marker', 'Find a more visible outlined profile', 'Compare a medium cross with a minimal dot'],
     steps: ['Start with the visual priority that matters most.', 'Select a preferred style and color if those are important.', 'Preview a matching result, copy it and test it in a controlled practice session.'],
-    mechanics: 'Recommendations are a transparent filter over profile properties, not an aim assessment. A profile tagged Visibility appears only when it also matches the other selected conditions. The result set can be empty; the finder never relabels an unrelated preset to force a recommendation.',
-    example: 'Choosing Visibility and Medium returns the white outlined profile. Changing the style to Large finds the red large profile instead. Those results describe different visibility options, not a numerical ranking of aiming skill.',
+    mechanics: 'Recommendations score explicit profile properties against your selected style, priority, color, outline and dot preferences. The three highest-scoring original profiles appear as alternatives to test, not as an aim-performance ranking.',
+    example: 'Choosing Visibility and Medium raises white outlined profiles in the three suggestions. Changing the style to Large favors larger markers such as Red large. The order reflects selected visual properties, not a measured ranking of aiming skill.',
     result: 'Keep sensitivity and practice conditions steady while comparing two markers. Notice whether the center obscures distant targets, whether the color blends into scenery, and whether an outline remains useful during movement. Edit the chosen starting point rather than collecting many unrelated codes.',
     limits: 'Preference labels are editorial descriptions of shape and contrast. They are not measurements of accuracy, reaction time or win rate. Browser rendering is enlarged and cannot reproduce every monitor, resolution or game background.',
     sources: [custom, patch],
@@ -89,7 +89,7 @@ export const valorantToolContent = defineToolContent({
       },
       {
         question: 'How does the best VALORANT crosshair finder rank recommendations?',
-        answer: 'It filters by explicit preference tags instead of assigning an unexplained score. Matching cards are alternatives to test, not a performance leaderboard.',
+        answer: 'It assigns points for matching selected style and priority, then color, outline and dot preferences. The three strongest matches are alternatives to test, not a performance leaderboard.',
       },
       {
         question: 'Should I choose a dot for the best VALORANT precision?',
@@ -104,10 +104,10 @@ export const valorantToolContent = defineToolContent({
     intro: 'VALORANT crosshair settings control several separate visual layers. The center dot marks the exact middle; inner and outer lines frame it; outlines add dark edges. Use the editor to see which control changes the marker before transferring a primary code to the game.',
     useCases: ['Understand line offset versus length', 'Inspect independent horizontal and vertical arms', 'Compare outline opacity with line opacity'],
     steps: ['Open one settings group at a time.', 'Change the control while watching the center and arm edges.', 'Restore the example or copy the resulting primary-profile code when the geometry is clear.'],
-    mechanics: 'Length extends an arm away from the center, thickness changes its width, and offset changes the gap before the arm begins. Each line layer has its own opacity. Independent vertical length is applied only when its separate-length switch is enabled. A dark outline is drawn around visible rectangles.',
+    mechanics: 'Length extends an arm away from the center, thickness changes its width, and offset changes the gap before the arm begins. Each line layer has its own opacity. Independent vertical length applies only when enabled. Moving and Firing tabs add a visible offset from their enabled multipliers; neither tab represents a weapon’s actual spread.',
     example: 'With inner length four, thickness two and offset two, increasing length to six extends the tips by two pixels without closing the center. Increasing thickness to four makes the arms wider instead. These two edits can look similar at a glance but change different dimensions.',
     result: 'Use line groups to understand your imported settings before editing them. Disabling outer lines simplifies the marker without affecting inner geometry. Lowering opacity changes contrast rather than shape; test it against both light and dark preview backgrounds.',
-    limits: 'The static browser image does not model a weapon’s firing state or movement spread. Primary settings are covered; advanced ADS and sniper profiles need the in-game menu. The enlarged rendering is explanatory rather than a screenshot of the VALORANT engine.',
+    limits: 'The state tabs visualize configured error multipliers but do not model a weapon’s recoil or bullet spread. Primary settings are covered; advanced ADS and sniper profiles need the in-game menu. The fixed-scale rendering is explanatory rather than a screenshot of the VALORANT engine.',
     sources: [custom, tokens],
     faqs: [
       {

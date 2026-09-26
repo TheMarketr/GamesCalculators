@@ -36,11 +36,13 @@ const gtaMediaOrder = tool.slug.includes('map')
   : tool.slug.includes('character')
     ? [0, 2, 3, 8, 10]
     : [0, 1, 2, 3, 7];
-const toolMedia = game.gallery
-  ? game.slug === 'gta-6'
-    ? gtaMediaOrder.map((index) => game.gallery![index]).filter(Boolean)
-    : game.gallery.slice(0, 2)
-  : [];
+const toolMedia = tool.media?.length
+  ? tool.media
+  : game.gallery?.length
+    ? game.slug === 'gta-6'
+      ? gtaMediaOrder.map((index) => game.gallery![index]).filter(Boolean)
+      : game.gallery.slice(0, 2)
+    : game.image ? [game.image] : [];
 ---
 <div class={`tool-page accent-${game.accent}`} data-ads-disabled={tool.adsDisabled ? 'true' : undefined}>
   <div class="tool-hero">
@@ -86,7 +88,7 @@ const toolMedia = game.gallery
       items={toolMedia}
       galleryId={`tool-${game.slug}-${tool.slug}`}
       title={game.slug === 'gta-6' ? `${tool.shortName} visual reference` : `${game.name} visual reference`}
-      description={game.slug === 'gta-6' ? `Explore official character and Leonida location screenshots selected for the ${tool.shortName}. Open any image for a larger view.` : `Official or licensed ${game.name} imagery identifies the game covered by the ${tool.shortName}.`}
+      description={game.slug === 'gta-6' ? `Explore official character and Leonida location screenshots selected for the ${tool.shortName}. Open any image for a larger view.` : `Explore visual context for ${tool.shortName}. Illustrations are original GamesCalculators artwork unless a separate source is credited.`}
       limit={game.slug === 'gta-6' ? 5 : 2}
       compact
     />}

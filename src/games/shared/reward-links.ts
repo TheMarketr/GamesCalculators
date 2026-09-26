@@ -71,3 +71,16 @@ export function relativeCheckTime(value: string, now: number) {
   const days = Math.floor(hours / 24);
   return `${days} day${days === 1 ? "" : "s"} ago`;
 }
+
+export function rewardFeedView(records: Reward[], game: RewardGame, now: number, filter: string, hideClaimed: boolean, claimed: string[]) {
+  const rows = uniqueRewards(records, game).sort((a, b) => b.discoveredAt.localeCompare(a.discoveredAt));
+  const today = now ? new Date(now).toDateString() : "";
+  const todayRows = rows.filter(r => !r.retired && today && new Date(r.discoveredAt).toDateString() === today);
+  const knownAmount = todayRows.reduce((sum, r) => sum + (game === "monopoly-go" ? (r.type === "dice" ? r.amount ?? 0 : 0) : (r.type === "spins" ? r.spins ?? 0 : 0)), 0);
+  const shown = rows.filter(r => !r.retired && (!hideClaimed || !claimed.includes(r.id)) &&
+    (filter === "all" || (filter === "today" && todayRows.includes(r)) ||
+      (filter === "daily" && r.label.toLowerCase().includes("daily gift")) ||
+      (filter === "other" && (game === "coin-master" ? !["spins", "coins"].includes(r.type) : r.type !== "dice")) || r.type === filter));
+  const archive = rows.filter(r => r.retired || (now > 0 && now - Date.parse(r.discoveredAt) < 14 * 86_400_000)).slice(0, 20);
+  return { rows, todayRows, knownAmount, shown, archive, latest: rows.find(r => !r.retired) };
+}

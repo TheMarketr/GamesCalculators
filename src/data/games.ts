@@ -30,6 +30,7 @@ export type ToolKind =
 
 export interface ToolConfig {
   adsDisabled?: boolean;
+  media?: GameImage[];
   slug: string;
   name: string;
   shortName: string;

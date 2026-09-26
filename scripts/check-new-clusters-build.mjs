@@ -3,11 +3,11 @@ import {resolve,join} from 'node:path';
 const root=resolve('dist');
 const baseline=JSON.parse(await readFile('reports/new-clusters-baseline-urls.json','utf8'));
 const paths={
-  'monopoly-go':['','tycoon-club','events','golden-blitz','wiki','sticker-safe-calculator','partner-event'],
+  'monopoly-go':['','free-dice-links','tycoon-club','events','golden-blitz','wiki','sticker-safe-calculator','partner-event'],
   valorant:['','crosshair','sens-converter','crosshair-codes','best-crosshairs','crosshair-settings','edpi-calculator','scoped-sensitivity-calculator','rank-progress-calculator'],
   'coin-master':['','free-spins','reward-calendar-tracker','how-to-get-free-spins','village-mania-guide'],
 };
-const withheld=['monopoly-go/free-dice-links','monopoly-go/board-cost-calculator','monopoly-go/sticker-tracker','valorant/rank-distribution','coin-master/village-cost-calculator','coin-master/village-progress-calculator','coin-master/card-set-tracker','coin-master/free-coins'];
+const withheld=['monopoly-go/board-cost-calculator','monopoly-go/sticker-tracker','valorant/rank-distribution','coin-master/village-cost-calculator','coin-master/village-progress-calculator','coin-master/card-set-tracker','coin-master/free-coins'];
 const errors=[],titles=new Set(),descriptions=new Set();
 for(const url of baseline){try{await access(join(root,url,'index.html'));}catch{errors.push(`Existing URL missing: ${url}`);}}
 const sitemap=await readFile(join(root,'sitemap.xml'),'utf8');
@@ -30,4 +30,4 @@ for(const [game,slugs]of Object.entries(paths))for(const slug of slugs){
   }
 }
 for(const path of withheld){try{await access(join(root,path,'index.html'));errors.push(`Withheld page published: ${path}`);}catch{}}
-if(errors.length){console.error(errors.join('\n'));process.exitCode=1;}else console.log(`New-cluster build audit passed: ${count} new routes, ${baseline.length} preserved URLs, canonical/H1/title/description/PNG/sitemap/internal assets checked; 8 withheld routes absent.`);
+if(errors.length){console.error(errors.join('\n'));process.exitCode=1;}else console.log(`New-cluster build audit passed: ${count} new routes, ${baseline.length} preserved URLs, canonical/H1/title/description/PNG/sitemap/internal assets checked; ${withheld.length} withheld routes absent.`);

@@ -45,7 +45,6 @@ describe("Reviewed reward and aim clusters", () => {
   it("excludes unsourced cost and collection routes", () => {
     const withheld = {
       "monopoly-go": [
-        "free-dice-links",
         "board-cost-calculator",
         "sticker-tracker",
       ],

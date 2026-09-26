@@ -4,6 +4,7 @@ import {
   rewardStatus,
   uniqueRewards,
   relativeCheckTime,
+  rewardFeedView,
   type Reward,
 } from "./reward-links";
 import { readLocal, readClaimed, writeLocal } from "./local-progress";
@@ -76,6 +77,36 @@ describe("Source-tracked reward safeguards", () => {
         Date.parse(sample.checkedAt) + 120000,
       ),
     ).toBe("2 minutes ago"));
+  it("keeps an empty MONOPOLY GO feed usable", () => {
+    const view = rewardFeedView([], "monopoly-go", Date.parse("2026-09-25T15:00:00Z"), "all", false, []);
+    expect(view.shown).toEqual([]);
+    expect(view.todayRows).toEqual([]);
+    expect(view.knownAmount).toBe(0);
+  });
+  it("filters today's dice and counts only known quantities", () => {
+    const now = Date.parse("2026-09-25T15:00:00Z");
+    const dice: Reward = { ...sample, id: "dice", type: "dice", amount: 25, discoveredAt: "2026-09-25T14:00:00Z" };
+    const unknown: Reward = { ...sample, id: "unknown", claimUrl: "https://mply.io/unknown", type: "dice", discoveredAt: "2026-09-25T13:00:00Z" };
+    const old: Reward = { ...sample, id: "old", claimUrl: "https://mply.io/old", type: "dice", amount: 50, discoveredAt: "2026-09-21T14:00:00Z" };
+    const view = rewardFeedView([old, unknown, dice], "monopoly-go", now, "today", false, []);
+    expect(view.todayRows).toHaveLength(2);
+    expect(view.knownAmount).toBe(25);
+    expect(view.shown.map(r => r.id)).toEqual(["dice", "unknown"]);
+    expect(rewardFeedView([old, unknown, dice], "monopoly-go", now, "all", true, ["dice"]).shown.map(r => r.id)).not.toContain("dice");
+  });
+  it("separates Coin Master spin, coin, daily and retired rewards", () => {
+    const now = Date.parse("2026-09-25T15:00:00Z");
+    const daily: Reward = { ...sample, id: "daily", claimUrl: "https://coin-master.co/daily", label: "Official Coin Master Daily Gift", discoveredAt: "2026-09-25T14:00:00Z" };
+    const spins: Reward = { ...daily, id: "spins", claimUrl: "https://coin-master.co/spins", label: "50 spins", type: "spins", spins: 50 };
+    const coins: Reward = { ...daily, id: "coins", claimUrl: "https://coin-master.co/coins", label: "Coins", type: "coins" };
+    const retired: Reward = { ...daily, id: "retired", claimUrl: "https://coin-master.co/retired", retired: true };
+    const rows = [daily, spins, coins, retired];
+    expect(rewardFeedView(rows, "coin-master", now, "spins", false, []).shown.map(r => r.id)).toEqual(["spins"]);
+    expect(rewardFeedView(rows, "coin-master", now, "coins", false, []).shown.map(r => r.id)).toEqual(["coins"]);
+    expect(rewardFeedView(rows, "coin-master", now, "daily", false, []).shown.map(r => r.id)).toEqual(["daily"]);
+    expect(rewardFeedView(rows, "coin-master", now, "all", false, []).knownAmount).toBe(50);
+    expect(rewardFeedView(rows, "coin-master", now, "all", false, []).archive.some(r => r.id === "retired")).toBe(true);
+  });
   it("validates stored claimed IDs", () => {
     expect(readClaimed(["a", 3, "a", "b", null])).toEqual(["a", "b"]);
     expect(readClaimed({ a: true })).toEqual([]);

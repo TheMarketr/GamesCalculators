@@ -21,8 +21,11 @@
     "data:sync:osrs": "node scripts/sync-osrs-prices.mjs",
     "data:sync:palworld": "node scripts/sync-palworld.mjs",
     "data:check:monopoly-go": "node scripts/check-monopoly-go-rewards.mjs",
+    "monopoly:add-reward": "node scripts/add-monopoly-go-reward.mjs",
+    "coin-master:add-reward": "node scripts/add-coin-master-reward.mjs",
     "data:sync:coin-master": "node scripts/sync-coin-master-rewards.mjs",
     "deploy:cloudflare": "pwsh -NoProfile -File scripts/deploy-cloudflare.ps1",
+    "deploy:rewards": "pwsh -NoProfile -File scripts/deploy-reward-worker.ps1",
     "astro": "astro"
   },
   "dependencies": {

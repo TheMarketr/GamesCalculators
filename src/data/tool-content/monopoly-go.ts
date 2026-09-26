@@ -1,6 +1,25 @@
 import { compactToolContent as c, defineToolContent } from './types';
 import { monopolySources as s } from '../monopoly-go/topics';
 export const monopolyGoToolContent = defineToolContent({
+  'monopoly-go/free-dice-links': c({
+    name: 'MONOPOLY GO Free Dice Links Today',
+    reviewed: '2026-09-25',
+    methodSummary: 'Lists source-tracked mply.io claim URLs newest first, separates discovery time from URL-check time, and saves your claimed marks only in this browser.',
+    intro: 'This MONOPOLY GO free dice links dashboard keeps one permanent place for newly sourced reward URLs. A card appears only after its mply.io destination and publisher evidence pass review. If no current link is confirmed, the page says so and keeps the claim instructions and recent archive available.',
+    useCases: ['Check newly listed dice rewards without guessing whether an old post is current', 'Separate a known dice amount from an unconfirmed quantity', 'Hide links you have already tried on this device'],
+    steps: ['Read the last checked time and inspect the newest source-tracked cards.', 'Open a claim link on a device with MONOPOLY GO installed and follow the game handoff.', 'If your account receives the reward, mark the card claimed here; undo the mark if it was accidental.'],
+    mechanics: 'A published reward has a normalized HTTPS mply.io claim URL, a source link, and independent discovery and check timestamps. The feed sorts new discoveries first. NEW means discovered within 24 hours, RECENT means one to three days, and OLDER means at least three days. A successful HTTP response does not prove an in-game redemption. The daily dice summary totals only records with an explicitly sourced amount.',
+    example: 'If two separately sourced links added today each state 25 dice while a third source does not state a quantity, the summary can say two known links and 50 listed dice. It must not turn the unknown link into another 25 dice or promise all three will work for your account.',
+    result: 'Open a recent card to let the publisher route you into the game. A claimed checkmark is your private note, not confirmation from Scopely. When the feed is empty, return after the next source review and use the linked Events and Tycoon Club pages for other legitimate opportunities.',
+    limits: 'Links may expire, be single-use per account, or fail to open when the app handoff is blocked. Publisher posts do not always disclose reward size or eligibility. Last checked describes URL validation, not a human-tested claim. This site never asks for your Scopely credentials.',
+    sources: [s.help, { label: 'MONOPOLY GO official website', url: 'https://www.monopolygo.com/' }],
+    faqs: [
+      { question: 'Why does a MONOPOLY GO free dice link say already claimed?', answer: 'Rewards can be limited to one use per account. A link that opens successfully can still be unavailable to an account that collected it earlier.' },
+      { question: 'How can I tell whether a MONOPOLY GO dice link is expired?', answer: 'A retired card means its destination is known to be inactive. A recent card can also fail in-game before our next check, so the game message is the final answer.' },
+      { question: 'Why are there no MONOPOLY GO free dice links today?', answer: 'No candidate has passed the source and URL checks in the current feed. The page stays available and does not replace missing links with unverified promotions.' },
+      { question: 'Do I need to enter my MONOPOLY GO login to claim dice here?', answer: 'No. GamesCalculators does not request account credentials. Claim links open the publisher-controlled route, and checkmarks stay in your browser.' },
+    ],
+  }),
   'monopoly-go/events': c({
     name: 'MONOPOLY GO Events',
     reviewed: '2026-09-25',
@@ -94,7 +113,7 @@ export const monopolyGoToolContent = defineToolContent({
     intro: 'This MONOPOLY GO wiki is a practical topic finder for the systems covered by GamesCalculators. Search for a term such as stars, Partners or Golden Blitz to find the relevant explanation and tool. It is an independent reference, with publisher sources attached to the underlying mechanics.',
     useCases: ['Find the difference between Partner points and currency', 'Locate the sticker-star planning tool', 'Understand the role of timed trading events'],
     steps: ['Type a mechanic or resource into the topic search.', 'Read the matching definition and its context.', 'Follow the topic link for the associated calculator or detailed reference.'],
-    mechanics: 'Search matches the topic name and explanation without requiring exact capitalization. The initial collection covers ten supported topics rather than every board, sticker or event. Topic cards point to utilities with distinct purposes: a point planner, star shortfall calculation, reward checklist or event reference.',
+    mechanics: 'Search matches the topic name and explanation without requiring exact capitalization. The reviewed glossary focuses on supported board, sticker, reward and event mechanics rather than claiming every seasonal item. Topic cards point to utilities with distinct purposes: a point planner, star shortfall calculation, reward checklist or event reference.',
     example: 'Searching “currency” surfaces Partners because its explanation separates wheel currency from attraction points. Follow that result before entering a progress total: 1,000 currency is not the same input as 1,000 attraction points.',
     result: 'The topic finder is most useful when the same screen contains several resources. Identify which quantity you have, then open the linked utility. Definitions provide orientation; dated announcements remain the authority for limited-time rewards and deadlines.',
     limits: 'The glossary does not claim complete album or board coverage. Individual offers and tournament rewards can vary, and references to a reward mechanism do not establish that a particular event is active now.',

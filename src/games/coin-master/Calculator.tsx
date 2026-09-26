@@ -86,6 +86,8 @@ export default function CoinCalculator({ toolSlug }: { toolSlug: string }) {
               {result.nextDay}
             </p>
             <progress value={result.percent} max="100" />
+            <div class="calendar-days" aria-label="Seven day reward cycle">{[1,2,3,4,5,6,7].map(position => <span class={position === day ? 'is-current' : ''} aria-current={position === day ? 'step' : undefined}>{position}</span>)}</div>
+            <p>Monthly bar: {progress} / 30</p>
           </div>
         ) : (
           <p role="alert">
@@ -145,7 +147,7 @@ export default function CoinCalculator({ toolSlug }: { toolSlug: string }) {
       cost >= 0;
     return (
       <div class="calculator universal-tool">
-        <h2>Test your Village Mania offer</h2>
+        <h2>Village Mania Discount Calculator</h2>
         <p>
           Enter the building prices shown in your game. The offer may cover one
           item or the whole village.
@@ -195,12 +197,9 @@ export default function CoinCalculator({ toolSlug }: { toolSlug: string }) {
         </div>
         {valid && result ? (
           <div class="primary-result">
-            <span>Coins to finish with this offer</span>
+            <span>Discounted cost</span>
             <strong>{(cost - result.saved).toLocaleString()}</strong>
-            <p>
-              {result.saved.toLocaleString()} coins saved on the eligible
-              portion
-            </p>
+            <div class="reward-summary"><div><span>Original cost</span><strong>{cost.toLocaleString()} coins</strong></div><div><span>Discounted cost</span><strong>{(cost - result.saved).toLocaleString()} coins</strong></div><div><span>Coins saved</span><strong>{result.saved.toLocaleString()} coins</strong></div></div>
           </div>
         ) : (
           <p role="alert">
@@ -224,6 +223,7 @@ export default function CoinCalculator({ toolSlug }: { toolSlug: string }) {
   return (
     <div class="calculator universal-tool">
       <h2>Choose an official spin source</h2>
+      <p><a class="button button--primary" href="/coin-master/free-spins/">See today's free spins & coins →</a></p>
       <div class="cluster-cards">
         {[
           [

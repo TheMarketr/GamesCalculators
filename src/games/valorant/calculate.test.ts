@@ -6,6 +6,7 @@ import {
   parseCrosshair,
   serializeCrosshair,
 } from "./crosshair";
+import { previewBoxes } from './preview-geometry';
 describe("VALORANT sensitivity and RR", () => {
   it("calculates eDPI and the CS2 conversion fixture", () => {
     const r = sensitivityResult(0.35, 800, 0.07, 0.022);
@@ -43,6 +44,23 @@ describe("VALORANT sensitivity and RR", () => {
   });
 });
 describe("VALORANT primary crosshair codec", () => {
+  it('has at least 20 unique original preset IDs', () => {
+    expect(crosshairProfiles.length).toBeGreaterThanOrEqual(20);
+    expect(new Set(crosshairProfiles.map(profile => profile.id)).size).toBe(crosshairProfiles.length);
+  });
+  it('changes fixed-coordinate preview geometry with length, offset and thickness', () => {
+    const base = previewBoxes(defaultCrosshair, 'standing');
+    expect(previewBoxes({ ...defaultCrosshair, '0l': 10 }, 'standing')[0].w).toBeGreaterThan(base[0].w);
+    expect(previewBoxes({ ...defaultCrosshair, '0o': 7 }, 'standing')[0].x).toBeGreaterThan(base[0].x);
+    expect(previewBoxes({ ...defaultCrosshair, '0t': 5 }, 'standing')[0].h).toBeGreaterThan(base[0].h);
+  });
+  it('visualizes movement and firing offsets only when enabled', () => {
+    const base = { ...defaultCrosshair, '0m': 1, '0f': 1, '0s': 2, '0e': 1 };
+    expect(previewBoxes(base, 'moving')[0].x).toBe(base['0o'] + 8);
+    expect(previewBoxes(base, 'firing')[0].x).toBe(base['0o'] + 4);
+    expect(previewBoxes(base, 'moving-firing')[0].x).toBe(base['0o'] + 12);
+    expect(previewBoxes({ ...base, '0m': 0, '0f': 0 }, 'moving-firing')[0].x).toBe(base['0o']);
+  });
   it("reads the default profile and a compact known token fixture", () => {
     expect(parseCrosshair("0")).toEqual(defaultCrosshair);
     expect(parseCrosshair("0;P;c;5;h;0;0l;4;0o;2;0f;0;1b;0")).toMatchObject({
